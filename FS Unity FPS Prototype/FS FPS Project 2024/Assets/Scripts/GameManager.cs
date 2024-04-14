@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     //game object player
     public GameObject player;
 
+    //MagicController added by Derek
+    public magicController magicController;
+
     //void awake so its called first 
     void Awake()
     {
@@ -18,6 +21,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
         //find player object with tag Player
         player = GameObject.FindWithTag("Player");
+
+        //MagicController added by Derek
+        magicController = FindObjectOfType<magicController>();
+        if (magicController == null)
+        {
+            Debug.LogError("MagicController not found in scene");
+        }
     }
 
 
