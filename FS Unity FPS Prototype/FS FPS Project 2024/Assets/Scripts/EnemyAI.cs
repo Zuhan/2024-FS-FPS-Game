@@ -22,6 +22,6 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         //set destitnation to player location
-        agent.SetDestination(GameManager.Instance.player.transform.position);
+        agent.SetDestination(gameManager.Instance.player.transform.position);
     }
 }
