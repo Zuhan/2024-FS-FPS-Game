@@ -528,6 +528,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 757653860}
     - target: {fileID: 7341120531424297971, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1154981450380241885, guid: daeb4bd311932b84c8cb902271156014, type: 3}
+    - target: {fileID: 7341120531424297971, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
+      propertyPath: shootPos
+      value: 
+      objectReference: {fileID: 1733858287}
+    - target: {fileID: 7341120531424297971, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
+      propertyPath: shootRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7341120531424297971, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
       propertyPath: pointsToGain
       value: 100
       objectReference: {fileID: 0}
@@ -581,9 +593,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7860460363812708478, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1733858287}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
+--- !u!4 &1355195880 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7860460363812708478, guid: 54a265d9df5d0104c835d83357cd4318, type: 3}
+  m_PrefabInstance: {fileID: 1355195879}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1733858286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1733858287}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1733858287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733858286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1355195880}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

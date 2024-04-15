@@ -18,8 +18,8 @@ public class enemyAI : MonoBehaviour, IDamage
    // Start is called before the first frame update
     void Start()
     {
-       
-
+        //updates enemy count on start instance
+        gameManager.Instance.updateGameGoal(1);
     }
 
     void Update()
@@ -40,6 +40,8 @@ public class enemyAI : MonoBehaviour, IDamage
         {
             PointsManager.Instance.AddPoints(pointsToGain);
             Destroy(gameObject);
+            //removes a enemy from enemy count
+            gameManager.Instance.updateGameGoal(-1);
         }
     }
     IEnumerator FlashRed()
