@@ -11,6 +11,8 @@ public class playerController : MonoBehaviour
     [SerializeField] int jumpHeight;
     [SerializeField] int maxJumps;
     [SerializeField] int gravity;
+    [SerializeField] int currentPoints;
+
 
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
@@ -34,16 +36,19 @@ public class playerController : MonoBehaviour
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.red);
         movement();
+
+        
     }
-    
     void movement()
     {
-        if(controller.isGrounded)
+        //Movement
+
+        if (controller.isGrounded)
         {
             jumpedTimes = 0;
             playerVelocity = Vector3.zero;
         }
-        //moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
         moveDirection = (Input.GetAxis("Horizontal") * transform.right)
                         + (Input.GetAxis("Vertical") * transform.forward);
         controller.Move(moveDirection * speed * Time.deltaTime);
@@ -56,5 +61,48 @@ public class playerController : MonoBehaviour
 
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        // Shooting 
+        if (Input.GetButton("Shoot") && !isShooting)
+        {
+            StartCoroutine(Shoot());
+        }
+
+    }
+    private void OnEnable()
+    {
+        PointsManager.Instance.OnPointChange += HandlePointChange;
+    }
+
+    private void OnDisable()
+    {
+        PointsManager.Instance.OnPointChange -= HandlePointChange;
+    }
+    
+
+    // Basic shooting added by Matt
+    IEnumerator Shoot()
+    {
+        isShooting = true;
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+        {
+
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            if (dmg != null && hit.transform != transform)
+            {
+                dmg.TakeDamage(shootDamage);
+            }
+        }
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+
+    private void HandlePointChange(int newPoints)
+    {
+        currentPoints += newPoints;
     }
 }
