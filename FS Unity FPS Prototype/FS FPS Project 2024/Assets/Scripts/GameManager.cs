@@ -14,6 +14,10 @@ public class gameManager : MonoBehaviour
     //MagicController added by Derek
     public magicController magicController;
 
+    //enemy count field 
+    public int enemyCount;
+
+
     //void awake so its called first 
     void Awake()
     {
@@ -39,5 +43,10 @@ public class gameManager : MonoBehaviour
     }
 
 
+    //method for adding and removing enemy count
+    public void updateGameGoal(int count)
+    {
+        enemyCount += count;
+    }
 
 }
