@@ -38,7 +38,7 @@ public class playerController : MonoBehaviour
     bool canSprint;
     int jumpedTimes;
     int sprintDecayTimes;
-
+    int interactDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -94,7 +94,10 @@ public class playerController : MonoBehaviour
             canSprint = false;
             StartCoroutine(StaminaRegen(sprintRegenRate));
         }
-
+        if (Input.GetButtonDown("Fire3"))
+        {
+            StartCoroutine(interact());
+        }
     }
     private void OnEnable()
     {
@@ -163,5 +166,18 @@ public class playerController : MonoBehaviour
     private void HandlePointChange(int newPoints)
     {
         currentPoints += newPoints;
+    }
+
+    //interact handler by Ben
+    IEnumerator interact()
+    {
+        interactDelay = 1;
+        RaycastHit hit;
+        if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit,5))
+        {
+            IfInteract interact = hit.collider.GetComponent<IfInteract>();
+            interact.interact();
+        }
+        yield return new WaitForSeconds(interactDelay);
     }
 }
