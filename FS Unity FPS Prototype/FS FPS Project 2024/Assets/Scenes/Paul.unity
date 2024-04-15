@@ -626,15 +626,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: stamina
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: maxStamina
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: sprintDelay
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
+      propertyPath: staminaToAdd
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: shootDistance
@@ -646,11 +650,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: sprintDecayRate
-      value: 1.5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
+      propertyPath: sprintRegenRate
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: staminaToRemove
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: defaultWalkSpeed

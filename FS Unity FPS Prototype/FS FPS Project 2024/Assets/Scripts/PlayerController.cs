@@ -20,7 +20,8 @@ public class playerController : MonoBehaviour
     [SerializeField] float sprintDecayRate;
     [SerializeField] int staminaToRemove;
     [SerializeField] int sprintRegenDelay;
-    [SerializeField] int springRegenRate;
+    [SerializeField] float sprintRegenRate;
+    [SerializeField] int staminaToAdd;
 
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
@@ -34,6 +35,7 @@ public class playerController : MonoBehaviour
     Vector3 playerVelocity;
     bool isShooting;
     bool isSprinting;
+    bool canSprint;
     int jumpedTimes;
     int sprintDecayTimes;
 
@@ -41,6 +43,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         stamina = maxStamina;
+        canSprint = true;
     }
 
     // Update is called once per frame
@@ -81,10 +84,15 @@ public class playerController : MonoBehaviour
         }
 
         //Sprinting implemented by Paul
-        if(Input.GetButton("Sprint") && !isSprinting)
+        if(Input.GetButtonDown("Sprint") && !isSprinting)
         {
-            StartCoroutine(Sprint(staminaToRemove));
-            
+            StartCoroutine(Sprint(sprintDecayRate));
+        }
+
+        if(stamina <= 0)
+        {
+            canSprint = false;
+            StartCoroutine(StaminaRegen(sprintRegenRate));
         }
 
     }
@@ -123,20 +131,32 @@ public class playerController : MonoBehaviour
     //Sprint by Paul
     IEnumerator Sprint(float stamDecay)
     {
-        isSprinting = true;
-        speed *= sprintMultiplier;
-        while (stamina > 0)
+        if (canSprint && stamina > 5)
         {
-            stamina -= staminaToRemove;
-            yield return new WaitForSeconds(stamDecay);
+            isSprinting = true;
+            speed *= sprintMultiplier;
+            while (stamina > 0)
+            {
+                stamina -= staminaToRemove;
+                yield return new WaitForSeconds(stamDecay);
+            }
+            isSprinting = false;
+            speed = defaultWalkSpeed; 
         }
-        isSprinting = false;
-        speed = defaultWalkSpeed;
     }
 
-    void StaminaRegen(int curr)
+    //Stamina Handler by Paul
+    IEnumerator StaminaRegen(float stamRegen)
     {
-
+        if (!isSprinting)
+        {
+            while (stamina < maxStamina)
+            {
+                stamina += staminaToAdd;
+                yield return new WaitForSeconds(stamRegen);
+            }
+        }
+        canSprint = true;
     }
 
 
