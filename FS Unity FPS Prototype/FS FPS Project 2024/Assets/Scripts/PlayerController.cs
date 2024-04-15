@@ -7,28 +7,40 @@ public class playerController : MonoBehaviour
     [SerializeField] CharacterController controller;
 
     [SerializeField] int HP;
-    [SerializeField] int speed;
+    [SerializeField] float defaultWalkSpeed;
+    [SerializeField] float sprintMultiplier;
+    [SerializeField] float speed;
     [SerializeField] int jumpHeight;
     [SerializeField] int maxJumps;
     [SerializeField] int gravity;
-    [SerializeField] int currentPoints;
 
+    [SerializeField] int stamina;
+    [SerializeField] int maxStamina;
+    [SerializeField] int sprintDelay;
+    [SerializeField] float sprintDecayRate;
+    [SerializeField] int staminaToRemove;
+    [SerializeField] int sprintRegenDelay;
+    [SerializeField] int springRegenRate;
 
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDistance;
+
+    [SerializeField] int currentPoints;
 
     [SerializeField] GameObject cube;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
     bool isShooting;
+    bool isSprinting;
     int jumpedTimes;
+    int sprintDecayTimes;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        stamina = maxStamina;
     }
 
     // Update is called once per frame
@@ -68,6 +80,13 @@ public class playerController : MonoBehaviour
             StartCoroutine(Shoot());
         }
 
+        //Sprinting implemented by Paul
+        if(Input.GetButton("Sprint") && !isSprinting)
+        {
+            StartCoroutine(Sprint(staminaToRemove));
+            
+        }
+
     }
     private void OnEnable()
     {
@@ -100,6 +119,26 @@ public class playerController : MonoBehaviour
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
+
+    //Sprint by Paul
+    IEnumerator Sprint(float stamDecay)
+    {
+        isSprinting = true;
+        speed *= sprintMultiplier;
+        while (stamina > 0)
+        {
+            stamina -= staminaToRemove;
+            yield return new WaitForSeconds(stamDecay);
+        }
+        isSprinting = false;
+        speed = defaultWalkSpeed;
+    }
+
+    void StaminaRegen(int curr)
+    {
+
+    }
+
 
     private void HandlePointChange(int newPoints)
     {
