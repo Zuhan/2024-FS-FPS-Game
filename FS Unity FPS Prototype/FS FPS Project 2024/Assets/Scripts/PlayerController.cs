@@ -44,7 +44,7 @@ public class playerController : MonoBehaviour
     {
         stamina = maxStamina;
         canSprint = true;
-        
+        currentPoints = gameManager.instance.points;
     }
 
     // Update is called once per frame

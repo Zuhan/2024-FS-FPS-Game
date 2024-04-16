@@ -32,6 +32,8 @@ public class gameManager : MonoBehaviour
     //enemy count field 
     public int enemyCount;
 
+    //point count
+    public int points;
 
     //void awake so its called first 
     void Awake()
@@ -59,6 +61,8 @@ public class gameManager : MonoBehaviour
             // If the fireStaff script is not already attached to the player, add it
             fireStaffScript = player.AddComponent<fireStaff>();
         }
+        //setting points
+        points = 0;
     }
 
 
@@ -98,12 +102,18 @@ public class gameManager : MonoBehaviour
     {
         interactText?.SetActive(false);
     }
+    //method for showing when you dont have enough points
     public void showInteractFail()
     {
         interactFailText.SetActive(true);
     }
+    //method getting rid of that text
     public void hideInteractFail()
     {
         interactFailText?.SetActive(false);
+    }
+    public void pointsChange(int amount)
+    {
+        points += amount;
     }
 }

@@ -27,6 +27,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         else
         {
             StartCoroutine(objInteract());
+            gameManager.instance.pointsChange(-amount);
         }
     }
     IEnumerator objInteract()
