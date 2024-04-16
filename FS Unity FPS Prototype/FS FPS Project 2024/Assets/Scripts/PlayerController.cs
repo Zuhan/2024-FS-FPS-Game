@@ -181,6 +181,7 @@ public class playerController : MonoBehaviour
         }
         yield return new WaitForSeconds(interactDelay);
     }
+    //checks if you are near an object that you can interact with
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Interact"))
@@ -188,6 +189,7 @@ public class playerController : MonoBehaviour
             gameManager.instance.showInteractText();
         }
     }
+    //checks if you left the area of an object that you can interact with
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Interact"))
