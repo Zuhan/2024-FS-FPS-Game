@@ -14,18 +14,21 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
+
     bool isShooting;
+
    // Start is called before the first frame update
     void Start()
     {
         //updates enemy count on start instance
-        gameManager.Instance.updateGameGoal(1);
+        gameManager.instance.updateGameGoal(1);
     }
 
     void Update()
     {
         //set destitnation to player location
-        agent.SetDestination(gameManager.Instance.player.transform.position);
+        agent.SetDestination(gameManager.instance.player.transform.position);
+
         if (!isShooting)
             StartCoroutine(Shoot());
     }
@@ -41,7 +44,7 @@ public class enemyAI : MonoBehaviour, IDamage
             PointsManager.Instance.AddPoints(pointsToGain);
             Destroy(gameObject);
             //removes a enemy from enemy count
-            gameManager.Instance.updateGameGoal(-1);
+            gameManager.instance.updateGameGoal(-1);
         }
     }
     IEnumerator FlashRed()

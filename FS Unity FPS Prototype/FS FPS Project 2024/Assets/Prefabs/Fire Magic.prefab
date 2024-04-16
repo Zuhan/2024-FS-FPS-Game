@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1336027409365229301}
   - component: {fileID: 1857199627173581008}
   - component: {fileID: 5399762327715855467}
+  - component: {fileID: -8360187486283285930}
   m_Layer: 0
   m_Name: Fire Magic
   m_TagString: Untagged
@@ -215,3 +216,11 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!33 &-8360187486283285930
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027668650579343880}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
