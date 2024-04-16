@@ -177,7 +177,7 @@ public class playerController : MonoBehaviour
         {
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
             interact.interact();
-            gameManager.Instance.hideInteractText();
+            gameManager.instance.hideInteractText();
         }
         yield return new WaitForSeconds(interactDelay);
     }
@@ -185,14 +185,14 @@ public class playerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Interact"))
         {
-            gameManager.Instance.showInteractText();
+            gameManager.instance.showInteractText();
         }
     }
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Interact"))
         {
-            gameManager.Instance.hideInteractText();
+            gameManager.instance.hideInteractText();
         }
     }
 }
