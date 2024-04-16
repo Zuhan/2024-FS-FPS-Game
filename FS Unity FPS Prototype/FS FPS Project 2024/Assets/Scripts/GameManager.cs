@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
+    //field for the interact text UI
+    [SerializeField] GameObject interactText;
 
     //game manager instance
     public static gameManager Instance;
@@ -49,4 +51,14 @@ public class gameManager : MonoBehaviour
         enemyCount += count;
     }
 
+    //method for displaying interact menu
+    public void showInteractText()
+    {
+        interactText.SetActive(true);
+    }
+    //method for hiding interact text
+    public void hideInteractText()
+    {
+        interactText?.SetActive(false);
+    }
 }

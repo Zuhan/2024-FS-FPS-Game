@@ -177,7 +177,22 @@ public class playerController : MonoBehaviour
         {
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
             interact.interact();
+            gameManager.Instance.hideInteractText();
         }
         yield return new WaitForSeconds(interactDelay);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interact"))
+        {
+            gameManager.Instance.showInteractText();
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Interact"))
+        {
+            gameManager.Instance.hideInteractText();
+        }
     }
 }
