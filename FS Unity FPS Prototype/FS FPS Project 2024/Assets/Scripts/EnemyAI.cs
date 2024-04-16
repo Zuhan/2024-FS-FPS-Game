@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class enemyAI : MonoBehaviour, IDamage
 {
 
-    //Seralized fields for enemy ai
+    //Serialized fields for enemy ai
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] int HP;
@@ -16,8 +16,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
 
     bool isShooting;
+    
 
-   // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         //updates enemy count on start instance
@@ -26,7 +27,7 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        //set destitnation to player location
+        //set destination to player location
         agent.SetDestination(gameManager.instance.player.transform.position);
 
         if (!isShooting)
@@ -42,9 +43,11 @@ public class enemyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {
             PointsManager.Instance.AddPoints(pointsToGain);
-            Destroy(gameObject);
+            Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
             //removes a enemy from enemy count
             gameManager.instance.updateGameGoal(-1);
+            
+            Destroy(gameObject);
         }
     }
     IEnumerator FlashRed()

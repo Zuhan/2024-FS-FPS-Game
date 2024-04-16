@@ -8,25 +8,27 @@ public class PointsManager : MonoBehaviour
 {
     public static PointsManager Instance;
 
-    public delegate void PointChangeHandeler(int amount);
-    public event PointChangeHandeler OnPointChange;
+    public delegate void PointChangeHandler(int amount);
+    public event PointChangeHandler OnPointChange;
 
+    
 
     //Singleton Check
-    private void Start()
+    private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null)
         {
-            Destroy(this);
+            Instance = this;
         }
         else
         {
-            Instance = this;
+            Destroy(gameObject);
         }
     }
 
     public void AddPoints(int amount)
     {
+        Debug.Log("AddPoints called"); 
         OnPointChange?.Invoke(amount);
     }
 }

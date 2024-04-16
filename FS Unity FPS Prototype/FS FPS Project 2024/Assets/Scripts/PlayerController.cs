@@ -22,7 +22,7 @@ public class playerController : MonoBehaviour
     [SerializeField] int sprintRegenDelay;
     [SerializeField] float sprintRegenRate;
     [SerializeField] int staminaToAdd;
-
+    
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDistance;
@@ -44,6 +44,7 @@ public class playerController : MonoBehaviour
     {
         stamina = maxStamina;
         canSprint = true;
+        
     }
 
     // Update is called once per frame
@@ -101,6 +102,7 @@ public class playerController : MonoBehaviour
     }
     private void OnEnable()
     {
+        
         PointsManager.Instance.OnPointChange += HandlePointChange;
     }
 
@@ -165,7 +167,9 @@ public class playerController : MonoBehaviour
 
     private void HandlePointChange(int newPoints)
     {
-        currentPoints += newPoints;
+        Debug.Log("HandlePointChange Called");
+        currentPoints = currentPoints + newPoints;
+        Debug.Log("Player gained " + newPoints + " points.");
     }
 
     //interact handler by Ben
