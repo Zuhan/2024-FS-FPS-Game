@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IfInteract
 {
-    void interact();
+    void interact(int amount);
 }

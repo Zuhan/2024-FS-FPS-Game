@@ -6,6 +6,7 @@ using UnityEngine;
 public class interactableObjectScript : MonoBehaviour, IfInteract
 {
     [SerializeField] Renderer model;
+    [SerializeField] int pointCost;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +18,30 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     {
         
     }
-    public void interact()
+    public void interact(int amount)
     {
-        StartCoroutine(objInteract());
+        if (amount < pointCost)
+        {
+            StartCoroutine(objInteractFail());
+        }
+        else
+        {
+            StartCoroutine(objInteract());
+        }
     }
     IEnumerator objInteract()
     {
         model.material.color = Color.green;
         yield return new WaitForSeconds(1);
+        gameManager.instance.hideInteractText();
         Destroy(gameObject);
+    }
+    IEnumerator objInteractFail()
+    {
+        gameManager.instance.hideInteractText();
+        gameManager.instance.showInteractFail();
+        yield return new WaitForSeconds(1);
+        gameManager.instance.hideInteractFail();
+        gameManager.instance.showInteractText();
     }
 }

@@ -180,8 +180,7 @@ public class playerController : MonoBehaviour
         if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit,5))
         {
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
-            interact.interact();
-            gameManager.instance.hideInteractText();
+            interact.interact(currentPoints);
         }
         yield return new WaitForSeconds(interactDelay);
     }

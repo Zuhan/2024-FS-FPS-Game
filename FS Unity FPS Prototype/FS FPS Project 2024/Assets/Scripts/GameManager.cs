@@ -6,6 +6,7 @@ public class gameManager : MonoBehaviour
 {
     //field for the interact text UI
     [SerializeField] GameObject interactText;
+    [SerializeField] GameObject interactFailText;
 
     //game manager instance
     public static gameManager instance;
@@ -96,5 +97,13 @@ public class gameManager : MonoBehaviour
     public void hideInteractText()
     {
         interactText?.SetActive(false);
+    }
+    public void showInteractFail()
+    {
+        interactFailText.SetActive(true);
+    }
+    public void hideInteractFail()
+    {
+        interactFailText?.SetActive(false);
     }
 }
