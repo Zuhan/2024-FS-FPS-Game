@@ -95,7 +95,7 @@ public class playerController : MonoBehaviour
             canSprint = false;
             StartCoroutine(StaminaRegen(sprintRegenRate));
         }
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Interact"))
         {
             StartCoroutine(interact());
         }
