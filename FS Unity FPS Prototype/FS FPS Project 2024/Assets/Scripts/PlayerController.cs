@@ -180,7 +180,7 @@ public class playerController : MonoBehaviour
         if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit,5))
         {
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
-            interact.interact(currentPoints);
+            interact.interact();
         }
         yield return new WaitForSeconds(interactDelay);
     }
@@ -190,6 +190,11 @@ public class playerController : MonoBehaviour
         if (other.gameObject.CompareTag("Interact"))
         {
             gameManager.instance.showInteractText();
+        }
+        else if (other.gameObject.CompareTag("pickup"))
+        {
+            IPickup pickup = other.GetComponent<IPickup>();
+            pickup.pickup();
         }
     }
     //checks if you left the area of an object that you can interact with

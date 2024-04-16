@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IfInteract
+public interface IPickup
 {
-    void interact();
+    void pickup();
 }

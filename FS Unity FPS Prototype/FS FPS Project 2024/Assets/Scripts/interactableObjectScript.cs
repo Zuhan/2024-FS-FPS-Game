@@ -18,8 +18,9 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     {
         
     }
-    public void interact(int amount)
+    public void interact()
     {
+        int amount = gameManager.instance.points;
         if (amount < pointCost)
         {
             StartCoroutine(objInteractFail());
@@ -27,7 +28,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         else
         {
             StartCoroutine(objInteract());
-            gameManager.instance.pointsChange(-amount);
+            gameManager.instance.pointsChange(-pointCost);
         }
     }
     IEnumerator objInteract()
