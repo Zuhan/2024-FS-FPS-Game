@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class interactableObjectScript : MonoBehaviour, IfInteract
 {
+    [SerializeField] Renderer model;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,12 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     }
     public void interact()
     {
+        StartCoroutine(objInteract());
+    }
+    IEnumerator objInteract()
+    {
+        model.material.color = Color.green;
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 }
