@@ -6,7 +6,10 @@ public class fireStaff : MonoBehaviour
 {
 
     public GameObject fireMagicPrefab;
+    [SerializeField] Transform shootPos;
+    [SerializeField] float castRate;
 
+    bool isCasting;
     // Update is called once per frame
     void Update()
     {
@@ -22,5 +25,14 @@ public class fireStaff : MonoBehaviour
     {
         // Instantiate the fire magic prefab
         Instantiate(fireMagicPrefab, transform.position, transform.rotation);
+    }
+
+    IEnumerator cast()
+    {
+        isCasting = true;
+
+        Instantiate(fireMagicPrefab, shootPos.position, transform.rotation);
+        yield return new WaitForSeconds(castRate);
+        isCasting = false;
     }
 }

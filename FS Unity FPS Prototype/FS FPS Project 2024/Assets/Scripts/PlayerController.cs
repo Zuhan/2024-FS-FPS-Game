@@ -79,10 +79,10 @@ public class playerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
 
         // Shooting 
-        if (Input.GetButton("Shoot") && !isShooting)
-        {
-            StartCoroutine(Shoot());
-        }
+        //if (Input.GetButton("Shoot") && !isShooting)
+        //{
+        //    StartCoroutine(Shoot());
+        //}
 
         //Sprinting implemented by Paul
         if(Input.GetButtonDown("Sprint") && !isSprinting)
@@ -101,8 +101,7 @@ public class playerController : MonoBehaviour
         }
     }
     private void OnEnable()
-    {
-        
+    {        
         PointsManager.Instance.OnPointChange += HandlePointChange;
     }
 
@@ -112,26 +111,27 @@ public class playerController : MonoBehaviour
     }
     
 
+    //Commented out by Derek due to having a Weapon to shoot now.
     // Basic shooting added by Matt
-    IEnumerator Shoot()
-    {
-        isShooting = true;
+    //IEnumerator Shoot()
+    //{
+    //    isShooting = true;
 
-        RaycastHit hit;
+    //    RaycastHit hit;
 
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
-        {
+    //    if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, shootDistance))
+    //    {
 
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
+    //        IDamage dmg = hit.collider.GetComponent<IDamage>();
 
-            if (dmg != null && hit.transform != transform)
-            {
-                dmg.TakeDamage(shootDamage);
-            }
-        }
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }
+    //        if (dmg != null && hit.transform != transform)
+    //        {
+    //            dmg.TakeDamage(shootDamage);
+    //        }
+    //    }
+    //    yield return new WaitForSeconds(shootRate);
+    //    isShooting = false;
+    //}
 
     //Sprint by Paul
     IEnumerator Sprint(float stamDecay)

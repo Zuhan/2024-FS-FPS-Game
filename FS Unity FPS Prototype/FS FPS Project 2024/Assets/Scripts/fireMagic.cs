@@ -13,26 +13,46 @@ public class fireMagic : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 
+    private bool hasHit = false;
+
     // Start is called before the first frame update
     void Start()
     {
+        Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
-        Destroy(gameObject, destroyTime);
-
-        StartCoroutine(DamageOverTime());
+        StartCoroutine(DestroyAfterTime());
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.GetComponent<IDamage>() != null)
-        {
-            IDamage dmg = other.GetComponent<IDamage>();
+        // Check if the projectile has already hit something
+        if (hasHit)
+            return;
 
-            if (dmg != null)
+        // Get the object hit by the projectile
+        GameObject hitObject = collision.gameObject;
+
+        // Check if the object is on a layer that should interact with the fireball
+        if (hitObject.layer != LayerMask.NameToLayer("IgnoreProjectile"))
+        {
+            // If the object is not the player, stop the projectile and apply damage
+            if (!hitObject.CompareTag("Player"))
             {
-                dmg.TakeDamage(damage);
+                Rigidbody rb = GetComponent<Rigidbody>();
+                rb.velocity = Vector3.zero;
+                rb.isKinematic = true;
+
+                // Stick the projectile to the object it hits
+                transform.parent = hitObject.transform;
+
+                // Align the rotation of the projectile with the surface normal of the object it hits
+                transform.rotation = Quaternion.FromToRotation(Vector3.forward, collision.contacts[0].normal);
+
+                hasHit = true;
+
+                // Apply damage over time
+                StartCoroutine(DamageOverTime());
             }
-            Destroy(gameObject);
         }
     }
     IEnumerator DamageOverTime()
@@ -58,5 +78,10 @@ public class fireMagic : MonoBehaviour
                 dmg.TakeDamage(damage);
             }
         }
+    }
+    IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(destroyTime);
+        Destroy(gameObject);
     }
 }

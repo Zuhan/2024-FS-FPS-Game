@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1120999973300441142}
   - component: {fileID: 8826739980523701212}
+  - component: {fileID: 1628807817204616799}
   - component: {fileID: 8976639915799612405}
   - component: {fileID: 8948208158895625171}
   - component: {fileID: 5205827618211160562}
-  - component: {fileID: 1628807817204616799}
   m_Layer: 0
   m_Name: GroundEnemy
   m_TagString: Untagged
@@ -45,6 +45,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3022000930250388504}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1628807817204616799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3022000930250388504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5295cc779a1926d45ac95ed543eebdbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 8976639915799612405}
+  model: {fileID: 8948208158895625171}
+  HP: 0
+  pointsToGain: 0
+  bullet: {fileID: 0}
+  shootRate: 0
+  shootPos: {fileID: 3770960406465362657}
 --- !u!195 &8976639915799612405
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -132,25 +151,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1628807817204616799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022000930250388504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5295cc779a1926d45ac95ed543eebdbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 8976639915799612405}
-  model: {fileID: 8948208158895625171}
-  HP: 0
-  pointsToGain: 0
-  bullet: {fileID: 0}
-  shootRate: 0
-  shootPos: {fileID: 3770960406465362657}
 --- !u!1 &5285312603844517991
 GameObject:
   m_ObjectHideFlags: 0

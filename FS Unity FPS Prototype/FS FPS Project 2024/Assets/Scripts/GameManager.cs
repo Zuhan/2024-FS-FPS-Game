@@ -17,16 +17,16 @@ public class gameManager : MonoBehaviour
     //MagicController added by Derek
     public magicController magicController;
 
-    // Fire Staff prefab
+    // Fire Staff prefab added by Derek
     public GameObject fireStaffPrefab;
 
-    // Reference to the fire staff object
+    // Reference to the fire staff object added by Derek
     private GameObject fireStaffObject;
 
-    // Reference to the fire staff script
+    // Reference to the fire staff script added by Derek
     private fireStaff fireStaffScript;
 
-    // Fire Magic prefab
+    // Fire Magic prefab added by Derek
     public GameObject FireMagicPrefab;
 
     //enemy count field 
@@ -47,7 +47,7 @@ public class gameManager : MonoBehaviour
         magicController = FindObjectOfType<magicController>();
         if (magicController == null)
         {
-            Debug.LogError("MagicController not found in scene");
+            Debug.LogError("magicController not found in scene");
         }
 
         // Instantiate the Fire Staff prefab in the scene
