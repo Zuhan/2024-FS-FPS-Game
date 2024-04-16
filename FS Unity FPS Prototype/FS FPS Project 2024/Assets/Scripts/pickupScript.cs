@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class pickupScript : MonoBehaviour, IPickup
 {
+    [SerializeField] int pointsToGain;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,9 @@ public class pickupScript : MonoBehaviour, IPickup
     {
         Debug.Log("Item picked up.");
         //Game Manager points?
-        gameManager.instance.pointsChange(100);
+        gameManager.instance.pointsChange(pointsToGain);
         //PointsManager Points?
-        PointsManager.Instance.AddPoints(100);
+        PointsManager.Instance.AddPoints(pointsToGain);
         Destroy(gameObject);
     }
 }

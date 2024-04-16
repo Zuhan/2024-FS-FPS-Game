@@ -415,6 +415,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup
       objectReference: {fileID: 0}
+    - target: {fileID: 1605131218841124528, guid: 3fad66338aadcb94385b8d1e6e27a76d, type: 3}
+      propertyPath: pointsToGain
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6376922119278276846, guid: 3fad66338aadcb94385b8d1e6e27a76d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13
@@ -970,6 +974,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1628807817204616799, guid: 7843b2bf3827130438f84c8ee5c7a156, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1154981450380241885, guid: daeb4bd311932b84c8cb902271156014, type: 3}
+    - target: {fileID: 1628807817204616799, guid: 7843b2bf3827130438f84c8ee5c7a156, type: 3}
       propertyPath: shootRate
       value: 1
       objectReference: {fileID: 0}
@@ -1325,7 +1333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: stamina
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: shootRate
@@ -1333,7 +1341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: maxStamina
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: shootDamage
@@ -1341,11 +1349,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: sprintDelay
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: staminaToAdd
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: currentPoints
@@ -1353,19 +1361,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: sprintDecayRate
-      value: 5.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: sprintRegenRate
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: staminaToRemove
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: sprintRegenDelay
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: m_Name

@@ -42,7 +42,10 @@ public class enemyAI : MonoBehaviour, IDamage
         StartCoroutine(FlashRed());
         if (HP <= 0)
         {
+            //Points manager points add... (works? Sometimes?)
             PointsManager.Instance.AddPoints(pointsToGain);
+            //Game manager points add... (Works, but not connected to player script)
+            gameManager.instance.pointsChange(pointsToGain);
             Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
             //removes a enemy from enemy count
             gameManager.instance.updateGameGoal(-1);
