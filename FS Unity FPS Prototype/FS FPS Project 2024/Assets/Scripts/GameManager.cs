@@ -6,7 +6,7 @@ public class gameManager : MonoBehaviour
 {
 
     //game manager instance
-    public static gameManager Instance;
+    public static gameManager instance;
 
     //game object player
     public GameObject player;
@@ -22,7 +22,7 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         //instance set to this
-        Instance = this;
+        instance = this;
         //find player object with tag Player
         player = GameObject.FindWithTag("Player");
 
