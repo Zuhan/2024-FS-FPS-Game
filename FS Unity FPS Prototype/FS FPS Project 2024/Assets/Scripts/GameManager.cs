@@ -16,8 +16,6 @@ public class gameManager : MonoBehaviour
     public GameObject player;
 
 
-    //MagicController added by Derek
-    public magicController magicController;
     //Fire Staff prefab added by Derek
     public GameObject fireStaffPrefab;
     //Reference to the fire staff object added by Derek

@@ -146,5 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a3a4188d34bd54d8d8523d6708dc7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  interactText: {fileID: 0}
+  interactFailText: {fileID: 0}
+  player: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
   magicController: {fileID: 0}
+  fireStaffPrefab: {fileID: 828565972911749674, guid: aba66e3a8f9f7fe46873f8b4267c5344, type: 3}
+  FireMagicPrefab: {fileID: 7027668650579343880, guid: 8aec002f82b622d4bb393fab20e83b08, type: 3}
+  enemyCount: 0
+  points: 0
