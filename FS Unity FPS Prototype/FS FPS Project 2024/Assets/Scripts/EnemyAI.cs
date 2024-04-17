@@ -14,7 +14,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
-
+    [SerializeField] int faceTargetSpeed;
+    bool playerInRange;
+    Vector3 playerDir;
     bool isShooting;
     
 
@@ -27,12 +29,47 @@ public class enemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        //set destination to player location
-        agent.SetDestination(gameManager.instance.player.transform.position);
 
-        if (!isShooting)
-            StartCoroutine(Shoot());
+        if (playerInRange)
+        {
+            playerDir = gameManager.instance.player.transform.position - transform.position;
+            agent.SetDestination(gameManager.instance.player.transform.position);
+
+            if (!isShooting)
+                StartCoroutine(Shoot());
+
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                faceTarget();
+            }
+        }
     }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
+    void faceTarget()
+    {
+        Quaternion rot = Quaternion.LookRotation(playerDir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+    }
+
 
     // Take Damage AI added by Matt
 
@@ -40,6 +77,8 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         HP -= damage;
         StartCoroutine(FlashRed());
+        //set destination when damaged
+        agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
             //removes a enemy from enemy count

@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
+    bool hitHappend;
 
     void Start()
     {
@@ -21,11 +22,18 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        if (other.isTrigger)
+        {
+            return;
+        }
+
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if (dmg != null)
+        if (dmg != null && !hitHappend)
         {
             dmg.TakeDamage(damage);
+            hitHappend = true;
         }
 
         Destroy(gameObject);

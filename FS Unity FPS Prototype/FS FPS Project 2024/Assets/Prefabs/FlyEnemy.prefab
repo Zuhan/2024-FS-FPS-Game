@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 6780633374166101902}
   - component: {fileID: 7341120531424297971}
   - component: {fileID: 7738523840267856083}
+  - component: {fileID: 7058303010288707007}
   m_Layer: 0
   m_Name: FlyEnemy
   m_TagString: Enemy
@@ -162,11 +163,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 7738523840267856083}
   model: {fileID: 8921542597407239022}
-  HP: 3
+  HP: 4
   pointsToGain: 100
   bullet: {fileID: 1154981450380241885, guid: daeb4bd311932b84c8cb902271156014, type: 3}
   shootRate: 1.5
   shootPos: {fileID: 137846917113684697}
+  faceTargetSpeed: 4
 --- !u!195 &7738523840267856083
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -189,6 +191,27 @@ NavMeshAgent:
   m_BaseOffset: 5.63
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &7058303010288707007
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074273329071172488}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1123513141889054069
 GameObject:
   m_ObjectHideFlags: 0

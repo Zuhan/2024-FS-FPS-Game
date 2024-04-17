@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class gameManager : MonoBehaviour
 {
     //field for the interact text UI
@@ -28,6 +29,7 @@ public class gameManager : MonoBehaviour
 
     // Fire Magic prefab added by Derek
     public GameObject FireMagicPrefab;
+
 
     //enemy count field 
     public int enemyCount;
