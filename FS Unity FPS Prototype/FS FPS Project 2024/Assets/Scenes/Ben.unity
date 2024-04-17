@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!23 &602797798 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5863248106380134291, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
-  m_PrefabInstance: {fileID: 9196258400845457322}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &655466306 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
@@ -377,11 +372,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
---- !u!23 &1199756033 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1198367240189647889, guid: 7ba9954d5df3eac4098c002e490b9b90, type: 3}
-  m_PrefabInstance: {fileID: 7964959990742849179}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1455227766
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,14 +855,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8265132759868116684, guid: 7ba9954d5df3eac4098c002e490b9b90, type: 3}
-      propertyPath: model
-      value: 
-      objectReference: {fileID: 1199756033}
-    - target: {fileID: 8265132759868116684, guid: 7ba9954d5df3eac4098c002e490b9b90, type: 3}
-      propertyPath: pointCost
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -929,14 +911,6 @@ PrefabInstance:
     - target: {fileID: 5556908780707708966, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
-      propertyPath: model
-      value: 
-      objectReference: {fileID: 602797798}
-    - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
-      propertyPath: pointCost
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

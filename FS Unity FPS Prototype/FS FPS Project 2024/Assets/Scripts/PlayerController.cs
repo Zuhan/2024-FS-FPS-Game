@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour
+public class playerController : MonoBehaviour, IDamage
 {
     [SerializeField] CharacterController controller;
 
@@ -177,8 +177,17 @@ public class playerController : MonoBehaviour
         }
     }
 
-    //TODO: implement take damage
-
+    //taking damage function
+    public void TakeDamage(int amount)
+    {
+        HP -= amount;
+        updatePlayerUI();
+        StartCoroutine(flashDamage());
+        if(HP <= 0)
+        {
+            gameManager.instance.lose();
+        }
+    }
     //hit indicator ienumerator
     IEnumerator flashDamage()
     {
