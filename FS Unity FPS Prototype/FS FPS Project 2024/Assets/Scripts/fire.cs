@@ -19,6 +19,8 @@ public class fire : MonoBehaviour, IDamage
 
     private void Start()
     {
+        //Destroy gameObject after [SerializeField] duration
+        Destroy(gameObject, duration);
         StartCoroutine(DamageOverTime());
     }
 
