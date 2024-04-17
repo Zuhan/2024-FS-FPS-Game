@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4979379391133287022}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,13 +77,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3968618428038824100}
   HP: 100
+  defaultWalkSpeed: 0
+  sprintMultiplier: 0
   speed: 6
   jumpHeight: 8
   maxJumps: 2
   gravity: 10
-  shootDamage: 0
-  shootRate: 0
-  shootDistance: 15
+  stamina: 0
+  maxStamina: 0
+  sprintDelay: 0
+  sprintDecayRate: 0
+  staminaToRemove: 0
+  sprintRegenDelay: 0
+  sprintRegenRate: 0
+  staminaToAdd: 0
+  rayDistance: 0
+  currentPoints: 0
   cube: {fileID: 0}
 --- !u!33 &2337110260309472815
 MeshFilter:
