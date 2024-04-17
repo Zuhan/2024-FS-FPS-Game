@@ -754,10 +754,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup
       objectReference: {fileID: 0}
-    - target: {fileID: 1605131218841124528, guid: 3fad66338aadcb94385b8d1e6e27a76d, type: 3}
-      propertyPath: pointsToGain
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 6376922119278276846, guid: 3fad66338aadcb94385b8d1e6e27a76d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13
@@ -815,6 +811,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 4981645156748749301, guid: 7ba9954d5df3eac4098c002e490b9b90, type: 3}
+      propertyPath: m_Size.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6328340573232154007, guid: 7ba9954d5df3eac4098c002e490b9b90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -871,6 +871,10 @@ PrefabInstance:
     - target: {fileID: 1760066939132121938, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: m_Name
       value: InteractableBarricade
+      objectReference: {fileID: 0}
+    - target: {fileID: 3799513359005746873, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
+      propertyPath: m_Size.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5556908780707708966, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: m_LocalPosition.x
