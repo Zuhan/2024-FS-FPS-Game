@@ -15,19 +15,16 @@ public class gameManager : MonoBehaviour
     //game object player
     public GameObject player;
 
+
     //MagicController added by Derek
     public magicController magicController;
-
-    // Fire Staff prefab added by Derek
+    //Fire Staff prefab added by Derek
     public GameObject fireStaffPrefab;
-
-    // Reference to the fire staff object added by Derek
+    //Reference to the fire staff object added by Derek
     private GameObject fireStaffObject;
-
-    // Reference to the fire staff script added by Derek
+    //Reference to the fire staff script added by Derek
     private fireStaff fireStaffScript;
-
-    // Fire Magic prefab added by Derek
+    //Fire Magic prefab added by Derek
     public GameObject FireMagicPrefab;
 
 
@@ -87,34 +84,25 @@ public class gameManager : MonoBehaviour
         points += amount;
     }
 
-    // method for equipping Fire_Staff prefab
+    //Method for equipping Fire_Staff prefab added by Derek
     public void EquipFireStaff()
     {
-        // Check if Fire Staff prefab is not already equipped
         if (fireStaffObject == null)
         {
-            // Instantiate Fire Staff prefab
             fireStaffObject = Instantiate(fireStaffPrefab, Vector3.zero, Quaternion.identity);
 
-            // Set its parent to Main Camera
             fireStaffObject.transform.parent = Camera.main.transform;
 
-            // Calculate offset to position Fire Staff in front of the Main Camera
-            Vector3 offset = new Vector3(0.5f, -0.088f, 0.98f); // Adjust this offset as needed
+            Vector3 offset = new Vector3(0.5f, -0.088f, 0.98f); // X offset, Y offset, Z offset
 
-            // Set its position relative to Main Camera
             fireStaffObject.transform.localPosition = offset;
 
-            // Calculate rotation to align Fire Staff with camera's forward direction
             Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
 
-            // Apply a 45-degree rotation around the right axis (assuming staff's initial orientation is aligned with the camera)
             rotation *= Quaternion.Euler(130f, 180f, 0f);
 
-            // Set its rotation
             fireStaffObject.transform.rotation = rotation;
 
-            // Get the fireStaff script component
             fireStaffScript = fireStaffObject.GetComponent<fireStaff>();
         }
     }
@@ -122,33 +110,27 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if the number 1 key is pressed
+        //Equipting the Fire Staff by pressing the 1 key added by Derek
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // Check if Fire Staff is already equipped
             if (fireStaffObject != null)
             {
-                // Unequip Fire Staff
                 UnequipFireStaff();
             }
             else
             {
-                // Equip Fire Staff
                 EquipFireStaff();
             }
         }
     }
 
-    // method for unequipping Fire_Staff prefab
+    //Unequipping the Fire Staff by pressing the 1 key added by Derek
     public void UnequipFireStaff()
     {
-        // Check if Fire Staff is equipped
         if (fireStaffObject != null)
         {
-            // Destroy the Fire Staff object
             Destroy(fireStaffObject);
 
-            // Reset reference variables
             fireStaffObject = null;
             fireStaffScript = null;
         }
