@@ -36,10 +36,12 @@ public class playerController : MonoBehaviour
     int jumpedTimes;
     int sprintDecayTimes;
     int interactDelay;
-
+    int hpOrig;
     // Start is called before the first frame update
     void Start()
     {
+        hpOrig = HP;
+        updatePlayerUI();
         stamina = maxStamina;
         canSprint = true;
         currentPoints = gameManager.instance.points;
@@ -173,5 +175,20 @@ public class playerController : MonoBehaviour
         {
             gameManager.instance.hideInteractText();
         }
+    }
+
+    //TODO: implement take damage
+
+    //hit indicator ienumerator
+    IEnumerator flashDamage()
+    {
+        gameManager.instance.playerDamageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerDamageScreen.SetActive(false);
+    }
+    //updating ui
+    void updatePlayerUI()
+    {
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / hpOrig;
     }
 }

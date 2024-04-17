@@ -31,6 +31,10 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
             gameManager.instance.pointsChange(-pointCost);
         }
     }
+    public int getCost()
+    {
+        return pointCost;
+    }
     IEnumerator objInteract()
     {
         model.material.color = Color.green;
