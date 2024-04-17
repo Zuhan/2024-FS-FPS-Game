@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3813249868673133822}
   - component: {fileID: 1336027409365229301}
   - component: {fileID: 1857199627173581008}
+  - component: {fileID: -297891772096245865}
   - component: {fileID: 5399762327715855467}
-  - component: {fileID: -8360187486283285930}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fire Magic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7027668650579343880}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.37932158, y: 0.0004456531, z: -0.00044641044, w: 0.9252647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0010892717, y: 0.92715114, z: 0.000003695488}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -44.583, y: 0.094, z: -0.094}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3813249868673133822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,12 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1857199627173581008}
+  fire: {fileID: 4812325306253215317, guid: 7c0835fa25be0fb408c2c465218a5cb1, type: 3}
   damage: 1
-  DOT: 1
-  DOTDuration: 3
-  DOTRadius: 4
+  fireballSpeed: 10
   speed: 3
-  destroyTime: 6
+  destroyTime: 3
 --- !u!135 &1336027409365229301
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -103,6 +102,14 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!33 &-297891772096245865
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027668650579343880}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!96 &5399762327715855467
 TrailRenderer:
   serializedVersion: 3
@@ -216,11 +223,3 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!33 &-8360187486283285930
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7027668650579343880}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

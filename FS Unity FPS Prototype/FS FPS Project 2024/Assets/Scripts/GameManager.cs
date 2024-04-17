@@ -50,41 +50,9 @@ public class gameManager : MonoBehaviour
             Debug.LogError("magicController not found in scene");
         }
 
-        // Instantiate the Fire Staff prefab in the scene
-        fireStaffObject = Instantiate(fireStaffPrefab, Vector3.zero, Quaternion.identity);
-        fireStaffObject.SetActive(false); // Hide the fire staff initially
-
-        // Get the fireStaff script from the player object
-        fireStaffScript = player.GetComponent<fireStaff>();
-        if (fireStaffScript == null)
-        {
-            // If the fireStaff script is not already attached to the player, add it
-            fireStaffScript = player.AddComponent<fireStaff>();
-        }
         //setting points
         points = 0;
     }
-
-
-    void Update()
-    {
-        // Check for player input to pick up the fire staff
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            PickupFireStaff();
-        }
-    }
-
-    // Method for picking up the fire staff
-    void PickupFireStaff()
-    {
-        // Activate the fire staff object in the scene
-        fireStaffObject.SetActive(true);
-
-        // Assign the fire magic prefab to the fireStaff script
-        fireStaffScript.fireMagicPrefab = FireMagicPrefab;
-    }
-
 
     //method for adding and removing enemy count
     public void updateGameGoal(int count)
@@ -115,5 +83,72 @@ public class gameManager : MonoBehaviour
     public void pointsChange(int amount)
     {
         points += amount;
+    }
+
+    // method for equipping Fire_Staff prefab
+    public void EquipFireStaff()
+    {
+        // Check if Fire Staff prefab is not already equipped
+        if (fireStaffObject == null)
+        {
+            // Instantiate Fire Staff prefab
+            fireStaffObject = Instantiate(fireStaffPrefab, Vector3.zero, Quaternion.identity);
+
+            // Set its parent to Main Camera
+            fireStaffObject.transform.parent = Camera.main.transform;
+
+            // Calculate offset to position Fire Staff in front of the Main Camera
+            Vector3 offset = new Vector3(0.5f, -0.088f, 0.98f); // Adjust this offset as needed
+
+            // Set its position relative to Main Camera
+            fireStaffObject.transform.localPosition = offset;
+
+            // Calculate rotation to align Fire Staff with camera's forward direction
+            Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+
+            // Apply a 45-degree rotation around the right axis (assuming staff's initial orientation is aligned with the camera)
+            rotation *= Quaternion.Euler(130f, 180f, 0f);
+
+            // Set its rotation
+            fireStaffObject.transform.rotation = rotation;
+
+            // Get the fireStaff script component
+            fireStaffScript = fireStaffObject.GetComponent<fireStaff>();
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Check if the number 1 key is pressed
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // Check if Fire Staff is already equipped
+            if (fireStaffObject != null)
+            {
+                // Unequip Fire Staff
+                UnequipFireStaff();
+            }
+            else
+            {
+                // Equip Fire Staff
+                EquipFireStaff();
+            }
+        }
+    }
+
+    // method for unequipping Fire_Staff prefab
+    public void UnequipFireStaff()
+    {
+        // Check if Fire Staff is equipped
+        if (fireStaffObject != null)
+        {
+            // Destroy the Fire Staff object
+            Destroy(fireStaffObject);
+
+            // Reset reference variables
+            fireStaffObject = null;
+            fireStaffScript = null;
+        }
     }
 }
