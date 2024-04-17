@@ -39,14 +39,6 @@ public class gameManager : MonoBehaviour
         instance = this;
         //find player object with tag Player
         player = GameObject.FindWithTag("Player");
-
-        //MagicController added by Derek
-        magicController = FindObjectOfType<magicController>();
-        if (magicController == null)
-        {
-            Debug.LogError("magicController not found in scene");
-        }
-
         //setting points
         points = 0;
     }
