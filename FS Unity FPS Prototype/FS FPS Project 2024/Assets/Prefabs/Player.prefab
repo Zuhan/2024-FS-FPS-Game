@@ -77,20 +77,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3968618428038824100}
   HP: 100
-  defaultWalkSpeed: 0
-  sprintMultiplier: 0
+  defaultWalkSpeed: 6
+  sprintMultiplier: 1.5
   speed: 6
   jumpHeight: 8
   maxJumps: 2
   gravity: 10
   stamina: 0
-  maxStamina: 0
-  sprintDelay: 0
-  sprintDecayRate: 0
-  staminaToRemove: 0
-  sprintRegenDelay: 0
-  sprintRegenRate: 0
-  staminaToAdd: 0
+  maxStamina: 21
+  sprintDelay: 1
+  sprintDecayRate: 1
+  staminaToRemove: 7
+  sprintRegenDelay: 2
+  sprintRegenRate: 1
+  staminaToAdd: 7
   rayDistance: 0
   currentPoints: 0
   cube: {fileID: 0}
