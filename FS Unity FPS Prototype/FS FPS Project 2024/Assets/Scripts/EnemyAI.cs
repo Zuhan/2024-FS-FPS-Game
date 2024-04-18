@@ -18,6 +18,7 @@ public class enemyAI : MonoBehaviour, IDamage
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
+    Color enemycolor;
     
 
     // Start is called before the first frame update
@@ -25,6 +26,8 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         //updates enemy count on start instance
         gameManager.instance.updateGameGoal(1);
+        //get starter enemy color
+        enemycolor = model.material.color;
     }
 
     void Update()
@@ -96,7 +99,7 @@ public class enemyAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        model.material.color = enemycolor;
     }
 
     IEnumerator Shoot()
