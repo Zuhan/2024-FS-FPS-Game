@@ -33,6 +33,7 @@ public class fireMagic : MonoBehaviour, IDamage
         transform.rotation = initialRotation;
     }
 
+    //Change Fire to trigger
     private void OnCollisionEnter(Collision collision)
     {
         if (hasHit)
@@ -47,12 +48,12 @@ public class fireMagic : MonoBehaviour, IDamage
         }
 
         Instantiate(fire, collision.contacts[0].point, Quaternion.identity);
-
-        Destroy(gameObject);
-
+          
         transform.parent = null;
 
         hasHit = true;
+
+        Destroy(gameObject);
     }
     private IEnumerator DestroyAfterTime()
     {

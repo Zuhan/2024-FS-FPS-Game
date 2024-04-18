@@ -94,16 +94,7 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(interact());
         }
     }
-    private void OnEnable()
-    {        
-        PointsManager.Instance.OnPointChange += HandlePointChange;
-    }
 
-    private void OnDisable()
-    {
-        PointsManager.Instance.OnPointChange -= HandlePointChange;
-    }
-    
     //Sprint by Paul
     IEnumerator Sprint(float stamDecay)
     {

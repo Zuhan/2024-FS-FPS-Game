@@ -34,6 +34,7 @@ public class fire : MonoBehaviour, IDamage
         }
     }
 
+    //Turn fire into trigger
     private void Update()
     {
         if (isAttached && targetEnemy != null)
