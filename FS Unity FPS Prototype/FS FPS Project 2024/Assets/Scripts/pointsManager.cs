@@ -4,6 +4,8 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
+// I ended up using the game manager for point collection, this may probably be deleted. 
+
 public class PointsManager : MonoBehaviour
 {
     public static PointsManager Instance;
@@ -32,3 +34,5 @@ public class PointsManager : MonoBehaviour
         OnPointChange?.Invoke(amount);
     }
 }
+
+
