@@ -44,11 +44,10 @@ public class fireMagic : MonoBehaviour, IDamage
         IDamage dmg = hitObject.GetComponent<IDamage>();
         if (dmg != null)
         {
-            dmg.TakeDamage(damage);
+            GameObject fireClone = Instantiate(fire, collision.contacts[0].point, Quaternion.identity);
+            fireClone.transform.parent = collision.transform;
         }
-
-        Instantiate(fire, collision.contacts[0].point, Quaternion.identity);
-          
+        
         transform.parent = null;
 
         hasHit = true;
