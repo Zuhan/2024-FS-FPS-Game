@@ -155,6 +155,31 @@ public class gameManager : MonoBehaviour
             fireStaffObject = Camera.main.transform.GetChild(0).gameObject;
             fireStaffScript = fireStaffObject.GetComponent<fireStaff>();
         }
+        else
+        {
+            UnequipFireStaff();
+        }
+    }
+
+    //Method for equipping Explosion_Staff prefab added by Derek
+    public void EquipExplosionStaff()
+    {
+        if (explosionStaffObject == null)
+        {
+            Vector3 offset = new Vector3(0.5f, -1.2f, -0.3f); // X offset, Y offset, Z offset
+
+            Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+            rotation *= Quaternion.Euler(-45f, 180f, 0f);
+
+            EquipWeaponSafely(explosionStaffPrefab, offset, rotation);
+
+            explosionStaffObject = Camera.main.transform.GetChild(0).gameObject;
+            explosionStaffScript = explosionStaffObject.GetComponent<explosionStaff>();
+        }
+        else
+        {
+            UnequipExplosionStaff();
+        }
     }
 
     // Update is called once per frame
@@ -203,24 +228,7 @@ public class gameManager : MonoBehaviour
             fireStaffScript = null;
         }
     }
-
-    //Method for equipping Explosion_Staff prefab added by Derek
-    public void EquipExplosionStaff()
-    {
-        if (explosionStaffObject == null)
-        {
-            Vector3 offset = new Vector3(0.5f, -1.2f, -0.3f); // X offset, Y offset, Z offset
-
-            Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-            rotation *= Quaternion.Euler(-45f, 180f, 0f);
-
-            EquipWeaponSafely(explosionStaffPrefab, offset, rotation);
-
-            explosionStaffObject = Camera.main.transform.GetChild(0).gameObject;
-            explosionStaffScript = explosionStaffObject.GetComponent<explosionStaff>();
-        }
-    }
-
+    
     //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
     public void UnequipExplosionStaff()
     {
