@@ -27,8 +27,6 @@ public class playerController : MonoBehaviour, IDamage
 
     [SerializeField] int currentPoints;
 
-    [SerializeField] GameObject cube;
-
     Vector3 moveDirection;
     Vector3 playerVelocity;
     bool isSprinting;

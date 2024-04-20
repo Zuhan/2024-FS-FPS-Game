@@ -83,17 +83,16 @@ MonoBehaviour:
   jumpHeight: 8
   maxJumps: 2
   gravity: 10
-  stamina: 0
+  stamina: 21
   maxStamina: 21
   sprintDelay: 1
   sprintDecayRate: 1
-  staminaToRemove: 7
+  staminaToRemove: 3
   sprintRegenDelay: 2
   sprintRegenRate: 1
   staminaToAdd: 7
   rayDistance: 0
   currentPoints: 0
-  cube: {fileID: 0}
 --- !u!33 &2337110260309472815
 MeshFilter:
   m_ObjectHideFlags: 0

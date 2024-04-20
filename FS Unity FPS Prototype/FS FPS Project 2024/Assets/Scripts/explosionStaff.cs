@@ -32,6 +32,6 @@ public class explosionStaff : MonoBehaviour
 
         explosionMagic.transform.parent = null;
 
-        explosionMagic.GetComponent<fireMagic>().SetInitialRotation(initialRotation);
+        explosionMagic.GetComponent<explosionMagic>().SetInitialRotation(initialRotation);
     }
 }
