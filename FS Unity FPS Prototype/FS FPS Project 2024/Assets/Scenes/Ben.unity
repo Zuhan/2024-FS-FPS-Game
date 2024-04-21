@@ -1350,7 +1350,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5643621764341838152, guid: 66946fad455cfa644abaeffa987f5939, type: 3}
+      propertyPath: fireDot
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643621764341838152, guid: 66946fad455cfa644abaeffa987f5939, type: 3}
       propertyPath: dmgDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643621764341838152, guid: 66946fad455cfa644abaeffa987f5939, type: 3}
+      propertyPath: dotDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643621764341838152, guid: 66946fad455cfa644abaeffa987f5939, type: 3}
+      propertyPath: dotTicks
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643621764341838152, guid: 66946fad455cfa644abaeffa987f5939, type: 3}
+      propertyPath: dotDamage
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8881709697167867041, guid: 66946fad455cfa644abaeffa987f5939, type: 3}
