@@ -3,42 +3,59 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class nukeExplosion : MonoBehaviour, IDamage
+public class nukeExplosion : MonoBehaviour
 {
     [SerializeField] float duration;
     [SerializeField] int damage;
     [SerializeField] float damageRadius;
+    [SerializeField] float maxDamageDistance;
+
+    SphereCollider explosionCollider;
+    float currentRadius;
+    [SerializeField] float expandSpeed;
+    [SerializeField] float targetRadius;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Destroy gameObject after [SerializeField] duration
+        explosionCollider = GetComponent<SphereCollider>();
+        currentRadius = 1f;
         Destroy(gameObject, duration);
+        StartCoroutine(ExpandCollider());
+    }
+
+    IEnumerator ExpandCollider()
+    {
+        while (currentRadius < targetRadius)
+        {
+            currentRadius += expandSpeed * Time.deltaTime;
+            explosionCollider.radius = currentRadius;
+            yield return null;
+        }
     }
 
     // OnTrigger method to detect nearby objects and apply damage
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the other object has IDamage interface
-        IDamage damageable = other.GetComponent<IDamage>();
-        if (damageable != null)
+        Debug.Log("Collider Stayed: " + other.name);
+        IDamage dmg = other.GetComponent<IDamage>();
+
+        if (dmg != null)
         {
-            // Calculate distance between explosion center and the object
-            float distance = Vector3.Distance(transform.position, other.transform.position);
+            //float distance = Vector3.Distance(transform.position, other.transform.position);
 
-            // Calculate falloff based on distance
-            float falloff = 1f - Mathf.Clamp01(distance / damageRadius);
+            //float damageMultiplier = Mathf.Clamp01(1f - (distance / maxDamageDistance));
 
-            // Calculate final damage
-            int finalDamage = Mathf.RoundToInt(damage * falloff);
+            //int calculatedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
-            // Apply damage to the object
-            damageable.TakeDamage(finalDamage);
+            dmg.TakeDamage(damage);
         }
     }
 
-    public void TakeDamage(int damage)
+    // Draw the damage radius gizmo for visualization
+    private void OnDrawGizmosSelected()
     {
-
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, damageRadius);
     }
 }

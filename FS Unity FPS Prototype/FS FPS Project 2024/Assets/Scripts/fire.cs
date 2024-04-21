@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fire : MonoBehaviour, IDamage
+public class fire : MonoBehaviour
 {
     //AHAHAHAHAHAHA BURN BABY BURN
 
@@ -13,7 +13,6 @@ public class fire : MonoBehaviour, IDamage
     [SerializeField] Rigidbody rb;
 
     private float timer = 0f;
-    private bool isAttached = false;
     private Transform targetEnemy;
     private Vector3 initialOffset;
 
@@ -82,10 +81,5 @@ public class fire : MonoBehaviour, IDamage
                 dmg.TakeDamage(damagePerTick);
             }
         }
-    }
-
-    public void TakeDamage(int damage)
-    {
-        
     }
 }

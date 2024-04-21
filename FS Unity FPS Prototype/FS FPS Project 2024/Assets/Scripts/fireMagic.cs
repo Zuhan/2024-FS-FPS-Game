@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fireMagic : MonoBehaviour, IDamage
+public class fireMagic : MonoBehaviour
 {
     //I, DEREK, CALL UPON THE POWER OF FIRE. HHHHHHAAAAAAA
 
@@ -73,10 +73,5 @@ public class fireMagic : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(destroyTime);
         Destroy(gameObject);
-    }
-
-    public void TakeDamage(int damage)
-    {
-
     }
 }

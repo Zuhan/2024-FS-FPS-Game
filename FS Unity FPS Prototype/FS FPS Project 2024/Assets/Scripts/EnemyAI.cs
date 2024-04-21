@@ -47,8 +47,6 @@ public class enemyAI : MonoBehaviour, IDamage
             }
         }
     }
-
-
     void OnTriggerEnter(Collider other)
     {
 
@@ -57,7 +55,6 @@ public class enemyAI : MonoBehaviour, IDamage
             playerInRange = true;
         }
     }
-
     void OnTriggerExit(Collider other)
     {
 
@@ -66,16 +63,13 @@ public class enemyAI : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
-
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
-
     // Take Damage AI added by Matt
-
     public void TakeDamage(int damage)
     {
         HP -= damage;

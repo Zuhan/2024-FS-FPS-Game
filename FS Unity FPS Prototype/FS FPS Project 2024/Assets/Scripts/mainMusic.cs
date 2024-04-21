@@ -8,10 +8,8 @@ public class mainMusic : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            //Play the music
             GetComponent<AudioSource>().Play();
         }
-        //Turn off collider to prevent further OnTriggerEnter calls
         GetComponent<Collider>().enabled = false;
     }
 }

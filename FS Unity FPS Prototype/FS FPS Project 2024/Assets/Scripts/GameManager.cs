@@ -36,14 +36,16 @@ public class gameManager : MonoBehaviour
     private fireStaff fireStaffScript;
     //Fire Magic prefab added by Derek
     public GameObject FireMagicPrefab;
-    //Fire Staff prefab added by Derek
+    //Explosion Staff prefab added by Derek
     public GameObject explosionStaffPrefab;
-    //Reference to the fire staff object added by Derek
+    //Reference to the explosion staff object added by Derek
     private GameObject explosionStaffObject;
-    //Reference to the fire staff script added by Derek
+    //Reference to the explosion staff script added by Derek
     private explosionStaff explosionStaffScript;
-    //Fire Magic prefab added by Derek
+    //Explosion Magic prefab added by Derek
     public GameObject ExplosionMagicPrefab;
+    //Nuclear Explosion prefab added by Derek
+    public GameObject Explosion;
 
 
     //enemy count field 

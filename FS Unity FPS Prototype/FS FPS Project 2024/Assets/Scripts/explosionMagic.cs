@@ -34,7 +34,6 @@ public class explosionMagic : MonoBehaviour
         transform.rotation = initialRotation;
     }
 
-    //Change Fire to trigger
     private void OnCollisionEnter(Collision collision)
     {
         if (hasHit)
@@ -64,10 +63,5 @@ public class explosionMagic : MonoBehaviour
     {
         yield return new WaitForSeconds(destroyTime);
         Destroy(gameObject);
-    }
-
-    public void TakeDamage(int damage)
-    {
-
     }
 }
