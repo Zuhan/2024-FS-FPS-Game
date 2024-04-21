@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
 {
-    [SerializeField] CharacterController controller;
+    public CharacterController controller;
 
     [SerializeField] int HP;
     [SerializeField] float defaultWalkSpeed;

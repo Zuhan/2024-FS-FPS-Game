@@ -24,9 +24,9 @@ public class gameManager : MonoBehaviour
     //game manager instance
     public static gameManager instance;
 
-    //game object player
+    //game object player and playercontroller
     public GameObject player;
-
+    public playerController playerScript;
 
     //Fire Staff prefab added by Derek
     public GameObject fireStaffPrefab;
@@ -58,8 +58,9 @@ public class gameManager : MonoBehaviour
     {
         //instance set to this
         instance = this;
-        //find player object with tag Player
+        //find player object with tag Player and player controller
         player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<playerController>();
         //setting points
         points = 0;
     }
