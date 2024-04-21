@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class platformMover : MonoBehaviour
+
+    //read pathScript.cs please
 {
     [SerializeField] pathScript path;
     [SerializeField] float speed;
@@ -16,8 +18,6 @@ public class platformMover : MonoBehaviour
     {
         targetNext();
     }
-
-    // Update is called once per frame
     void FixedUpdate()
     {
         elapsed += Time.deltaTime;

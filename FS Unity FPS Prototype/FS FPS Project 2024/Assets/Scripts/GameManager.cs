@@ -99,8 +99,9 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
     //method for displaying interact menu
-    public void showInteractText()
+    public void showInteractText(int cost)
     {
+        pointsCostText.text = cost.ToString("F0");
         interactText.SetActive(true);
     }
     //method for hiding interact text

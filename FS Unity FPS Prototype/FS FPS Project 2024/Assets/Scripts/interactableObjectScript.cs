@@ -48,6 +48,20 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         gameManager.instance.showInteractFail();
         yield return new WaitForSeconds(1);
         gameManager.instance.hideInteractFail();
-        gameManager.instance.showInteractText();
+        gameManager.instance.showInteractText(pointCost);
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            gameManager.instance.showInteractText(pointCost);
+        }
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            gameManager.instance.hideInteractText();
+        }
     }
 }

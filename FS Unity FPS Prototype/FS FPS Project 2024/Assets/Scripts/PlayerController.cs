@@ -147,22 +147,10 @@ public class playerController : MonoBehaviour, IDamage
     //checks if you are near an object that you can interact with
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Interact"))
-        {
-            gameManager.instance.showInteractText();
-        }
-        else if (other.gameObject.CompareTag("pickup"))
+        if (other.gameObject.CompareTag("pickup"))
         {
             IPickup pickup = other.GetComponent<IPickup>();
             pickup.pickup();
-        }
-    }
-    //checks if you left the area of an object that you can interact with
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Interact"))
-        {
-            gameManager.instance.hideInteractText();
         }
     }
 
