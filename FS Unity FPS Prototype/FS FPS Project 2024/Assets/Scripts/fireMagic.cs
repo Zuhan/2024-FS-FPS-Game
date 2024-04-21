@@ -47,14 +47,28 @@ public class fireMagic : MonoBehaviour, IDamage
             dmg.TakeDamage(damage);
         }
 
-        Instantiate(fire, collision.contacts[0].point, Quaternion.identity);
+        GameObject newFire = Instantiate(fire, collision.contacts[0].point, Quaternion.identity);
 
-        transform.parent = null;
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+            if (enemyRigidbody != null)
+            {
+                Vector3 centerOfMassOffset = enemyRigidbody.centerOfMass;
+                newFire.transform.SetParent(collision.gameObject.transform);
+                newFire.transform.localPosition = centerOfMassOffset;
+            }
+        }
+
+        // Create a fixed joint to attach the fire object to the collided object
+        FixedJoint joint = newFire.AddComponent<FixedJoint>();
+        joint.connectedBody = collision.rigidbody;
 
         hasHit = true;
 
         Destroy(gameObject);
     }
+
     private IEnumerator DestroyAfterTime()
     {
         yield return new WaitForSeconds(destroyTime);

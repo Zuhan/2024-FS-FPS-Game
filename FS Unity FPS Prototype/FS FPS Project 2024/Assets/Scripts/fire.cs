@@ -24,22 +24,37 @@ public class fire : MonoBehaviour, IDamage
         StartCoroutine(DamageOverTime());
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        if (collision.gameObject.CompareTag("Enemy") && !isAttached)
+        // Check if the fire is attached to an enemy
+        if (targetEnemy != null)
         {
-            targetEnemy = collision.transform;
-            initialOffset = transform.position - targetEnemy.position;
-            isAttached = true;
+            // Update the fire's position relative to the enemy's center of mass
+            transform.position = targetEnemy.position + initialOffset;
         }
     }
 
-    //Turn fire into trigger
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (isAttached && targetEnemy != null)
+        if (other.CompareTag("Enemy") && targetEnemy == null)
         {
-            transform.position = targetEnemy.position + initialOffset;
+            // Set the target enemy
+            targetEnemy = other.transform;
+            // Calculate the initial offset from the enemy's center of mass
+            Rigidbody enemyRigidbody = targetEnemy.GetComponent<Rigidbody>();
+            if (enemyRigidbody != null)
+            {
+                Vector3 centerOfMassOffset = enemyRigidbody.centerOfMass;
+                initialOffset = transform.position - (targetEnemy.position + centerOfMassOffset);
+                // Attach the fire to the center of mass of the enemy
+                transform.SetParent(targetEnemy);
+            }
+            // Disable the fire's collider to prevent further OnTriggerEnter calls
+            Collider fireCollider = GetComponent<Collider>();
+            if (fireCollider != null)
+            {
+                fireCollider.enabled = false;
+            }
         }
     }
 

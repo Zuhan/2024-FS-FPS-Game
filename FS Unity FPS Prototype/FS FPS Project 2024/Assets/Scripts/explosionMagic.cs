@@ -10,6 +10,7 @@ public class explosionMagic : MonoBehaviour
     [SerializeField] GameObject explosion;
 
     [SerializeField] int damage;
+    [SerializeField] int damageRadius;
     [SerializeField] float projectileSpeed;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
@@ -44,6 +45,10 @@ public class explosionMagic : MonoBehaviour
         IDamage dmg = hitObject.GetComponent<IDamage>();
         if (dmg != null)
         {
+            float distance = Vector3.Distance(transform.position, collision.collider.transform.position);
+            float falloff = 1f - Mathf.Clamp01(distance / damageRadius);
+            int finalDamage = Mathf.RoundToInt(damage * falloff);
+
             dmg.TakeDamage(damage);
         }
 
