@@ -42,11 +42,11 @@ public class nukeExplosion : MonoBehaviour
 
         if (dmg != null)
         {
-            //float distance = Vector3.Distance(transform.position, other.transform.position);
+            float distance = Vector3.Distance(transform.position, other.transform.position);
 
-            //float damageMultiplier = Mathf.Clamp01(1f - (distance / maxDamageDistance));
+            float damageMultiplier = Mathf.Clamp01(1f - (distance / maxDamageDistance));
 
-            //int calculatedDamage = Mathf.RoundToInt(damage * damageMultiplier);
+            int calculatedDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
             dmg.TakeDamage(damage);
         }

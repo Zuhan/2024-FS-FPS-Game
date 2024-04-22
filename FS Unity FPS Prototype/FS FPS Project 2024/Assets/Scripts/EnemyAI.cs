@@ -27,7 +27,7 @@ public class enemyAI : MonoBehaviour, IDamage
         //updates enemy count on start instance
         gameManager.instance.updateGameGoal(1);
         //get starter enemy color
-        enemycolor = model.material.color;
+        //enemycolor = model.material.color;
     }
 
     void Update()
