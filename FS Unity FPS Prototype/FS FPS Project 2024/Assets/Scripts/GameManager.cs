@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class gameManager : MonoBehaviour
 {
@@ -67,6 +68,7 @@ public class gameManager : MonoBehaviour
     private int nmes;
     public int round;
     public TMP_Text waveText;
+    private int spawnsRemaining;
 
     //void awake so its called first 
     void Awake()
@@ -81,6 +83,7 @@ public class gameManager : MonoBehaviour
 
         //testing
         nmes = enemiesPerWave;
+        spawnsRemaining = enemiesPerWave;
         startWave();
     }
     public void statePaused()
@@ -103,35 +106,43 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int count)
     {
         waveText.text = round.ToString();
-        enemyCount += count;
         enemyCountText.text = enemiesPerWave.ToString("F0");
-        if(enemiesPerWave <= 0 && enemyCount <= 0)
+        //enemyCount += count;
+        //testing stuff
+        if (count == -1)
         {
+            enemyCount--;
+            enemiesPerWave--;
+            enemyCountText.text = enemiesPerWave.ToString("F0");
+            if (enemiesPerWave > 0)
+            {
+                if (spawnsRemaining > 0)
+                {
+                    if (enemyCount < maxEnemiesAlive)
+                    {
+                        spawnEnemy();
+                    }
+                }
+            }
+        }
+        if (enemiesPerWave <= 0 && enemyCount <= 0)
+        {
+            StartCoroutine(startRound(3f));
+        }
+        /*if (enemiesPerWave <= 0 && enemyCount <= 0)
+        {
+            *//*waitForRound(5);
             round++;
             nmes += 5;
             enemiesPerWave += nmes;
+            spawnsRemaining += nmes;
             maxEnemiesAlive += 2;
             enemyCountText.text = enemiesPerWave.ToString("F0");
-            startWave();
-            /*statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(isPaused);*/
-        }
-
-        //testing stuff
-        if(count == -1)
-        {
-            enemyCount--;
-            if (enemiesPerWave > 0)
-            {
-                if (enemyCount < maxEnemiesAlive)
-                {
-                    spawnEnemy();
-                    enemyCount += 1;
-                    enemiesPerWave--;
-                }
-            }
-        } 
+            startWave();*/
+        /*statePaused();
+        menuActive = menuWin;
+        menuActive.SetActive(isPaused);*//*
+    }*/
     }
     //method for losing
     public void lose()
@@ -260,6 +271,7 @@ public class gameManager : MonoBehaviour
         //        EquipExplosionStaff();
         //    }
         //}
+        
     }
 
     //Unequipping the Fire Staff by pressing the 1 key added by Derek
@@ -295,6 +307,8 @@ public class gameManager : MonoBehaviour
         int spawnNum = rand.Next(spawner.transform.childCount);
         int nme = rand.Next(enemies.Count);
         Instantiate(enemies[nme], spawner.transform.GetChild(spawnNum).position,spawner.transform.GetChild(spawnNum).rotation);
+        spawnsRemaining--;
+        enemyCount++;
     }
     public void startWave()
     {
@@ -302,5 +316,16 @@ public class gameManager : MonoBehaviour
         {
             spawnEnemy();
         }
+    }
+    IEnumerator startRound(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        round++;
+        nmes += 5;
+        enemiesPerWave += nmes;
+        spawnsRemaining += nmes;
+        maxEnemiesAlive += 2;
+        enemyCountText.text = enemiesPerWave.ToString("F0");
+        startWave();
     }
 }

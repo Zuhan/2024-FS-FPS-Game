@@ -39,7 +39,7 @@ public class miniflyAI : MonoBehaviour, IDamage
     void Start()
     {
         //updates enemy count on start instance
-        gameManager.instance.updateGameGoal(1);
+        //gameManager.instance.updateGameGoal(1);
         //get starter enemy color
         enemycolor = model.material.color;
         //set spawn flys to false
@@ -100,7 +100,7 @@ public class miniflyAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {            
             //removes a enemy from enemy count
-            gameManager.instance.updateGameGoal(-1);
+            //gameManager.instance.updateGameGoal(-1);
             
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
