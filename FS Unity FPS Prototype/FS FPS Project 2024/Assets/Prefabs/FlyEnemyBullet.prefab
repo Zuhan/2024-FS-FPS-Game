@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 538942273195974137}
   - component: {fileID: 2299564589984927620}
   m_Layer: 0
-  m_Name: Red Enemy Bullet
+  m_Name: FlyEnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2299564589984927620}
-  damage: 1
-  speed: 30
+  damage: 2
+  speed: 20
   destroyTime: 2
 --- !u!33 &6405185013788838807
 MeshFilter:
@@ -170,13 +170,13 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.86458206
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -184,8 +184,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.76827586
-        value: 0.18142632
+        time: 0.43241537
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -197,7 +197,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9245283, g: 0, b: 0.12784898, a: 1}
+      key0: {r: 0.14912377, g: 0.66800606, b: 0.72955966, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
