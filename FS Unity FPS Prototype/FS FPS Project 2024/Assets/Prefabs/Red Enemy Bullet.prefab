@@ -51,8 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2299564589984927620}
   damage: 1
-  speed: 25
-  destroyTime: 3
+  speed: 30
+  destroyTime: 2
 --- !u!33 &6405185013788838807
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ TrailRenderer:
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.5
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -184,8 +184,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.70112264
-        value: 0.551178
+        time: 0.76827586
+        value: 0.18142632
         inSlope: 0
         outSlope: 0
         tangentMode: 0
