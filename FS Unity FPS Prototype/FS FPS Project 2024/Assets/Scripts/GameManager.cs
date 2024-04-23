@@ -58,6 +58,12 @@ public class gameManager : MonoBehaviour
 
     public bool isPaused;
 
+
+    //test fields for some spawn experiments
+    public int enemiesPerWave;
+    public int maxEnemiesAlive;
+    public int round;
+
     //void awake so its called first 
     void Awake()
     {
@@ -90,11 +96,28 @@ public class gameManager : MonoBehaviour
     {
         enemyCount += count;
         enemyCountText.text = enemyCount.ToString("F0");
-        if(enemyCount <= 1)
+        if(enemiesPerWave <=0 && enemyCount <= 1)
         {
-            statePaused();
+            round++;
+            enemiesPerWave += 5;
+            maxEnemiesAlive += 2;
+            for(int i = 0; i < maxEnemiesAlive; i++)
+            {
+                spawnEnemy();
+            }
+            /*statePaused();
             menuActive = menuWin;
-            menuActive.SetActive(isPaused);
+            menuActive.SetActive(isPaused);*/
+        }
+
+        //testing stuff
+        if (enemiesPerWave > 0)
+        {
+            if (enemyCount < maxEnemiesAlive)
+            {
+                spawnEnemy();
+                enemiesPerWave--;
+            }
         }
     }
     //method for losing

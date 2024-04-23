@@ -1010,6 +1010,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8649457027260640550, guid: 9459dd904d6258143ba146e324a041ae, type: 3}
+      propertyPath: round
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649457027260640550, guid: 9459dd904d6258143ba146e324a041ae, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 655466306}
@@ -1018,9 +1022,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 41740898}
     - target: {fileID: 8649457027260640550, guid: 9459dd904d6258143ba146e324a041ae, type: 3}
+      propertyPath: enemiesPerWave
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8649457027260640550, guid: 9459dd904d6258143ba146e324a041ae, type: 3}
       propertyPath: pointsCostText
       value: 
       objectReference: {fileID: 1761527333}
+    - target: {fileID: 8649457027260640550, guid: 9459dd904d6258143ba146e324a041ae, type: 3}
+      propertyPath: maxEnemiesAlive
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8649457027260640550, guid: 9459dd904d6258143ba146e324a041ae, type: 3}
       propertyPath: enemies.Array.size
       value: 3
