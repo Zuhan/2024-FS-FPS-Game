@@ -5,59 +5,62 @@ using UnityEngine;
 
 public class nukeExplosion : MonoBehaviour
 {
-    [SerializeField] float duration;
-    [SerializeField] int damage;
-    [SerializeField] float damageRadius;
-    [SerializeField] float maxDamageDistance;
-    [SerializeField] float expandSpeed;
-    [SerializeField] float targetRadius;
-    [SerializeField] Rigidbody rb;
+    //Nuke Explosion Being Shelved
 
-    SphereCollider explosionCollider;
 
-    float currentRadius;
+    //[SerializeField] float duration;
+    //[SerializeField] int damage;
+    //[SerializeField] float damageRadius;
+    //[SerializeField] float maxDamageDistance;
+    //[SerializeField] float expandSpeed;
+    //[SerializeField] float targetRadius;
+    //[SerializeField] Rigidbody rb;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        explosionCollider = GetComponent<SphereCollider>();
-        currentRadius = 1f;
-        Destroy(gameObject, duration);
-        StartCoroutine(ExpandCollider());
-    }
+    //SphereCollider explosionCollider;
 
-    IEnumerator ExpandCollider()
-    {
-        while (currentRadius < targetRadius)
-        {
-            currentRadius += expandSpeed * Time.deltaTime;
-            explosionCollider.radius = currentRadius;
-            yield return null;
-        }
-    }
+    //float currentRadius;
 
-    // OnTrigger method to detect nearby objects and apply damage
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Collider Stayed: " + other.name);
-        IDamage dmg = other.GetComponent<IDamage>();
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    explosionCollider = GetComponent<SphereCollider>();
+    //    currentRadius = 1f;
+    //    Destroy(gameObject, duration);
+    //    StartCoroutine(ExpandCollider());
+    //}
 
-        if (dmg != null)
-        {
-            float distance = Vector3.Distance(transform.position, other.transform.position);
+    //IEnumerator ExpandCollider()
+    //{
+    //    while (currentRadius < targetRadius)
+    //    {
+    //        currentRadius += expandSpeed * Time.deltaTime;
+    //        explosionCollider.radius = currentRadius;
+    //        yield return null;
+    //    }
+    //}
 
-            float damageMultiplier = Mathf.Clamp01(1f - (distance / maxDamageDistance));
+    //// OnTrigger method to detect nearby objects and apply damage
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Debug.Log("Collider Stayed: " + other.name);
+    //    IDamage dmg = other.GetComponent<IDamage>();
 
-            int calculatedDamage = Mathf.RoundToInt(damage * damageMultiplier);
+    //    if (dmg != null)
+    //    {
+    //        float distance = Vector3.Distance(transform.position, other.transform.position);
 
-            dmg.TakeDamage(damage);
-        }
-    }
+    //        float damageMultiplier = Mathf.Clamp01(1f - (distance / maxDamageDistance));
 
-    // Draw the damage radius gizmo for visualization
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, damageRadius);
-    }
+    //        int calculatedDamage = Mathf.RoundToInt(damage * damageMultiplier);
+
+    //        dmg.TakeDamage(damage);
+    //    }
+    //}
+
+    //// Draw the damage radius gizmo for visualization
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, damageRadius);
+    //}
 }

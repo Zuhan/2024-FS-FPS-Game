@@ -38,16 +38,18 @@ public class gameManager : MonoBehaviour
     private fireStaff fireStaffScript;
     //Fire Magic prefab added by Derek
     public GameObject FireMagicPrefab;
-    //Explosion Staff prefab added by Derek
-    public GameObject explosionStaffPrefab;
-    //Reference to the explosion staff object added by Derek
-    private GameObject explosionStaffObject;
-    //Reference to the explosion staff script added by Derek
-    private explosionStaff explosionStaffScript;
-    //Explosion Magic prefab added by Derek
-    public GameObject ExplosionMagicPrefab;
-    //Nuclear Explosion prefab added by Derek
-    public GameObject Explosion;
+
+    //Explosion Being Shelved
+    ////Explosion Staff prefab added by Derek
+    //public GameObject explosionStaffPrefab;
+    ////Reference to the explosion staff object added by Derek
+    //private GameObject explosionStaffObject;
+    ////Reference to the explosion staff script added by Derek
+    //private explosionStaff explosionStaffScript;
+    ////Explosion Magic prefab added by Derek
+    //public GameObject ExplosionMagicPrefab;
+    ////Nuclear Explosion prefab added by Derek
+    //public GameObject Explosion;
 
 
     //enemy count field 
@@ -202,26 +204,27 @@ public class gameManager : MonoBehaviour
         }
     }
 
+        //Explosion Staff Being Shelved
     //Method for equipping Explosion_Staff prefab added by Derek
-    public void EquipExplosionStaff()
-    {
-        if (explosionStaffObject == null)
-        {
-            Vector3 offset = new Vector3(0.5f, -1.2f, -0.3f); // X offset, Y offset, Z offset
+    //public void EquipExplosionStaff()
+    //{
+    //    if (explosionStaffObject == null)
+    //    {
+    //        Vector3 offset = new Vector3(0.5f, -1.2f, -0.3f); // X offset, Y offset, Z offset
 
-            Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-            rotation *= Quaternion.Euler(-45f, 180f, 0f);
+    //        Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+    //        rotation *= Quaternion.Euler(-45f, 180f, 0f);
 
-            EquipWeaponSafely(explosionStaffPrefab, offset, rotation);
+    //        EquipWeaponSafely(explosionStaffPrefab, offset, rotation);
 
-            explosionStaffObject = Camera.main.transform.GetChild(0).gameObject;
-            explosionStaffScript = explosionStaffObject.GetComponent<explosionStaff>();
-        }
-        else
-        {
-            UnequipExplosionStaff();
-        }
-    }
+    //        explosionStaffObject = Camera.main.transform.GetChild(0).gameObject;
+    //        explosionStaffScript = explosionStaffObject.GetComponent<explosionStaff>();
+    //    }
+    //    else
+    //    {
+    //        UnequipExplosionStaff();
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
@@ -244,18 +247,19 @@ public class gameManager : MonoBehaviour
                 EquipFireStaff();
             }
         }
+        //Explosion Staff Being Shelved
         //Equipping the Explosion_Staff by pressing 0 key
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            if (explosionStaffObject != null)
-            {
-                UnequipExplosionStaff();
-            }
-            else
-            {
-                EquipExplosionStaff();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha0))
+        //{
+        //    if (explosionStaffObject != null)
+        //    {
+        //        UnequipExplosionStaff();
+        //    }
+        //    else
+        //    {
+        //        EquipExplosionStaff();
+        //    }
+        //}
     }
 
     //Unequipping the Fire Staff by pressing the 1 key added by Derek
@@ -270,17 +274,19 @@ public class gameManager : MonoBehaviour
         }
     }
     
-    //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
-    public void UnequipExplosionStaff()
-    {
-        if (explosionStaffObject != null)
-        {
-            Destroy(explosionStaffObject);
 
-            explosionStaffObject = null;
-            explosionStaffScript = null;
-        }
-    }
+    //Explosion Staff Being Shelved
+    //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
+    //public void UnequipExplosionStaff()
+    //{
+    //    if (explosionStaffObject != null)
+    //    {
+    //        Destroy(explosionStaffObject);
+
+    //        explosionStaffObject = null;
+    //        explosionStaffScript = null;
+    //    }
+    //}
 
     //test function
     public void spawnEnemy()

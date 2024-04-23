@@ -4,64 +4,67 @@ using UnityEngine;
 
 public class explosionMagic : MonoBehaviour
 {
+    //Explosion Magic Being Shelved
+
+
     //I, DEREK, CALL UPON THE POWE TO VANQUISH MY ENEMIES, EXPLOSION!!!!!!!!!!!!!!!!
 
-    [SerializeField] Rigidbody rb;
-    [SerializeField] GameObject explosion;
+    //[SerializeField] Rigidbody rb;
+    //[SerializeField] GameObject explosion;
 
-    [SerializeField] int damage;
-    [SerializeField] int damageRadius;
-    [SerializeField] float projectileSpeed;
-    [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    //[SerializeField] int damage;
+    //[SerializeField] int damageRadius;
+    //[SerializeField] float projectileSpeed;
+    //[SerializeField] int speed;
+    //[SerializeField] int destroyTime;
 
-    private bool hasHit = false;
+    //private bool hasHit = false;
 
-    private Quaternion initialRotation;
+    //private Quaternion initialRotation;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Rigidbody rb = GetComponent<Rigidbody>();
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    Rigidbody rb = GetComponent<Rigidbody>();
 
-        rb.velocity = transform.forward * projectileSpeed;
+    //    rb.velocity = transform.forward * projectileSpeed;
 
-        StartCoroutine(DestroyAfterTime());
-    }
-    public void SetInitialRotation(Quaternion rotation)
-    {
-        initialRotation = rotation;
-        transform.rotation = initialRotation;
-    }
+    //    StartCoroutine(DestroyAfterTime());
+    //}
+    //public void SetInitialRotation(Quaternion rotation)
+    //{
+    //    initialRotation = rotation;
+    //    transform.rotation = initialRotation;
+    //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (hasHit)
-            return;
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (hasHit)
+    //        return;
 
-        GameObject hitObject = collision.gameObject;
+    //    GameObject hitObject = collision.gameObject;
 
-        IDamage dmg = hitObject.GetComponent<IDamage>();
-        if (dmg != null)
-        {
-            float distance = Vector3.Distance(transform.position, collision.collider.transform.position);
-            float falloff = 1f - Mathf.Clamp01(distance / damageRadius);
-            int finalDamage = Mathf.RoundToInt(damage * falloff);
+    //    IDamage dmg = hitObject.GetComponent<IDamage>();
+    //    if (dmg != null)
+    //    {
+    //        float distance = Vector3.Distance(transform.position, collision.collider.transform.position);
+    //        float falloff = 1f - Mathf.Clamp01(distance / damageRadius);
+    //        int finalDamage = Mathf.RoundToInt(damage * falloff);
 
-            dmg.TakeDamage(damage);
-        }
+    //        dmg.TakeDamage(damage);
+    //    }
 
-        Instantiate(explosion, collision.contacts[0].point, Quaternion.identity);
+    //    Instantiate(explosion, collision.contacts[0].point, Quaternion.identity);
 
-        transform.parent = null;
+    //    transform.parent = null;
 
-        hasHit = true;
+    //    hasHit = true;
 
-        Destroy(gameObject);
-    }
-    private IEnumerator DestroyAfterTime()
-    {
-        yield return new WaitForSeconds(destroyTime);
-        Destroy(gameObject);
-    }
+    //    Destroy(gameObject);
+    //}
+    //private IEnumerator DestroyAfterTime()
+    //{
+    //    yield return new WaitForSeconds(destroyTime);
+    //    Destroy(gameObject);
+    //}
 }
