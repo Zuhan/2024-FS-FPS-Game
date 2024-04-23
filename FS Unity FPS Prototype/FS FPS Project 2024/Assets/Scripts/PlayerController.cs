@@ -140,7 +140,10 @@ public class playerController : MonoBehaviour, IDamage
         if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit,5))
         {
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
-            interact.interact();
+            if (hit.transform != transform && interact != null)
+            {
+                interact.interact();
+            }
         }
         yield return new WaitForSeconds(interactDelay);
     }
