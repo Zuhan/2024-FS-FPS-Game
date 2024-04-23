@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class explosionMagic : MonoBehaviour
 {
-    //Explosion Magic Being Shelved
+    //Explosion Magic Being Shelved (DO NOT DELETE)
 
 
     //I, DEREK, CALL UPON THE POWE TO VANQUISH MY ENEMIES, EXPLOSION!!!!!!!!!!!!!!!!

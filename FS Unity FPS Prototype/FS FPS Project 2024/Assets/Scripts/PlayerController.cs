@@ -35,6 +35,7 @@ public class playerController : MonoBehaviour, IDamage
     int sprintDecayTimes;
     int interactDelay;
     int hpOrig;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,8 +51,6 @@ public class playerController : MonoBehaviour, IDamage
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
         movement();
-
-        
     }
     void movement()
     {
@@ -77,12 +76,12 @@ public class playerController : MonoBehaviour, IDamage
         controller.Move(playerVelocity * Time.deltaTime);
 
         //Sprinting implemented by Paul
-        if(Input.GetButtonDown("Sprint") && !isSprinting)
+        if (Input.GetButtonDown("Sprint") && !isSprinting)
         {
             StartCoroutine(Sprint(sprintDecayRate));
         }
 
-        if(stamina <= 0)
+        if (stamina <= 0)
         {
             canSprint = false;
             StartCoroutine(StaminaRegen(sprintRegenRate));
@@ -106,7 +105,7 @@ public class playerController : MonoBehaviour, IDamage
                 yield return new WaitForSeconds(stamDecay);
             }
             isSprinting = false;
-            speed = defaultWalkSpeed; 
+            speed = defaultWalkSpeed;
         }
     }
 
@@ -137,7 +136,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         interactDelay = 1;
         RaycastHit hit;
-        if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f,0.5f)),out hit,5))
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 5))
         {
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
             if (hit.transform != transform && interact != null)
@@ -163,7 +162,7 @@ public class playerController : MonoBehaviour, IDamage
         HP -= amount;
         updatePlayerUI();
         StartCoroutine(flashDamage());
-        if(HP <= 0)
+        if (HP <= 0)
         {
             gameManager.instance.lose();
         }

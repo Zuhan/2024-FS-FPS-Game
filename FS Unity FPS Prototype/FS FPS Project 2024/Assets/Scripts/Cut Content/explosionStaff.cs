@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class explosionStaff : MonoBehaviour
 {
-    //Explosion Staff Being Shelved
+    //Explosion Staff Being Shelved (DO NOT DELETE)
 
 
     ////I CALL UPON THE STRONGEST OF MAGIC, FROM THE DARKEST OF DARKNESS AND THE BRIGHTEST OF LIGHTS, TO CAST UPON MY ENEMIES, EXPLOSION!!!!!!!!!!!!!!!!
