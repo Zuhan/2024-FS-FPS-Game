@@ -9,11 +9,13 @@ public class nukeExplosion : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] float damageRadius;
     [SerializeField] float maxDamageDistance;
-
-    SphereCollider explosionCollider;
-    float currentRadius;
     [SerializeField] float expandSpeed;
     [SerializeField] float targetRadius;
+    [SerializeField] Rigidbody rb;
+
+    SphereCollider explosionCollider;
+
+    float currentRadius;
 
     // Start is called before the first frame update
     void Start()

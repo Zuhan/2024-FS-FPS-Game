@@ -15,6 +15,9 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] Transform shootPos;
     [SerializeField] int faceTargetSpeed;
+    [SerializeField] Component playerDetectiomRad;
+    [SerializeField] Component enemyCollider;
+
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
@@ -29,6 +32,7 @@ public class enemyAI : MonoBehaviour, IDamage
         //get starter enemy color
         enemycolor = model.material.color;
     }
+
 
     void Update()
     {

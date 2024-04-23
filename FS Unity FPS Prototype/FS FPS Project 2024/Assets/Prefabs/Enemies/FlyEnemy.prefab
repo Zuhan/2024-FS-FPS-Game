@@ -40,10 +40,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7860460363812708478}
-  - component: {fileID: 2744345558203271711}
+  - component: {fileID: 7341120531424297971}
   - component: {fileID: 6780633374166101902}
   - component: {fileID: 7058303010288707007}
-  - component: {fileID: 7341120531424297971}
+  - component: {fileID: 2744345558203271711}
   - component: {fileID: 8921542597407239022}
   - component: {fileID: 7738523840267856083}
   m_Layer: 0
@@ -76,14 +76,28 @@ Transform:
   - {fileID: 580919292047670140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2744345558203271711
-MeshFilter:
+--- !u!114 &7341120531424297971
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074273329071172488}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5295cc779a1926d45ac95ed543eebdbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 7738523840267856083}
+  model: {fileID: 8921542597407239022}
+  HP: 15
+  pointsToGain: 50
+  bullet: {fileID: 1154981450380241885, guid: daeb4bd311932b84c8cb902271156014, type: 3}
+  shootRate: 1.5
+  shootPos: {fileID: 137846917113684697}
+  faceTargetSpeed: 4
+  playerDetectiomRad: {fileID: 7058303010288707007}
+  enemyCollider: {fileID: 6780633374166101902}
 --- !u!136 &6780633374166101902
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -128,26 +142,14 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7341120531424297971
-MonoBehaviour:
+--- !u!33 &2744345558203271711
+MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074273329071172488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5295cc779a1926d45ac95ed543eebdbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 7738523840267856083}
-  model: {fileID: 8921542597407239022}
-  HP: 15
-  pointsToGain: 50
-  bullet: {fileID: 1154981450380241885, guid: daeb4bd311932b84c8cb902271156014, type: 3}
-  shootRate: 1.5
-  shootPos: {fileID: 137846917113684697}
-  faceTargetSpeed: 4
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8921542597407239022
 MeshRenderer:
   m_ObjectHideFlags: 0
