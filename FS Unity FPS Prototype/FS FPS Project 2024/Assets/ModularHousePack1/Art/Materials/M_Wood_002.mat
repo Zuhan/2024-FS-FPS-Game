@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Wood_002
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _NORMALMAP
   - _PARALLAXMAP
@@ -19,11 +21,12 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: d01a59ce55ef5734caf7516a33b7700a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 185bffc57c61f77448e6611b92740ac8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -43,7 +46,7 @@ Material:
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: caffb801f9c27c24996ec7cd967c8b61, type: 3}
+        m_Texture: {fileID: 2800000, guid: d09a80086caa256498ac254d5398b2c2, type: 3}
         m_Scale: {x: 2, y: 2}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -51,11 +54,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 3c0b549f3ec4df543a849a416b1935d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: ab62668c9cfadaf4c8275a1f5fe096bf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 306694c50efdef5458b60b7629c1fc29, type: 3}
+        m_Texture: {fileID: 2800000, guid: 93dde54e9e66c5e469356224afa6c36e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
