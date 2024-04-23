@@ -13,13 +13,15 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-
+    
     //public fields for more UI
     public Image playerHPBar;
     public TMP_Text enemyCountText;
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
+    public List<GameObject> enemies;
+    public GameObject spawner;
 
     //game manager instance
     public static gameManager instance;
@@ -55,6 +57,7 @@ public class gameManager : MonoBehaviour
     public int points;
 
     public bool isPaused;
+
     //void awake so its called first 
     void Awake()
     {
@@ -87,7 +90,7 @@ public class gameManager : MonoBehaviour
     {
         enemyCount += count;
         enemyCountText.text = enemyCount.ToString("F0");
-        if(enemyCount <= 0)
+        if(enemyCount <= 1)
         {
             statePaused();
             menuActive = menuWin;
@@ -243,5 +246,14 @@ public class gameManager : MonoBehaviour
             explosionStaffObject = null;
             explosionStaffScript = null;
         }
+    }
+
+    //test function
+    public void spawnEnemy()
+    {
+        var rand = new System.Random();
+        int spawnNum = rand.Next(spawner.transform.childCount);
+        int nme = rand.Next(enemies.Count);
+        Instantiate(enemies[nme], spawner.transform.GetChild(spawnNum).position,spawner.transform.GetChild(spawnNum).rotation);
     }
 }
