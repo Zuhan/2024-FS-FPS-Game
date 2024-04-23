@@ -62,7 +62,9 @@ public class gameManager : MonoBehaviour
     //test fields for some spawn experiments
     public int enemiesPerWave;
     public int maxEnemiesAlive;
+    private int nmes;
     public int round;
+    public TMP_Text waveText;
 
     //void awake so its called first 
     void Awake()
@@ -74,6 +76,10 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         //setting points
         points = 0;
+
+        //testing
+        nmes = enemiesPerWave;
+        startWave();
     }
     public void statePaused()
     {
@@ -94,31 +100,36 @@ public class gameManager : MonoBehaviour
     //method for adding and removing enemy count and determining if you win
     public void updateGameGoal(int count)
     {
+        waveText.text = round.ToString();
         enemyCount += count;
-        enemyCountText.text = enemyCount.ToString("F0");
-        if(enemiesPerWave <=0 && enemyCount <= 1)
+        enemyCountText.text = enemiesPerWave.ToString("F0");
+        if(enemiesPerWave <= 0 && enemyCount <= 0)
         {
             round++;
-            enemiesPerWave += 5;
+            nmes += 5;
+            enemiesPerWave += nmes;
             maxEnemiesAlive += 2;
-            for(int i = 0; i < maxEnemiesAlive; i++)
-            {
-                spawnEnemy();
-            }
+            enemyCountText.text = enemiesPerWave.ToString("F0");
+            startWave();
             /*statePaused();
             menuActive = menuWin;
             menuActive.SetActive(isPaused);*/
         }
 
         //testing stuff
-        if (enemiesPerWave > 0)
+        if(count == -1)
         {
-            if (enemyCount < maxEnemiesAlive)
+            enemyCount--;
+            if (enemiesPerWave > 0)
             {
-                spawnEnemy();
-                enemiesPerWave--;
+                if (enemyCount < maxEnemiesAlive)
+                {
+                    spawnEnemy();
+                    enemyCount += 1;
+                    enemiesPerWave--;
+                }
             }
-        }
+        } 
     }
     //method for losing
     public void lose()
@@ -278,5 +289,12 @@ public class gameManager : MonoBehaviour
         int spawnNum = rand.Next(spawner.transform.childCount);
         int nme = rand.Next(enemies.Count);
         Instantiate(enemies[nme], spawner.transform.GetChild(spawnNum).position,spawner.transform.GetChild(spawnNum).rotation);
+    }
+    public void startWave()
+    {
+        for(int i = 0; i < maxEnemiesAlive; i++)
+        {
+            spawnEnemy();
+        }
     }
 }
