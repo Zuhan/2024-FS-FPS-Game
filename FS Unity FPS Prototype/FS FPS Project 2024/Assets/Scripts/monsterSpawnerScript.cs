@@ -19,6 +19,11 @@ public class monsterSpawnerScript : MonoBehaviour
         spawnCoroutine = StartCoroutine(SpawnRoutine());
     }
 
+    void Update()
+    {
+        
+    }
+
     private IEnumerator SpawnRoutine()
     {
         while (true)
