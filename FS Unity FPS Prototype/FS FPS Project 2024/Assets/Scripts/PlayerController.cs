@@ -13,6 +13,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int jumpHeight;
     [SerializeField] int maxJumps;
     [SerializeField] int gravity;
+    [SerializeField] int currentPoints;
 
     [SerializeField] int stamina;
     [SerializeField] int maxStamina;
@@ -24,8 +25,6 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int staminaToAdd;
 
     [SerializeField] int rayDistance;
-
-    [SerializeField] int currentPoints;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -123,14 +122,6 @@ public class playerController : MonoBehaviour, IDamage
         canSprint = true;
     }
 
-
-    private void HandlePointChange(int newPoints)
-    {
-        Debug.Log("HandlePointChange Called");
-        currentPoints = currentPoints + newPoints;
-        Debug.Log("Player gained " + newPoints + " points.");
-    }
-
     //interact handler by Ben
     IEnumerator interact()
     {
@@ -138,6 +129,7 @@ public class playerController : MonoBehaviour, IDamage
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 5))
         {
+            
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
             if (hit.transform != transform && interact != null)
             {

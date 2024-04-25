@@ -10,11 +10,12 @@ public class gameManager : MonoBehaviour
     //fields for the UI 
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject interactFailText;
+    [SerializeField] GameObject barricadeText;
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
-    
+
     //public fields for more UI
     public Image playerHPBar;
     public TMP_Text enemyCountText;
@@ -98,7 +99,7 @@ public class gameManager : MonoBehaviour
         isPaused = !isPaused;
         Time.timeScale = 1;
         Cursor.visible = false;
-        Cursor.lockState= CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(isPaused);
         menuActive = null;
     }
@@ -157,10 +158,20 @@ public class gameManager : MonoBehaviour
         pointsCostText.text = cost.ToString("F0");
         interactText.SetActive(true);
     }
+    public void showBarricadeText(int cost)
+    {
+        pointsCostText.text = cost.ToString("F0");
+        barricadeText.SetActive(true);
+    }
+
     //method for hiding interact text
     public void hideInteractText()
     {
         interactText?.SetActive(false);
+    }
+    public void hideBarricadeText()
+    {    
+        barricadeText?.SetActive(false);
     }
     //method for showing when you dont have enough points
     public void showInteractFail()

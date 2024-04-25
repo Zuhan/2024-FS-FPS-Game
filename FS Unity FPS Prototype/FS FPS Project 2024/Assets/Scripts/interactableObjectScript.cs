@@ -7,7 +7,6 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
 {
     [SerializeField] Renderer model;
     [SerializeField] int pointCost;
-    [SerializeField] int HP;
     // Start is called before the first frame update
     void Start()
     {
