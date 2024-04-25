@@ -240,11 +240,18 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && menuActive == null)
+        if (Input.GetButtonDown("Cancel"))
         {
-            statePaused();
-            menuActive = menuPause;
-            menuActive.SetActive(isPaused);
+            if (menuActive == null)
+            {
+                statePaused();
+                menuActive = menuPause;
+                menuActive.SetActive(isPaused);
+            }
+            else if (menuActive == menuPause)
+            {
+                stateUnpaused();
+            }
         }
         //Equipping the Fire Staff by pressing the 1 key added by Derek
         if (Input.GetKeyDown(KeyCode.Alpha1))
