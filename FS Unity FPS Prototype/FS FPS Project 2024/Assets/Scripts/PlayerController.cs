@@ -48,7 +48,7 @@ public class playerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.instance.isPaused)
+        if (!gameManager.instance.isPaused)
         {
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
             movement();
