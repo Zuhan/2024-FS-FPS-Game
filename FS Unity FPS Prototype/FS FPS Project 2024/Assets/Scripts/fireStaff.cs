@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fireStaff : MonoBehaviour, ICooldownWeapon
+public class fireStaff : MonoBehaviour
 {
     //MY STAFF OF FIRE. I, DEREK, CALL UPON THEE TO BURN MY ENEMIES TO ASHES
 
@@ -10,10 +10,6 @@ public class fireStaff : MonoBehaviour, ICooldownWeapon
     [SerializeField] Transform shootPos;
     [SerializeField] private float fireCooldown = 0.5f;
     private float lastFireTime;
-
-    // Properties implementing the ICooldownWeapon interface
-    public float FireCooldown { get { return fireCooldown; } }
-    public float LastFireTime { get { return lastFireTime; } }
 
 
     // Update is called once per frame
@@ -23,6 +19,7 @@ public class fireStaff : MonoBehaviour, ICooldownWeapon
         {
             CastFireMagic();
             lastFireTime = Time.time;
+            StartCoroutine(displayCooldown());
         }
     }
 
@@ -39,5 +36,12 @@ public class fireStaff : MonoBehaviour, ICooldownWeapon
         fireMagic.transform.parent = null;
 
         fireMagic.GetComponent<fireMagic>().SetInitialRotation(initialRotation);
+    }
+
+    IEnumerator displayCooldown()
+    {
+        gameManager.instance.cooldownRing.SetActive(true);
+        yield return new WaitForSeconds(fireCooldown);
+        gameManager.instance.cooldownRing.SetActive(false);
     }
 }

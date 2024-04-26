@@ -40,6 +40,8 @@ public class gameManager : MonoBehaviour
     private fireStaff fireStaffScript;
     //Fire Magic prefab added by Derek
     public GameObject FireMagicPrefab;
+    //Cooldown Ring Added by Derek
+    public GameObject cooldownRing;
 
     //Explosion Being Shelved
     ////Explosion Staff prefab added by Derek
