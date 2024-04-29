@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4076256976862845341
+--- !u!1 &6487716144170632422
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5429576433946931431}
-  - component: {fileID: 6820806224029465981}
-  - component: {fileID: 4801188024326490857}
+  - component: {fileID: 2904462113517235693}
+  - component: {fileID: 7372329324092841561}
+  - component: {fileID: 736567911930065675}
   m_Layer: 0
-  m_Name: Medieval_Foliage_IvyVines_LongVert
+  m_Name: Foliage_IvyVines_ShortHoz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 80
   m_IsActive: 1
---- !u!4 &5429576433946931431
+--- !u!4 &2904462113517235693
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4076256976862845341}
+  m_GameObject: {fileID: 6487716144170632422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,21 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6820806224029465981
+--- !u!33 &7372329324092841561
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4076256976862845341}
-  m_Mesh: {fileID: 4300006, guid: e76d94a405b39a54682588c753f5bb83, type: 3}
---- !u!23 &4801188024326490857
+  m_GameObject: {fileID: 6487716144170632422}
+  m_Mesh: {fileID: 4300002, guid: e76d94a405b39a54682588c753f5bb83, type: 3}
+--- !u!23 &736567911930065675
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4076256976862845341}
+  m_GameObject: {fileID: 6487716144170632422}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
