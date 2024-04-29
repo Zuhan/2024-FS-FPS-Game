@@ -85,7 +85,7 @@ MonoBehaviour:
   gravity: 10
   currentPoints: 0
   weapons: []
-  weaponModel: {fileID: 0}
+  fireStaff: {fileID: 5840208470352011704}
   castDamage: 0
   castRate: 0
   castDist: 0
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 5091439835502740994}
   - component: {fileID: 7378953207129882213}
   m_Layer: 6
-  m_Name: Fire Staff
+  m_Name: fireStaff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

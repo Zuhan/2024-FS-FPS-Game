@@ -437,10 +437,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
-      propertyPath: fireStaff
-      value: 
-      objectReference: {fileID: 2744462802912958503}
     - target: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: m_Name
       value: Player
@@ -848,11 +844,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5ea8d7d45cada64bb817b3276c1f5e1, type: 3}
---- !u!1 &2744462802912958503 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5840208470352011704, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
-  m_PrefabInstance: {fileID: 859630414}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3878043369425962323
 PrefabInstance:
   m_ObjectHideFlags: 0
