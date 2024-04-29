@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824b0af4da3d94d4d9e95e6bc18b3120, type: 3}
+  m_Name: Weapon Fire Staff
+  m_EditorClassIdentifier: 
+  weaponModel: {fileID: 828565972911749674, guid: aba66e3a8f9f7fe46873f8b4267c5344, type: 3}
+  castDamage: 2
+  castRate: 1
+  castDist: 4
+  hitEffect: {fileID: 0}
+  castSound: {fileID: 8300000, guid: 38f1254f7c545af4aa9a5cb31e78aaf8, type: 3}
+  castSoundVol: 0

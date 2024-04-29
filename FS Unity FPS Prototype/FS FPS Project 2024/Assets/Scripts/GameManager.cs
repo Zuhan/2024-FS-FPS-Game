@@ -192,41 +192,41 @@ public class gameManager : MonoBehaviour
     }
 
     // Method for equipping any type of weapon after ensuring no other weapon is already equipped
-    private void EquipWeaponSafely(GameObject weaponPrefab, Vector3 offset, Quaternion rotation)
-    {
-        if (Camera.main.transform.childCount > 0)
-        {
-            // Destroy the currently equipped weapon
-            Destroy(Camera.main.transform.GetChild(0).gameObject);
-        }
+    //private void EquipWeaponSafely(GameObject weaponPrefab, Vector3 offset, Quaternion rotation)
+    //{
+    //    if (Camera.main.transform.childCount > 0)
+    //    {
+    //        // Destroy the currently equipped weapon
+    //        Destroy(Camera.main.transform.GetChild(0).gameObject);
+    //    }
 
-        // Instantiate and equip the new weapon
-        GameObject equippedWeapon = Instantiate(weaponPrefab, Vector3.zero, Quaternion.identity);
-        equippedWeapon.transform.parent = Camera.main.transform;
-        equippedWeapon.transform.localPosition = offset;
-        equippedWeapon.transform.rotation = rotation;
-    }
+    //    // Instantiate and equip the new weapon
+    //    GameObject equippedWeapon = Instantiate(weaponPrefab, Vector3.zero, Quaternion.identity);
+    //    equippedWeapon.transform.parent = Camera.main.transform;
+    //    equippedWeapon.transform.localPosition = offset;
+    //    equippedWeapon.transform.rotation = rotation;
+    //}
 
     //Method for equipping Fire_Staff prefab added by Derek
-    public void EquipFireStaff()
-    {
-        if (fireStaffObject == null)
-        {
-            Vector3 offset = new Vector3(0.5f, -0.088f, 0.98f); // X offset, Y offset, Z offset
+    //public void EquipFireStaff()
+    //{
+    //    if (fireStaffObject == null)
+    //    {
+    //        Vector3 offset = new Vector3(0.5f, -0.088f, 0.98f); // X offset, Y offset, Z offset
 
-            Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-            rotation *= Quaternion.Euler(130f, 180f, 0f);
+    //        Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+    //        rotation *= Quaternion.Euler(130f, 180f, 0f);
 
-            EquipWeaponSafely(fireStaffPrefab, offset, rotation);
+    //        EquipWeaponSafely(fireStaffPrefab, offset, rotation);
 
-            fireStaffObject = Camera.main.transform.GetChild(0).gameObject;
-            fireStaffScript = fireStaffObject.GetComponent<fireStaff>();
-        }
-        else
-        {
-            UnequipFireStaff();
-        }
-    }
+    //        fireStaffObject = Camera.main.transform.GetChild(0).gameObject;
+    //        fireStaffScript = fireStaffObject.GetComponent<fireStaff>();
+    //    }
+    //    else
+    //    {
+    //        UnequipFireStaff();
+    //    }
+    //}
 
         //Explosion Staff Being Shelved
     //Method for equipping Explosion_Staff prefab added by Derek
@@ -266,18 +266,20 @@ public class gameManager : MonoBehaviour
                 stateUnpaused();
             }
         }
+
         //Equipping the Fire Staff by pressing the 1 key added by Derek
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (fireStaffObject != null)
-            {
-                UnequipFireStaff();
-            }
-            else
-            {
-                EquipFireStaff();
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    if (fireStaffObject != null)
+        //    {
+        //        UnequipFireStaff();
+        //    }
+        //    else
+        //    {
+        //        EquipFireStaff();
+        //    }
+        //}
+
         //Explosion Staff Being Shelved
         //Equipping the Explosion_Staff by pressing 0 key
         //if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -295,16 +297,16 @@ public class gameManager : MonoBehaviour
     }
 
     //Unequipping the Fire Staff by pressing the 1 key added by Derek
-    public void UnequipFireStaff()
-    {
-        if (fireStaffObject != null)
-        {
-            Destroy(fireStaffObject);
+    //public void UnequipFireStaff()
+    //{
+    //    if (fireStaffObject != null)
+    //    {
+    //        Destroy(fireStaffObject);
 
-            fireStaffObject = null;
-            fireStaffScript = null;
-        }
-    }
+    //        fireStaffObject = null;
+    //        fireStaffScript = null;
+    //    }
+    //}
     
 
     //Explosion Staff Being Shelved

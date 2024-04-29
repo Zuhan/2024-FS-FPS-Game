@@ -15,6 +15,12 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int currentPoints;
 
+    [SerializeField] List<weaponStats> weapons = new List<weaponStats>();
+    [SerializeField] GameObject fireStaff;
+    [SerializeField] int castDamage;
+    [SerializeField] float castRate;
+    [SerializeField] int castDist;
+
     [SerializeField] int stamina;
     [SerializeField] int maxStamina;
     [SerializeField] int sprintDelay;
@@ -34,6 +40,7 @@ public class playerController : MonoBehaviour, IDamage
     int sprintDecayTimes;
     int interactDelay;
     int hpOrig;
+    int selectedWeapon;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +58,7 @@ public class playerController : MonoBehaviour, IDamage
         if (!gameManager.instance.isPaused)
         {
             Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
+            selectWeapon();
             movement();
         }
     }
@@ -169,9 +177,47 @@ public class playerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
+
     //updating ui
     void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / hpOrig;
     }
+
+    public void getWeaponStats(weaponStats weapon)
+    {
+        weapons.Add(weapon);
+        selectedWeapon = weapons.Count - 1;
+
+        castDamage = weapon.castDamage;
+        castDist = weapon.castDist;
+        castRate = weapon.castRate;
+
+        //fireStaff
+        fireStaff.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        fireStaff.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+        //Add other weapons here
+    }
+
+    void selectWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && selectedWeapon < weapons.Count - 1)
+        {
+            changeWeapon();
+        }
+
+        //Add Other Weapons Here
+    }
+
+    void changeWeapon()
+    {
+        castDamage = weapons[selectedWeapon].castDamage;
+        castDist = weapons[selectedWeapon].castDist;
+        castRate = weapons[selectedWeapon].castRate;
+
+        fireStaff.GetComponent<MeshFilter>().sharedMesh = weapons[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
+        fireStaff.GetComponent<MeshRenderer>().sharedMaterial = weapons[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+    }
+
 }

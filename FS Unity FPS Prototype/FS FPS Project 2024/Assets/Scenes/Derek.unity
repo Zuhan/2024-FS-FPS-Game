@@ -372,6 +372,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee2cc75a2a8694e40871f43874ee5a15, type: 3}
+--- !u!1001 &651130420
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3504159764801147048, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_Name
+      value: Fire Staff Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 187.28665
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 55.327606
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3033648
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.00075508014
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00034528022
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9367849
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.3499048
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -139.037
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.08900452
+      objectReference: {fileID: 0}
+    - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180.009
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
 --- !u!1001 &859630414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -380,12 +437,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
+      propertyPath: fireStaff
+      value: 
+      objectReference: {fileID: 2744462802912958503}
     - target: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8079026875378098207, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
@@ -394,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8079026875378098207, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 57.06
+      value: 56.59
       objectReference: {fileID: 0}
     - target: {fileID: 8079026875378098207, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -791,6 +848,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5ea8d7d45cada64bb817b3276c1f5e1, type: 3}
+--- !u!1 &2744462802912958503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5840208470352011704, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
+  m_PrefabInstance: {fileID: 859630414}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3878043369425962323
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -874,3 +936,4 @@ SceneRoots:
   - {fileID: 2096039097}
   - {fileID: 1312637276}
   - {fileID: 258486720}
+  - {fileID: 651130420}
