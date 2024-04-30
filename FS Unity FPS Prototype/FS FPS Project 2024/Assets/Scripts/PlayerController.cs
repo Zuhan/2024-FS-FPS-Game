@@ -195,8 +195,16 @@ public class playerController : MonoBehaviour, IDamage
 
         Debug.Log("Weapon added to List: " + weapon.name);
 
+        // Check if the added weapon is the fire staff
+        if (weapon.name == "Fire Staff")
+        {
+            // Enable the fire staff script
+            fireStaff.GetComponent<fireStaff>().EnableFireStaff();
+        }
+
         fireStaff.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
         fireStaff.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+
     }
 
     void selectWeapon()

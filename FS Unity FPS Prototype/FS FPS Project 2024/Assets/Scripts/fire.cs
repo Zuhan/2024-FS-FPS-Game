@@ -33,26 +33,17 @@ public class fire : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Enemy") && targetEnemy == null)
+        if (collision.collider.CompareTag("Enemy") && targetEnemy == null)
         {
-            // Set the target enemy
-            targetEnemy = other.transform;
-            // Calculate the initial offset from the enemy's center of mass
+            targetEnemy = collision.collider.transform;
             Rigidbody enemyRigidbody = targetEnemy.GetComponent<Rigidbody>();
             if (enemyRigidbody != null)
             {
                 Vector3 centerOfMassOffset = enemyRigidbody.centerOfMass;
                 initialOffset = transform.position - (targetEnemy.position + centerOfMassOffset);
-                // Attach the fire to the center of mass of the enemy
                 transform.SetParent(targetEnemy);
-            }
-            // Disable the fire's collider to prevent further OnTriggerEnter calls
-            Collider fireCollider = GetComponent<Collider>();
-            if (fireCollider != null)
-            {
-                fireCollider.enabled = false;
             }
         }
     }

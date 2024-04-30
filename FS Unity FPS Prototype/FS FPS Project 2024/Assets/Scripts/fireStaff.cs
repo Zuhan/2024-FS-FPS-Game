@@ -12,6 +12,11 @@ public class fireStaff : MonoBehaviour
     private float lastFireTime;
 
 
+    void Start()
+    {
+        enabled = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,5 +48,10 @@ public class fireStaff : MonoBehaviour
         gameManager.instance.cooldownRing.SetActive(true);
         yield return new WaitForSeconds(fireCooldown);
         gameManager.instance.cooldownRing.SetActive(false);
+    }
+
+    public void EnableFireStaff()
+    {
+        enabled = true;
     }
 }
