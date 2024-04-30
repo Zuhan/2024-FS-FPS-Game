@@ -193,25 +193,27 @@ public class playerController : MonoBehaviour, IDamage
         castDist = weapon.castDist;
         castRate = weapon.castRate;
 
-        //fireStaff
+        Debug.Log("Weapon added to List: " + weapon.name);
+
         fireStaff.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
         fireStaff.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
-
-        //Add other weapons here
     }
 
     void selectWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && selectedWeapon < weapons.Count - 1)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            Debug.Log("Weapon 1 Selected");
             changeWeapon();
         }
 
-        //Add Other Weapons Here
+        //Add other weapons here
     }
 
     void changeWeapon()
     {
+        Debug.Log("Weapon Changed");
+
         castDamage = weapons[selectedWeapon].castDamage;
         castDist = weapons[selectedWeapon].castDist;
         castRate = weapons[selectedWeapon].castRate;

@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4007083634452241109}
   - component: {fileID: 2753678394914978248}
+  - component: {fileID: 3518405958607362321}
   - component: {fileID: 7911369911476966860}
   - component: {fileID: 3628221122170074393}
   - component: {fileID: 746934361981543018}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fire Staff Pickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,6 +49,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 2ccd44e8d8922db4dbf647fb3af659a5, type: 2}
+--- !u!114 &3518405958607362321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3504159764801147048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdaa902239d212948b66f4bff20d82d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &7911369911476966860
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -12,8 +12,4 @@ public class weaponStats : ScriptableObject
     public float castRate;
     public int castDist;
     public int cooldown;
-
-    public ParticleSystem hitEffect;
-    public AudioClip castSound;
-    [Range(0, 1)] public float castSoundVol;
 }

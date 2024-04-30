@@ -19,6 +19,8 @@ public class weaponPickup : MonoBehaviour
             Debug.Log("Picked up " + weapon.name);
 
             gameManager.instance.playerScript.getWeaponStats(weapon);
+
+            Debug.Log("Pickup Item Destroyed");
             Destroy(gameObject);
         }
     }
