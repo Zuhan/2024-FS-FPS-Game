@@ -570,12 +570,13 @@ GameObject:
   - component: {fileID: 5584635788940803691}
   - component: {fileID: 1564555249537923276}
   - component: {fileID: 2506340555127630775}
+  - component: {fileID: 2481466231406731513}
   - component: {fileID: 6232277957200666548}
   - component: {fileID: 6098443037473622161}
   - component: {fileID: 1058172278457307274}
   m_Layer: 0
   m_Name: Mimic
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -607,7 +608,7 @@ Animator:
   m_GameObject: {fileID: 6440277652488049994}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 05748777faed4b138a9efedfa00c10ad, type: 3}
-  m_Controller: {fileID: 9100000, guid: 03730bceb22a49ef8f018a0019003810, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -640,6 +641,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2481466231406731513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6440277652488049994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05448a22a373554995e894e17067203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2506340555127630775}
+  model: {fileID: 4285277488886994111}
+  HP: 25
+  pointsToGain: 75
+  faceTargetSpeed: 5
+  playerDetectiomRad: {fileID: 6232277957200666548}
+  enemyCollider: {fileID: 6098443037473622161}
+  weaponCol: {fileID: 1058172278457307274}
 --- !u!135 &6232277957200666548
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -678,7 +699,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.75
   m_Height: 2
