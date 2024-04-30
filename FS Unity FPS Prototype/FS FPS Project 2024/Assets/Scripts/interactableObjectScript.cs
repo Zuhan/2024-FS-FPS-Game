@@ -7,10 +7,15 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
 {
     [SerializeField] Renderer model;
     [SerializeField] int pointCost;
+
+    [SerializeField] GameObject emptyGameObject;
+    [SerializeField] string sceneToLoad;
+    private Collider emptyGameObjectCollider;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        emptyGameObjectCollider = emptyGameObject.GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -20,6 +25,14 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     }
     public void interact()
     {
+        Debug.Log("Interacting with the door");
+        if (emptyGameObjectCollider != null)
+        {
+            emptyGameObjectCollider.enabled = true;
+            // Load the scene using the SceneLoader attached to the emptyGameObject
+            emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
+        }
+
         int amount = gameManager.instance.points;
         if (amount < pointCost)
         {

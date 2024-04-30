@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 5167704825703208588}
   - component: {fileID: 5336073816316694037}
   - component: {fileID: 4655419677204224494}
+  - component: {fileID: 2520602775496640762}
+  - component: {fileID: 293443705656104206}
   m_Layer: 0
   m_Name: Exterior_Door
   m_TagString: Untagged
@@ -193,6 +195,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.0959998, y: 1.996, z: 0.107784614}
   m_Center: {x: 0.54599994, y: -0.9990002, z: 0.05089196}
+--- !u!114 &2520602775496640762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253009238021413512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ac5e73ab5d82c47864547c34416296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 5336073816316694037}
+  pointCost: 0
+--- !u!65 &293443705656104206
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2253009238021413512}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.096, y: 1.996, z: 2.4}
+  m_Center: {x: 0.54599994, y: -0.9990097, z: 0.050891966}
 --- !u!1 &3271955167906631494
 GameObject:
   m_ObjectHideFlags: 0
