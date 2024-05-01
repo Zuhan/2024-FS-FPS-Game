@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
 {
+    [Header("----- Components -----")]
     public CharacterController controller;
+    [SerializeField] AudioSource aud;
 
+    [Header("----- Player Stats-----")]
     [SerializeField] int HP;
     [SerializeField] float defaultWalkSpeed;
     [SerializeField] float sprintMultiplier;
@@ -15,12 +18,15 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int gravity;
     [SerializeField] int currentPoints;
 
+    [Header("----- Weapon Stats -----")]
     [SerializeField] List<weaponStats> weapons = new List<weaponStats>();
     [SerializeField] GameObject fireStaff;
+    [SerializeField] GameObject Slingshot;
     [SerializeField] int castDamage;
     [SerializeField] float castRate;
     [SerializeField] int castDist;
 
+    [Header("----- Sprinting Stats -----")]
     [SerializeField] int stamina;
     [SerializeField] int maxStamina;
     [SerializeField] int sprintDelay;
@@ -30,11 +36,22 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float sprintRegenRate;
     [SerializeField] int staminaToAdd;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
+
     [SerializeField] int rayDistance;
+
+    Dictionary<string, GameObject> weaponSlots = new Dictionary<string, GameObject>();
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
     bool isSprinting;
+    bool playingSteps;
     bool canSprint;
     int jumpedTimes;
     int sprintDecayTimes;
@@ -50,6 +67,9 @@ public class playerController : MonoBehaviour, IDamage
         stamina = maxStamina;
         canSprint = true;
         currentPoints = gameManager.instance.points;
+
+        weaponSlots.Add("Fire Staff", fireStaff);
+        weaponSlots.Add("Slingshot", Slingshot);
     }
 
     // Update is called once per frame
@@ -78,12 +98,18 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             jumpedTimes++;
             playerVelocity.y = jumpHeight;
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (controller.isGrounded && moveDirection.normalized.magnitude > 0.3f && !playingSteps)
+        {
+            StartCoroutine(playSteps());
+        }
 
         //Sprinting implemented by Paul
         if (Input.GetButtonDown("Sprint") && !isSprinting)
@@ -100,6 +126,19 @@ public class playerController : MonoBehaviour, IDamage
         {
             StartCoroutine(interact());
         }
+    }
+    IEnumerator playSteps()
+    {
+        playingSteps = true;
+
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.5f);
+        else
+            yield return new WaitForSeconds(0.3f);
+
+        playingSteps = false;
     }
 
     //Sprint by Paul
@@ -163,6 +202,7 @@ public class playerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         updatePlayerUI();
         StartCoroutine(flashDamage());
         if (HP <= 0)
@@ -189,33 +229,53 @@ public class playerController : MonoBehaviour, IDamage
         weapons.Add(weapon);
         selectedWeapon = weapons.Count - 1;
 
+        if (weapons.Count == 1)
+        {
+            selectedWeapon = 0; // Automatically select the newly added weapon if it's the first one
+            changeWeapon();
+        }
+        else
+        {
+            selectedWeapon = weapons.Count - 1;
+        }
+
         castDamage = weapon.castDamage;
         castDist = weapon.castDist;
         castRate = weapon.castRate;
 
         Debug.Log("Weapon added to List: " + weapon.name);
-
-        // Check if the added weapon is the fire staff
-        if (weapon.name == "Fire Staff")
-        {
-            // Enable the fire staff script
-            fireStaff.GetComponent<fireStaff>().EnableFireStaff();
-        }
-
-        fireStaff.GetComponent<MeshFilter>().sharedMesh = weapon.weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        fireStaff.GetComponent<MeshRenderer>().sharedMaterial = weapon.weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
-
     }
 
     void selectWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Debug.Log("Weapon 1 Selected");
-            changeWeapon();
+            // Find the Slingshot in the weapons list
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                if (weapons[i].name == "Slingshot")
+                {
+                    selectedWeapon = i;
+                    changeWeapon();
+                    return;
+                }
+            }
+            Debug.Log("Slingshot not found in weapons list.");
         }
-
-        //Add other weapons here
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // Find the fire staff in the weapons list
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                if (weapons[i].name == "Fire Staff")
+                {
+                    selectedWeapon = i;
+                    changeWeapon();
+                    return;
+                }
+            }
+            Debug.Log("Fire Staff not found in weapons list.");
+        }
     }
 
     void changeWeapon()
@@ -226,8 +286,61 @@ public class playerController : MonoBehaviour, IDamage
         castDist = weapons[selectedWeapon].castDist;
         castRate = weapons[selectedWeapon].castRate;
 
-        fireStaff.GetComponent<MeshFilter>().sharedMesh = weapons[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
-        fireStaff.GetComponent<MeshRenderer>().sharedMaterial = weapons[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+        // Iterate through all weapons
+        foreach (var kvp in weaponSlots)
+        {
+            string weaponName = kvp.Key;
+            GameObject weaponObject = kvp.Value;
+
+            // Check if the current weapon matches the selected weapon
+            if (weaponName == weapons[selectedWeapon].name)
+            {
+                // Set the mesh and material of the currently equipped weapon
+                weaponObject.GetComponent<MeshFilter>().sharedMesh = weapons[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
+                weaponObject.GetComponent<MeshRenderer>().sharedMaterial = weapons[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
+
+                // Enable the Fire Staff script only if the selected weapon is the Fire Staff
+                if (weaponName == "Fire Staff")
+                {
+                    fireStaff.GetComponent<fireStaff>().EnableFireStaff();
+                }
+                else
+                {
+                    fireStaff.GetComponent<fireStaff>().DisableFireStaff();
+                }
+
+                // Enable the Slingshot script only if the selected weapon is the Slingshot
+                if (weaponName == "Slingshot")
+                {
+                    Slingshot.GetComponent<slingshot>().EnableSlingshot();
+                    Slingshot.GetComponent<slingshot>().EnableAudio();
+                }
+                else
+                {
+                    Slingshot.GetComponent<slingshot>().DisableSlingshot();
+                    Slingshot.GetComponent<slingshot>().DisableAudio();
+                }
+            }
+            else
+            {
+                // Reset the mesh and material of other weapons
+                weaponObject.GetComponent<MeshFilter>().sharedMesh = null;
+                weaponObject.GetComponent<MeshRenderer>().sharedMaterial = null;
+            }
+        }
+    }
+
+    GameObject GetWeaponObject(string weaponName)
+    {
+        if (weaponSlots.ContainsKey(weaponName))
+        {
+            return weaponSlots[weaponName];
+        }
+        else
+        {
+            Debug.LogError("Unknown weapon: " + weaponName);
+            return null;
+        }
     }
 
 }

@@ -33,7 +33,6 @@ public class fireMagic : MonoBehaviour
         transform.rotation = initialRotation;
     }
 
-    //Change Fire to trigger
     private void OnCollisionEnter(Collision collision)
     {
         if (hasHit)
@@ -60,7 +59,6 @@ public class fireMagic : MonoBehaviour
             }
         }
 
-        // Create a fixed joint to attach the fire object to the collided object
         FixedJoint joint = newFire.AddComponent<FixedJoint>();
         joint.connectedBody = collision.rigidbody;
 
