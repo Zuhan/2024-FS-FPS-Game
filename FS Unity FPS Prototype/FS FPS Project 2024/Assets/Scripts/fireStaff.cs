@@ -52,6 +52,12 @@ public class fireStaff : MonoBehaviour
 
     public void EnableFireStaff()
     {
+        Debug.Log("Fire Staff Enabled");
         enabled = true;
+    }
+    public void DisableFireStaff()
+    {
+        Debug.Log("Fire Staff Disabled");
+        enabled = false;
     }
 }

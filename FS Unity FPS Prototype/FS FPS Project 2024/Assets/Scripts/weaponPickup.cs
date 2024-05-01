@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class weaponPickup : MonoBehaviour
 {
+    //THIS IS MY WEAPON, THERE IS ONLY ONE LIKE IT!!!!!!!!!!
+
     [SerializeField] weaponStats weapon;
 
     // Start is called before the first frame update
@@ -16,11 +18,7 @@ public class weaponPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Picked up " + weapon.name);
-
             gameManager.instance.playerScript.getWeaponStats(weapon);
-
-            Debug.Log("Pickup Item Destroyed");
             Destroy(gameObject);
         }
     }
