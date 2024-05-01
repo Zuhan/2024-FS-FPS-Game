@@ -8,19 +8,25 @@ public class slingshot : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] AudioClip snapSound;
 
+    [SerializeField] private float fireCooldown = 0.5f;
+    private float lastFireTime;
+
     private AudioSource audioSource; 
 
     void Start()
     {
         enabled = false;
         audioSource = GetComponent<AudioSource>();
+        DisableAudio();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
         {
             CreateBullet();
+            lastFireTime = Time.time;
+            StartCoroutine(displayCooldown());
         }
     }
 
@@ -28,12 +34,16 @@ public class slingshot : MonoBehaviour
     {
         Debug.Log("Bullet Created");
         Instantiate(bullet, shootPOS.position, shootPOS.rotation);
-
-        // Play the shoot sound
+    }
+    IEnumerator displayCooldown()
+    {
+        gameManager.instance.cooldownRing.SetActive(true);
         if (audioSource != null && snapSound != null)
         {
             audioSource.PlayOneShot(snapSound);
         }
+        yield return new WaitForSeconds(fireCooldown);
+        gameManager.instance.cooldownRing.SetActive(false);
     }
 
     public void EnableSlingshot()
@@ -45,5 +55,14 @@ public class slingshot : MonoBehaviour
     {
         Debug.Log("Slingshot Disabled");
         enabled = false;
+    }
+
+    public void EnableAudio()
+    {
+        audioSource.enabled = true;
+    }
+    public void DisableAudio()
+    {
+        audioSource.enabled = false;
     }
 }

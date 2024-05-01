@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour, IDamage
 {
+    [Header("----- Components -----")]
     public CharacterController controller;
+    [SerializeField] AudioSource aud;
 
     [Header("----- Player Stats-----")]
     [SerializeField] int HP;
@@ -34,6 +36,14 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] float sprintRegenRate;
     [SerializeField] int staminaToAdd;
 
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)][SerializeField] float audStepsVol;
+
     [SerializeField] int rayDistance;
 
     Dictionary<string, GameObject> weaponSlots = new Dictionary<string, GameObject>();
@@ -41,6 +51,7 @@ public class playerController : MonoBehaviour, IDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
     bool isSprinting;
+    bool playingSteps;
     bool canSprint;
     int jumpedTimes;
     int sprintDecayTimes;
@@ -87,12 +98,18 @@ public class playerController : MonoBehaviour, IDamage
 
         if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
         {
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             jumpedTimes++;
             playerVelocity.y = jumpHeight;
         }
 
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (controller.isGrounded && moveDirection.normalized.magnitude > 0.3f && !playingSteps)
+        {
+            StartCoroutine(playSteps());
+        }
 
         //Sprinting implemented by Paul
         if (Input.GetButtonDown("Sprint") && !isSprinting)
@@ -109,6 +126,19 @@ public class playerController : MonoBehaviour, IDamage
         {
             StartCoroutine(interact());
         }
+    }
+    IEnumerator playSteps()
+    {
+        playingSteps = true;
+
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.5f);
+        else
+            yield return new WaitForSeconds(0.3f);
+
+        playingSteps = false;
     }
 
     //Sprint by Paul
@@ -172,6 +202,7 @@ public class playerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
         updatePlayerUI();
         StartCoroutine(flashDamage());
         if (HP <= 0)
@@ -282,10 +313,12 @@ public class playerController : MonoBehaviour, IDamage
                 if (weaponName == "Slingshot")
                 {
                     Slingshot.GetComponent<slingshot>().EnableSlingshot();
+                    Slingshot.GetComponent<slingshot>().EnableAudio();
                 }
                 else
                 {
                     Slingshot.GetComponent<slingshot>().DisableSlingshot();
+                    Slingshot.GetComponent<slingshot>().DisableAudio();
                 }
             }
             else
