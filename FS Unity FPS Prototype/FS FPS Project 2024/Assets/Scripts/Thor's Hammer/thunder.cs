@@ -8,20 +8,20 @@ public class thunder : MonoBehaviour
 {
     [SerializeField] int baseDmg;
     [SerializeField] int castRate;
-    [SerializeField] int castRange;
-
     [SerializeField] int chainRange;
-    [SerializeField] int maxChainJumps;
-    public int currentHits;
+
+    public int currJumps;
+    [SerializeField] int maxJumps;
     [SerializeField] float chainJumpDelay;
 
     [SerializeField] float delay;
 
     [SerializeField] Rigidbody rb;
+    [SerializeField] bool hasHit;
 
     public GameObject chainLightningPrefab;
+    public GameObject objectHit;
 
-    private bool hasHit = false;
     private Transform targetEnemy;
     private Vector3 initialOffset;
 
@@ -32,7 +32,6 @@ public class thunder : MonoBehaviour
     void Start()
     {
         chainTrigger = GetComponent<BoxCollider>();
-        currentHits = 0;
 
         Destroy(gameObject, delay);
     }
@@ -41,65 +40,86 @@ public class thunder : MonoBehaviour
     {
         if (hasHit)
             return;
-        
-        GameObject objectHit = collision.gameObject;
+
+        objectHit = collision.gameObject;
 
         if (objectHit.CompareTag("Enemy"))
         {
-            targetEnemy = collision.transform;
-            initialOffset = transform.position - targetEnemy.position;
+            Debug.Log("Hit " + collision.gameObject.name);
+
+            initialOffset = transform.position - objectHit.transform.position;
 
             //activate trigger for chain
-            chainTrigger.enabled = true;
+            StartCoroutine(WaitForChain(chainJumpDelay, objectHit.GetComponent<Collider>()));
 
-            
-            //objectHit.gameObject.tag = "EnemyHitByThunder";
+            Destroy(gameObject);
         }
-
-        chainTrigger.enabled = false;
-        hasHit = true;
-
-        Destroy(gameObject);
         //objectHit.gameObject.tag = "Enemy";
     }
 
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    GameObject objectHit = collision.gameObject;
-
-    //    objectHit.tag = "Enemy";
-    //    currentHits--;
-    //}
-
-    private void OnTriggerEnter(Collider other)
+    
+    void chainNearbyEnemy(Vector3 center, float range)
     {
-        if (!hasHit && other.CompareTag("Enemy"))
+        Collider[] hits = Physics.OverlapSphere(center, range);
+        Debug.Log("Entered chainEnemy function");
+
+        foreach(var hit in hits)
         {
-            targetEnemy = other.transform;
-
-            Debug.Log("The God of Thunder says...");            
-
-            while (currentHits < maxChainJumps)
+            if (hit.gameObject.CompareTag("Enemy") && currJumps < maxJumps)
             {
-                Instantiate(chainLightningPrefab, targetEnemy.transform.position, Quaternion.identity);
-                
-                if(targetEnemy != null)
+                Debug.Log("Enemy in range: " + hit.name);
+                if (!hasHit)
                 {
-                    Debug.Log("rbCheck reached");
-                    Vector3 com = targetEnemy.position;
-                    initialOffset = transform.position = (targetEnemy.position + com).normalized;
-
-                    transform.SetParent(targetEnemy);
-                }
-
-                //targetEnemy.gameObject.tag = "EnemyHitByThunder";
-                currentHits++;
+                    IDamage dmg = hit.GetComponent<IDamage>();
+                    if (dmg != null)
+                    {
+                        Debug.Log("Dealt damage to " + hit.gameObject.name);
+                        hasHit = true;
+                        currJumps++;
+                        dmg.TakeDamage(baseDmg);
+                        hasHit = false;
+                    }
+                } 
             }
-
-            ApplyChainDamage(other);
-            chainTrigger.enabled = false;
         }
     }
+
+//private void OnCollisionExit(Collision collision)
+//{
+//    GameObject objectHit = collision.gameObject;
+
+//    objectHit.tag = "Enemy";
+//    currentHits--;
+//}
+
+//private void OnTriggerEnter(Collider other)
+//{
+//    GameObject currHitEnemy = other.gameObject;
+
+//    while (currJumps < maxJumps)
+//    {
+//        if (currHitEnemy.CompareTag("Enemy"))
+//        {
+//            Debug.Log("Attempting jump to: " + other.name);
+
+//            currJumps++;
+//            targetEnemy = other.transform;
+//            GameObject thunderToChain = Instantiate(chainLightningPrefab, targetEnemy.transform.position, Quaternion.identity);
+
+//            if (targetEnemy != null)
+//            {
+//                //Vector3 com = targetEnemy.position;
+//                //initialOffset = transform.position = (targetEnemy.position + com).normalized;
+//                ApplyChainDamage(other);
+//                //transform.SetParent(targetEnemy);
+//            }
+//            //targetEnemy.gameObject.tag = "EnemyHitByThunder";
+//            //ApplyChainDamage(other);
+//        }
+//        break;
+//    }
+//    Debug.Log("curr > max");
+//}
 
     private void ApplyChainDamage(Collider other)
     {        
@@ -110,7 +130,15 @@ public class thunder : MonoBehaviour
             dmg.TakeDamage(baseDmg);
         }
     }
-    void Update()
+
+    IEnumerator WaitForChain(float delay, Collider other)
+    {
+        Debug.Log("Jumping to... " + other.gameObject.name);
+        chainNearbyEnemy(objectHit.transform.position, chainRange);
+        yield return new WaitForSeconds(delay);
+        
+    }
+    void FixedUpdate()
     {
        
     }
