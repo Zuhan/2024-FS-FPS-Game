@@ -76,11 +76,6 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         //setting points
         points = 0;
-
-        //testing
-       // nmes = enemiesPerWave;
-        //spawnsRemaining = enemiesPerWave;
-        //startWave();
     }
     public void statePaused()
     {
@@ -103,7 +98,12 @@ public class gameManager : MonoBehaviour
     {
         enemyCount += count;
         enemyCountText.text = enemyCount.ToString("F0");
-        
+        if (enemyCount <= 0 && waveManager.instance.waveCurrent >= waveManager.instance.spawners.Length)
+        {
+            statePaused();
+            menuActive = menuWin;
+            menuActive.SetActive(isPaused);
+        }
     }
     //method for losing
     public void lose()

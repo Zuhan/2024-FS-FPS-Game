@@ -26,13 +26,13 @@ public class CentaurAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
-    
+    public waveSpawner spawnLocation;
 
     // Start is called before the first frame update
     void Start()
     {
         //updates enemy count on start instance
-        gameManager.instance.updateGameGoal(1);
+        //gameManager.instance.updateGameGoal(1);
         //get starter enemy color
         enemycolor = model.material.color;
     }
@@ -97,7 +97,10 @@ public class CentaurAI : MonoBehaviour, IDamage
         {            
             //removes a enemy from enemy count
             gameManager.instance.updateGameGoal(-1);
-            
+            if (spawnLocation)
+            {
+                spawnLocation.updateEnemyNumber();
+            }
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
             PointsManager.Instance.AddPoints(pointsToGain);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class waveSpawner : MonoBehaviour
 {
 
-    [SerializeField] GameObject objectToSpawn;
+    [SerializeField] GameObject[] objectToSpawn;
     [SerializeField] int numToSpawn;
     [SerializeField] int spawnTimer;
     [SerializeField] Transform[] spawnPos;
@@ -31,10 +31,18 @@ public class waveSpawner : MonoBehaviour
     {
         isSpawning = true;
         int arrayPos = Random.Range(0, spawnPos.Length);
-        GameObject objectSpawned = Instantiate(objectToSpawn, spawnPos[arrayPos].position, spawnPos[arrayPos].rotation);
+        GameObject objectSpawned = Instantiate(objectToSpawn[Random.Range(0,objectToSpawn.Length)], spawnPos[arrayPos].position, spawnPos[arrayPos].rotation);
         if (objectSpawned.GetComponent<BeholderAI>())
         {
             objectSpawned.GetComponent<BeholderAI>().spawnLocation = this;
+        }
+        else if (objectSpawned.GetComponent<mimicAI>())
+        {
+            objectSpawned.GetComponent<mimicAI>().spawnLocation = this;
+        }
+        else if (objectSpawned.GetComponent<CentaurAI>())
+        {
+            objectSpawned.GetComponent <CentaurAI>().spawnLocation = this;
         }
         spawnCount++;
         yield return new WaitForSeconds(spawnTimer);
