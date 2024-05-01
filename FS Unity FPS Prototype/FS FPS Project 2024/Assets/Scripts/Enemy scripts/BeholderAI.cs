@@ -27,7 +27,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
-    
+    public waveSpawner spawnLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -115,7 +115,10 @@ public class BeholderAI : MonoBehaviour, IDamage
         {            
             //removes a enemy from enemy count
             gameManager.instance.updateGameGoal(-1);
-            
+            if (spawnLocation)
+            {
+                spawnLocation.updateEnemyNumber();
+            }
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
             PointsManager.Instance.AddPoints(pointsToGain);
