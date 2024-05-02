@@ -61,7 +61,7 @@ public class BeholderAI : MonoBehaviour, IDamage
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
 
-        Debug.Log(angleToPlayer);
+        //Debug.Log(angleToPlayer);
         Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;

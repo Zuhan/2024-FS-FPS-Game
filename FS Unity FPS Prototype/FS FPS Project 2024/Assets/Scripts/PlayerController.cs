@@ -144,7 +144,7 @@ public class playerController : MonoBehaviour, IDamage
     //Sprint by Paul
     IEnumerator Sprint(float stamDecay)
     {
-        if (canSprint && stamina > 5)
+        if (canSprint && stamina > 5 && controller.isGrounded)
         {
             isSprinting = true;
             speed *= sprintMultiplier;

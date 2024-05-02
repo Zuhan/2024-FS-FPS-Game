@@ -40,7 +40,6 @@ public class thunderMagic : MonoBehaviour, IDamage
         {
             if (hitEnemy)
             {
-                Debug.Log("Enemy has already been hit");
                 return;
             }
 
