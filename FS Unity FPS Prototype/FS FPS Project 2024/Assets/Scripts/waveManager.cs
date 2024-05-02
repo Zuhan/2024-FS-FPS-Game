@@ -5,7 +5,7 @@ using UnityEngine;
 public class waveManager : MonoBehaviour
 {
     public static waveManager instance;
-    public waveSpawner[] spawners;
+    public waveSpawnerTwo[] spawners;
     [SerializeField] int timeBetweenWaves;
     [SerializeField] int enemyIncrement;
     public int waveCurrent;

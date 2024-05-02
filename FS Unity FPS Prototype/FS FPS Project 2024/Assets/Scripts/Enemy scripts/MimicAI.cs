@@ -28,7 +28,7 @@ public class MimicAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
-    public waveSpawner spawnLocation;
+    public waveSpawnerTwo spawnLocation;
 
     // Start is called before the first frame update
     void Start()

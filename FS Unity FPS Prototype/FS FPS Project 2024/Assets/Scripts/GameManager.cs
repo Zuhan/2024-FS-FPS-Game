@@ -61,6 +61,8 @@ public class gameManager : MonoBehaviour
     //enemy count field 
     public int enemyCount;
 
+    int winPoints = 0;
+
     //point count
     public int points;
 
@@ -108,6 +110,22 @@ public class gameManager : MonoBehaviour
             menuActive.SetActive(isPaused);
         }
     }
+
+    public void win()
+    {
+        statePaused();
+        menuActive = menuWin;
+        menuActive.SetActive(isPaused);
+    }
+    public void winByPoints()
+    {
+        winPoints++;
+        if (winPoints >= 5)
+        {
+            win();
+        }
+    }
+
     //method for losing
     public void lose()
     {
