@@ -19,7 +19,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int currentPoints;
 
     [Header("----- Weapon Stats -----")]
-    [SerializeField] List<weaponStats> weapons = new List<weaponStats>();
+    [SerializeField] public List<weaponStats> weapons = new List<weaponStats>();
     [SerializeField] GameObject fireStaff;
     [SerializeField] GameObject Slingshot;
     [SerializeField] int castDamage;
