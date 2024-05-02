@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
+    public TMP_Text collectibleText;
     //public List<GameObject> enemies;
     //public GameObject spawner;
 
@@ -120,6 +121,7 @@ public class gameManager : MonoBehaviour
     public void winByPoints()
     {
         winPoints++;
+        collectibleText.text = winPoints.ToString("F0");
         if (winPoints >= 5)
         {
             win();
