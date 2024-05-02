@@ -1,23 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class IBarricade : MonoBehaviour , IDamage, IfInteract
 {
 
-    public Renderer model;
+    public GameObject[] planks;
     public BoxCollider boxCollider; 
     public int pointGain;
     public int HP;
     public int startingHP;
+    public int modelNumber;
     bool barricadeBuilt;
+    
 
     void Start()
     {
         // Initially, the model and box collider are disabled
-        model.enabled = false;
-        boxCollider.enabled = false;
-        startingHP = HP;
+        for (int i = 0; i < planks.Length; i++)
+        {
+            planks[i].SetActive(true);
+        }
+
+        boxCollider.enabled = true;
+        HP = startingHP;
     }
     void Update()
     {
@@ -58,7 +65,6 @@ public class IBarricade : MonoBehaviour , IDamage, IfInteract
     IEnumerator objInteract()
     {
         
-        model.material.color = Color.green;
         yield return new WaitForSeconds(1);
         BuildBarricade();
         gameManager.instance.hideInteractText();
@@ -69,15 +75,21 @@ public class IBarricade : MonoBehaviour , IDamage, IfInteract
         HP -= damage;     
         if (HP <= 0)
         {
+            for (int i = 0; i < planks.Length; i++)
+            {
+                planks[i].SetActive(false);
+            }
             boxCollider.enabled = false;
-            model.enabled = false;
             barricadeBuilt = false;
             Debug.Log("Barricade lost.");
         }
     }
     private void BuildBarricade()
     {
-        model.enabled = true;
+        for (int i = 0; i < planks.Length; i++)
+        {
+            planks[i].SetActive(true);
+        }
         boxCollider.enabled = true;
         HP = startingHP;
         barricadeBuilt = true;

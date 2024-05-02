@@ -2,58 +2,45 @@ using System.Collections;
 using UnityEngine;
 public class monsterSpawnerScript : MonoBehaviour
 {
-    public GameObject creatureSpawn;
-    public float baseSpawnRate = 2f;
-    public float maxSpawnRate = 0.5f;
-    public float minScale = 0.5f;
-    public float maxScale = 1.0f;
-    public float scaleRestoreRate = 0.1f;
-    public float timer = 0f;
+    [SerializeField] GameObject objectToSpawn;
+    [SerializeField] int numToSpawn;
+    [SerializeField] int spawnTimer;
+    [SerializeField] Transform[] spawnPos;
 
+    int spawnCount;
+    bool isSpawning;
+    bool startSpawning;
     // Start is called before the first frame update
-    private Coroutine spawnCoroutine;
-
     void Start()
     {
-        // Start the coroutine to manage spawn timing
-        spawnCoroutine = StartCoroutine(SpawnRoutine());
+        gameManager.instance.updateGameGoal(numToSpawn);
     }
 
+    // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private IEnumerator SpawnRoutine()
-    {
-        while (true)
+        if (startSpawning && !isSpawning && spawnCount < numToSpawn)
         {
-            float currentScale = transform.localScale.x;
-            float scaleRatio = (currentScale - minScale) / (maxScale - minScale);
-            float currentSpawnRate = Mathf.Lerp(maxSpawnRate, baseSpawnRate, scaleRatio);
-
-            yield return new WaitForSeconds(currentSpawnRate); // Wait before spawning
-
-            SpawnCreature(); // Spawn the creature
-
-            // Gradually restore scale to the maximum
-            if (transform.localScale.x < maxScale)
-            {
-                transform.localScale += Vector3.one * scaleRestoreRate * currentSpawnRate; // Restore over time
-            }
+            StartCoroutine(spawn());
         }
     }
 
-    void SpawnCreature()
+    private void OnTriggerEnter(Collider other)
     {
-        Instantiate(creatureSpawn, transform.position, transform.rotation);
+        if (other.CompareTag("Player"))
+        {
+            startSpawning = true;
+        }
     }
 
-    public void ScaleDown()
+    IEnumerator spawn()
     {
-        if (transform.localScale.x > minScale) // Ensure it doesn't go below minScale
-        {
-            transform.localScale -= Vector3.one * 0.1f; // Scale down a bit
-        }
+        isSpawning = true;
+        int arrayPos = Random.Range(0, spawnPos.Length);
+        Instantiate(objectToSpawn, spawnPos[arrayPos].position, spawnPos[arrayPos].rotation);
+        spawnCount++;
+        yield return new WaitForSeconds(spawnTimer);
+        isSpawning = false;
+
     }
 }
