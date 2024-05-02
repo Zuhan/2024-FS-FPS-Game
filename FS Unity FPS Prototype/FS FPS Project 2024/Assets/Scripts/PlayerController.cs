@@ -80,7 +80,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused)
         {
-            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
+            //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
             selectWeapon();
             movement();
         }
@@ -256,7 +256,7 @@ public class playerController : MonoBehaviour, IDamage
         castDist = weapon.castDist;
         castRate = weapon.castRate;
         saveStats();
-        Debug.Log("Weapon added to List: " + weapon.name);
+        //Debug.Log("Weapon added to List: " + weapon.name);
     }
 
     void selectWeapon()
@@ -273,7 +273,7 @@ public class playerController : MonoBehaviour, IDamage
                     return;
                 }
             }
-            Debug.Log("Slingshot not found in weapons list.");
+            //Debug.Log("Slingshot not found in weapons list.");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -287,7 +287,7 @@ public class playerController : MonoBehaviour, IDamage
                     return;
                 }
             }
-            Debug.Log("Fire Staff not found in weapons list.");
+            //Debug.Log("Fire Staff not found in weapons list.");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -301,13 +301,13 @@ public class playerController : MonoBehaviour, IDamage
                     return;
                 }
             }
-            Debug.Log("Thunder Hammer not found in weapons list.");
+            //Debug.Log("Thunder Hammer not found in weapons list.");
         }
     }
 
     void changeWeapon()
     {
-        Debug.Log("Weapon Changed");
+        //Debug.Log("Weapon Changed");
 
         castDamage = weapons[selectedWeapon].castDamage;
         castDist = weapons[selectedWeapon].castDist;

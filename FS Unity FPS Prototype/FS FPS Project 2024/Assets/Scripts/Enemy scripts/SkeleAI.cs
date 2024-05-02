@@ -73,7 +73,7 @@ public class SkeleAI : MonoBehaviour, IDamage
 
 
         //Debug.Log(angleToPlayer);
-        Debug.DrawRay(HeadPos.position, playerDir);
+        //Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;
 
@@ -135,7 +135,7 @@ public class SkeleAI : MonoBehaviour, IDamage
             PointsManager.Instance.AddPoints(pointsToGain);
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
-            Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
+            //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
     }
     IEnumerator FlashRed()

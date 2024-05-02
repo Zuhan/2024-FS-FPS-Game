@@ -19,7 +19,7 @@ public class pickupScript : MonoBehaviour, IPickup
     }
     public void pickup()
     {
-        Debug.Log("Item picked up.");
+        //Debug.Log("Item picked up.");
         gameManager.instance.winByPoints();
         //Game Manager points?
         gameManager.instance.pointsChange(pointsToGain);

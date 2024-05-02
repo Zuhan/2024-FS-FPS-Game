@@ -48,12 +48,12 @@ public class thunderHammer : MonoBehaviour
 
     public void EnableThunderHammer()
     {
-        Debug.Log("Thunder Hammer Enabled");
+        //Debug.Log("Thunder Hammer Enabled");
         enabled = true;
     }
     public void DisableThunderHammer()
     {
-        Debug.Log("Thunder Hammer Disabled");
+        //Debug.Log("Thunder Hammer Disabled");
         enabled = false;
     }
     void PlayAudio()

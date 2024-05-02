@@ -49,11 +49,11 @@ public class thunderMagic : MonoBehaviour, IDamage
 
             hitEnemy = true;
             IDamage dmg = enemyHit.GetComponent<IDamage>();
-            Debug.Log(dmg);
+            //Debug.Log(dmg);
             if (dmg != null)
             {
                 dmg.TakeDamage(baseDmg);
-                Debug.Log("Dealt " + baseDmg + " to " + enemyHit.name);
+                //Debug.Log("Dealt " + baseDmg + " to " + enemyHit.name);
             }
         }
 

@@ -62,7 +62,7 @@ public class BeholderAI : MonoBehaviour, IDamage
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
 
         //Debug.Log(angleToPlayer);
-        Debug.DrawRay(HeadPos.position, playerDir);
+        //Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;
 
@@ -124,7 +124,7 @@ public class BeholderAI : MonoBehaviour, IDamage
             PointsManager.Instance.AddPoints(pointsToGain);
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
-            Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
+            //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
     }
     IEnumerator FlashRed()

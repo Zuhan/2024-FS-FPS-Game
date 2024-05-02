@@ -30,7 +30,7 @@ public class PointsManager : MonoBehaviour
 
     public void AddPoints(int amount)
     {
-        Debug.Log("AddPoints called"); 
+        //Debug.Log("AddPoints called"); 
         OnPointChange?.Invoke(amount);
     }
 }

@@ -58,7 +58,7 @@ public class IBarricade : MonoBehaviour , IDamage, IfInteract
 
     public void interact()
     {
-        Debug.Log("Interact called.");
+        //Debug.Log("Interact called.");
         StartCoroutine(objInteract());
         gameManager.instance.pointsChange(pointGain);
     }
@@ -81,7 +81,7 @@ public class IBarricade : MonoBehaviour , IDamage, IfInteract
             }
             boxCollider.enabled = false;
             barricadeBuilt = false;
-            Debug.Log("Barricade lost.");
+            //Debug.Log("Barricade lost.");
         }
     }
     private void BuildBarricade()

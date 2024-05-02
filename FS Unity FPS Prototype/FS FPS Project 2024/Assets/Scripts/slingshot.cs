@@ -32,7 +32,7 @@ public class slingshot : MonoBehaviour
 
     void CreateBullet()
     {
-        Debug.Log("Bullet Created");
+        //Debug.Log("Bullet Created");
         Instantiate(bullet, shootPOS.position, shootPOS.rotation);
     }
     IEnumerator displayCooldown()
@@ -48,12 +48,12 @@ public class slingshot : MonoBehaviour
 
     public void EnableSlingshot()
     {
-        Debug.Log("Slingshot Enabled");
+        //Debug.Log("Slingshot Enabled");
         enabled = true;
     }
     public void DisableSlingshot()
     {
-        Debug.Log("Slingshot Disabled");
+        //Debug.Log("Slingshot Disabled");
         enabled = false;
     }
 

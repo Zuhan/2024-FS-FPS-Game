@@ -20,13 +20,13 @@ public class waveSpawnerTwo : MonoBehaviour
     {
         if (startSpawning && !isSpawning && spawnCount < numToSpawn)
         {
-            Debug.Log("spawn being called");
+            //Debug.Log("spawn being called");
             StartCoroutine(spawn());
         }
     }
     public void startWave(int multiplier)
     {
-        Debug.Log("spawn being called");
+        //Debug.Log("spawn being called");
         startSpawning = setSpawnTrue.isSpawning;
         /*if (!startSpawning)
         {
