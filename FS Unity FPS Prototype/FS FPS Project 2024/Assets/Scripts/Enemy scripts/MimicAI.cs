@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class mimicAI : MonoBehaviour, IDamage
+public class MimicAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
+    [SerializeField] Animator anim;
     [SerializeField] int HP;
     [SerializeField] int pointsToGain;
-    [SerializeField] int faceTargetSpeed;
-    [SerializeField] Component playerDetectiomRad;
-    [SerializeField] Component enemyCollider;
     [SerializeField] Collider weaponCol;
+    //[SerializeField] GameObject bullet;
+    [SerializeField] float shootRate;
+    //[SerializeField] Transform shootPos;
+    [SerializeField] int faceTargetSpeed;
+    [SerializeField] int animSpeedTrans;
+    [SerializeField] Component playerDetectiomRad;
+    [SerializeField] int viewCone;
+    [SerializeField] Transform HeadPos;
+    
 
-
+    float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
+    bool isShooting;
     Color enemycolor;
-    float angleToPlayer;
     public waveSpawner spawnLocation;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        //updates enemy count on start instance
-        //gameManager.instance.updateGameGoal(1);
         //get starter enemy color
         enemycolor = model.material.color;
     }
@@ -36,21 +40,50 @@ public class mimicAI : MonoBehaviour, IDamage
 
     void Update()
     {
+        float animSpeed = agent.velocity.normalized.magnitude;
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
 
         if (playerInRange)
         {
-            playerDir = gameManager.instance.player.transform.position - transform.position;
-            angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
             agent.SetDestination(gameManager.instance.player.transform.position);
-
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 faceTarget();
+
+                canSeePlayer();
             }
+           
         }
     }
+
+    void canSeePlayer()
+    {
+        playerDir = gameManager.instance.player.transform.position - HeadPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
+
+
+        //Debug.Log(angleToPlayer);
+        Debug.DrawRay(HeadPos.position, playerDir);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(HeadPos.position, playerDir, out hit))
+        {
+
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            {
+
+                if (!isShooting)
+                    StartCoroutine(Shoot());
+              
+            }
+
+        }
+       
+    }
+
+
     void OnTriggerEnter(Collider other)
     {
 
@@ -69,7 +102,7 @@ public class mimicAI : MonoBehaviour, IDamage
     }
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(playerDir);
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
@@ -103,15 +136,23 @@ public class mimicAI : MonoBehaviour, IDamage
         model.material.color = enemycolor;
     }
 
-
-    public void weaponColOn()
+    IEnumerator Shoot()
     {
-        weaponCol.enabled = true;
+        isShooting = true;
+        anim.SetTrigger("Shoot");
+       
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
     }
 
-
-    public void weaponColOff()
+    public void WeaponColOn()
     {
-        weaponCol.enabled = false;
+        weaponCol.gameObject.SetActive(true);
     }
+
+    public void WeaponColOff()
+    {
+        weaponCol.gameObject.SetActive(false);
+    }
+
 }
