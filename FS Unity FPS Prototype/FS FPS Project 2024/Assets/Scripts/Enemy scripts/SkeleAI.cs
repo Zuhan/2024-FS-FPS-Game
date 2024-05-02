@@ -162,12 +162,12 @@ public class SkeleAI : MonoBehaviour, IDamage
 
     public void WeaponColOn()
     {
-        weaponCol.gameObject.SetActive(true);
+        weaponCol.enabled = true;
     }
 
     public void WeaponColOff()
     {
-        weaponCol.gameObject.SetActive(false);
+        weaponCol.enabled = false;
     }
 
 }

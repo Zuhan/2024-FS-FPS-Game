@@ -573,7 +573,6 @@ GameObject:
   - component: {fileID: 2506340555127630775}
   - component: {fileID: 6232277957200666548}
   - component: {fileID: 6098443037473622161}
-  - component: {fileID: 1058172278457307274}
   m_Layer: 0
   m_Name: Mimic
   m_TagString: Enemy
@@ -635,11 +634,11 @@ MonoBehaviour:
   model: {fileID: 4285277488886994111}
   anim: {fileID: 1564555249537923276}
   HP: 35
-  pointsToGain: 75
-  weaponCol: {fileID: 1058172278457307274}
+  pointsToGain: 100
+  weaponCol: {fileID: 8558277014889411380}
   shootRate: 1
   faceTargetSpeed: 6
-  animSpeedTrans: 2
+  animSpeedTrans: 4
   playerDetectiomRad: {fileID: 6232277957200666548}
   viewCone: 90
   HeadPos: {fileID: 4109557289463851937}
@@ -652,9 +651,9 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6440277652488049994}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 4.5
+  m_Speed: 5
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600
@@ -710,29 +709,6 @@ CapsuleCollider:
   m_Height: 1.42
   m_Direction: 1
   m_Center: {x: 0, y: 0.71, z: 0}
---- !u!136 &1058172278457307274
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6440277652488049994}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1.5
-  m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 1}
 --- !u!1 &7124611880452917970
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +813,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7992241553352516996}
+  - component: {fileID: 8558277014889411380}
+  - component: {fileID: 9005284095270089281}
   m_Layer: 0
   m_Name: LowerTeethCTRL
   m_TagString: Untagged
@@ -859,6 +837,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3520066652078947519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &8558277014889411380
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529611120822113609}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Height: 1.47
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.79, z: 0.32}
+--- !u!114 &9005284095270089281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529611120822113609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b5cfe41582cde47960dfb810e7dd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
 --- !u!1 &7996387521233890247
 GameObject:
   m_ObjectHideFlags: 0
