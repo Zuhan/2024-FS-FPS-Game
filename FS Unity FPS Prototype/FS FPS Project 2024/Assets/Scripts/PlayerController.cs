@@ -70,6 +70,7 @@ public class playerController : MonoBehaviour, IDamage
 
         weaponSlots.Add("Fire Staff", fireStaff);
         weaponSlots.Add("Slingshot", Slingshot);
+        loadStats();
     }
 
     // Update is called once per frame
@@ -242,7 +243,7 @@ public class playerController : MonoBehaviour, IDamage
         castDamage = weapon.castDamage;
         castDist = weapon.castDist;
         castRate = weapon.castRate;
-
+        saveStats();
         Debug.Log("Weapon added to List: " + weapon.name);
     }
 
@@ -342,5 +343,12 @@ public class playerController : MonoBehaviour, IDamage
             return null;
         }
     }
-
+    public void saveStats()
+    {
+        playerStats.weapons = weapons;
+    }
+    public void loadStats()
+    {
+        weapons = playerStats.weapons;
+    }
 }

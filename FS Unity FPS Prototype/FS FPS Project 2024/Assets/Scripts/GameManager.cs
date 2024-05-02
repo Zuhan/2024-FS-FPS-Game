@@ -23,8 +23,8 @@ public class gameManager : MonoBehaviour
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
-    public List<GameObject> enemies;
-    public GameObject spawner;
+    //public List<GameObject> enemies;
+    //public GameObject spawner;
 
     //game manager instance
     public static gameManager instance;
@@ -78,16 +78,6 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         //setting points
         points = 0;
-
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     public void statePaused()
