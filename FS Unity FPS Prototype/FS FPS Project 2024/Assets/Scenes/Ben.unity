@@ -212,6 +212,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: numToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: enemyIncrement
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4558895742749317819, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
       propertyPath: m_Name
       value: spawnParent (2)
@@ -1418,6 +1426,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: numToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: spawnTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: enemyIncrement
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4558895742749317819, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
       propertyPath: m_Name
       value: spawnParent (1)
@@ -1748,6 +1768,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5789859493276594697, guid: 7c52334a07012e2459284ec3fda5d72a, type: 3}
+      propertyPath: enemyIncrement
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789859493276594697, guid: 7c52334a07012e2459284ec3fda5d72a, type: 3}
       propertyPath: spawners.Array.data[0]
       value: 
       objectReference: {fileID: 41740899}
@@ -1776,6 +1800,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: numToSpawn
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
+      propertyPath: enemyIncrement
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3307607600993035870, guid: af04bbb25b9321f4ebeb5a6913a4a3b7, type: 3}
       propertyPath: objectToSpawn.Array.size
       value: 2

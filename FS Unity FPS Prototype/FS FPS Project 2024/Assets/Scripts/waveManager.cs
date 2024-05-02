@@ -7,7 +7,7 @@ public class waveManager : MonoBehaviour
     public static waveManager instance;
     public waveSpawner[] spawners;
     [SerializeField] int timeBetweenWaves;
-
+    [SerializeField] int enemyIncrement;
     public int waveCurrent;
     // Start is called before the first frame update
     void Awake()
@@ -22,7 +22,8 @@ public class waveManager : MonoBehaviour
         if (waveCurrent <= spawners.Length)
         {
             yield return new WaitForSeconds(timeBetweenWaves);
-            spawners[waveCurrent - 1].startWave();
+            spawners[waveCurrent - 1].startWave(enemyIncrement);
+            enemyIncrement++;
         }
     }
 }
