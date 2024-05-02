@@ -33,6 +33,7 @@ public class waveSpawner : MonoBehaviour
     }
     IEnumerator spawn()
     {
+        Debug.Log("spawn called");
         isSpawning = true;
         int arrayPos = Random.Range(0, spawnPos.Length);
         GameObject objectSpawned = Instantiate(objectToSpawn[Random.Range(0,objectToSpawn.Length)], spawnPos[arrayPos].position, spawnPos[arrayPos].rotation);
