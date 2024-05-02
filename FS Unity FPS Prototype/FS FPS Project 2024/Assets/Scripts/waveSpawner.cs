@@ -44,9 +44,9 @@ public class waveSpawner : MonoBehaviour
         {
             objectSpawned.GetComponent<MimicAI>().spawnLocation = this;
         }
-        else if (objectSpawned.GetComponent<CentaurAI>())
+        else if (objectSpawned.GetComponent<SkeleAI>())
         {
-            objectSpawned.GetComponent <CentaurAI>().spawnLocation = this;
+            objectSpawned.GetComponent <SkeleAI>().spawnLocation = this;
         }
         spawnCount++;
         yield return new WaitForSeconds(spawnTimer);
