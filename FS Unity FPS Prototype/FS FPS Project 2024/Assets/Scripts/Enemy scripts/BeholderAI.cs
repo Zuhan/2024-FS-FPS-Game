@@ -137,9 +137,15 @@ public class BeholderAI : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        anim.SetTrigger("Shoot");
+       
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    public void createBullet()
+    {
+        Instantiate(bullet, shootPos.position, transform.rotation);
     }
 
 }

@@ -36,9 +36,9 @@ public class waveSpawner : MonoBehaviour
         {
             objectSpawned.GetComponent<BeholderAI>().spawnLocation = this;
         }
-        else if (objectSpawned.GetComponent<mimicAI>())
+        else if (objectSpawned.GetComponent<MimicAI>())
         {
-            objectSpawned.GetComponent<mimicAI>().spawnLocation = this;
+            objectSpawned.GetComponent<MimicAI>().spawnLocation = this;
         }
         else if (objectSpawned.GetComponent<CentaurAI>())
         {
