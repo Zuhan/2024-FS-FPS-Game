@@ -3,18 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BeholderAI : MonoBehaviour, IDamage
+public class SkeleAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Renderer model;
+    [SerializeField] Renderer head;
+    [SerializeField] Renderer torso;
+    [SerializeField] Renderer arms;
+    [SerializeField] Renderer legs;
     [SerializeField] Animator anim;
     [SerializeField] int HP;
     [SerializeField] int pointsToGain;
-    [SerializeField] GameObject bullet;
+    [SerializeField] Collider weaponCol;
+    //[SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
-    [SerializeField] Transform shootPos;
+    //[SerializeField] Transform shootPos;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
     [SerializeField] Component playerDetectiomRad;
@@ -26,14 +30,20 @@ public class BeholderAI : MonoBehaviour, IDamage
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
-    Color enemycolor;
+    Color enemycolor1;
+    Color enemycolor2;
+    Color enemycolor3;
+    Color enemycolor4;
     public waveSpawner spawnLocation;
 
     // Start is called before the first frame update
     void Start()
     {
         //get starter enemy color
-        enemycolor = model.material.color;
+        enemycolor1 = head.material.color;
+        enemycolor2 = torso.material.color;
+        enemycolor3 = legs.material.color;
+        enemycolor4 = arms.material.color;
     }
 
 
@@ -60,6 +70,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     {
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
+
 
         //Debug.Log(angleToPlayer);
         Debug.DrawRay(HeadPos.position, playerDir);
@@ -129,9 +140,15 @@ public class BeholderAI : MonoBehaviour, IDamage
     }
     IEnumerator FlashRed()
     {
-        model.material.color = Color.red;
+        head.material.color = Color.red;
+        torso.material.color = Color.red;
+        legs.material.color = Color.red;
+        arms.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = enemycolor;
+        head.material.color = enemycolor1;
+        torso.material.color = enemycolor2;
+        legs.material.color = enemycolor3;
+        arms.material.color = enemycolor4;
     }
 
     IEnumerator Shoot()
@@ -143,9 +160,14 @@ public class BeholderAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    public void createBullet()
+    public void WeaponColOn()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        weaponCol.gameObject.SetActive(true);
+    }
+
+    public void WeaponColOff()
+    {
+        weaponCol.gameObject.SetActive(false);
     }
 
 }
