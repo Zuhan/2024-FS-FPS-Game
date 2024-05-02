@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3520855825381205423}
   - component: {fileID: 4046584239279768502}
   - component: {fileID: 1253313095308276407}
-  - component: {fileID: 110039870096333463}
   - component: {fileID: -1762373948462131939}
   m_Layer: 0
   m_Name: Thunder Ball
@@ -51,10 +50,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseDmg: 5
   castRate: 5
-  castRange: 10
-  chainRange: 0
-  maxChainJumps: 6
-  currentHits: 0
+  chainRange: 10
+  currJumps: 0
+  maxJumps: 6
   chainJumpDelay: 0.1
   delay: 0.1
   rb: {fileID: 1253313095308276407}
@@ -136,27 +134,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &110039870096333463
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3889255350698043963}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &-1762373948462131939
 CapsuleCollider:
   m_ObjectHideFlags: 0

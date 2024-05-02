@@ -8,13 +8,15 @@ public class thunderHammer : MonoBehaviour
     public GameObject chainLightningPrefab;
     [SerializeField] Transform castPos;
     [SerializeField] float castRate;
+    private float casted;
 
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time - casted > castRate)
         {
             CastChainLightning();
+            casted = Time.time;
         }
     }
 

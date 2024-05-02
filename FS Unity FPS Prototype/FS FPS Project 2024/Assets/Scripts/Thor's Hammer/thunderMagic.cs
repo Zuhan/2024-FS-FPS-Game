@@ -7,6 +7,9 @@ public class thunderMagic : MonoBehaviour, IDamage
     [SerializeField] Rigidbody rb;
     [SerializeField] GameObject thunder;
 
+    public int currJumps;
+    [SerializeField] int maxJumps;
+
     [SerializeField] int baseDmg;
     [SerializeField] float flightSpeed;
 
@@ -33,24 +36,30 @@ public class thunderMagic : MonoBehaviour, IDamage
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (hitEnemy)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            return;
+            if (hitEnemy)
+            {
+                Debug.Log("Enemy has already been hit");
+                return;
+            }
+
+            GameObject enemyHit = collision.gameObject;
+            GameObject thunderBall = Instantiate(thunder, collision.contacts[0].point, Quaternion.identity);
+            thunderBall.transform.SetParent(collision.gameObject.transform);
+
+            hitEnemy = true;
+            IDamage dmg = enemyHit.GetComponent<IDamage>();
+            Debug.Log(dmg);
+            if (dmg != null)
+            {
+                dmg.TakeDamage(baseDmg);
+                Debug.Log("Dealt " + baseDmg + " to " + enemyHit.name);
+            }
         }
-
-        GameObject enemyToDamage = collision.gameObject;
-
-        IDamage dmg = enemyToDamage.GetComponent<IDamage>();
-        if (dmg != null)
-        {
-            dmg.TakeDamage(baseDmg);
-        }
-
-        Instantiate(thunder, collision.contacts[0].point, Quaternion.identity);
-        transform.parent = null;
-        hitEnemy = true;
 
         Destroy(gameObject);
+
     }
 
     private IEnumerator DestroyAfterTime()

@@ -27,6 +27,7 @@ public class fireMagic : MonoBehaviour
 
         StartCoroutine(DestroyAfterTime());
     }
+
     public void SetInitialRotation(Quaternion rotation)
     {
         initialRotation = rotation;
@@ -50,17 +51,12 @@ public class fireMagic : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Rigidbody enemyRigidbody = collision.gameObject.GetComponent<Rigidbody>();
-            if (enemyRigidbody != null)
+            fire fireComponent = newFire.GetComponent<fire>();
+            if (fireComponent != null)
             {
-                Vector3 centerOfMassOffset = enemyRigidbody.centerOfMass;
-                newFire.transform.SetParent(collision.gameObject.transform);
-                newFire.transform.localPosition = centerOfMassOffset;
+                fireComponent.SetTargetEnemy(collision.gameObject.transform);
             }
         }
-
-        FixedJoint joint = newFire.AddComponent<FixedJoint>();
-        joint.connectedBody = collision.rigidbody;
 
         hasHit = true;
 
