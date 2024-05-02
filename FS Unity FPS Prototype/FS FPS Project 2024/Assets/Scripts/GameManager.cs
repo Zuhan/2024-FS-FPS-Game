@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 
 public class gameManager : MonoBehaviour
 {
-    //fields for the UI 
+    [Header("----- Menu Stuff -----")]
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject interactFailText;
     [SerializeField] GameObject barricadeText;
@@ -16,14 +17,14 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
 
-    //public fields for more UI
+    [Header("----- UI Stuff -----")]
     public Image playerHPBar;
     public TMP_Text enemyCountText;
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
-    public List<GameObject> enemies;
-    public GameObject spawner;
+    //public List<GameObject> enemies;
+    //public GameObject spawner;
 
     //game manager instance
     public static gameManager instance;
@@ -32,6 +33,7 @@ public class gameManager : MonoBehaviour
     public GameObject player;
     public playerController playerScript;
 
+    [Header("----- Fire Staff -----")]
     //Fire Staff prefab added by Derek
     public GameObject fireStaffPrefab;
     //Reference to the fire staff object added by Derek
@@ -77,6 +79,7 @@ public class gameManager : MonoBehaviour
         //setting points
         points = 0;
     }
+
     public void statePaused()
     {
         isPaused = !isPaused;
@@ -152,6 +155,15 @@ public class gameManager : MonoBehaviour
     {
         waveText.text = wave.ToString("F0");
     }
+
+    [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
+    public class PlayerData : ScriptableObject
+    {
+        public int points;
+        public List<weaponStats> weapons = new List<weaponStats>();
+        // Add other player data here
+    }
+
     // Update is called once per frame
     void Update()
     {

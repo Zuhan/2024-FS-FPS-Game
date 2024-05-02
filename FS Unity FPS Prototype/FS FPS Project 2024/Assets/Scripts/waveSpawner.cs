@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class waveSpawner : MonoBehaviour
 {
-
+    [Header("---Basic Enemy Stuff---")]
     [SerializeField] GameObject[] objectToSpawn;
     [SerializeField] int numToSpawn;
     [SerializeField] int spawnTimer;
     [SerializeField] Transform[] spawnPos;
+    
+    private int enemyIncrement = 0;
 
     int spawnCount;
     bool isSpawning;
@@ -21,9 +24,10 @@ public class waveSpawner : MonoBehaviour
             StartCoroutine(spawn());
         }
     }
-    public void startWave()
+    public void startWave(int multiplier)
     {
         startSpawning = true;
+        numToSpawn *= multiplier;
         gameManager.instance.updateGameGoal(numToSpawn);
         gameManager.instance.updateWave(waveManager.instance.waveCurrent);
     }
@@ -40,9 +44,9 @@ public class waveSpawner : MonoBehaviour
         {
             objectSpawned.GetComponent<MimicAI>().spawnLocation = this;
         }
-        else if (objectSpawned.GetComponent<CentaurAI>())
+        else if (objectSpawned.GetComponent<SkeleAI>())
         {
-            objectSpawned.GetComponent <CentaurAI>().spawnLocation = this;
+            objectSpawned.GetComponent <SkeleAI>().spawnLocation = this;
         }
         spawnCount++;
         yield return new WaitForSeconds(spawnTimer);
