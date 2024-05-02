@@ -6,17 +6,24 @@ public class thunderHammer : MonoBehaviour
 {
 
     public GameObject chainLightningPrefab;
+    public AudioSource audioSource;
     [SerializeField] Transform castPos;
-    [SerializeField] float castRate;
-    private float casted;
+    [SerializeField] private float fireCooldown = 0.5f;
+    private float lastFireTime;
 
+    private void Start()
+    {
+        enabled = false;
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time - casted > castRate)
+        if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
         {
             CastChainLightning();
-            casted = Time.time;
+            PlayAudio();
+            lastFireTime = Time.time;
+            StartCoroutine(displayCooldown());
         }
     }
 
@@ -30,5 +37,30 @@ public class thunderHammer : MonoBehaviour
         chainLightning.transform.parent = null;
 
         chainLightning.GetComponent<thunderMagic>().SetInitialRotation(startRot);
+    }
+
+    IEnumerator displayCooldown()
+    {
+        gameManager.instance.cooldownRing.SetActive(true);
+        yield return new WaitForSeconds(fireCooldown);
+        gameManager.instance.cooldownRing.SetActive(false);
+    }
+
+    public void EnableThunderHammer()
+    {
+        Debug.Log("Thunder Hammer Enabled");
+        enabled = true;
+    }
+    public void DisableThunderHammer()
+    {
+        Debug.Log("Thunder Hammer Disabled");
+        enabled = false;
+    }
+    void PlayAudio()
+    {
+        if (audioSource != null && audioSource.clip != null)
+        {
+            audioSource.Play();
+        }
     }
 }

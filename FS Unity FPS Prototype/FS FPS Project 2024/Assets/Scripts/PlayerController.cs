@@ -22,6 +22,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] public List<weaponStats> weapons = new List<weaponStats>();
     [SerializeField] GameObject fireStaff;
     [SerializeField] GameObject Slingshot;
+    [SerializeField] GameObject ThunderHammer;
     [SerializeField] int castDamage;
     [SerializeField] float castRate;
     [SerializeField] int castDist;
@@ -70,6 +71,7 @@ public class playerController : MonoBehaviour, IDamage
 
         weaponSlots.Add("Fire Staff", fireStaff);
         weaponSlots.Add("Slingshot", Slingshot);
+        weaponSlots.Add("Thunder Hammer", ThunderHammer);
         loadStats();
     }
 
@@ -180,7 +182,7 @@ public class playerController : MonoBehaviour, IDamage
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f)), out hit, 5))
         {
-            
+
             IfInteract interact = hit.collider.GetComponent<IfInteract>();
             if (hit.transform != transform && interact != null)
             {
@@ -277,6 +279,20 @@ public class playerController : MonoBehaviour, IDamage
             }
             Debug.Log("Fire Staff not found in weapons list.");
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            // Find the Thunder Hammer in the weapons list
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                if (weapons[i].name == "Thunder Hammer")
+                {
+                    selectedWeapon = i;
+                    changeWeapon();
+                    return;
+                }
+            }
+            Debug.Log("Thunder Hammer not found in weapons list.");
+        }
     }
 
     void changeWeapon()
@@ -320,6 +336,16 @@ public class playerController : MonoBehaviour, IDamage
                 {
                     Slingshot.GetComponent<slingshot>().DisableSlingshot();
                     Slingshot.GetComponent<slingshot>().DisableAudio();
+                }
+
+                // Enable the Thunder Hammer script only if the selected weapon is the Thunder Hammer
+                if (weaponName == "Thunder Hammer")
+                {
+                    ThunderHammer.GetComponent<thunderHammer>().EnableThunderHammer();
+                }
+                else
+                {
+                    ThunderHammer.GetComponent<thunderHammer>().DisableThunderHammer();
                 }
             }
             else
