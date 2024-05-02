@@ -227,6 +227,16 @@ public class playerController : MonoBehaviour, IDamage
         gameManager.instance.playerHPBar.fillAmount = (float)HP / hpOrig;
     }
 
+    public void spawnPlayer()
+    {
+        HP = hpOrig;
+        updatePlayerUI();
+
+        controller.enabled = false;
+        transform.position = gameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
+    }
+
     public void getWeaponStats(weaponStats weapon)
     {
         weapons.Add(weapon);

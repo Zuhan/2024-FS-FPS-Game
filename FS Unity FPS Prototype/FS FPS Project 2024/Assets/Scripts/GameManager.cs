@@ -71,6 +71,8 @@ public class gameManager : MonoBehaviour
 
     public TMP_Text waveText;
 
+    public GameObject playerSpawnPos;
+
     //void awake so its called first 
     void Awake()
     {
@@ -79,6 +81,7 @@ public class gameManager : MonoBehaviour
         //find player object with tag Player and player controller
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<playerController>();
+        playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         //setting points
         points = 0;
     }
