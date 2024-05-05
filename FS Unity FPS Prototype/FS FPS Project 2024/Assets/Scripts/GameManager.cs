@@ -204,19 +204,6 @@ public class gameManager : MonoBehaviour
             }
         }
 
-        //Equipping the Fire Staff by pressing the 1 key added by Derek
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    if (fireStaffObject != null)
-        //    {
-        //        UnequipFireStaff();
-        //    }
-        //    else
-        //    {
-        //        EquipFireStaff();
-        //    }
-        //}
-
         //Explosion Staff Being Shelved
         //Equipping the Explosion_Staff by pressing 0 key
         //if (Input.GetKeyDown(KeyCode.Alpha0))
@@ -229,22 +216,8 @@ public class gameManager : MonoBehaviour
         //    {
         //        EquipExplosionStaff();
         //    }
-        //}
-        
+        //}        
     }
-
-    //Unequipping the Fire Staff by pressing the 1 key added by Derek
-    //public void UnequipFireStaff()
-    //{
-    //    if (fireStaffObject != null)
-    //    {
-    //        Destroy(fireStaffObject);
-
-    //        fireStaffObject = null;
-    //        fireStaffScript = null;
-    //    }
-    //}
-
 
     //Explosion Staff Being Shelved
     //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
@@ -272,27 +245,6 @@ public class gameManager : MonoBehaviour
     //    equippedWeapon.transform.parent = Camera.main.transform;
     //    equippedWeapon.transform.localPosition = offset;
     //    equippedWeapon.transform.rotation = rotation;
-    //}
-
-    //Method for equipping Fire_Staff prefab added by Derek
-    //public void EquipFireStaff()
-    //{
-    //    if (fireStaffObject == null)
-    //    {
-    //        Vector3 offset = new Vector3(0.5f, -0.088f, 0.98f); // X offset, Y offset, Z offset
-
-    //        Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
-    //        rotation *= Quaternion.Euler(130f, 180f, 0f);
-
-    //        EquipWeaponSafely(fireStaffPrefab, offset, rotation);
-
-    //        fireStaffObject = Camera.main.transform.GetChild(0).gameObject;
-    //        fireStaffScript = fireStaffObject.GetComponent<fireStaff>();
-    //    }
-    //    else
-    //    {
-    //        UnequipFireStaff();
-    //    }
     //}
 
     //Explosion Staff Being Shelved
