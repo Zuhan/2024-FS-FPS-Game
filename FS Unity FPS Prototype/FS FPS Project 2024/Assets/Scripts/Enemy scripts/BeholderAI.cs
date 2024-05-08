@@ -7,33 +7,62 @@ public class BeholderAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
+    [Header("----Main----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
-    [SerializeField] int HP;
-    [SerializeField] int pointsToGain;
     [SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
-    [SerializeField] Transform shootPos;
-    [SerializeField] int faceTargetSpeed;
-    [SerializeField] int animSpeedTrans;
-    [SerializeField] Component playerDetectiomRad;
-    [SerializeField] int viewCone;
+    [SerializeField] GameObject Beam;
     [SerializeField] Transform HeadPos;
-    
+    [SerializeField] Transform shootPos;
+    [SerializeField] Transform BeamPos1;
+    [SerializeField] Transform BeamPos2;
+    [SerializeField] Transform BeamPos3;
+    [SerializeField] Transform BeamPos4;
+    [SerializeField] Transform BeamPos5;
+    [SerializeField] Component playerDetectiomRad;
+    [SerializeField] AudioSource aud;
+    [Header("----Stats----")]  
+    [SerializeField][Range(1, 6)] int faceTargetSpeed;
+    [SerializeField][Range(2, 4)] int animSpeedTrans;
+    [SerializeField] int HP;  
+    [SerializeField][Range(0.1f,2)] float shootRate;
+    [SerializeField] int pointsToGain;
+    [SerializeField][Range(90, 90)] int viewCone;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audBeam;
+    [Range(0, 1)][SerializeField] float audBeamVol;
 
+
+    int totalHp;
+    bool LowHpReached = false;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
     public waveSpawnerTwo spawnLocation;
+    List<Transform> BeamList;
 
     // Start is called before the first frame update
     void Start()
     {
-        //get starter enemy color
+        //call set up enemy func
+        SetUpEnemy();
+    }
+
+
+    //set up Enemy
+    private void SetUpEnemy()
+    {
+        totalHp = HP;
+        BeamList = new List<Transform>(5);
         enemycolor = model.material.color;
+        BeamList.Add(BeamPos1);
+        BeamList.Add(BeamPos2);
+        BeamList.Add(BeamPos3);
+        BeamList.Add(BeamPos4);
+        BeamList.Add(BeamPos5);
     }
 
 
@@ -51,6 +80,8 @@ public class BeholderAI : MonoBehaviour, IDamage
                 faceTarget();
 
                 canSeePlayer();
+
+
             }
            
         }
@@ -72,9 +103,14 @@ public class BeholderAI : MonoBehaviour, IDamage
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
 
-                if (!isShooting)
+
+                if (isShooting == false)
+                {
                     StartCoroutine(Shoot());
-              
+                }
+
+
+
             }
 
         }
@@ -110,6 +146,12 @@ public class BeholderAI : MonoBehaviour, IDamage
         HP -= damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
+
+        if (LowHpReached == false && HP <= totalHp / 2)
+        {
+            LowHpAttack();
+        }
+
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
@@ -138,9 +180,26 @@ public class BeholderAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
-       
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    //low hp attack func
+    public void LowHpAttack()
+    {
+        isShooting = true;
+        anim.SetTrigger("BeamAttack");
+        aud.PlayOneShot(audBeam[Random.Range(0, audBeam.Length)], audBeamVol);
+        LowHpReached = true;
+        isShooting = false;
+    }
+
+
+    //shoot beam func for low hp attack in anim
+    public void ShootBeam()
+    {
+       int random = Random.Range(0, 4);
+       Instantiate(Beam, BeamList[random].position, transform.rotation);
     }
 
     public void createBullet()
