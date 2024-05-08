@@ -83,7 +83,8 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         playerSpawnPos = GameObject.FindWithTag("Player Spawn Pos");
         //setting points
-        points = 0;
+        points = playerStats.money;
+        pointsText.text = points.ToString("F0");
     }
 
     public void statePaused()
@@ -173,6 +174,7 @@ public class gameManager : MonoBehaviour
     {
         points += amount;
         pointsText.text = points.ToString("F0");
+        playerStats.money = points;
     }
     public void updateWave(int wave)
     {
@@ -182,7 +184,7 @@ public class gameManager : MonoBehaviour
     [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
     public class PlayerData : ScriptableObject
     {
-        public int points;
+        //public int points;
         public List<weaponStats> weapons = new List<weaponStats>();
         // Add other player data here
     }
