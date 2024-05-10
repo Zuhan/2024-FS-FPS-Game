@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SkeleRedMageAI : MonoBehaviour, IDamage
+public class MiniSkeleAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
@@ -15,9 +15,10 @@ public class SkeleRedMageAI : MonoBehaviour, IDamage
     [SerializeField] Animator anim;
     [SerializeField] int HP;
     [SerializeField] int pointsToGain;
-    [SerializeField] GameObject bullet;
+    [SerializeField] Collider weaponCol;
+    //[SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
-    [SerializeField] Transform shootPos;
+    //[SerializeField] Transform shootPos;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
     [SerializeField] Component playerDetectiomRad;
@@ -33,7 +34,7 @@ public class SkeleRedMageAI : MonoBehaviour, IDamage
     Color enemycolor2;
     Color enemycolor3;
     Color enemycolor4;
-    public waveSpawner spawnLocation;
+    public waveSpawnerTwo spawnLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -159,21 +160,14 @@ public class SkeleRedMageAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-    public void createBullet()
+    public void WeaponColOn()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        weaponCol.enabled = true;
     }
 
-
-
-    // public void WeaponColOn()
-    //{
-    //    weaponCol.enabled = true;
-    //}
-
-    // public void WeaponColOff()
-    //{
-    //    weaponCol.enabled = false;
-    //}
+    public void WeaponColOff()
+    {
+        weaponCol.enabled = false;
+    }
 
 }
