@@ -54,6 +54,7 @@ public class playerController : MonoBehaviour, IDamage
     bool isSprinting;
     bool playingSteps;
     bool canSprint;
+    bool staminaGen;
     int jumpedTimes;
     int sprintDecayTimes;
     int interactDelay;
@@ -65,7 +66,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         hpOrig = HP;
         updatePlayerUI();
-        stamina = maxStamina;
+        //stamina = maxStamina;
         canSprint = true;
         currentPoints = gameManager.instance.points;
 
@@ -84,6 +85,16 @@ public class playerController : MonoBehaviour, IDamage
             selectWeapon();
             movement();
         }
+        if (stamina < maxStamina && !isSprinting)
+        {
+            staminaGen = true;
+            StartCoroutine(StaminaRegen(staminaToAdd));
+        }
+        if(canSprint)
+        {
+            Sprint();
+        }
+        
     }
     void movement()
     {
@@ -115,19 +126,40 @@ public class playerController : MonoBehaviour, IDamage
         }
 
         //Sprinting implemented by Paul
-        if (Input.GetButtonDown("Sprint") && !isSprinting)
-        {
-            StartCoroutine(Sprint(sprintDecayRate));
-        }
+        //if (Input.GetButtonDown("Sprint") && !isSprinting)
+        //{
+        //    StartCoroutine(Sprint(sprintDecayRate));
+        //}
 
-        if (stamina <= 0)
-        {
-            canSprint = false;
-            StartCoroutine(StaminaRegen(sprintRegenRate));
-        }
+        //if (stamina <= 0)
+        //{
+        //    canSprint = false;
+        //    StartCoroutine(StaminaRegen(sprintRegenRate));
+        //}
         if (Input.GetButtonDown("Interact"))
         {
             StartCoroutine(interact());
+        }
+    }
+
+    void Sprint()
+    {
+
+        if (Input.GetButtonDown("Sprint") && stamina > 0 && canSprint)
+        {
+
+            speed *= sprintMultiplier;
+            isSprinting = true;
+            StamDecay(staminaToRemove);
+        }
+        else if (Input.GetButtonUp("Sprint"))
+        {
+            speed /= sprintMultiplier;
+            isSprinting = false;
+            
+            if (staminaGen)
+            StaminaRegen(staminaToAdd);
+            
         }
     }
     IEnumerator playSteps()
@@ -145,34 +177,19 @@ public class playerController : MonoBehaviour, IDamage
     }
 
     //Sprint by Paul
-    IEnumerator Sprint(float stamDecay)
+    IEnumerator StamDecay(float stamDecay)
     {
-        if (canSprint && stamina > 5 && controller.isGrounded)
-        {
-            isSprinting = true;
-            speed *= sprintMultiplier;
-            while (stamina > 0)
-            {
-                stamina -= staminaToRemove;
-                yield return new WaitForSeconds(stamDecay);
-            }
-            isSprinting = false;
-            speed = defaultWalkSpeed;
-        }
+            stamina -= staminaToRemove;
+            yield return new WaitForSeconds(stamDecay);
     }
 
     //Stamina Handler by Paul
     IEnumerator StaminaRegen(float stamRegen)
     {
-        if (!isSprinting)
-        {
-            while (stamina < maxStamina)
-            {
-                stamina += staminaToAdd;
-                yield return new WaitForSeconds(stamRegen);
-            }
-        }
-        canSprint = true;
+        stamina += staminaToAdd;
+        staminaGen = false;
+        yield return new WaitForSeconds(stamRegen);
+        
     }
 
     //interact handler by Ben
