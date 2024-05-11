@@ -5,4 +5,5 @@ using UnityEngine;
 public static class playerStats
 {
     public static List<weaponStats> weapons = new List<weaponStats>();
+    public static int money = 0;
 }

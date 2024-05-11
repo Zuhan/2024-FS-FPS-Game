@@ -37,13 +37,13 @@ public class slingshot : MonoBehaviour
     }
     IEnumerator displayCooldown()
     {
-        gameManager.instance.cooldownRing.SetActive(true);
+        gameManager.instance.cooldownRing.SetActive(false);
         if (audioSource != null && snapSound != null)
         {
             audioSource.PlayOneShot(snapSound);
         }
         yield return new WaitForSeconds(fireCooldown);
-        gameManager.instance.cooldownRing.SetActive(false);
+        gameManager.instance.cooldownRing.SetActive(true);
     }
 
     public void EnableSlingshot()

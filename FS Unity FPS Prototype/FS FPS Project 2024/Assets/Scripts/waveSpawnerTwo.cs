@@ -65,9 +65,9 @@ public class waveSpawnerTwo : MonoBehaviour
         {
             objectSpawned.GetComponent<MimicAI>().spawnLocation = this;
         }
-        else if (objectSpawned.GetComponent<SkeleAI>())
+        else if (objectSpawned.GetComponent<MiniSkeleAI>())
         {
-            objectSpawned.GetComponent<SkeleAI>().spawnLocation = this;
+            objectSpawned.GetComponent<MiniSkeleAI>().spawnLocation = this;
         }
         spawnCount++;
         yield return new WaitForSeconds(spawnTimer);

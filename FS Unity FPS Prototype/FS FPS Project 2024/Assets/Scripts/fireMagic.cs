@@ -21,7 +21,7 @@ public class fireMagic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
         rb.velocity = transform.forward * fireballSpeed;
 
@@ -57,7 +57,6 @@ public class fireMagic : MonoBehaviour
                 fireComponent.SetTargetEnemy(collision.gameObject.transform);
             }
         }
-
         hasHit = true;
 
         Destroy(gameObject);

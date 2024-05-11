@@ -115,12 +115,6 @@ public class MimicAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
-            //removes a enemy from enemy count
-            gameManager.instance.updateGameGoal(-1);
-            if (spawnLocation)
-            {
-                spawnLocation.updateEnemyNumber();
-            }
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
             PointsManager.Instance.AddPoints(pointsToGain);

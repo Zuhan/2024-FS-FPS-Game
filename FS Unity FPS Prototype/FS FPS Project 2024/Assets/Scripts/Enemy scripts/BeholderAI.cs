@@ -155,12 +155,6 @@ public class BeholderAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
-            //removes a enemy from enemy count
-            gameManager.instance.updateGameGoal(-1);
-            if (spawnLocation)
-            {
-                spawnLocation.updateEnemyNumber();
-            }
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
             PointsManager.Instance.AddPoints(pointsToGain);
@@ -198,7 +192,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     //shoot beam func for low hp attack in anim
     public void ShootBeam()
     {
-       int random = Random.Range(0, 4);
+       int random = UnityEngine.Random.Range(0, 4);
        Instantiate(Beam, BeamList[random].position, transform.rotation);
     }
 

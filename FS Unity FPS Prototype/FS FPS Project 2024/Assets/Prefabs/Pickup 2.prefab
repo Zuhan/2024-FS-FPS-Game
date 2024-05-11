@@ -501,7 +501,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5469668122058419247}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.64533645, y: -0.04022712, z: 0.0033564763, w: 0.7628312}
+  m_LocalRotation: {x: 0.6453352, y: -0.040230077, z: 0.0033592137, w: 0.7628321}
   m_LocalPosition: {x: -1.457, y: 0.718, z: -2.678}
   m_LocalScale: {x: 0.27494994, y: 0.27495003, z: 0.27495006}
   m_ConstrainProportionsScale: 1
@@ -514,7 +514,7 @@ Transform:
   - {fileID: 7460578115173729981}
   - {fileID: 4218739824079061781}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80.009, y: -19.195, z: -15.649}
 --- !u!33 &7604053333570387891
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc00db3be6147574794547bd706b69d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsToGain: 1000
+  pointsToGain: 100
 --- !u!1 &5719490118220350685
 GameObject:
   m_ObjectHideFlags: 0
