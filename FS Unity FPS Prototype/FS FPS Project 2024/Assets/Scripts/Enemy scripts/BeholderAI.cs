@@ -192,7 +192,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     //shoot beam func for low hp attack in anim
     public void ShootBeam()
     {
-       int random = Random.Range(0, 4);
+       int random = UnityEngine.Random.Range(0, 4);
        Instantiate(Beam, BeamList[random].position, transform.rotation);
     }
 

@@ -119,16 +119,13 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     // Take Damage AI added by Matt
     public void TakeDamage(int damage)
     {
-        if(Armor > 0)
+        //if armor amount is greater then 0
+        if (Armor > 0)
         {
-
-            damage -= Armor;
-
-            if(damage < 0)
-            {
-                damage = 0;
-            }
+            //call armor reduction
+            damage = ArmorReduction(damage); 
         }
+
 
         HP -= damage;
         StartCoroutine(FlashRed());
@@ -158,6 +155,28 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+
+    private int ArmorReduction(int damage)
+    {
+        //generate a random int between 0 and half of the armor
+        int randomArmor = UnityEngine.Random.Range(0, Armor / 2);
+        //subtract generated number from armor
+        Armor -= randomArmor;
+
+        damage -= randomArmor;
+
+        //if damage is less than 0 
+        if (damage < 0)
+        {
+            //subtract negative number from damage into armor
+            Armor -= damage;
+            //set damage to 0
+            damage = 0;
+        }
+        //return the reducted damage value
+        return damage;
     }
 
     public void WeaponColOn()
