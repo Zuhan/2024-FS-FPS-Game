@@ -44,6 +44,10 @@ public class fire : MonoBehaviour
 
     private IEnumerator DamageOverTime()
     {
+        yield return new WaitForSeconds(0.5f);
+
+        float timer = 0f;
+
         while (timer < duration)
         {
             ApplyDamageOverTime();
