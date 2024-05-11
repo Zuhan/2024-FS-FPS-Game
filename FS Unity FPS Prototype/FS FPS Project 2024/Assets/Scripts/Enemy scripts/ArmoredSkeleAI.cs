@@ -1,40 +1,43 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MimicAI : MonoBehaviour, IDamage
+public class ArmoredSkeleAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
+    [Header ("----Main----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
+    [SerializeField] Collider weaponCol;
+    [SerializeField] Transform HeadPos;
+    [SerializeField] Component playerDetectiomRad;
+    //[SerializeField] GameObject bullet;
+    //[SerializeField] Transform shootPos;
+    [Header("----Stats----")]
+    [SerializeField] float shootRate;
+    [SerializeField] int faceTargetSpeed;
     [SerializeField] int HP;
     [SerializeField] int pointsToGain;
-    [SerializeField] Collider weaponCol;
-    //[SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
-    //[SerializeField] Transform shootPos;
-    [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
-    [SerializeField] Component playerDetectiomRad;
     [SerializeField] int viewCone;
-    [SerializeField] Transform HeadPos;
+    [SerializeField] int Armor;
     
 
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
-    Color enemycolor;
+    int TotalArmor;
+    Color enemycolor1;
     public waveSpawnerTwo spawnLocation;
 
     // Start is called before the first frame update
     void Start()
     {
-        //get starter enemy color
-        enemycolor = model.material.color;
+        SetUpEnemy();
     }
 
 
@@ -55,6 +58,13 @@ public class MimicAI : MonoBehaviour, IDamage
             }
            
         }
+    }
+
+    private void SetUpEnemy()
+    {
+        //get starter enemy color
+        enemycolor1 = model.material.color;
+        TotalArmor = Armor;
     }
 
     void canSeePlayer()
@@ -109,6 +119,17 @@ public class MimicAI : MonoBehaviour, IDamage
     // Take Damage AI added by Matt
     public void TakeDamage(int damage)
     {
+        if(Armor > 0)
+        {
+
+            damage -= Armor;
+
+            if(damage < 0)
+            {
+                damage = 0;
+            }
+        }
+
         HP -= damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
@@ -127,7 +148,7 @@ public class MimicAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = enemycolor;
+        model.material.color = enemycolor1;
     }
 
     IEnumerator Shoot()
