@@ -404,4 +404,16 @@ public class playerController : MonoBehaviour, IDamage
     {
         weapons = playerStats.weapons;
     }
+    public void addHP(int amount)
+    {
+        if (HP + amount > hpOrig)
+        {
+            HP = hpOrig;
+        }
+        else
+        {
+            HP+= amount;
+        }
+        updatePlayerUI();
+    }
 }
