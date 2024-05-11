@@ -1,68 +1,43 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BeholderAI : MonoBehaviour, IDamage
+public class ArmoredSkeleAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
-    [Header("----Main----")]
+    [Header ("----Main----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
-    [SerializeField] GameObject bullet;
-    [SerializeField] GameObject Beam;
+    [SerializeField] Collider weaponCol;
     [SerializeField] Transform HeadPos;
-    [SerializeField] Transform shootPos;
-    [SerializeField] Transform BeamPos1;
-    [SerializeField] Transform BeamPos2;
-    [SerializeField] Transform BeamPos3;
-    [SerializeField] Transform BeamPos4;
-    [SerializeField] Transform BeamPos5;
     [SerializeField] Component playerDetectiomRad;
-    [SerializeField] AudioSource aud;
-    [Header("----Stats----")]  
-    [SerializeField][Range(1, 6)] int faceTargetSpeed;
-    [SerializeField][Range(2, 4)] int animSpeedTrans;
-    [SerializeField] int HP;  
-    [SerializeField][Range(0.1f,2)] float shootRate;
+    //[SerializeField] GameObject bullet;
+    //[SerializeField] Transform shootPos;
+    [Header("----Stats----")]
+    [SerializeField] float shootRate;
+    [SerializeField] int faceTargetSpeed;
+    [SerializeField] int HP;
     [SerializeField] int pointsToGain;
-    [SerializeField][Range(90, 90)] int viewCone;
-    [Header("----- Audio -----")]
-    [SerializeField] AudioClip[] audBeam;
-    [Range(0, 1)][SerializeField] float audBeamVol;
+    [SerializeField] int animSpeedTrans;
+    [SerializeField] int viewCone;
+    [SerializeField] int Armor;
+    
 
-
-    int totalHp;
-    bool LowHpReached = false;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
-    Color enemycolor;
+    int TotalArmor;
+    Color enemycolor1;
     public waveSpawnerTwo spawnLocation;
-    List<Transform> BeamList;
 
     // Start is called before the first frame update
     void Start()
     {
-        //call set up enemy func
         SetUpEnemy();
-    }
-
-
-    //set up Enemy
-    private void SetUpEnemy()
-    {
-        totalHp = HP;
-        BeamList = new List<Transform>(5);
-        enemycolor = model.material.color;
-        BeamList.Add(BeamPos1);
-        BeamList.Add(BeamPos2);
-        BeamList.Add(BeamPos3);
-        BeamList.Add(BeamPos4);
-        BeamList.Add(BeamPos5);
     }
 
 
@@ -80,17 +55,23 @@ public class BeholderAI : MonoBehaviour, IDamage
                 faceTarget();
 
                 canSeePlayer();
-
-
             }
            
         }
+    }
+
+    private void SetUpEnemy()
+    {
+        //get starter enemy color
+        enemycolor1 = model.material.color;
+        TotalArmor = Armor;
     }
 
     void canSeePlayer()
     {
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
+
 
         //Debug.Log(angleToPlayer);
         //Debug.DrawRay(HeadPos.position, playerDir);
@@ -103,14 +84,9 @@ public class BeholderAI : MonoBehaviour, IDamage
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
 
-
-                if (isShooting == false)
-                {
+                if (!isShooting)
                     StartCoroutine(Shoot());
-                }
-
-
-
+              
             }
 
         }
@@ -143,15 +119,17 @@ public class BeholderAI : MonoBehaviour, IDamage
     // Take Damage AI added by Matt
     public void TakeDamage(int damage)
     {
+        //if armor amount is greater then 0
+        if (Armor > 0)
+        {
+            //call armor reduction
+            damage = ArmorReduction(damage); 
+        }
+
+
         HP -= damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
-
-        if (LowHpReached == false && HP <= totalHp / 2)
-        {
-            LowHpAttack();
-        }
-
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
@@ -167,38 +145,48 @@ public class BeholderAI : MonoBehaviour, IDamage
     {
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-        model.material.color = enemycolor;
+        model.material.color = enemycolor1;
     }
 
     IEnumerator Shoot()
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
+       
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
-    //low hp attack func
-    public void LowHpAttack()
+
+    private int ArmorReduction(int damage)
     {
-        isShooting = true;
-        anim.SetTrigger("BeamAttack");
-        aud.PlayOneShot(audBeam[Random.Range(0, audBeam.Length)], audBeamVol);
-        LowHpReached = true;
-        isShooting = false;
+        //generate a random int between 0 and half of the armor
+        int randomArmor = UnityEngine.Random.Range(0, Armor / 2);
+        //subtract generated number from armor
+        Armor -= randomArmor;
+
+        damage -= randomArmor;
+
+        //if damage is less than 0 
+        if (damage < 0)
+        {
+            //subtract negative number from damage into armor
+            Armor -= damage;
+            //set damage to 0
+            damage = 0;
+        }
+        //return the reducted damage value
+        return damage;
     }
 
-
-    //shoot beam func for low hp attack in anim
-    public void ShootBeam()
+    public void WeaponColOn()
     {
-       int random = UnityEngine.Random.Range(0, 4);
-       Instantiate(Beam, BeamList[random].position, transform.rotation);
+        weaponCol.enabled = true;
     }
 
-    public void createBullet()
+    public void WeaponColOff()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        weaponCol.enabled = false;
     }
 
 }

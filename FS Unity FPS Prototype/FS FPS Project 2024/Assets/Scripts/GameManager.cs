@@ -106,14 +106,14 @@ public class gameManager : MonoBehaviour
     //method for adding and removing enemy count and determining if you win
     public void updateGameGoal(int count)
     {
-        enemyCount += count;
+        /*enemyCount += count;
         enemyCountText.text = enemyCount.ToString("F0");
         if (enemyCount <= 0 && waveManager.instance.waveCurrent >= waveManager.instance.spawners.Length)
         {
             statePaused();
             menuActive = menuWin;
             menuActive.SetActive(isPaused);
-        }
+        }*/
     }
 
     public void win()
