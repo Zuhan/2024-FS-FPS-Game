@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class IdleState : IBossState
 {
+    int sayThiOnce = 0;
     public IBossState DoState(BossSearch boss)
     {
+        while(sayThiOnce == 0)
+        {
+            Debug.Log("Melore is in Idle State");
+            sayThiOnce++;
+        }
+
         if (boss.agent == null)
         {
             boss.agent = boss.GetComponent<NavMeshAgent>();
         }
 
-        if (PlayerInRange(boss))
+        if (boss.playerInRange)
         {
             return boss.attackState;
         }
@@ -24,9 +32,5 @@ public class IdleState : IBossState
     void Update()
     {
         
-    }
-    private bool PlayerInRange(BossSearch boss)
-    {
-        return false;
     }
 }

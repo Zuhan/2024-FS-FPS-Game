@@ -10,6 +10,19 @@ public class BossSearch : MonoBehaviour
     [SerializeField] private IBossState currentState;
     [SerializeField] public SphereCollider trigger;
 
+    [SerializeField] public GameObject WorldLocationOne;
+    [SerializeField] public GameObject WorldLocationTwo;
+    [SerializeField] public GameObject WorldLocationThree;
+    [SerializeField] public GameObject WorldLocationFour;
+    [SerializeField] public GameObject WorldLocationFive;
+
+    [SerializeField] public GameObject Card_TheWorld;
+    [SerializeField] public GameObject Card_TheMagician;
+    [SerializeField] public GameObject Card_Justice;
+    [SerializeField] public GameObject Card_TheTower;
+
+    public List<GameObject> cardDeck = new List<GameObject>();
+
     public IdleState idleState = new IdleState();
     public AttackState attackState = new AttackState();
 
@@ -21,6 +34,8 @@ public class BossSearch : MonoBehaviour
     public int HP;
     public int maxHP;
 
+    public bool playerInRange = false;
+
     public HPValue hpValue = new HPValue();
 
 
@@ -28,8 +43,22 @@ public class BossSearch : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
+        HP = maxHP;
         currentState = idleState;
         trigger.enabled = true;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+            if (playerInRange)
+            {
+                Debug.Log("Player is in range");
+            }
+            playerTarget = other.gameObject;
+        }
     }
 
     // Update is called once per frame
@@ -38,18 +67,18 @@ public class BossSearch : MonoBehaviour
         currentState = currentState.DoState(this);
         stateName = currentState.ToString();
 
-        if(HP <= (maxHP / 2))
+        if(HP <= (maxHP / 4))
         {
-            hpValue = HPValue.halfOrBelow;
+            hpValue = HPValue.quarterOrBelow;
         }
         else
         {
-            hpValue = HPValue.aboveHalf;
+            hpValue = HPValue.highHP;
         }
     }
     public enum HPValue
     {
-        aboveHalf,
-        halfOrBelow
+        highHP,
+        quarterOrBelow
     }
 }
