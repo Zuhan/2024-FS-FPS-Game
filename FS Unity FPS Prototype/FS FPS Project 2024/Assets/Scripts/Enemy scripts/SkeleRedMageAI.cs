@@ -61,7 +61,6 @@ public class SkeleRedMageAI : MonoBehaviour, IDamage
 
                 canSeePlayer();
             }
-           
         }
     }
 
@@ -81,14 +80,10 @@ public class SkeleRedMageAI : MonoBehaviour, IDamage
 
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
-
                 if (!isShooting)
                     StartCoroutine(Shoot());
-              
             }
-
         }
-       
     }
 
 
