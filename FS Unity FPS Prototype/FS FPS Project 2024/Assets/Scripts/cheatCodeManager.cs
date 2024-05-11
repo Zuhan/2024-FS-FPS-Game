@@ -13,12 +13,16 @@ public class cheatCodeManager : MonoBehaviour
     public TMP_InputField inputField;
 
     public gameManager gameManager;
+    public GameObject player;
+    public playerController playerScript;
 
     private bool cheatActivated = false;
 
     private void Awake()
     {
         instance = this;
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<playerController>();
     }
 
     private void Start()
@@ -26,6 +30,7 @@ public class cheatCodeManager : MonoBehaviour
         inputField.gameObject.SetActive(false);
         inputField.onEndEdit.AddListener(SubmitInput);
         cheatCodeManager.instance.cheatCodes.Add(new cheatCode("pointsoplenty", ActivatePointsOPlenty));
+        cheatCodeManager.instance.cheatCodes.Add(new cheatCode("iamgod", ToggleGodMode));
     }
 
     void ActivatePointsOPlenty()
@@ -35,6 +40,16 @@ public class cheatCodeManager : MonoBehaviour
             gameManager.points += 1000;
             gameManager.pointsText.text = gameManager.points.ToString("F0");
             playerStats.money = gameManager.points;
+            cheatActivated = true;
+        }
+    }
+
+    void ToggleGodMode()
+    {
+        if (!cheatActivated)
+        {
+            playerController playerCtrl = player.GetComponent<playerController>();
+            playerCtrl.godModeActive = !playerCtrl.godModeActive;
             cheatActivated = true;
         }
     }
