@@ -420,4 +420,8 @@ public class playerController : MonoBehaviour, IDamage
         }
         updatePlayerUI();
     }
+    public void addVelocityY(float amount)
+    {
+        playerVelocity.y += amount;
+    }
 }
