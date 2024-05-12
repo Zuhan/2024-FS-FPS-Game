@@ -32,10 +32,11 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int maxStamina;
     [SerializeField] int sprintDelay;
     [SerializeField] float sprintDecayRate;
-    [SerializeField] int staminaToRemove;
+    [SerializeField] int runCost;
     [SerializeField] int sprintRegenDelay;
     [SerializeField] float sprintRegenRate;
     [SerializeField] int staminaToAdd;
+    
 
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audJump;
@@ -61,7 +62,8 @@ public class playerController : MonoBehaviour, IDamage
     int interactDelay;
     int hpOrig;
     int selectedWeapon;
-
+    float setSpeed;
+    public Coroutine recharge;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +72,7 @@ public class playerController : MonoBehaviour, IDamage
         stamina = maxStamina;
         canSprint = true;
         currentPoints = gameManager.instance.points;
-
+        setSpeed = speed;
         weaponSlots.Add("Fire Staff", fireStaff);
         weaponSlots.Add("Slingshot", Slingshot);
         weaponSlots.Add("Thunder Hammer", ThunderHammer);
@@ -86,15 +88,13 @@ public class playerController : MonoBehaviour, IDamage
             selectWeapon();
             movement();
         }
-        if (stamina < maxStamina && !isSprinting)
-        {
-            staminaGen = true;
-            StartCoroutine(StaminaRegen(staminaToAdd));
-        }
-        if(canSprint)
-        {
-            Sprint();
-        }
+        //if(stamina <= 0)
+        //{
+        //    canSprint = false;
+        //}
+        Sprint();
+        
+        
         
     }
     void movement()
@@ -146,22 +146,43 @@ public class playerController : MonoBehaviour, IDamage
     void Sprint()
     {
 
-        if (Input.GetButtonDown("Sprint") && stamina > 0 && canSprint)
+        if (stamina <= 0)
         {
-
-            speed *= sprintMultiplier;
-            isSprinting = true;
-            stamina -= staminaToRemove * Time.deltaTime;
-        }
-        else if (Input.GetButtonUp("Sprint"))
-        {
-            speed /= sprintMultiplier;
+            canSprint = false;
             isSprinting = false;
-            
-            if (staminaGen)
-            StaminaRegen(staminaToAdd);
-            
         }
+        else
+        {
+            canSprint = true;
+            isSprinting = true;
+        }
+
+        if (canSprint)
+        {
+            if (Input.GetButtonDown("Sprint"))
+            {
+                isSprinting = true;
+                speed *= sprintMultiplier;
+            }
+            else if (Input.GetButtonUp("Sprint"))
+            {
+                isSprinting = false;
+                speed = setSpeed;
+            }
+            if (isSprinting)
+            {
+                stamina -= runCost * Time.deltaTime;
+                if (stamina < 0) stamina = 0;
+            }
+        }
+        else if (stamina < maxStamina && !isSprinting)
+        {
+            if (recharge != null) StopCoroutine(recharge);
+            recharge = StartCoroutine(StaminaRegen(staminaToAdd));
+            isSprinting = false;
+            speed = setSpeed;
+        }
+
     }
     IEnumerator playSteps()
     {
@@ -178,18 +199,21 @@ public class playerController : MonoBehaviour, IDamage
     }
 
     //Sprint by Paul
-    IEnumerator StamDecay(float stamDecay)
-    {
-            stamina -= staminaToRemove;
-            yield return new WaitForSeconds(stamDecay);
-    }
+    //IEnumerator StamDecay(float stamDecay)
+    //{
+    //        stamina -= staminaToRemove;
+    //        yield return new WaitForSeconds(stamDecay);
+    //}
 
     //Stamina Handler by Paul
     IEnumerator StaminaRegen(float stamRegen)
     {
-        stamina += staminaToAdd;
-        staminaGen = false;
-        yield return new WaitForSeconds(stamRegen);
+        while (stamina < maxStamina)
+        {
+            stamina += stamRegen / 10f;
+            if (stamina > maxStamina) { stamina = maxStamina; }
+            yield return new WaitForSeconds(.1f);
+        }
         
     }
 
