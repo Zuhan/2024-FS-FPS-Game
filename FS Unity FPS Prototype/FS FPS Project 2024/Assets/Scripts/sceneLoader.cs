@@ -10,7 +10,7 @@ public class sceneLoader : MonoBehaviour
     // Function to load a scene by name
     public void LoadScene(string sceneName)
     {
-        //Debug.Log("Loading scene: " + sceneName);
+        Debug.Log("Loading scene: " + sceneName);
         SceneManager.LoadScene(sceneName);
     }
 }

@@ -15,14 +15,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     // Start is called before the first frame update
     void Start()
     {
-        if (emptyGameObjectCollider == null)
-        {
-            emptyGameObjectCollider = null;
-        }
-        else
-        {
-            emptyGameObjectCollider = emptyGameObject.GetComponent<Collider>();
-        }
+        emptyGameObjectCollider = emptyGameObject.GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -36,7 +29,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         if (emptyGameObjectCollider != null)
         {
             emptyGameObjectCollider.enabled = true;
-            // Load the scene using the SceneLoader attached to the emptyGameObject
+            Debug.Log("Loading Scene");
             emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
         }
 

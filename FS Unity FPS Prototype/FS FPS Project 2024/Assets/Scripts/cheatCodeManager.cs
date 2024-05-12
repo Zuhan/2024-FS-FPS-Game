@@ -47,6 +47,7 @@ public class cheatCodeManager : MonoBehaviour
 
     void ActivatePointsOPlenty()
     {
+        Debug.Log("CheatsOPlenty Activated");
         if (!cheatActivated)
         {
             gameManager.points += 1000;
@@ -58,6 +59,7 @@ public class cheatCodeManager : MonoBehaviour
 
     void ToggleGodMode()
     {
+        Debug.Log("God Mode Activated");
         if (!cheatActivated)
         {
             playerController playerCtrl = player.GetComponent<playerController>();
@@ -68,6 +70,7 @@ public class cheatCodeManager : MonoBehaviour
 
     void ToggleNoClipMode()
     {
+        Debug.Log("No Clip Activated");
         if (!cheatActivated)
         {
             playerController playerCtrl = player.GetComponent<playerController>();
@@ -77,30 +80,32 @@ public class cheatCodeManager : MonoBehaviour
     }
 
     void DropItem(string itemName)
-    {
-        Debug.Log("Dropping item: " + itemName);
-        Vector3 dropPosition = player.transform.position + player.transform.forward * 4; // Adjust distance in front of the player
-        GameObject itemPrefab = null;
-
-        switch (itemName.ToLower())
+    {if (!cheatActivated)
         {
-            case "slingshot":
-                itemPrefab = slingshot;
-                break;
-            case "firestaff":
-                itemPrefab = fireStaff;
-                break;
-            case "thunderhammer":
-                itemPrefab = thunderHammer;
-                break;
-            // Add more cases for other items if needed
-            default:
-                Debug.LogWarning("Item not found!");
-                return;
-        }
+            Debug.Log("Dropping item: " + itemName);
+            Vector3 dropPosition = player.transform.position + player.transform.forward * 4; // Adjust distance in front of the player
+            GameObject itemPrefab = null;
 
-        // Instantiate the item prefab at the calculated drop position
-        Instantiate(itemPrefab, dropPosition, Quaternion.identity);
+            switch (itemName.ToLower())
+            {
+                case "slingshot":
+                    itemPrefab = slingshot;
+                    break;
+                case "firestaff":
+                    itemPrefab = fireStaff;
+                    break;
+                case "thunderhammer":
+                    itemPrefab = thunderHammer;
+                    break;
+                // Add more cases for other items if needed
+                default:
+                    Debug.LogWarning("Item not found!");
+                    return;
+            }
+            // Instantiate the item prefab at the calculated drop position
+            Instantiate(itemPrefab, dropPosition, Quaternion.identity);
+            cheatActivated = true;
+        }
     }
 
     // Update is called once per frame
@@ -108,10 +113,10 @@ public class cheatCodeManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            gameManager.instance.menuActive = gameManager.instance.cheatInput;
             inputField.gameObject.SetActive(true);
             inputField.Select();
             inputField.ActivateInputField();
+            gameManager.instance.menuActive = gameManager.instance.cheatInput;
             gameManager.instance.statePaused();
         }
         else if (Input.GetKeyDown(KeyCode.Return))
@@ -149,35 +154,47 @@ public class cheatCodeManager : MonoBehaviour
     void CheckCheatCode()
     {
         string[] inputParts = currentInput.Trim().Split(' ');
-        if (inputParts.Length < 2)
-        {
-            Debug.LogWarning("Invalid cheat code format!");
-            inputField.text = "";
-            return;
-        }
+        string cheatCode = inputParts[0]; // Get the cheat code
 
-        string cheatCode = inputParts[0];
-        string cheatArgument = inputParts[1];
-
+        // Check if there's a corresponding cheat code in the list
         foreach (cheatCode cheat in cheatCodes)
         {
             if (cheat != null && cheatCode == cheat.code)
             {
-                if (cheat.action != null)
+                if (inputParts.Length > 1)
                 {
-                    cheat.action.Invoke();
+                    string cheatArgument = inputParts[1]; // Get the argument if it exists
+
+                    // Check if the action requires an argument
+                    if (cheat.actionWithString != null)
+                    {
+                        cheat.actionWithString.Invoke(cheatArgument);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Cheat code does not require an argument!");
+                    }
                 }
-                else if (cheat.actionWithString != null)
+                else
                 {
-                    cheat.actionWithString.Invoke(cheatArgument);
+                    // If there's no argument, invoke the action without an argument
+                    if (cheat.action != null)
+                    {
+                        cheat.action.Invoke();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Cheat code does not require an argument!");
+                    }
                 }
-                inputField.text = "";
-                return;
+
+                inputField.text = ""; // Clear the input field
+                return; // Exit the method once a valid cheat code is found
             }
         }
 
         Debug.LogWarning("Cheat code not found!");
-        inputField.text = "";
+        inputField.text = ""; // Clear the input field
     }
 
     bool IsGamePaused()
