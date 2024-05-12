@@ -11,11 +11,16 @@ public class npcAI : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
 
+    [SerializeField] AudioSource aud;
+
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int viewCone;
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTimer;
     [SerializeField] int animSpeedTrans;
+
+    [SerializeField] AudioClip[] voiceOver;
+    [Range(0, 1)][SerializeField] float audVoiceVol;
 
     bool playerInRange;
     bool destinationChosen;
@@ -23,6 +28,8 @@ public class npcAI : MonoBehaviour
     Vector3 startingPos;
     float angleToPlayer;
     float stoppingDistOr;
+
+    bool hasPlayedVoiceLine;
 
     // Start is called before the first frame update
     void Start()
@@ -113,7 +120,14 @@ public class npcAI : MonoBehaviour
 
     void faceTarget()
     {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        if (!hasPlayedVoiceLine)
+        {
+            Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+
+            aud.PlayOneShot(voiceOver[Random.Range(0, voiceOver.Length)], audVoiceVol);
+
+            hasPlayedVoiceLine = true;
+        }
     }
 }
