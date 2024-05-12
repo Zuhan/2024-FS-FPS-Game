@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -28,8 +29,9 @@ public class Bullet : MonoBehaviour
         }
 
         IDamage dmg = other.GetComponent<IDamage>();
+        
 
-        if (dmg != null && !hitHappend)
+        if (other.CompareTag("Player") == true && dmg != null && !hitHappend)
         {
             dmg.TakeDamage(damage);
             hitHappend = true;
