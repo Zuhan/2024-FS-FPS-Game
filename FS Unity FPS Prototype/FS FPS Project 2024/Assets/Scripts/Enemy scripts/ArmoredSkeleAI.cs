@@ -218,6 +218,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
                 armorList[ARindex].SetActive(false);
                 armorList.RemoveAt(ARindex);
                 armorLReach1 = true;
+                gameObject.GetComponent<NavMeshAgent>().speed += .30f;
             }
             else
             if (armorLReach2 != true && Armor <= TotalArmor * .60f)
@@ -226,6 +227,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
                 armorList[ARindex].SetActive(false);
                 armorList.RemoveAt(ARindex);
                 armorLReach2 = true;
+                gameObject.GetComponent<NavMeshAgent>().speed += .30f;
             }
             else
             if (armorLReach3 != true && Armor <= TotalArmor * .40f)
@@ -234,6 +236,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
                 armorList[ARindex].SetActive(false);
                 armorList.RemoveAt(ARindex);
                 armorLReach3 = true;
+                gameObject.GetComponent<NavMeshAgent>().speed += .30f;
             }
             else
             if (armorLReach4 != true && Armor <= TotalArmor * .20f)
@@ -242,6 +245,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
                 armorList[ARindex].SetActive(false);
                 armorList.RemoveAt(ARindex);
                 armorLReach4 = true;
+                gameObject.GetComponent<NavMeshAgent>().speed += .30f;
             }
             else
             if (armorLReach5 != true && Armor <= TotalArmor * .0f)
@@ -250,6 +254,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
                 armorList[ARindex].SetActive(false);
                 armorList.RemoveAt(ARindex);
                 armorLReach5 = true;
+                gameObject.GetComponent<NavMeshAgent>().speed += .30f;
             }
         }
 
