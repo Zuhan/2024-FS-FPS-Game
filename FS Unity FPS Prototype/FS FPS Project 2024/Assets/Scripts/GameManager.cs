@@ -12,10 +12,11 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject interactFailText;
     [SerializeField] GameObject barricadeText;
-    [SerializeField] GameObject menuActive;
+    [SerializeField] public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] public GameObject cheatInput;
 
     [Header("----- UI Stuff -----")]
     public Image playerHPBar;

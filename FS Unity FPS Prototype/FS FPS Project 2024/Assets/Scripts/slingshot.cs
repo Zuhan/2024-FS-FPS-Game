@@ -22,11 +22,14 @@ public class slingshot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
+        if (!gameManager.instance.isPaused)
         {
-            CreateBullet();
-            lastFireTime = Time.time;
-            StartCoroutine(displayCooldown());
+            if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
+            {
+                CreateBullet();
+                lastFireTime = Time.time;
+                StartCoroutine(displayCooldown());
+            }
         }
     }
 

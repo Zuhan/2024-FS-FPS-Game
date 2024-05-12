@@ -20,11 +20,14 @@ public class fireStaff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
+        if (!gameManager.instance.isPaused)
         {
-            CastFireMagic();
-            lastFireTime = Time.time;
-            StartCoroutine(displayCooldown());
+            if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
+            {
+                CastFireMagic();
+                lastFireTime = Time.time;
+                StartCoroutine(displayCooldown());
+            }
         }
     }
 

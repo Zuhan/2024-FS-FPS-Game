@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,20 @@ using UnityEngine;
 public class cheatCode
 {
     public string code;
-    public System.Action action;
+    public Action action; // Action without arguments
+    public Action<string> actionWithString; // Action with a string argument
 
-    public cheatCode(string code, System.Action action)
+    // Constructor for methods without arguments
+    public cheatCode(string _code, Action _action)
     {
-        this.code = code;
-        this.action = action;
+        code = _code;
+        action = _action;
+    }
+
+    // Constructor for methods with a string argument
+    public cheatCode(string _code, Action<string> _actionWithString)
+    {
+        code = _code;
+        actionWithString = _actionWithString;
     }
 }

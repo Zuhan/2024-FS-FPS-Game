@@ -18,12 +18,15 @@ public class thunderHammer : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
+        if (!gameManager.instance.isPaused)
         {
-            CastChainLightning();
-            PlayAudio();
-            lastFireTime = Time.time;
-            StartCoroutine(displayCooldown());
+            if (Input.GetMouseButtonDown(0) && Time.time - lastFireTime > fireCooldown)
+            {
+                CastChainLightning();
+                PlayAudio();
+                lastFireTime = Time.time;
+                StartCoroutine(displayCooldown());
+            }
         }
     }
 
