@@ -28,7 +28,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     [SerializeField] float HP;  
     [SerializeField][Range(0.1f,2)] float shootRate;
     [SerializeField] int pointsToGain;
-    [SerializeField][Range(90, 90)] int viewCone;
+    [SerializeField] int viewCone;
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audBeam;
     [Range(0, 1)][SerializeField] float audBeamVol;
