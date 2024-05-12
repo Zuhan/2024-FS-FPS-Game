@@ -28,7 +28,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] int castDist;
 
     [Header("----- Sprinting Stats -----")]
-    [SerializeField] int stamina;
+    [SerializeField] float stamina;
     [SerializeField] int maxStamina;
     [SerializeField] int sprintDelay;
     [SerializeField] float sprintDecayRate;
@@ -66,7 +66,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         hpOrig = HP;
         updatePlayerUI();
-        //stamina = maxStamina;
+        stamina = maxStamina;
         canSprint = true;
         currentPoints = gameManager.instance.points;
 
@@ -150,7 +150,7 @@ public class playerController : MonoBehaviour, IDamage
 
             speed *= sprintMultiplier;
             isSprinting = true;
-            StamDecay(staminaToRemove);
+            stamina -= staminaToRemove * Time.deltaTime;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
