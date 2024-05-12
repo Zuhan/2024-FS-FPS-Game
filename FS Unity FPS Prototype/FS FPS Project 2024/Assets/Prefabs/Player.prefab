@@ -97,10 +97,10 @@ MonoBehaviour:
   maxStamina: 100
   sprintDelay: 1
   sprintDecayRate: 1
-  staminaToRemove: 3
-  sprintRegenDelay: 2
-  sprintRegenRate: 6.58
-  staminaToAdd: 7
+  runCost: 25
+  sprintRegenDelay: 3
+  sprintRegenRate: 1
+  staminaToAdd: 1
   audJump:
   - {fileID: 8300000, guid: ba964993233424e40b38ea86a39f641e, type: 3}
   - {fileID: 8300000, guid: 9b302c0131409a242ba5e135a37a5446, type: 3}
@@ -126,6 +126,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6ce96b986a4efd541b8d268ffedb2168, type: 3}
   audStepsVol: 0.1
   rayDistance: 0
+  godModeActive: 0
+  noClipModeActive: 0
 --- !u!136 &4979379391133287022
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -65,6 +65,7 @@ public class playerController : MonoBehaviour, IDamage
     int selectedWeapon;
     float setSpeed;
     public Coroutine recharge;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,11 +86,9 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused)
         {
-            //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * rayDistance, Color.red);
             selectWeapon();
             movement();
         }
-
         Sprint();     
     }
 
@@ -134,41 +133,20 @@ public class playerController : MonoBehaviour, IDamage
             }
         }
 
-        //Sprinting implemented by Paul
-        //if (Input.GetButtonDown("Sprint") && !isSprinting)
-        //{
-        //    StartCoroutine(Sprint(sprintDecayRate));
-        //}
-
-        //if (stamina <= 0)
-        //{
-        //    canSprint = false;
-        //    StartCoroutine(StaminaRegen(sprintRegenRate));
-        //}
         if (Input.GetButtonDown("Interact"))
         {
             StartCoroutine(interact());
         }
     }
+
     public void ToggleNoclipMode()
     {
         noClipModeActive = !noClipModeActive;
     }
 
-
     void Sprint()
     {
-
-        if (stamina <= 0)
-        {
-            canSprint = false;
-            isSprinting = false;
-        }
-        else
-        {
-            canSprint = true;
-            isSprinting = true;
-        }
+        canSprint = stamina > 0;
 
         if (canSprint)
         {
@@ -187,16 +165,36 @@ public class playerController : MonoBehaviour, IDamage
                 stamina -= runCost * Time.deltaTime;
                 if (stamina < 0) stamina = 0;
             }
+            else
+            {
+                if (stamina < maxStamina)
+                {
+                    if (recharge != null) StopCoroutine(recharge);
+                    recharge = StartCoroutine(StaminaRegen(staminaToAdd));
+                }
+            }
         }
-        else if (stamina < maxStamina && !isSprinting)
+        else
         {
-            if (recharge != null) StopCoroutine(recharge);
-            recharge = StartCoroutine(StaminaRegen(staminaToAdd));
-            isSprinting = false;
-            speed = setSpeed;
+            if (isSprinting)
+            {
+                isSprinting = false;
+                speed = setSpeed;
+            }
         }
-
     }
+
+    //Stamina Handler by Paul
+    IEnumerator StaminaRegen(float stamRegen)
+    {
+        while (stamina < maxStamina)
+        {
+            stamina += stamRegen / 10f;
+            if (stamina > maxStamina) { stamina = maxStamina; }
+            yield return new WaitForSeconds(.1f);
+        }
+    }
+
     IEnumerator playSteps()
     {
         playingSteps = true;
@@ -209,25 +207,6 @@ public class playerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.3f);
 
         playingSteps = false;
-    }
-
-    //Sprint by Paul
-    //IEnumerator StamDecay(float stamDecay)
-    //{
-    //        stamina -= staminaToRemove;
-    //        yield return new WaitForSeconds(stamDecay);
-    //}
-
-    //Stamina Handler by Paul
-    IEnumerator StaminaRegen(float stamRegen)
-    {
-        while (stamina < maxStamina)
-        {
-            stamina += stamRegen / 10f;
-            if (stamina > maxStamina) { stamina = maxStamina; }
-            yield return new WaitForSeconds(.1f);
-        }
-        
     }
 
     //interact handler by Ben
@@ -302,7 +281,7 @@ public class playerController : MonoBehaviour, IDamage
 
         if (weapons.Count == 1)
         {
-            selectedWeapon = 0; // Automatically select the newly added weapon if it's the first one
+            selectedWeapon = 0;
             changeWeapon();
         }
         else
@@ -314,14 +293,12 @@ public class playerController : MonoBehaviour, IDamage
         castDist = weapon.castDist;
         castRate = weapon.castRate;
         saveStats();
-        //Debug.Log("Weapon added to List: " + weapon.name);
     }
 
     void selectWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // Find the Slingshot in the weapons list
             for (int i = 0; i < weapons.Count; i++)
             {
                 if (weapons[i].name == "Slingshot")
@@ -331,11 +308,9 @@ public class playerController : MonoBehaviour, IDamage
                     return;
                 }
             }
-            //Debug.Log("Slingshot not found in weapons list.");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // Find the fire staff in the weapons list
             for (int i = 0; i < weapons.Count; i++)
             {
                 if (weapons[i].name == "Fire Staff")
@@ -345,11 +320,9 @@ public class playerController : MonoBehaviour, IDamage
                     return;
                 }
             }
-            //Debug.Log("Fire Staff not found in weapons list.");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            // Find the Thunder Hammer in the weapons list
             for (int i = 0; i < weapons.Count; i++)
             {
                 if (weapons[i].name == "Thunder Hammer")
@@ -359,32 +332,26 @@ public class playerController : MonoBehaviour, IDamage
                     return;
                 }
             }
-            //Debug.Log("Thunder Hammer not found in weapons list.");
         }
     }
 
     void changeWeapon()
     {
-        //Debug.Log("Weapon Changed");
 
         castDamage = weapons[selectedWeapon].castDamage;
         castDist = weapons[selectedWeapon].castDist;
         castRate = weapons[selectedWeapon].castRate;
 
-        // Iterate through all weapons
         foreach (var kvp in weaponSlots)
         {
             string weaponName = kvp.Key;
             GameObject weaponObject = kvp.Value;
 
-            // Check if the current weapon matches the selected weapon
             if (weaponName == weapons[selectedWeapon].name)
             {
-                // Set the mesh and material of the currently equipped weapon
                 weaponObject.GetComponent<MeshFilter>().sharedMesh = weapons[selectedWeapon].weaponModel.GetComponent<MeshFilter>().sharedMesh;
                 weaponObject.GetComponent<MeshRenderer>().sharedMaterial = weapons[selectedWeapon].weaponModel.GetComponent<MeshRenderer>().sharedMaterial;
 
-                // Enable the Fire Staff script only if the selected weapon is the Fire Staff
                 if (weaponName == "Fire Staff")
                 {
                     fireStaff.GetComponent<fireStaff>().EnableFireStaff();
@@ -394,7 +361,6 @@ public class playerController : MonoBehaviour, IDamage
                     fireStaff.GetComponent<fireStaff>().DisableFireStaff();
                 }
 
-                // Enable the Slingshot script only if the selected weapon is the Slingshot
                 if (weaponName == "Slingshot")
                 {
                     Slingshot.GetComponent<slingshot>().EnableSlingshot();
@@ -406,7 +372,6 @@ public class playerController : MonoBehaviour, IDamage
                     Slingshot.GetComponent<slingshot>().DisableAudio();
                 }
 
-                // Enable the Thunder Hammer script only if the selected weapon is the Thunder Hammer
                 if (weaponName == "Thunder Hammer")
                 {
                     ThunderHammer.GetComponent<thunderHammer>().EnableThunderHammer();
@@ -418,7 +383,6 @@ public class playerController : MonoBehaviour, IDamage
             }
             else
             {
-                // Reset the mesh and material of other weapons
                 weaponObject.GetComponent<MeshFilter>().sharedMesh = null;
                 weaponObject.GetComponent<MeshRenderer>().sharedMaterial = null;
             }
