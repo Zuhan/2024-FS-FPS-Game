@@ -55,6 +55,7 @@ public class playerController : MonoBehaviour, IDamage
     bool playingSteps;
     bool canSprint;
     bool staminaGen;
+    public bool godModeActive = false;
     int jumpedTimes;
     int sprintDecayTimes;
     int interactDelay;
@@ -221,13 +222,16 @@ public class playerController : MonoBehaviour, IDamage
     //taking damage function
     public void TakeDamage(int amount)
     {
-        HP -= amount;
-        aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
-        updatePlayerUI();
-        StartCoroutine(flashDamage());
-        if (HP <= 0)
+        if (!godModeActive)
         {
-            gameManager.instance.lose();
+            HP -= amount;
+            aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
+            updatePlayerUI();
+            StartCoroutine(flashDamage());
+            if (HP <= 0)
+            {
+                gameManager.instance.lose();
+            }
         }
     }
     //hit indicator ienumerator
@@ -415,5 +419,9 @@ public class playerController : MonoBehaviour, IDamage
             HP+= amount;
         }
         updatePlayerUI();
+    }
+    public void addVelocityY(float amount)
+    {
+        playerVelocity.y += amount;
     }
 }
