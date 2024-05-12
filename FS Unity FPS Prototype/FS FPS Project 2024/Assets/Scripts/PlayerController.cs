@@ -69,6 +69,7 @@ public class playerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        HP = playerStats.hp;
         hpOrig = HP;
         updatePlayerUI();
         stamina = maxStamina;
@@ -241,6 +242,7 @@ public class playerController : MonoBehaviour, IDamage
         if (!godModeActive)
         {
             HP -= amount;
+            playerStats.hp -= amount;
             aud.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audHurtVol);
             updatePlayerUI();
             StartCoroutine(flashDamage());
@@ -261,7 +263,7 @@ public class playerController : MonoBehaviour, IDamage
     //updating ui
     void updatePlayerUI()
     {
-        gameManager.instance.playerHPBar.fillAmount = (float)HP / hpOrig;
+        gameManager.instance.playerHPBar.fillAmount = (float)HP / getMaxHP();
     }
 
     public void spawnPlayer()
@@ -411,9 +413,9 @@ public class playerController : MonoBehaviour, IDamage
     }
     public void addHP(float amount)
     {
-        if (HP + amount > hpOrig)
+        if (HP + amount > getMaxHP())
         {
-            HP = hpOrig;
+            HP = getMaxHP();
         }
         else
         {
@@ -424,5 +426,9 @@ public class playerController : MonoBehaviour, IDamage
     public void addVelocityY(float amount)
     {
         playerVelocity.y += amount;
+    }
+    public float getMaxHP()
+    {
+        return playerStats.maxHP;
     }
 }
