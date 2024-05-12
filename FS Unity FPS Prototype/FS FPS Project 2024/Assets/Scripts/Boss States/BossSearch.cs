@@ -10,11 +10,29 @@ public class BossSearch : MonoBehaviour
     [SerializeField] private IBossState currentState;
     [SerializeField] public SphereCollider trigger;
 
-    [SerializeField] public GameObject WorldLocationOne;
-    [SerializeField] public GameObject WorldLocationTwo;
-    [SerializeField] public GameObject WorldLocationThree;
-    [SerializeField] public GameObject WorldLocationFour;
-    [SerializeField] public GameObject WorldLocationFive;
+    [SerializeField] public GameObject BossCenterPOS;
+    [SerializeField] public GameObject BossRightPOS;
+    [SerializeField] public GameObject BossLeftPOS;
+    [SerializeField] public GameObject FarRightPOS;
+    [SerializeField] public GameObject FarLeftPOS;
+
+    [SerializeField] public GameObject UICenter;
+    [SerializeField] public GameObject UIBossRight;
+    [SerializeField] public GameObject UIBossLeft;
+    [SerializeField] public GameObject UIFarRight;
+    [SerializeField] public GameObject UIFarLeft;
+
+    [SerializeField] public GameObject ExplosionCenter;
+    [SerializeField] public GameObject ExplosionBossRight;
+    [SerializeField] public GameObject ExplosionBossLeft;
+    [SerializeField] public GameObject ExplosionFarRight;
+    [SerializeField] public GameObject ExplosionFarLeft;
+
+    [SerializeField] public SphereCollider CenterTrigger;
+    [SerializeField] public SphereCollider BossRightTrigger;
+    [SerializeField] public SphereCollider BossLeftTrigger;
+    [SerializeField] public SphereCollider FarRightTrigger;
+    [SerializeField] public SphereCollider FarLeftTrigger;
 
     [SerializeField] public GameObject Card_TheWorld;
     [SerializeField] public GameObject Card_TheMagician;
