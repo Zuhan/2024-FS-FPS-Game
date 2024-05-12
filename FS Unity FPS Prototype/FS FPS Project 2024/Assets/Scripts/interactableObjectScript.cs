@@ -29,8 +29,15 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         if (emptyGameObjectCollider != null)
         {
             emptyGameObjectCollider.enabled = true;
-            Debug.Log("Loading Scene");
-            emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
+            if (!string.IsNullOrEmpty(sceneToLoad))
+            {
+                Debug.Log("Loading Scene");
+                emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
+            }
+            else
+            {
+                Debug.LogWarning("No scene to load specified.");
+            }
         }
 
         int amount = gameManager.instance.points;
