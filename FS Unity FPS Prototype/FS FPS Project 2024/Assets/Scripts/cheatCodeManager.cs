@@ -31,6 +31,7 @@ public class cheatCodeManager : MonoBehaviour
         inputField.onEndEdit.AddListener(SubmitInput);
         cheatCodeManager.instance.cheatCodes.Add(new cheatCode("pointsoplenty", ActivatePointsOPlenty));
         cheatCodeManager.instance.cheatCodes.Add(new cheatCode("iamgod", ToggleGodMode));
+        cheatCodeManager.instance.cheatCodes.Add(new cheatCode("noclip", ToggleNoClipMode));
     }
 
     void ActivatePointsOPlenty()
@@ -50,6 +51,16 @@ public class cheatCodeManager : MonoBehaviour
         {
             playerController playerCtrl = player.GetComponent<playerController>();
             playerCtrl.godModeActive = !playerCtrl.godModeActive;
+            cheatActivated = true;
+        }
+    }
+
+    void ToggleNoClipMode()
+    {
+        if (!cheatActivated)
+        {
+            playerController playerCtrl = player.GetComponent<playerController>();
+            playerCtrl.ToggleNoclipMode();
             cheatActivated = true;
         }
     }
