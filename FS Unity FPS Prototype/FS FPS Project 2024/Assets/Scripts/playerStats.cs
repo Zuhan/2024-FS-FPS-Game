@@ -8,4 +8,5 @@ public static class playerStats
     public static int money = 0;
     public static float maxHP = 100;
     public static float hp = maxHP;
+    public static List<GameObject> keys = new List<GameObject>();
 }
