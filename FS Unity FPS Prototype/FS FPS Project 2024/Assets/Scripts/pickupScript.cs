@@ -5,7 +5,7 @@ using UnityEngine;
 public class pickupScript : MonoBehaviour, IPickup
 {
     [SerializeField] int pointsToGain;
-    [SerializeField] int hpToAdd;
+    [SerializeField] float hpToAdd;
 
     // Start is called before the first frame update
     void Start()

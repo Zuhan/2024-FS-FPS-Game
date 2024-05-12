@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +12,11 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     [Header ("----Main----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
+    [SerializeField] GameObject Helmet;
+    [SerializeField] GameObject BracerArmL;
+    [SerializeField] GameObject BracerArmR;
+    [SerializeField] GameObject BracerLegL;
+    [SerializeField] GameObject BracerLegR;
     [SerializeField] Animator anim;
     [SerializeField] Collider weaponCol;
     [SerializeField] Transform HeadPos;
@@ -19,20 +26,26 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     [Header("----Stats----")]
     [SerializeField] float shootRate;
     [SerializeField] int faceTargetSpeed;
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int pointsToGain;
     [SerializeField] int animSpeedTrans;
     [SerializeField] int viewCone;
-    [SerializeField] int Armor;
-    
+    [SerializeField] float Armor;
 
+    float TotalHP;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
-    int TotalArmor;
+    float TotalArmor;
     Color enemycolor1;
     public waveSpawnerTwo spawnLocation;
+    List<GameObject> armorList;
+    bool armorLReach1;
+    bool armorLReach2;
+    bool armorLReach3;
+    bool armorLReach4;
+    bool armorLReach5;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +78,15 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
         //get starter enemy color
         enemycolor1 = model.material.color;
         TotalArmor = Armor;
+        TotalHP = HP;
+        armorList = new List<GameObject>
+        {
+            Helmet,
+            BracerArmL,
+            BracerArmR,
+            BracerLegL,
+            BracerLegR
+        };
     }
 
     void canSeePlayer()
@@ -117,7 +139,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     }
 
     // Take Damage AI added by Matt
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         //if armor amount is greater then 0
         if (Armor > 0)
@@ -158,12 +180,23 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     }
 
 
-    private int ArmorReduction(int damage)
+    private float ArmorReduction(float damage)
     {
+
+       
         //generate a random int between 0 and half of the armor
-        int randomArmor = UnityEngine.Random.Range(0, Armor / 2);
+        float randomArmor = UnityEngine.Random.Range(0, Armor / 2);
+
+        if(Armor <= 2f)
+        {
+            randomArmor = Armor;
+        }
+
+
         //subtract generated number from armor
         Armor -= randomArmor;
+        
+
 
         damage -= randomArmor;
 
@@ -173,11 +206,60 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
             //subtract negative number from damage into armor
             Armor -= damage;
             //set damage to 0
-            damage = 0;
+            damage = 0f;
         }
+
+
+        if (armorLReach5 != true)
+        {
+            if (armorLReach1 != true && Armor <= TotalArmor * .80f)
+            {
+                int ARindex = UnityEngine.Random.Range(0, armorList.Count);
+                armorList[ARindex].SetActive(false);
+                armorList.RemoveAt(ARindex);
+                armorLReach1 = true;
+            }
+            else
+            if (armorLReach2 != true && Armor <= TotalArmor * .60f)
+            {
+                int ARindex = UnityEngine.Random.Range(0, armorList.Count);
+                armorList[ARindex].SetActive(false);
+                armorList.RemoveAt(ARindex);
+                armorLReach2 = true;
+            }
+            else
+            if (armorLReach3 != true && Armor <= TotalArmor * .40f)
+            {
+                int ARindex = UnityEngine.Random.Range(0, armorList.Count);
+                armorList[ARindex].SetActive(false);
+                armorList.RemoveAt(ARindex);
+                armorLReach3 = true;
+            }
+            else
+            if (armorLReach4 != true && Armor <= TotalArmor * .20f)
+            {
+                int ARindex = UnityEngine.Random.Range(0, armorList.Count);
+                armorList[ARindex].SetActive(false);
+                armorList.RemoveAt(ARindex);
+                armorLReach4 = true;
+            }
+            else
+            if (armorLReach5 != true && Armor <= TotalArmor * .0f)
+            {
+                int ARindex = UnityEngine.Random.Range(0, armorList.Count);
+                armorList[ARindex].SetActive(false);
+                armorList.RemoveAt(ARindex);
+                armorLReach5 = true;
+            }
+        }
+
+
+
+
         //return the reducted damage value
         return damage;
     }
+
 
     public void WeaponColOn()
     {

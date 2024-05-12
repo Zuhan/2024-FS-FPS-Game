@@ -628,7 +628,7 @@ NavMeshAgent:
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 1.7
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1549,8 +1549,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 147973807056996454}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2171
+      value: 1.557888
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1591,6 +1599,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -201.175
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 27f19f244afa43c43b7c5bff88b185bb, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1648,10 +1660,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.28
-  m_Height: 1.04
+  m_Radius: 0.3
+  m_Height: 1.47
   m_Direction: 2
-  m_Center: {x: -0.00000023827347, y: -0.0000002723675, z: 0.39}
+  m_Center: {x: 0, y: -0.0000002723675, z: 0.47}
 --- !u!114 &535773992040279094
 MonoBehaviour:
   m_ObjectHideFlags: 0

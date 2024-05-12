@@ -13,7 +13,7 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     [SerializeField] Renderer arms;
     [SerializeField] Renderer legs;
     [SerializeField] Animator anim;
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int pointsToGain;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -110,7 +110,7 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     }
 
     // Take Damage AI added by Matt
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         HP -= damage;
         StartCoroutine(FlashRed());

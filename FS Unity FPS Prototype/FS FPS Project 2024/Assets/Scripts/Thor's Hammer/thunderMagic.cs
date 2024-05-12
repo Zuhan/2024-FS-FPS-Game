@@ -67,7 +67,7 @@ public class thunderMagic : MonoBehaviour, IDamage
         Destroy(gameObject);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
 
     }

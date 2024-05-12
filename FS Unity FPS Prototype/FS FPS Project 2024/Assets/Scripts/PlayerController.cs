@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource aud;
 
     [Header("----- Player Stats-----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] float defaultWalkSpeed;
     [SerializeField] float sprintMultiplier;
     [SerializeField] float speed;
@@ -59,7 +59,7 @@ public class playerController : MonoBehaviour, IDamage
     int jumpedTimes;
     int sprintDecayTimes;
     int interactDelay;
-    int hpOrig;
+    float hpOrig;
     int selectedWeapon;
 
     // Start is called before the first frame update
@@ -220,7 +220,7 @@ public class playerController : MonoBehaviour, IDamage
     }
 
     //taking damage function
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (!godModeActive)
         {
@@ -408,7 +408,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         weapons = playerStats.weapons;
     }
-    public void addHP(int amount)
+    public void addHP(float amount)
     {
         if (HP + amount > hpOrig)
         {
