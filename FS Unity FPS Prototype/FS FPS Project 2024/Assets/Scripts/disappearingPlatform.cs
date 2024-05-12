@@ -13,10 +13,17 @@ public class disappearingPlatform : MonoBehaviour
     [SerializeField] BoxCollider objectCollider;
     [SerializeField] BoxCollider trigger;
     private bool isActive;
+    [SerializeField] Material mat;
+
+    private Color color;
     // Start is called before the first frame update
     void Start()
     {
         isActive = true;
+        color.a = mat.color.a;
+        color.r = mat.color.r;
+        color.g = mat.color.g;
+        color.b = mat.color.b;
     }
 
     // Update is called once per frame
@@ -25,14 +32,14 @@ public class disappearingPlatform : MonoBehaviour
         if (!isActive)
         {
             isActive = true;
-            StartCoroutine(reappear());
+            StartCoroutine(reappear2(timeToReappear));
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(disappear());
+            StartCoroutine(disappear2(timeToDisappear));
         }
     }
     IEnumerator disappear()
@@ -51,6 +58,35 @@ public class disappearingPlatform : MonoBehaviour
         render.enabled = true;
         objectCollider.enabled = true;
         trigger.enabled = true;
+        mat.color = color;
     }
-
+    IEnumerator disappear2(float dur)
+    {
+        for (float t = 0f; t < dur; t += Time.deltaTime)
+        {
+            Color c = mat.color;
+            c.a = c.a - 0.001f;
+            mat.color = c;
+            yield return null;
+        }
+        render.enabled = false;
+        objectCollider.enabled = false;
+        trigger.enabled = false;
+        isActive = false;
+    }
+    IEnumerator reappear2(float dur)
+    {
+        render.enabled = true;
+        for (float t = 0f; t < dur; t += Time.deltaTime)
+        {
+            Color c = mat.color;
+            c.a = c.a + 0.001f;
+            mat.color = c;
+            yield return null;
+        }
+        
+        objectCollider.enabled = true;
+        trigger.enabled = true;
+        mat.color = color;
+    }
 }
