@@ -162,11 +162,11 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     {
         //play the explosion
         explosion.Play();
-        yield return new WaitForSeconds(.5f);
         HP = 100;
         //set speed and rotate speed to 0
         GetComponent<NavMeshAgent>().speed = 0;
         faceTargetSpeed = 0;
+        yield return new WaitForSeconds(.5f);
         //set VFX active and bomb radius to active
         VFX.SetActive(true);
         BombAOE.enabled = true;
