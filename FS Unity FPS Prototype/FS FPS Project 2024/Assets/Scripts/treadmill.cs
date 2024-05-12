@@ -11,6 +11,8 @@ public class treadmill : MonoBehaviour
     //set to true for x, false for z
     [SerializeField] bool xOrZ;
     private float dir;
+
+    private float dirMod;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,28 @@ public class treadmill : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gameManager.instance.playerScript.controller.Move(move * Time.deltaTime);
+        }
+    }
+    //call direction for with negative num to swap directions, if no direction change wanted leave positive or zero
+    public void changeDirection(char axis, float direction)
+    {
+        if(direction < 0)
+        {
+            dirMod = -1;
+        }
+        else
+        {
+            dirMod = 1;
+        }
+        if (axis.Equals('x') || axis.Equals('X'))
+        {
+            move.z = 0;
+            move.x = dirMod * treadSpeed;
+        }
+        else
+        {
+            move.x = 0;
+            move.z = dirMod * treadSpeed;
         }
     }
 }
