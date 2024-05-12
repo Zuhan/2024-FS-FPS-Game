@@ -87,9 +87,9 @@ public class CentaurAI : MonoBehaviour, IDamage
     }
 
     // Take Damage AI added by Matt
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        HP -= damage;
+        HP -= (int)damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
         agent.SetDestination(gameManager.instance.player.transform.position);

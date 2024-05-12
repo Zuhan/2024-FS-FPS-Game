@@ -7,9 +7,9 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
 
-    [SerializeField] int damage;
-    [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    [SerializeField] float damage;
+    [SerializeField] float speed;
+    [SerializeField] float destroyTime;
     bool hitHappend;
 
     void Start()

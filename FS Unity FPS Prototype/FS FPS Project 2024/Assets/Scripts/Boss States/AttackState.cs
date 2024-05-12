@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,11 @@ public class AttackState : IBossState
 
     private bool isPullingCard = false;
     private bool secondPhaseActive = false;
+
+    private int worldCastTime = 3;
+    //private int magicianCastTime = 2;
+    private int justiceCastTime;
+    private int towerCastTime;
 
     public IBossState DoState(BossSearch boss)
     {
@@ -37,7 +43,7 @@ public class AttackState : IBossState
                 break;
             case BossSearch.HPValue.quarterOrBelow:
                 secondPhaseActive = true;
-                Debug.Log("Melore is above 25% HP");
+                Debug.Log("Melore is below 25% HP");
                 if (!isPullingCard)
                     AttackPatternTwo();
                 break;
@@ -64,14 +70,16 @@ public class AttackState : IBossState
         Debug.Log("Melore is pulling a card.");
         if (!secondPhaseActive)
         {
+            boss.cardDeck.Clear();
+
             boss.cardDeck.Add(boss.Card_TheWorld);
-            boss.cardDeck.Add(boss.Card_TheMagician);
-            boss.cardDeck.Add(boss.Card_Justice);
+            //boss.cardDeck.Add(boss.Card_TheMagician);
+            //boss.cardDeck.Add(boss.Card_Justice);
 
             int randCard = Random.Range(0, boss.cardDeck.Count);
 
             GameObject cardSelected = boss.cardDeck[randCard];
-
+            cardSelected.SetActive(true);
 
             if (cardSelected != null)
             {
@@ -92,6 +100,8 @@ public class AttackState : IBossState
                     Debug.Log("Selected Justice");
                     Justice(boss);
                 }
+                //clear deck
+                boss.cardDeck.Clear();
             }
             //foreach(var card in boss.cardDeck)
             //{
@@ -100,6 +110,8 @@ public class AttackState : IBossState
         }
         else
         {
+            boss.cardDeck.Clear();
+
             boss.cardDeck.Add(boss.Card_TheWorld);
             boss.cardDeck.Add(boss.Card_TheMagician);
             boss.cardDeck.Add(boss.Card_Justice);
@@ -132,6 +144,7 @@ public class AttackState : IBossState
             }
 
             cardSelected.SetActive(false);
+            boss.cardDeck.Clear();
         }
     }
 
@@ -158,27 +171,72 @@ public class AttackState : IBossState
     IEnumerator ExecuteTheWorld(BossSearch boss)
     {
         Debug.Log("Melore is executing: The World");
+        
+        //boss.ExplosionUIOne.SetActive(true);
+        //boss.ExplosionUITwo.SetActive(true);
+        //boss.ExplosionUIThree.SetActive(true);
+        //boss.ExplosionUIFour.SetActive(true);
+        //boss.ExplosionUIFive.SetActive(true);
 
-        boss.WorldLocationOne.SetActive(true);
-        boss.WorldLocationTwo.SetActive(true);
-        boss.WorldLocationThree.SetActive(true);
-        boss.WorldLocationFour.SetActive(true);
-        boss.WorldLocationFive.SetActive(true);
+        boss.BossCenterPOS.SetActive(true);
+        boss.BossRightPOS.SetActive(true);
+        boss.BossLeftPOS.SetActive(true);
+        boss.FarRightPOS.SetActive(true);
+        boss.FarLeftPOS.SetActive(true);
 
-        //Make UI Elements appear on the ground to show danger spots
-        //after a cooldown, deal damage in those triggers
-        //turn off triggers
-        //return to loop
+        boss.UICenter.SetActive(true);
+        boss.UIBossRight.SetActive(true);
+        boss.UIBossLeft.SetActive(true);
+        boss.UIFarRight.SetActive(true);
+        boss.UIFarLeft.SetActive(true);
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(worldCastTime);
+
+        boss.UICenter.SetActive(false);
+        boss.UIBossRight.SetActive(false);
+        boss.UIBossLeft.SetActive(false);
+        boss.UIFarRight.SetActive(false);
+        boss.UIFarLeft.SetActive(false);
+
+        yield return new WaitForSeconds(.5f);
+
+        boss.ExplosionCenter.SetActive(true);
+        boss.ExplosionBossRight.SetActive(true);
+        boss.ExplosionBossLeft.SetActive(true);
+        boss.ExplosionFarRight.SetActive(true);
+        boss.ExplosionFarLeft.SetActive(true);        
+
+        yield return new WaitForSeconds(1);
+
+        boss.CenterTrigger.enabled = true;
+        boss.BossRightTrigger.enabled = true;
+        boss.BossLeftTrigger.enabled = true;
+        boss.FarRightTrigger.enabled = true;
+        boss.FarLeftTrigger.enabled = true;
+
+        yield return new WaitForSeconds(.5f);
+
+        boss.ExplosionCenter.SetActive(false);
+        boss.ExplosionBossRight.SetActive(false);
+        boss.ExplosionBossLeft.SetActive(false);
+        boss.ExplosionFarRight.SetActive(false);
+        boss.ExplosionFarLeft.SetActive(false);
+
+        boss.CenterTrigger.enabled = false;
+        boss.BossRightTrigger.enabled = false;
+        boss.BossLeftTrigger.enabled = false;
+        boss.FarRightTrigger.enabled = false;
+        boss.FarLeftTrigger.enabled = false;
+
+        boss.BossCenterPOS.SetActive(false);
+        boss.BossRightPOS.SetActive(false);
+        boss.BossLeftPOS.SetActive(false);
+        boss.FarRightPOS.SetActive(false);
+        boss.FarLeftPOS.SetActive(false);
+
+        yield return new WaitForSeconds(5);
 
         isPullingCard = false;
-        boss.WorldLocationOne.SetActive(false);
-        boss.WorldLocationTwo.SetActive(false);
-        boss.WorldLocationThree.SetActive(false);
-        boss.WorldLocationFour.SetActive(false);
-        boss.WorldLocationFive.SetActive(false);
-
     }
 
     IEnumerator ExecuteTheMagician(BossSearch boss)
@@ -197,5 +255,10 @@ public class AttackState : IBossState
         Debug.Log("Melore is executing: Justice");
 
         isPullingCard = false;
+    }
+
+    IEnumerator CycleCards(BossSearch boss)
+    {
+        yield return new WaitForSeconds(.5f);
     }
 }

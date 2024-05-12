@@ -70,9 +70,9 @@ public class IBarricade : MonoBehaviour , IDamage, IfInteract
         gameManager.instance.hideInteractText();
         
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
-        HP -= damage;     
+        HP -= (int)damage;     
         if (HP <= 0)
         {
             for (int i = 0; i < planks.Length; i++)

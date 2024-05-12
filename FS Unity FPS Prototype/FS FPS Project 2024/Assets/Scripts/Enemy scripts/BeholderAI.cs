@@ -25,7 +25,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     [Header("----Stats----")]  
     [SerializeField][Range(1, 6)] int faceTargetSpeed;
     [SerializeField][Range(2, 4)] int animSpeedTrans;
-    [SerializeField] int HP;  
+    [SerializeField] float HP;  
     [SerializeField][Range(0.1f,2)] float shootRate;
     [SerializeField] int pointsToGain;
     [SerializeField][Range(90, 90)] int viewCone;
@@ -34,7 +34,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audBeamVol;
 
 
-    int totalHp;
+    float totalHp;
     bool LowHpReached = false;
     float angleToPlayer;
     bool playerInRange;
@@ -141,7 +141,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     }
 
     // Take Damage AI added by Matt
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         HP -= damage;
         StartCoroutine(FlashRed());

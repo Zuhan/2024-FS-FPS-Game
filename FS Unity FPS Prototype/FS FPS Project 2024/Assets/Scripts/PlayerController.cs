@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] AudioSource aud;
 
     [Header("----- Player Stats-----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] float defaultWalkSpeed;
     [SerializeField] float sprintMultiplier;
     [SerializeField] float speed;
@@ -57,10 +57,11 @@ public class playerController : MonoBehaviour, IDamage
     bool canSprint;
     bool staminaGen;
     public bool godModeActive = false;
+    public bool noClipModeActive = false;
     int jumpedTimes;
     int sprintDecayTimes;
     int interactDelay;
-    int hpOrig;
+    float hpOrig;
     int selectedWeapon;
     float setSpeed;
     public Coroutine recharge;
@@ -88,42 +89,49 @@ public class playerController : MonoBehaviour, IDamage
             selectWeapon();
             movement();
         }
-        //if(stamina <= 0)
-        //{
-        //    canSprint = false;
-        //}
-        Sprint();
-        
-        
-        
+
+        Sprint();     
     }
+
     void movement()
     {
         //Movement
-
-        if (controller.isGrounded)
+        if (noClipModeActive)
         {
-            jumpedTimes = 0;
-            playerVelocity = Vector3.zero;
+            float moveVertical = Input.GetAxis("Vertical");
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveUp = Input.GetAxis("Jump");
+            float moveDown = Input.GetAxis("Crouch");
+
+            Vector3 moveDirection = transform.TransformDirection(new Vector3(moveHorizontal, moveUp - moveDown, moveVertical));
+            transform.position += moveDirection * speed * Time.deltaTime;
         }
-
-        moveDirection = (Input.GetAxis("Horizontal") * transform.right)
-                        + (Input.GetAxis("Vertical") * transform.forward);
-        controller.Move(moveDirection * speed * Time.deltaTime);
-
-        if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
+        else
         {
-            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
-            jumpedTimes++;
-            playerVelocity.y = jumpHeight;
-        }
+            if (controller.isGrounded)
+            {
+                jumpedTimes = 0;
+                playerVelocity = Vector3.zero;
+            }
 
-        playerVelocity.y -= gravity * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+            moveDirection = (Input.GetAxis("Horizontal") * transform.right)
+                            + (Input.GetAxis("Vertical") * transform.forward);
+            controller.Move(moveDirection * speed * Time.deltaTime);
 
-        if (controller.isGrounded && moveDirection.normalized.magnitude > 0.3f && !playingSteps)
-        {
-            StartCoroutine(playSteps());
+            if (Input.GetButtonDown("Jump") && jumpedTimes < maxJumps)
+            {
+                aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+                jumpedTimes++;
+                playerVelocity.y = jumpHeight;
+            }
+
+            playerVelocity.y -= gravity * Time.deltaTime;
+            controller.Move(playerVelocity * Time.deltaTime);
+
+            if (controller.isGrounded && moveDirection.normalized.magnitude > 0.3f && !playingSteps)
+            {
+                StartCoroutine(playSteps());
+            }
         }
 
         //Sprinting implemented by Paul
@@ -142,6 +150,11 @@ public class playerController : MonoBehaviour, IDamage
             StartCoroutine(interact());
         }
     }
+    public void ToggleNoclipMode()
+    {
+        noClipModeActive = !noClipModeActive;
+    }
+
 
     void Sprint()
     {
@@ -244,7 +257,7 @@ public class playerController : MonoBehaviour, IDamage
     }
 
     //taking damage function
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         if (!godModeActive)
         {
@@ -432,7 +445,7 @@ public class playerController : MonoBehaviour, IDamage
     {
         weapons = playerStats.weapons;
     }
-    public void addHP(int amount)
+    public void addHP(float amount)
     {
         if (HP + amount > hpOrig)
         {

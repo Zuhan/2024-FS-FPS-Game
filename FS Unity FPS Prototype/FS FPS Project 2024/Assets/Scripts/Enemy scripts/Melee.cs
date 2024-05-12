@@ -5,7 +5,7 @@ using UnityEngine;
 public class Melee : MonoBehaviour
 {
 
-    [SerializeField] int damage;
+    [SerializeField] float damage;
     bool hitHappend;
 
 

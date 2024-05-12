@@ -10,7 +10,7 @@ public class flyAI : MonoBehaviour, IDamage
     //Serialized fields for enemy ai
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int pointsToGain;
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -102,7 +102,7 @@ public class flyAI : MonoBehaviour, IDamage
     }
 
     // Take Damage AI added by Matt
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         HP -= damage;
         StartCoroutine(FlashRed());
