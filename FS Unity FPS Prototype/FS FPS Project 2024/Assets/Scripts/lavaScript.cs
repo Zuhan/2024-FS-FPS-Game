@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class lavaScript : MonoBehaviour
 {
-    public int damage;
+    public float damage;
     /*public int dotDamage;
     public int dotTicks;
     public bool fireDot;
