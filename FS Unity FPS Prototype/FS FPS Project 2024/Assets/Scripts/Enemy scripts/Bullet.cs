@@ -12,10 +12,22 @@ public class Bullet : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float destroyTime;
     bool hitHappend;
+    float distanceToPlayery;
+   
 
     void Start()
     {
+        distanceToPlayery = gameManager.instance.player.transform.position.y + 1 - transform.position.y;
+       
+
         rb.velocity = transform.forward * speed;
+
+
+        if (distanceToPlayery != 0)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, distanceToPlayery, rb.velocity.z);
+        }
+
         Destroy(gameObject, destroyTime);
     }
 
