@@ -17,6 +17,7 @@ public class npcAI : MonoBehaviour
     [SerializeField] int viewCone;
     [SerializeField] int roamDist;
     [SerializeField] int roamPauseTimer;
+    [SerializeField] int idleTimer;
     [SerializeField] int animSpeedTrans;
 
     [SerializeField] AudioClip[] voiceOver;
