@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,9 +28,9 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
     [SerializeField] int viewCone;
+    [SerializeField] float AttackRange;
 
-
-
+    bool isDead;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
@@ -56,7 +57,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
         float animSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
 
-        if (playerInRange)
+        if (playerInRange && isDead != true)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
 
@@ -74,23 +75,23 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     {
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(HeadPos.position, playerDir);
+       // Debug.Log(angleToPlayer);
+       // Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;
 
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))
         {
 
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            if ( hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange && angleToPlayer <= viewCone)
             {
-
+           
                 if (!isShooting)
                     StartCoroutine(Shoot());
 
-            }
+            } 
 
         }
 
@@ -128,6 +129,8 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
+            isDead = true;
+            HP = 100;
             anim.SetTrigger("Shoot");
             //Points manager points add... (works? Sometimes?)
             PointsManager.Instance.AddPoints(pointsToGain);
@@ -151,21 +154,18 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
 
     IEnumerator Shoot()
     {
+        isDead = true;
         isShooting = true;
         anim.SetTrigger("Shoot");
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     IEnumerator BlowUp()
     {
+        HP = 100;
         //play the explosion
         explosion.Play();
-        HP = 100;
-        //set speed and rotate speed to 0
-        GetComponent<NavMeshAgent>().speed = 0;
-        faceTargetSpeed = 0;
         yield return new WaitForSeconds(.5f);
         //set VFX active and bomb radius to active
         VFX.SetActive(true);

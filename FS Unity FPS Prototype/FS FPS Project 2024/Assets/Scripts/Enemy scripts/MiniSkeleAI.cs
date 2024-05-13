@@ -7,24 +7,27 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
+    [Header("----Main----")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer head;
     [SerializeField] Renderer torso;
     [SerializeField] Renderer arms;
     [SerializeField] Renderer legs;
     [SerializeField] Animator anim;
-    [SerializeField] float HP;
-    [SerializeField] int pointsToGain;
     [SerializeField] Collider weaponCol;
     //[SerializeField] GameObject bullet;
-    [SerializeField] float shootRate;
     //[SerializeField] Transform shootPos;
+    [SerializeField] Component playerDetectiomRad;
+    [SerializeField] Transform HeadPos;
+    [Header("----Stats----")]
+    [SerializeField] float shootRate;
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
-    [SerializeField] Component playerDetectiomRad;
+    [SerializeField] float HP;
+    [SerializeField] int pointsToGain;
     [SerializeField] int viewCone;
-    [SerializeField] Transform HeadPos;
-    
+    [SerializeField] float AttackRange;
+
 
     float angleToPlayer;
     bool playerInRange;
@@ -51,7 +54,7 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     {
         float animSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
-
+      
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
@@ -70,6 +73,7 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     {
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
 
         //Debug.Log(angleToPlayer);
@@ -80,7 +84,7 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))
         {
 
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            if (hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange && angleToPlayer <= viewCone)
             {
 
                 if (!isShooting)

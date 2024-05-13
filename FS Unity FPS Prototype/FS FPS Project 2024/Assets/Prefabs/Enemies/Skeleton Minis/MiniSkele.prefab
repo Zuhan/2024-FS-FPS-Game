@@ -675,15 +675,16 @@ MonoBehaviour:
   arms: {fileID: 1683358630156087637}
   legs: {fileID: 3165581184875734670}
   anim: {fileID: 8819557068821231349}
-  HP: 6
-  pointsToGain: 25
   weaponCol: {fileID: 356829606837177119}
+  playerDetectiomRad: {fileID: 4360399314352091568}
+  HeadPos: {fileID: 5159796241447583266}
   shootRate: 1
   faceTargetSpeed: 3
   animSpeedTrans: 2
-  playerDetectiomRad: {fileID: 4360399314352091568}
-  viewCone: 60
-  HeadPos: {fileID: 5159796241447583266}
+  HP: 6
+  pointsToGain: 25
+  viewCone: 90
+  AttackRange: 1.8
   spawnLocation: {fileID: 0}
 --- !u!1 &3903618237735265510
 GameObject:

@@ -31,6 +31,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     [SerializeField] int animSpeedTrans;
     [SerializeField] int viewCone;
     [SerializeField] float Armor;
+    [SerializeField] float AttackRange;
 
     float TotalHP;
     float angleToPlayer;
@@ -58,6 +59,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     {
         float animSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
         if (playerInRange)
         {
@@ -93,6 +95,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     {
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
 
         //Debug.Log(angleToPlayer);
@@ -103,7 +106,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))
         {
 
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
+            if (hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange && angleToPlayer <= viewCone)
             {
 
                 if (!isShooting)

@@ -633,15 +633,16 @@ MonoBehaviour:
   agent: {fileID: 2506340555127630775}
   model: {fileID: 4285277488886994111}
   anim: {fileID: 1564555249537923276}
+  weaponCol: {fileID: 8558277014889411380}
+  playerDetectiomRad: {fileID: 6232277957200666548}
+  HeadPos: {fileID: 4109557289463851937}
+  shootRate: 0.75
   HP: 12
   pointsToGain: 75
-  weaponCol: {fileID: 8558277014889411380}
-  shootRate: 0.75
   faceTargetSpeed: 6
   animSpeedTrans: 4
-  playerDetectiomRad: {fileID: 6232277957200666548}
-  viewCone: 60
-  HeadPos: {fileID: 4109557289463851937}
+  viewCone: 90
+  AttackRange: 2
   spawnLocation: {fileID: 0}
 --- !u!195 &2506340555127630775
 NavMeshAgent:

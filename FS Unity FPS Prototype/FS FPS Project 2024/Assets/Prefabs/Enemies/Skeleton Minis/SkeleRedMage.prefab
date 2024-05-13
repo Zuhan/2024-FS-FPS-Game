@@ -963,16 +963,17 @@ MonoBehaviour:
   arms: {fileID: 1955575288642037870}
   legs: {fileID: 2554208849034154166}
   anim: {fileID: 6198136467707543602}
+  shootPos: {fileID: 3868675528938711825}
+  bullet: {fileID: 5201718884399950278, guid: cb76a709600fa8140b5bc78903b713c5, type: 3}
+  playerDetectiomRad: {fileID: 8030857122118864417}
+  HeadPos: {fileID: 3337819541285211971}
+  shootRate: 0.5
   HP: 12
   pointsToGain: 75
-  bullet: {fileID: 5201718884399950278, guid: cb76a709600fa8140b5bc78903b713c5, type: 3}
-  shootRate: 0.5
-  shootPos: {fileID: 3868675528938711825}
   faceTargetSpeed: 6
   animSpeedTrans: 1
-  playerDetectiomRad: {fileID: 8030857122118864417}
-  viewCone: 60
-  HeadPos: {fileID: 3337819541285211971}
+  viewCone: 90
+  AttackRange: 8
   spawnLocation: {fileID: 0}
 --- !u!135 &8030857122118864417
 SphereCollider:
