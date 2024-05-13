@@ -20,9 +20,7 @@ public class mortarStart : MonoBehaviour
     {
         if (mortar.hasLandedFunc())
         {
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(1).gameObject.SetActive(false);
-            transform.gameObject.SetActive(false);
+            StartCoroutine(stopMortar());
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -43,9 +41,11 @@ public class mortarStart : MonoBehaviour
         {
             Debug.Log("xdd");
             dmg.TakeDamage(damage);
+            gameManager.instance.playerScript.addVelocityY(10);
         }
         yield return null;
     }
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -60,5 +60,12 @@ public class mortarStart : MonoBehaviour
                 transform.gameObject.SetActive(false);
             }
         }
+    }
+    IEnumerator stopMortar()
+    {
+        yield return new WaitForSeconds(.5f);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+        transform.gameObject.SetActive(false);
     }
 }
