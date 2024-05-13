@@ -219,7 +219,8 @@ MonoBehaviour:
   pointsToGain: 50
   faceTargetSpeed: 4
   animSpeedTrans: 2
-  viewCone: 60
+  viewCone: 90
+  AttackRange: 5
   spawnLocation: {fileID: 0}
 --- !u!135 &1256051583741586664
 SphereCollider:
@@ -256,7 +257,7 @@ NavMeshAgent:
   m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 2
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
