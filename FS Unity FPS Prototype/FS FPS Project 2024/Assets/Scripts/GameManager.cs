@@ -81,7 +81,10 @@ public class gameManager : MonoBehaviour
 
     public GameObject playerSpawnPos;
     public bool invOpen;
-    
+
+    public bool slingUI;
+    public bool fireUI;
+    public bool thUI;
     //void awake so its called first 
     void Awake()
     {
@@ -94,6 +97,22 @@ public class gameManager : MonoBehaviour
         //setting points
         points = playerStats.money;
         pointsText.text = points.ToString("F0");
+        slingUI = playerStats.slingUI;
+        Debug.Log(playerStats.slingUI);
+        fireUI = playerStats.fireUI;
+        thUI = playerStats.thUI;
+        if (slingUI)
+        {
+            ShowWeaponIcon(0);
+        }
+        if (fireUI)
+        {
+            ShowWeaponIcon(1);
+        }
+        if (thUI)
+        {
+            ShowWeaponIcon(2);
+        }
     }
 
     public void statePaused()
@@ -249,6 +268,20 @@ public class gameManager : MonoBehaviour
     public void ShowWeaponIcon(int weaponIndex)
     {
         weaponIcons[weaponIndex].enabled = true;
+        if(weaponIndex == 0)
+        {
+            
+            playerStats.slingUI = true;
+            Debug.Log(playerStats.slingUI);
+        }
+        else if (weaponIndex == 1)
+        {
+            playerStats.fireUI = true;
+        }
+        else
+        {
+            playerStats.thUI = true;
+        }
     }
     //Explosion Staff Being Shelved
     //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
