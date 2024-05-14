@@ -301,6 +301,11 @@ public class playerController : MonoBehaviour, IDamage
         saveStats();
     }
 
+    public void AddedSpeed(float AddedSpeed)
+    {
+        speed += AddedSpeed;
+    }
+
     void selectWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
