@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class ArmoredSkeleAI : MonoBehaviour, IDamage
 {
@@ -21,6 +22,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     [SerializeField] Collider weaponCol;
     [SerializeField] Transform HeadPos;
     [SerializeField] Component playerDetectiomRad;
+    [SerializeField] Image healthbar;
     //[SerializeField] GameObject bullet;
     //[SerializeField] Transform shootPos;
     [Header("----Stats----")]
@@ -33,7 +35,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     [SerializeField] float Armor;
     [SerializeField] float AttackRange;
 
-    float TotalHP;
+    float MaxHP;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
@@ -80,7 +82,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
         //get starter enemy color
         enemycolor1 = model.material.color;
         TotalArmor = Armor;
-        TotalHP = HP;
+        MaxHP = HP;
         armorList = new List<GameObject>
         {
             Helmet,
@@ -89,6 +91,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
             BracerLegL,
             BracerLegR
         };
+        UpdateEnemyUI();
     }
 
     void canSeePlayer()
@@ -151,20 +154,29 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
             damage = ArmorReduction(damage); 
         }
 
+       
+
 
         HP -= damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
+
+        UpdateEnemyUI();
+
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
             Destroy(gameObject);
-            //Points manager points add... (works? Sometimes?)
-            PointsManager.Instance.AddPoints(pointsToGain);
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
+    }
+
+
+    void UpdateEnemyUI()
+    {
+        healthbar.fillAmount = HP / MaxHP;
     }
     IEnumerator FlashRed()
     {

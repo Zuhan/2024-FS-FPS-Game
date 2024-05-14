@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class BeholderAI : MonoBehaviour, IDamage
 {
@@ -22,11 +23,12 @@ public class BeholderAI : MonoBehaviour, IDamage
     [SerializeField] Transform BeamPos5;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] AudioSource aud;
+    [SerializeField] Image healthbar;
     [Header("----Stats----")]  
-    [SerializeField][Range(1, 6)] int faceTargetSpeed;
-    [SerializeField][Range(2, 4)] int animSpeedTrans;
+    [SerializeField] int faceTargetSpeed;
+    [SerializeField] int animSpeedTrans;
     [SerializeField] float HP;  
-    [SerializeField][Range(0.1f,2)] float shootRate;
+    [SerializeField] float shootRate;
     [SerializeField] int pointsToGain;
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
@@ -35,7 +37,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audBeamVol;
 
 
-    float totalHp;
+    float MaxHP;
     bool LowHpReached = false;
     float angleToPlayer;
     bool playerInRange;
@@ -56,7 +58,8 @@ public class BeholderAI : MonoBehaviour, IDamage
     //set up Enemy
     private void SetUpEnemy()
     {
-        totalHp = HP;
+        MaxHP = HP;
+        UpdateEnemyUI();
         BeamList = new List<Transform>(5);
         enemycolor = model.material.color;
         BeamList.Add(BeamPos1);
@@ -150,7 +153,9 @@ public class BeholderAI : MonoBehaviour, IDamage
         StartCoroutine(FlashRed());
         //set destination when damaged
 
-        if (LowHpReached == false && HP <= totalHp / 2)
+        UpdateEnemyUI();
+
+        if (LowHpReached == false && HP <= MaxHP / 2)
         {
             LowHpAttack();
         }
@@ -159,13 +164,17 @@ public class BeholderAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {            
             Destroy(gameObject);
-            //Points manager points add... (works? Sometimes?)
-            PointsManager.Instance.AddPoints(pointsToGain);
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
     }
+
+    void UpdateEnemyUI()
+    {
+        healthbar.fillAmount = HP / MaxHP;
+    }
+
     IEnumerator FlashRed()
     {
         model.material.color = Color.red;

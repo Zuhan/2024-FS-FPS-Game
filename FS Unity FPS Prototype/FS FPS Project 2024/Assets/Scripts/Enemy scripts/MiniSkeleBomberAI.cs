@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class MiniSkeleBomberAI : MonoBehaviour, IDamage
 {
@@ -19,6 +20,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     [SerializeField] Collider BombAOE;
     [SerializeField] GameObject VFX;
     [SerializeField] AudioSource explosion;
+    [SerializeField] Image healthbar;
     //[SerializeField] GameObject bullet;
     [Header("----stats----")]
     [SerializeField] float shootRate;
@@ -30,6 +32,8 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
 
+
+    float MaxHP;
     bool isDead;
     float angleToPlayer;
     bool playerInRange;
@@ -44,11 +48,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        //get starter enemy color
-        enemycolor1 = head.material.color;
-        enemycolor2 = torso.material.color;
-        enemycolor3 = legs.material.color;
-        enemycolor4 = arms.material.color;
+        SetUpEnemy();
     }
 
 
@@ -69,6 +69,18 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
             }
 
         }
+    }
+
+
+    void SetUpEnemy()
+    {
+        MaxHP = HP;
+        UpdateEnemyUI();
+        //get starter enemy color
+        enemycolor1 = head.material.color;
+        enemycolor2 = torso.material.color;
+        enemycolor3 = legs.material.color;
+        enemycolor4 = arms.material.color;
     }
 
     void canSeePlayer()
@@ -124,6 +136,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        UpdateEnemyUI();
         StartCoroutine(FlashRed());
         //set destination when damaged
         agent.SetDestination(gameManager.instance.player.transform.position);
@@ -131,14 +144,20 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
         {
             isDead = true;
             HP = 100;
+            UpdateEnemyUI();
             anim.SetTrigger("Shoot");
-            //Points manager points add... (works? Sometimes?)
-            PointsManager.Instance.AddPoints(pointsToGain);
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
     }
+
+
+    void UpdateEnemyUI()
+    {
+        healthbar.fillAmount = HP / MaxHP;
+    }
+
     IEnumerator FlashRed()
     {
         head.material.color = Color.red;
@@ -164,6 +183,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     IEnumerator BlowUp()
     {
         HP = 100;
+        UpdateEnemyUI();
         //play the explosion
         explosion.Play();
         yield return new WaitForSeconds(.5f);

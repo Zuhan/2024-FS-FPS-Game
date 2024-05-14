@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class MimicAI : MonoBehaviour, IDamage
 {
@@ -16,6 +17,7 @@ public class MimicAI : MonoBehaviour, IDamage
     //[SerializeField] Transform shootPos;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Transform HeadPos;
+    [SerializeField] Image healthbar;
     [Header("----Stats----")]
     [SerializeField] float shootRate;
     [SerializeField] float HP;
@@ -25,7 +27,7 @@ public class MimicAI : MonoBehaviour, IDamage
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
 
-
+    float MaxHP;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
@@ -36,8 +38,7 @@ public class MimicAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        //get starter enemy color
-        enemycolor = model.material.color;
+        SetUpEnemy();
     }
 
 
@@ -51,6 +52,9 @@ public class MimicAI : MonoBehaviour, IDamage
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
 
+            healthbar.enabled = true;
+         
+
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
                 faceTarget();
@@ -59,6 +63,14 @@ public class MimicAI : MonoBehaviour, IDamage
             }
            
         }
+    }
+
+    void SetUpEnemy()
+    {
+        MaxHP = HP;
+        UpdateEnemyUI();
+        //get starter enemy color
+        enemycolor = model.material.color;
     }
 
     void canSeePlayer()
@@ -116,17 +128,22 @@ public class MimicAI : MonoBehaviour, IDamage
         HP -= damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
+        UpdateEnemyUI();
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
             Destroy(gameObject);
-            //Points manager points add... (works? Sometimes?)
-            PointsManager.Instance.AddPoints(pointsToGain);
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
     }
+
+    void UpdateEnemyUI()
+    {
+        healthbar.fillAmount = HP / MaxHP;
+    }
+
     IEnumerator FlashRed()
     {
         model.material.color = Color.red;
