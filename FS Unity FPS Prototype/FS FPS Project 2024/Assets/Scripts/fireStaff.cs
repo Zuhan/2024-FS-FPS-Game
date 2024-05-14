@@ -48,9 +48,9 @@ public class fireStaff : MonoBehaviour
 
     IEnumerator displayCooldown()
     {
-        gameManager.instance.cooldownRing.SetActive(true);
-        yield return new WaitForSeconds(fireCooldown);
         gameManager.instance.cooldownRing.SetActive(false);
+        yield return new WaitForSeconds(fireCooldown);
+        gameManager.instance.cooldownRing.SetActive(true);
     }
 
     public void EnableFireStaff()
