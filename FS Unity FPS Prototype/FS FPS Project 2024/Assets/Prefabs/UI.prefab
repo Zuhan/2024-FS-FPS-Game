@@ -1650,12 +1650,12 @@ GameObject:
   - component: {fileID: 1174905386809877424}
   - component: {fileID: 2270850900956136626}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: ThunderHamIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6113434818662808031
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1672,7 +1672,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -105.6, y: -482.1}
+  m_AnchoredPosition: {x: -105.6, y: -463.2435}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1174905386809877424
@@ -1690,7 +1690,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015660288677837354}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3137,12 +3137,12 @@ GameObject:
   - component: {fileID: 621095092411432418}
   - component: {fileID: 6105978612153718043}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: FireStaffIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1818860094006922603
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3159,7 +3159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -181.8, y: -482.1}
+  m_AnchoredPosition: {x: -181.8, y: -461.97083}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &621095092411432418
@@ -3177,7 +3177,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4060813359217422818}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3894,7 +3894,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7221373287117405577
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5423,12 +5423,12 @@ GameObject:
   - component: {fileID: 5303015272041542550}
   - component: {fileID: 7798928449439654918}
   m_Layer: 5
-  m_Name: Image
+  m_Name: SlingShotIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4060438159542833729
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5445,7 +5445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -256.5, y: -482.1}
+  m_AnchoredPosition: {x: -256.5, y: -461.54663}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5303015272041542550
@@ -5463,7 +5463,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7855091004424751684}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -5636,7 +5636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3582500864369441594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6727,8 +6727,15 @@ MonoBehaviour:
   menuWin: {fileID: 3076806865573789665}
   menuLose: {fileID: 2230040226188380877}
   cheatInput: {fileID: 8136219837546856574}
+  weaponIcons:
+  - {fileID: 7798928449439654918}
+  - {fileID: 6105978612153718043}
+  - {fileID: 2270850900956136626}
   playerHPBar: {fileID: 4428776012890347750}
-  playerStaminaPool: {fileID: 0}
+  playerStaminaPool: {fileID: 825480304382682738}
+  slingShot: {fileID: 7798928449439654918}
+  fireStaff: {fileID: 6105978612153718043}
+  thunderHammer: {fileID: 2270850900956136626}
   enemyCountText: {fileID: 1165487123014179112}
   pointsText: {fileID: 849020113598699067}
   pointsCostText: {fileID: 3245168676983904941}
@@ -6920,6 +6927,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a9924480ee40b9489bfde94669868c1, type: 3}
+--- !u!114 &825480304382682738 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1934217774465782009, guid: 9a9924480ee40b9489bfde94669868c1, type: 3}
+  m_PrefabInstance: {fileID: 1270869587025999499}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4078358425761498109 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2970744382152799606, guid: 9a9924480ee40b9489bfde94669868c1, type: 3}

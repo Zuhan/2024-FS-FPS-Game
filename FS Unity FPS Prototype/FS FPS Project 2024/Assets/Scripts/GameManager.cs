@@ -17,10 +17,14 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] public GameObject cheatInput;
+    [SerializeField] List<Image> weaponIcons;
 
     [Header("----- UI Stuff -----")]
     public Image playerHPBar;
     public Image playerStaminaPool;
+    public Image slingShot;
+    public Image fireStaff;
+    public Image thunderHammer;
     public TMP_Text enemyCountText;
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
@@ -77,7 +81,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject playerSpawnPos;
     public bool invOpen;
-
+    
     //void awake so its called first 
     void Awake()
     {
@@ -240,6 +244,10 @@ public class gameManager : MonoBehaviour
         //}        
     }
 
+    public void ShowWeaponIcon(int weaponIndex)
+    {
+        weaponIcons[weaponIndex].enabled = true;
+    }
     //Explosion Staff Being Shelved
     //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
     //public void UnequipExplosionStaff()
