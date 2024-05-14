@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class BossSearch : MonoBehaviour
+public class BossSearch : MonoBehaviour, IDamage
 {
     [SerializeField] private string stateName;
     [SerializeField] private IBossState currentState;
@@ -39,6 +39,14 @@ public class BossSearch : MonoBehaviour
     [SerializeField] public GameObject Card_Justice;
     [SerializeField] public GameObject Card_TheTower;
 
+    [SerializeField] public Renderer body;
+    [SerializeField] public Renderer RArm;
+    [SerializeField] public Renderer LArm;
+
+    [SerializeField] public CapsuleCollider bodyHitBox;
+    [SerializeField] public CapsuleCollider LArmHitBox;
+    [SerializeField] public CapsuleCollider RArmHitBox;
+
     public List<GameObject> cardDeck = new List<GameObject>();
 
     public IdleState idleState = new IdleState();
@@ -49,8 +57,10 @@ public class BossSearch : MonoBehaviour
     public Vector3 nextDashLocation;
     public GameObject playerTarget;
 
-    public int HP;
-    public int maxHP;
+    public float HP;
+    public float maxHP;
+
+    public int pointsToGain = 2500;
 
     public bool playerInRange = false;
 
@@ -77,6 +87,35 @@ public class BossSearch : MonoBehaviour
             }
             playerTarget = other.gameObject;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        HP -= damage;
+        StartCoroutine(FlashRed());
+
+        if(HP <= 0)
+        {
+            Destroy(gameObject);
+
+            PointsManager.Instance.AddPoints(pointsToGain);
+
+            gameManager.instance.pointsChange(pointsToGain);
+        }
+
+    }
+
+    IEnumerator FlashRed()
+    {
+        body.material.color = Color.red;
+        RArm.material.color = Color.red;
+        LArm.material.color = Color.red;
+
+        yield return new WaitForSeconds(0.1f);
+
+        body.material.color = Color.white;
+        RArm.material.color = Color.white;
+        LArm.material.color = Color.white;
     }
 
     // Update is called once per frame
