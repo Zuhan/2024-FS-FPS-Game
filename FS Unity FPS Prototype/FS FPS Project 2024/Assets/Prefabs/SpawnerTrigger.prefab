@@ -104,13 +104,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesToSpawn:
-  - {fileID: 908410883882053373, guid: d6a7badf0b156e44d846c34184eb15f5, type: 3}
-  - {fileID: 6440277652488049994, guid: ca389f0ac9aec2c49942b58224210f42, type: 3}
   - {fileID: 3058783600462980642, guid: 813d1dafdd39d7943bcefc493b2c630b, type: 3}
   - {fileID: 6915617181386329528, guid: 66c7449b87922db4091763af24ce58fd, type: 3}
   - {fileID: 875005040873535282, guid: f90cb40c29e12e846a927e9c5049db7f, type: 3}
+  - {fileID: 908410883882053373, guid: d6a7badf0b156e44d846c34184eb15f5, type: 3}
+  - {fileID: 6630588110848197161, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+  - {fileID: 6440277652488049994, guid: ca389f0ac9aec2c49942b58224210f42, type: 3}
   numToSpawn: 10
-  spawnDelay: 1
+  spawnDelay: 0
 --- !u!65 &3569790788217715220
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -35,7 +35,8 @@ public class SpawnerTrigger : MonoBehaviour
     {
         isSpawning = true;
         int spawnPos = Random.Range(0, transform.childCount);
-        int enemy = Random.Range(0,enemiesToSpawn.Length);
+        //int enemy = Random.Range(0,enemiesToSpawn.Length);
+        int enemy = enemyAlgorithim();
         Instantiate(enemiesToSpawn[enemy], transform.GetChild(spawnPos).position, transform.GetChild(spawnPos).rotation);
         spawnCount++;
         yield return new WaitForSeconds(spawnDelay);
@@ -47,13 +48,16 @@ public class SpawnerTrigger : MonoBehaviour
     private int enemyAlgorithim()
     {
         int enemy = Random.Range(0, 100);
+        Debug.Log(enemy);
         int num = 0;
+        //spawn case 1: mini skele
         if(enemy <= 19)
         {
             num = 0;
             return num;
         }
-        else if(enemy <= 69)
+        //spawn case 2: skele red mage
+        else if(enemy <= 39)
         {
             num = 1;
             if (num >= enemiesToSpawn.Length)
@@ -62,7 +66,8 @@ public class SpawnerTrigger : MonoBehaviour
             }
             return num;
         }
-        else if (enemy <= 89)
+        //spawn case 3: skele yellow bomber
+        else if (enemy <= 59)
         {
             num = 2;
             if (num >= enemiesToSpawn.Length)
@@ -71,9 +76,30 @@ public class SpawnerTrigger : MonoBehaviour
             }
             return num;
         }
-        else
+        //spawn case 4: beholder
+        else if (enemy < 79)
         {
             num = 3;
+            if (num >= enemiesToSpawn.Length)
+            {
+                num = 0;
+            }
+            return num;
+        }
+        //spawn case 5: armored melee skele
+        else if (enemy <= 89)
+        {
+            num = 4;
+            if (num >= enemiesToSpawn.Length)
+            {
+                num = 0;
+            }
+            return num;
+        }
+        //spawn case 6: mimic
+        else
+        {
+            num = 5;
             if (num >= enemiesToSpawn.Length)
             {
                 num = 0;
