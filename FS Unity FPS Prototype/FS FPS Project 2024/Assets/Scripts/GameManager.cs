@@ -167,13 +167,13 @@ public class gameManager : MonoBehaviour
         invOpen = true;
         statePaused();
     }
-    public void hideInventory()
+    /*public void hideInventory()
     {
         inventory.SetActive(false);
         invOpen = false;
         menuActive.SetActive(false);
         menuActive = null;
-    }
+    }*/
     //method for hiding interact text
     public void hideInteractText()
     {
@@ -222,10 +222,12 @@ public class gameManager : MonoBehaviour
                 statePaused();
                 menuActive = menuPause;
                 menuActive.SetActive(isPaused);
+                invOpen = false;
             }
             else if (menuActive == menuPause || menuActive == inventory)
             {
                 stateUnpaused();
+                invOpen = false;
             }
         }
 

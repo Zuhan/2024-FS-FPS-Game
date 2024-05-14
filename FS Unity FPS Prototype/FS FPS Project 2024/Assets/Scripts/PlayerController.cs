@@ -100,10 +100,6 @@ public class playerController : MonoBehaviour, IDamage
                 {
                     gameManager.instance.showInventory();
                 }
-                else
-                {
-                    gameManager.instance.hideInventory();
-                }
             }
             selectWeapon();
             movement();
