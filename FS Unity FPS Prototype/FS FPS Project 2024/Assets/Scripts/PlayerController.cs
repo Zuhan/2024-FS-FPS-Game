@@ -73,6 +73,7 @@ public class playerController : MonoBehaviour, IDamage
         hpOrig = HP;
         updatePlayerUI();
         stamina = maxStamina;
+        updateStaminaUI();
         canSprint = true;
         currentPoints = gameManager.instance.points;
         setSpeed = speed;
@@ -180,6 +181,7 @@ public class playerController : MonoBehaviour, IDamage
             {
                 stamina -= runCost * Time.deltaTime;
                 if (stamina < 0) stamina = 0;
+                updateStaminaUI();
             }
             else
             {
@@ -187,6 +189,8 @@ public class playerController : MonoBehaviour, IDamage
                 {
                     if (recharge != null) StopCoroutine(recharge);
                     recharge = StartCoroutine(StaminaRegen(staminaToAdd));
+                    updateStaminaUI();
+
                 }
             }
         }
@@ -279,12 +283,17 @@ public class playerController : MonoBehaviour, IDamage
     void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / getMaxHP();
+        
+    }
+    void updateStaminaUI()
+    {
         gameManager.instance.playerStaminaPool.fillAmount = stamina / maxStamina;
     }
 
     public void spawnPlayer()
     {
         HP = hpOrig;
+        stamina = maxStamina;
         updatePlayerUI();
 
         controller.enabled = false;
