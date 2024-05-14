@@ -17,6 +17,9 @@ public class AttackState : IBossState
     private int justiceCastTime;
     private int towerCastTime;
 
+    
+    private float flightSpeed = 1.5f;
+
     public IBossState DoState(BossSearch boss)
     {
         while (sayThisOnce == 0)
@@ -72,9 +75,9 @@ public class AttackState : IBossState
         if (!secondPhaseActive)
         {
 
-            boss.cardDeck.Add(boss.Card_TheWorld);
-            //boss.cardDeck.Add(boss.Card_TheMagician);
-            boss.cardDeck.Add(boss.Card_Justice);
+            //boss.cardDeck.Add(boss.Card_TheWorld);
+            boss.cardDeck.Add(boss.Card_TheMagician);
+            //boss.cardDeck.Add(boss.Card_Justice);
 
             int randCard = Random.Range(0, boss.cardDeck.Count);
 
@@ -250,12 +253,32 @@ public class AttackState : IBossState
     {
         Debug.Log("Melore is executing: The Magician");
 
+        boss.auraUnderBoss.SetActive(true);
+        
+
+        boss.auraList.Add(boss.aura1);
+        boss.auraList.Add(boss.aura2);
+        boss.auraList.Add(boss.aura3);
+        boss.auraList.Add(boss.aura4);
+        boss.auraList.Add(boss.aura5);
+
+        for (int i = 0; i < boss.auraList.Count; i++)
+        {
+            boss.auraList[i].SetActive(true);
+            yield return new WaitForSeconds(1);
+        }
+
+        
+
         yield return new WaitForSeconds(3);
 
-        Debug.Log("Melore is executing: Justice");
+        
 
+        boss.auraUnderBoss.SetActive(false);
         isPullingCard = false;
     }
+
+    
 
     IEnumerator ExecuteJustice(BossSearch boss)
     {
@@ -398,4 +421,5 @@ public class AttackState : IBossState
 
         yield return new WaitForSeconds(2);
     }
+
 }

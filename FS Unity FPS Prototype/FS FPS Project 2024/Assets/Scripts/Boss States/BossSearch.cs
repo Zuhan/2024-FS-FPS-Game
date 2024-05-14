@@ -10,6 +10,7 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] private IBossState currentState;
     [SerializeField] public SphereCollider trigger;
 
+    [Header("-----The World-----")]
     [SerializeField] public GameObject BossCenterPOS;
     [SerializeField] public GameObject BossRightPOS;
     [SerializeField] public GameObject BossLeftPOS;
@@ -34,11 +35,13 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] public SphereCollider FarRightTrigger;
     [SerializeField] public SphereCollider FarLeftTrigger;
 
+    [Header("-----Cards-----")]
     [SerializeField] public GameObject Card_TheWorld;
     [SerializeField] public GameObject Card_TheMagician;
     [SerializeField] public GameObject Card_Justice;
     [SerializeField] public GameObject Card_TheTower;
 
+    [Header("-----Body-----")]
     [SerializeField] public Renderer body;
     [SerializeField] public Renderer RArm;
     [SerializeField] public Renderer LArm;
@@ -47,6 +50,27 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] public CapsuleCollider LArmHitBox;
     [SerializeField] public CapsuleCollider RArmHitBox;
 
+    [Header("-----The Magician-----")]
+    [SerializeField] public GameObject aura1;
+    [SerializeField] public GameObject aura2;
+    [SerializeField] public GameObject aura3;
+    [SerializeField] public GameObject aura4;
+    [SerializeField] public GameObject aura5;
+
+    [SerializeField] public GameObject auraUnderBoss;
+
+    [SerializeField] public Transform magiShootPOS1;
+    [SerializeField] public Transform magiShootPOS2;
+    [SerializeField] public Transform magiShootPOS3;
+    [SerializeField] public Transform magiShootPOS4;
+    [SerializeField] public Transform magiShootPOS5;
+
+    [SerializeField] public GameObject magicianProjectile;
+    [SerializeField] public Vector3 currShootPOS;
+
+
+    [Header("-----Miscellaneous-----")]
+    public List<GameObject> auraList = new List<GameObject>();
     public List<GameObject> cardDeck = new List<GameObject>();
 
     public IdleState idleState = new IdleState();
@@ -63,9 +87,9 @@ public class BossSearch : MonoBehaviour, IDamage
     public int pointsToGain = 2500;
 
     public bool playerInRange = false;
+    public bool castingSpell = false;
 
     public HPValue hpValue = new HPValue();
-
 
 
     // Start is called before the first frame update
@@ -117,6 +141,8 @@ public class BossSearch : MonoBehaviour, IDamage
         RArm.material.color = Color.white;
         LArm.material.color = Color.white;
     }
+
+    
 
     // Update is called once per frame
     void Update()
