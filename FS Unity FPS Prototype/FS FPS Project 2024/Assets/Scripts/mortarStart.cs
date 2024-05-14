@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class mortarStart : MonoBehaviour
 {
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audFire;
+    [Range(0, 1)][SerializeField] float audFireVol;
+    [SerializeField] AudioClip audLand;
+    [Range(0, 1)][SerializeField] float audLandVol;
     [SerializeField] mortarShell mortar;
     [SerializeField] float damage;
-
+    Collider col;
     private bool damageTaken;
     private bool fired;
+    private bool hasPlayed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        col = GetComponent<Collider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (mortar.hasLandedFunc())
+        if (mortar.hasLandedFunc() && !hasPlayed)
         {
             StartCoroutine(stopMortar());
         }
@@ -30,6 +36,7 @@ public class mortarStart : MonoBehaviour
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(true);
             mortar.startMortar();
+            aud.PlayOneShot(audFire,audFireVol);
             fired = true;
         }
     }
@@ -55,17 +62,27 @@ public class mortarStart : MonoBehaviour
                 Debug.Log("xdd");
                 StartCoroutine(dealDamage(other));
                 damageTaken = true;
-                transform.GetChild(0).gameObject.SetActive(false);
+                //aud.PlayOneShot(audLand, audLandVol);
+                /*transform.GetChild(0).gameObject.SetActive(false);
                 transform.GetChild(1).gameObject.SetActive(false);
-                transform.gameObject.SetActive(false);
+                col.gameObject.SetActive(false);*/
+                //transform.gameObject.SetActive(false);
             }
         }
     }
     IEnumerator stopMortar()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
+        
+        
+        if (!hasPlayed)
+        {
+            aud.PlayOneShot(audLand, audLandVol);
+        }
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
-        transform.gameObject.SetActive(false);
+        col.enabled = false;
+        hasPlayed = true;
+        //transform.gameObject.SetActive(false);
     }
 }
