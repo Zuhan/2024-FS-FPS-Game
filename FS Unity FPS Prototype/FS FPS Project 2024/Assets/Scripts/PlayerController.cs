@@ -87,6 +87,10 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused)
         {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                usePotion();
+            }
             selectWeapon();
             movement();
         }
@@ -430,5 +434,16 @@ public class playerController : MonoBehaviour, IDamage
     public float getMaxHP()
     {
         return playerStats.maxHP;
+    }
+    public void usePotion()
+    {
+        if (playerStats.potions.Count > 0 && HP < getMaxHP())
+        {
+            Debug.Log("potion used");
+            playerStats.potions[0].pickup();
+            playerStats.potions.RemoveAt(0);
+            updatePlayerUI();
+            Debug.Log(playerStats.potions);
+        }
     }
 }
