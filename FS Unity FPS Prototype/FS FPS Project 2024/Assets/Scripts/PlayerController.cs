@@ -45,6 +45,8 @@ public class playerController : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audHurtVol;
     [SerializeField] AudioClip[] audSteps;
     [Range(0, 1)][SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audDrink;
+    [Range(0, 1)] [SerializeField] float audDrinkVol;
 
     [SerializeField] int rayDistance;
 
@@ -469,6 +471,7 @@ public class playerController : MonoBehaviour, IDamage
         {
             Debug.Log("potion used");
             playerStats.potions[0].pickup();
+            aud.PlayOneShot(audDrink[Random.Range(0, audDrink.Length)],audDrinkVol);
             playerStats.potions.RemoveAt(0);
             updatePlayerUI();
             Debug.Log(playerStats.potions);
