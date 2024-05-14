@@ -17,14 +17,21 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] public GameObject cheatInput;
+    [SerializeField] List<Image> weaponIcons;
 
     [Header("----- UI Stuff -----")]
     public Image playerHPBar;
+    public Image playerStaminaPool;
+    public Image slingShot;
+    public Image fireStaff;
+    public Image thunderHammer;
     public TMP_Text enemyCountText;
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
     public TMP_Text collectibleText;
+    public TMP_Text potionCount;
+    public GameObject inventory;
     //public List<GameObject> enemies;
     //public GameObject spawner;
 
@@ -73,7 +80,8 @@ public class gameManager : MonoBehaviour
     public TMP_Text waveText;
 
     public GameObject playerSpawnPos;
-
+    public bool invOpen;
+    
     //void awake so its called first 
     void Awake()
     {
@@ -151,7 +159,21 @@ public class gameManager : MonoBehaviour
         pointsCostText.text = cost.ToString("F0");
         barricadeText.SetActive(true);
     }
-
+    public void showInventory()
+    {
+        menuActive = inventory;
+        menuActive.SetActive(true);
+        potionCount.text = playerStats.potions.Count.ToString();
+        invOpen = true;
+        statePaused();
+    }
+    public void hideInventory()
+    {
+        inventory.SetActive(false);
+        invOpen = false;
+        menuActive.SetActive(false);
+        menuActive = null;
+    }
     //method for hiding interact text
     public void hideInteractText()
     {
@@ -201,7 +223,7 @@ public class gameManager : MonoBehaviour
                 menuActive = menuPause;
                 menuActive.SetActive(isPaused);
             }
-            else if (menuActive == menuPause)
+            else if (menuActive == menuPause || menuActive == inventory)
             {
                 stateUnpaused();
             }
@@ -222,6 +244,10 @@ public class gameManager : MonoBehaviour
         //}        
     }
 
+    public void ShowWeaponIcon(int weaponIndex)
+    {
+        weaponIcons[weaponIndex].enabled = true;
+    }
     //Explosion Staff Being Shelved
     //Unequipping the Explosion_Staff by pressing the 1 key added by Derek
     //public void UnequipExplosionStaff()

@@ -73,6 +73,7 @@ public class playerController : MonoBehaviour, IDamage
         hpOrig = HP;
         updatePlayerUI();
         stamina = maxStamina;
+        updateStaminaUI();
         canSprint = true;
         currentPoints = gameManager.instance.points;
         setSpeed = speed;
@@ -87,6 +88,21 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (!gameManager.instance.isPaused)
         {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                usePotion();
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                if (!gameManager.instance.invOpen)
+                {
+                    gameManager.instance.showInventory();
+                }
+                else
+                {
+                    gameManager.instance.hideInventory();
+                }
+            }
             selectWeapon();
             movement();
         }
@@ -165,6 +181,7 @@ public class playerController : MonoBehaviour, IDamage
             {
                 stamina -= runCost * Time.deltaTime;
                 if (stamina < 0) stamina = 0;
+                updateStaminaUI();
             }
             else
             {
@@ -172,6 +189,8 @@ public class playerController : MonoBehaviour, IDamage
                 {
                     if (recharge != null) StopCoroutine(recharge);
                     recharge = StartCoroutine(StaminaRegen(staminaToAdd));
+                    updateStaminaUI();
+
                 }
             }
         }
@@ -264,11 +283,17 @@ public class playerController : MonoBehaviour, IDamage
     void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / getMaxHP();
+        
+    }
+    void updateStaminaUI()
+    {
+        gameManager.instance.playerStaminaPool.fillAmount = stamina / maxStamina;
     }
 
     public void spawnPlayer()
     {
         HP = hpOrig;
+        stamina = maxStamina;
         updatePlayerUI();
 
         controller.enabled = false;
@@ -295,6 +320,11 @@ public class playerController : MonoBehaviour, IDamage
         castDist = weapon.castDist;
         castRate = weapon.castRate;
         saveStats();
+    }
+
+    public void AddedSpeed(float AddedSpeed)
+    {
+        speed += AddedSpeed;
     }
 
     void selectWeapon()
@@ -430,5 +460,16 @@ public class playerController : MonoBehaviour, IDamage
     public float getMaxHP()
     {
         return playerStats.maxHP;
+    }
+    public void usePotion()
+    {
+        if (playerStats.potions.Count > 0 && HP < getMaxHP())
+        {
+            Debug.Log("potion used");
+            playerStats.potions[0].pickup();
+            playerStats.potions.RemoveAt(0);
+            updatePlayerUI();
+            Debug.Log(playerStats.potions);
+        }
     }
 }

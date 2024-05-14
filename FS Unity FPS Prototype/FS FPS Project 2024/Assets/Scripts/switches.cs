@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class switches : MonoBehaviour, IfInteract
 {
+    [SerializeField] GameObject menu;
+    [SerializeField] switchDoor switchDoor;
     private bool switchedOn;
     // Start is called before the first frame update
     void Start()
@@ -38,7 +41,8 @@ public class switches : MonoBehaviour, IfInteract
     }
     IEnumerator switchOn()
     {
-        //do something here
+        menu.SetActive(false);
+        switchDoor.UpdateSwitch();
         yield return new WaitForSeconds(1f);
     }
 }

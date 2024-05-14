@@ -7,6 +7,7 @@ public class weaponPickup : MonoBehaviour
     //THIS IS MY WEAPON, THERE IS ONLY ONE LIKE IT!!!!!!!!!!
 
     [SerializeField] weaponStats weapon;
+    [SerializeField] int weaponNumber;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class weaponPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gameManager.instance.playerScript.getWeaponStats(weapon);
+            gameManager.instance.ShowWeaponIcon(weaponNumber);
             Destroy(gameObject);
         }
     }

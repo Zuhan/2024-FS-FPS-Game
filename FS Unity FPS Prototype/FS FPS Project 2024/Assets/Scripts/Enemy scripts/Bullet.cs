@@ -52,4 +52,14 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void AddDamage(float addedDamage)
+    {
+        damage += addedDamage;
+    }
+
+    public void RemoveDamage(float addedDamage)
+    {
+        damage -= addedDamage;
+    }
+
 }
