@@ -26,6 +26,8 @@ public class gameManager : MonoBehaviour
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
     public TMP_Text collectibleText;
+    public TMP_Text potionCount;
+    public GameObject inventory;
     //public List<GameObject> enemies;
     //public GameObject spawner;
 
@@ -74,6 +76,7 @@ public class gameManager : MonoBehaviour
     public TMP_Text waveText;
 
     public GameObject playerSpawnPos;
+    public bool invOpen;
 
     //void awake so its called first 
     void Awake()
@@ -152,7 +155,21 @@ public class gameManager : MonoBehaviour
         pointsCostText.text = cost.ToString("F0");
         barricadeText.SetActive(true);
     }
-
+    public void showInventory()
+    {
+        menuActive = inventory;
+        menuActive.SetActive(true);
+        potionCount.text = playerStats.potions.Count.ToString();
+        invOpen = true;
+        statePaused();
+    }
+    public void hideInventory()
+    {
+        inventory.SetActive(false);
+        invOpen = false;
+        menuActive.SetActive(false);
+        menuActive = null;
+    }
     //method for hiding interact text
     public void hideInteractText()
     {
@@ -202,7 +219,7 @@ public class gameManager : MonoBehaviour
                 menuActive = menuPause;
                 menuActive.SetActive(isPaused);
             }
-            else if (menuActive == menuPause)
+            else if (menuActive == menuPause || menuActive == inventory)
             {
                 stateUnpaused();
             }
