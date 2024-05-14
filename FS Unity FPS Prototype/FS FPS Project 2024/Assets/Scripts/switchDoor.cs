@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class switchDoor : MonoBehaviour, IfInteract
@@ -8,10 +9,15 @@ public class switchDoor : MonoBehaviour, IfInteract
     [SerializeField] Renderer model;
     private bool allSwitched;
     private int switchCount;
+    public TMP_Text numSwitched;
+    public TMP_Text switchText;
+    private int numSwitchedOn;
     // Start is called before the first frame update
     void Start()
     {
         switchCount = 0;
+        numSwitched.text = switchCount.ToString();
+        switchText.text = switches.Length.ToString();
     }
 
     // Update is called once per frame
@@ -51,5 +57,10 @@ public class switchDoor : MonoBehaviour, IfInteract
         model.material.color = Color.green;
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
+    }
+    public void UpdateSwitch()
+    {
+        numSwitchedOn++;
+        numSwitched.text = numSwitchedOn.ToString();
     }
 }
