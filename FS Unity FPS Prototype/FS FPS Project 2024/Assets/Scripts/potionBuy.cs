@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class potionBuy : MonoBehaviour, IfInteract
 {
+    [SerializeField] AudioSource aud;
+
     [SerializeField] hpPotion potion;
     [SerializeField] int cost;
     [SerializeField] GameObject menuText;
     [SerializeField] GameObject menuText2;
     public TMP_Text costText;
     [SerializeField] GameObject failText;
+
+    [SerializeField] AudioClip audBuy;
+    [Range(0, 1)][SerializeField] float audBuyVol;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +33,7 @@ public class potionBuy : MonoBehaviour, IfInteract
         {
             playerStats.potions.Add(potion);
             gameManager.instance.pointsChange(-cost);
+            playSound();
             //play audio or something
         }
         else
@@ -44,5 +50,9 @@ public class potionBuy : MonoBehaviour, IfInteract
         failText.SetActive(false);
         menuText.SetActive(true);
         menuText2.SetActive(true);
+    }
+    private void playSound()
+    {
+        aud.PlayOneShot(audBuy, audBuyVol);
     }
 }
