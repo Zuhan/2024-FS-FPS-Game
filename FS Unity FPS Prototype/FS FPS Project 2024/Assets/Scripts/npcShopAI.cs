@@ -9,7 +9,12 @@ public class npcShopAI : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] Transform headPos;
 
+    [SerializeField] AudioSource aud;
+
     [SerializeField] int animSpeedTrans;
+
+    [SerializeField] AudioClip[] voiceOver;
+    [Range(0, 1)][SerializeField] float audVoiceVol;
 
     bool playerInRange;
 
@@ -30,6 +35,7 @@ public class npcShopAI : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            aud.PlayOneShot(voiceOver[Random.Range(0, voiceOver.Length)], audVoiceVol);
         }
     }
 }
