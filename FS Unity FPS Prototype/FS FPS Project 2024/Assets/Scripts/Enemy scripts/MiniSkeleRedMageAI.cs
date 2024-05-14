@@ -18,6 +18,7 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Transform HeadPos;
+    [SerializeField] GameObject Shield;
     [Header("----stats----")]
     [SerializeField] float shootRate;
     [SerializeField] float HP;
@@ -26,8 +27,12 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     [SerializeField] int animSpeedTrans;
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
+    [SerializeField] float ShieldCooldown;
 
 
+    bool ShieldOn;
+    bool ShieldOnCoolDown;
+    float DamageAbsorb;
     float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
@@ -86,6 +91,11 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
             {
                 if (!isShooting)
                     StartCoroutine(Shoot());
+
+                if(ShieldOn == false && ShieldOnCoolDown == false)
+                {
+                    StartCoroutine(shieldSelf());
+                }
             }
         }
     }
@@ -116,6 +126,16 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     // Take Damage AI added by Matt
     public void TakeDamage(float damage)
     {
+
+        if(ShieldOn == true)
+        {
+            Shield.SetActive(false);
+            DamageAbsorb += damage;
+            damage = 0;
+            ShieldOn = false;
+        }
+
+
         HP -= damage;
         StartCoroutine(FlashRed());
         //set destination when damaged
@@ -147,16 +167,29 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
-       
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
-    public void createBullet()
+
+
+    IEnumerator shieldSelf()
     {
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        ShieldOnCoolDown = true;
+        Shield.SetActive(true);
+        ShieldOn = true;
+        yield return new WaitForSeconds(ShieldCooldown);
+        ShieldOnCoolDown = false;
     }
 
+
+    public void createBullet()
+    {
+        bullet.GetComponent<Bullet>().AddDamage(DamageAbsorb);
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        bullet.GetComponent<Bullet>().RemoveDamage(DamageAbsorb);
+        DamageAbsorb = 0;
+    }
 
 
     // public void WeaponColOn()
