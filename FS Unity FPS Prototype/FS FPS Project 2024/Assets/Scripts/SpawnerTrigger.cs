@@ -113,4 +113,8 @@ public class SpawnerTrigger : MonoBehaviour
             return num;
         }
     }
+    public void resetSpawner()
+    {
+        spawnCount = 0;
+    }
 }
