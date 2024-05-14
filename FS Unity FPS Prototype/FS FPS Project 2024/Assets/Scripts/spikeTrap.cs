@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class spikeTrap : MonoBehaviour
 {
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audSpike;
+    [Range(0, 1)][SerializeField] float audSpikeVol;
+    [SerializeField] AudioClip audSpikeDown;
+    [Range(0, 1)][SerializeField] float audSpikeDownVol;
     [SerializeField] float delay;
     [SerializeField] GameObject spikes;
     private Vector3 move;
@@ -52,12 +57,14 @@ public class spikeTrap : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         spikes.transform.Translate(move);
+        aud.PlayOneShot(audSpike,audSpikeVol);
         raised = true;
     }
     IEnumerator lowerSpikes()
     {
         yield return new WaitForSeconds(delay);
         spikes.transform.Translate(moveDown);
+        aud.PlayOneShot(audSpikeDown, audSpikeDownVol);
         raised = false;
     }
 }

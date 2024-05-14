@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class geyser : MonoBehaviour
 {
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audGeyser;
+    [Range(0, 1)][SerializeField] float audGeyserVol;
     [SerializeField] float speed;
     private Vector3 move;
     // Start is called before the first frame update
@@ -21,6 +24,7 @@ public class geyser : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            aud.PlayOneShot(audGeyser,audGeyserVol);
             gameManager.instance.playerScript.addVelocityY(speed);
         }
     }

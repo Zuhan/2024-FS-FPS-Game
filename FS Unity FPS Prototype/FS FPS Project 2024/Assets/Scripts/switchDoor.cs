@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class switchDoor : MonoBehaviour, IfInteract
 {
+    [SerializeField] AudioSource aud;
     [SerializeField] switches[] switches;
     [SerializeField] Renderer model;
     private bool allSwitched;
@@ -12,6 +13,8 @@ public class switchDoor : MonoBehaviour, IfInteract
     public TMP_Text numSwitched;
     public TMP_Text switchText;
     private int numSwitchedOn;
+    [SerializeField] AudioClip audDoor;
+    [Range(0, 1)][SerializeField] float audDoorVol;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +58,7 @@ public class switchDoor : MonoBehaviour, IfInteract
     IEnumerator openDoor()
     {
         model.material.color = Color.green;
+        aud.PlayOneShot(audDoor,audDoorVol);
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
     }
