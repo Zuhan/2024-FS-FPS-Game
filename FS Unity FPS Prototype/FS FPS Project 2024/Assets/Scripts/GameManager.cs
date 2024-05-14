@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
 
     [Header("----- UI Stuff -----")]
     public Image playerHPBar;
+    public Image playerStaminaPool;
     public TMP_Text enemyCountText;
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;

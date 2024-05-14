@@ -268,6 +268,7 @@ public class playerController : MonoBehaviour, IDamage
     void updatePlayerUI()
     {
         gameManager.instance.playerHPBar.fillAmount = (float)HP / getMaxHP();
+        gameManager.instance.playerStaminaPool.fillAmount = stamina / maxStamina;
     }
 
     public void spawnPlayer()
