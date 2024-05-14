@@ -41,6 +41,7 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] public GameObject Card_Justice;
     [SerializeField] public GameObject Card_TheTower;
 
+    [Header("-----Justice-----")]
     [Header("-----Body-----")]
     [SerializeField] public Renderer body;
     [SerializeField] public Renderer RArm;
@@ -49,6 +50,9 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] public CapsuleCollider bodyHitBox;
     [SerializeField] public CapsuleCollider LArmHitBox;
     [SerializeField] public CapsuleCollider RArmHitBox;
+
+    [SerializeField] public GameObject justiceObj;
+    [SerializeField] public SpawnerTrigger justiceTrigger;
 
     [Header("-----The Magician-----")]
     [SerializeField] public GameObject aura1;
@@ -65,6 +69,9 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] public Transform magiShootPOS4;
     [SerializeField] public Transform magiShootPOS5;
 
+    
+
+    [SerializeField] public Rigidbody rb;
     [SerializeField] public GameObject magicianProjectile;
     [SerializeField] public Vector3 currShootPOS;
 

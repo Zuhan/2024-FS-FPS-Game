@@ -22,11 +22,11 @@ public class AttackState : IBossState
 
     public IBossState DoState(BossSearch boss)
     {
-        while (sayThisOnce == 0)
-        {
-            Debug.Log("Melore has entered attack state");
-            sayThisOnce++;
-        }
+        //while (sayThisOnce == 0)
+        //{
+        //    Debug.Log("Melore has entered attack state");
+        //    sayThisOnce++;
+        //}
 
         if (boss.agent == null)
         {
@@ -36,11 +36,11 @@ public class AttackState : IBossState
         switch (boss.hpValue)
         {
             case BossSearch.HPValue.highHP:
-                while (sayThisOnceAgain == 0)
-                {
-                    Debug.Log("Melore is above 25% HP");
-                    sayThisOnceAgain++;
-                }
+                //while (sayThisOnceAgain == 0)
+                //{
+                //    Debug.Log("Melore is above 25% HP");
+                //    sayThisOnceAgain++;
+                //}
                 if(!isPullingCard)
                     CardPull(boss);
                 break;
@@ -74,10 +74,14 @@ public class AttackState : IBossState
         
         if (!secondPhaseActive)
         {
-
-            //boss.cardDeck.Add(boss.Card_TheWorld);
-            boss.cardDeck.Add(boss.Card_TheMagician);
-            //boss.cardDeck.Add(boss.Card_Justice);
+            boss.cardDeck.Clear();
+            for (int i = 0; i < 10; i++)
+            {
+                boss.cardDeck.Add(boss.Card_TheWorld);
+                boss.cardDeck.Add(boss.Card_TheMagician); 
+            }
+            boss.cardDeck.Add(boss.Card_Justice);
+            boss.cardDeck.Add(boss.Card_Justice);
 
             int randCard = Random.Range(0, boss.cardDeck.Count);
 
@@ -288,6 +292,10 @@ public class AttackState : IBossState
         boss.RArmHitBox.enabled = false;
         boss.bodyHitBox.enabled = false;
 
+        boss.justiceObj.SetActive(true);
+        boss.justiceTrigger.resetSpawner();
+        yield return new WaitForSeconds(1f);
+        boss.justiceObj.SetActive(false);
 
         float HPtoHeal = boss.maxHP * .02f;
 
@@ -391,6 +399,8 @@ public class AttackState : IBossState
         {
             yield return new WaitForSeconds(2.9f);
         }
+
+        
 
         boss.LArmHitBox.enabled = true;
         boss.RArmHitBox.enabled = true;
