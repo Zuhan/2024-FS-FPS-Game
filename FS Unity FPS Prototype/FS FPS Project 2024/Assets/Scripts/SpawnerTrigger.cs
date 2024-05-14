@@ -77,7 +77,7 @@ public class SpawnerTrigger : MonoBehaviour
             return num;
         }
         //spawn case 4: beholder
-        else if (enemy < 79)
+        else if (enemy <= 79)
         {
             num = 3;
             if (num >= enemiesToSpawn.Length)
