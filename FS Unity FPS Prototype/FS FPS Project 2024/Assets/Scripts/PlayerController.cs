@@ -446,10 +446,12 @@ public class playerController : MonoBehaviour, IDamage
         if (HP + amount > getMaxHP())
         {
             HP = getMaxHP();
+            playerStats.hp = HP;
         }
         else
         {
             HP+= amount;
+            playerStats.hp = HP;
         }
         updatePlayerUI();
     }
