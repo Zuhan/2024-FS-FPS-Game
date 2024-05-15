@@ -140,7 +140,7 @@ public class BossSearch : MonoBehaviour, IDamage
             Destroy(gameObject);
 
             //PointsManager.Instance.AddPoints(pointsToGain);
-
+            //win-condition
             gameManager.instance.win();
         }
 
