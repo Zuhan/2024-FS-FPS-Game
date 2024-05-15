@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
 {
     public TMP_Dropdown graphicsDropdown;
     public Slider masterVol, musicVol, sfxVol;
+    public AudioMixer mainMixer;
     // Start is called before the first frame update
     public void PlayGame()
     {
@@ -23,5 +24,17 @@ public class MainMenu : MonoBehaviour
     public void SetQualityLevel()
     {
         QualitySettings.SetQualityLevel(graphicsDropdown.value);
+    }
+    public void ChangeMasterVolume()
+    {
+        mainMixer.SetFloat("Master Volume", masterVol.value);
+    }
+    public void ChangeMusicVolume()
+    {
+        mainMixer.SetFloat("Music Volume", musicVol.value);
+    }
+    public void ChangeSFXVolume()
+    {
+        mainMixer.SetFloat("SFX Volume", sfxVol.value);
     }
 }
