@@ -11,6 +11,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] float damage;
     [SerializeField] float speed;
     [SerializeField] float destroyTime;
+    [SerializeField] float homingSpeed;
+    [SerializeField] float HomingStrength;
+    [SerializeField] float DistanceTillHoming;
+
+    bool HomingActive;
     bool hitHappend;
     float distanceToPlayery;
    
@@ -32,6 +37,19 @@ public class Bullet : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
+
+        if (distanceToPlayer <=  DistanceTillHoming && HomingActive == false)
+        {
+            StartCoroutine(Homing());
+        }
+
+
+    }
+
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -50,6 +68,18 @@ public class Bullet : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+
+    IEnumerator Homing()
+    {
+        HomingActive = true;
+        float distanceToPlayerx = gameManager.instance.player.transform.position.x - transform.position.x;
+        float distanceToPlayery = gameManager.instance.player.transform.position.y + 1 - transform.position.y;
+        float distanceToPlayerz = gameManager.instance.player.transform.position.z - transform.position.z;
+        rb.velocity = new Vector3(rb.velocity.x + (distanceToPlayerx * HomingStrength), rb.velocity.y + (distanceToPlayery * HomingStrength), rb.velocity.z + (distanceToPlayerz * HomingStrength));
+        yield return new WaitForSeconds(homingSpeed);
+        HomingActive = false;
     }
 
     public void AddDamage(float addedDamage)
