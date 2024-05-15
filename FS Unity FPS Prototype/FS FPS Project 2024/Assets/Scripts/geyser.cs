@@ -8,11 +8,10 @@ public class geyser : MonoBehaviour
     [SerializeField] AudioClip audGeyser;
     [Range(0, 1)][SerializeField] float audGeyserVol;
     [SerializeField] float speed;
-    private Vector3 move;
     // Start is called before the first frame update
     void Start()
     {
-        move = new Vector3(0.0f, speed, 0.0f);
+        
     }
 
     // Update is called once per frame
@@ -24,8 +23,8 @@ public class geyser : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            aud.PlayOneShot(audGeyser,audGeyserVol);
             gameManager.instance.playerScript.addVelocityY(speed);
+            aud.PlayOneShot(audGeyser,audGeyserVol);      
         }
     }
 }

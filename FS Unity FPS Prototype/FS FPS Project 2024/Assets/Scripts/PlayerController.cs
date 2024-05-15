@@ -455,7 +455,7 @@ public class playerController : MonoBehaviour, IDamage
     }
     public void addVelocityY(float amount)
     {
-        playerVelocity.y += amount;
+        playerVelocity.y = amount;
     }
     public float getMaxHP()
     {
