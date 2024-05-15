@@ -9,6 +9,7 @@ public class explosionStaff : MonoBehaviour
     public GameObject explosionMagicPrefab;
     [SerializeField] Transform shootPos;
     [SerializeField] private float fireCooldown = 0.5f;
+    [SerializeField] GameObject crystal;
     private float lastFireTime;
 
     void Start()
@@ -55,9 +56,11 @@ public class explosionStaff : MonoBehaviour
     public void EnableExplosionStaff()
     {
         enabled = true;
+        crystal.SetActive(true );
     }
     public void DisableExplosionStaff()
     {
         enabled = false;
+        crystal.SetActive(false );
     }
 }
