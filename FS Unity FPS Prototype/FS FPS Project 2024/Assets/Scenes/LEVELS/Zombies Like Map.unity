@@ -1215,7 +1215,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 35110f34a4c1a654b977560fe8660eef, type: 2}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: pointCost
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: emptyGameObject
@@ -5126,7 +5126,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 35110f34a4c1a654b977560fe8660eef, type: 2}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: pointCost
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: emptyGameObject
@@ -7180,7 +7180,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 35110f34a4c1a654b977560fe8660eef, type: 2}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: pointCost
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: emptyGameObject
@@ -8525,7 +8525,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 35110f34a4c1a654b977560fe8660eef, type: 2}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: pointCost
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: emptyGameObject
@@ -16140,7 +16140,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 35110f34a4c1a654b977560fe8660eef, type: 2}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: pointCost
-      value: 250
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6004431560813114378, guid: 47ff03359939e594ea940e5e82e87aab, type: 3}
       propertyPath: emptyGameObject
@@ -44552,7 +44552,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7760079666929860961, guid: fe8a83163c038934382fe8ee8d4c9057, type: 3}
       propertyPath: pointsToGain
-      value: 200
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46355,6 +46355,10 @@ PrefabInstance:
     - target: {fileID: 5469668122058419247, guid: fe8a83163c038934382fe8ee8d4c9057, type: 3}
       propertyPath: m_Name
       value: Pickup 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760079666929860961, guid: fe8a83163c038934382fe8ee8d4c9057, type: 3}
+      propertyPath: pointsToGain
+      value: 400
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
