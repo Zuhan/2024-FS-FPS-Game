@@ -12,6 +12,11 @@ public class MainMenu : MonoBehaviour
     public Slider masterVol, musicVol, sfxVol;
     public AudioMixer mainMixer;
     // Start is called before the first frame update
+    public void Start()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
     public void PlayGame()
     {
         SceneManager.LoadSceneAsync(1);

@@ -296,7 +296,7 @@ public class playerController : MonoBehaviour, IDamage
 
     public void spawnPlayer()
     {
-        HP = hpOrig;
+        HP = getMaxHP();
         stamina = maxStamina;
         updatePlayerUI();
 
