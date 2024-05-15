@@ -45,7 +45,7 @@ public class AttackState : IBossState
                     CardPull(boss);
                 break;
             case BossSearch.HPValue.quarterOrBelow:
-                secondPhaseActive = true;
+                //secondPhaseActive = true;
                 Debug.Log("Melore is below 25% HP");
                 if (!isPullingCard)
                     AttackPatternTwo();
