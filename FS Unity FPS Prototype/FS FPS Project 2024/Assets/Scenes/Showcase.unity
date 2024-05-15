@@ -970,7 +970,7 @@ PrefabInstance:
     - target: {fileID: 508483914289564043, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: explosionStaff
       value: 
-      objectReference: {fileID: 7065172199522734390, guid: aead21e83ea18344a9d73673eaffab80, type: 3}
+      objectReference: {fileID: 8219875143610945166}
     - target: {fileID: 1498508535447480768, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1095,7 +1095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4728003198672892395, guid: 9275891f841423048a37df704230fd27, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2702,7 +2702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1328288833284191780, guid: 2f4fa13382d91b84ab6ca1f2876e3e2e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7721604880862162306, guid: 2f4fa13382d91b84ab6ca1f2876e3e2e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5104,7 +5104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3504159764801147048, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4007083634452241109, guid: db87b57aa3ba5784f8018ef5b1b20b43, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8074,6 +8074,7 @@ MonoBehaviour:
   explosionMagicPrefab: {fileID: 7958346828356480755, guid: 058ad907804d6624fb7c2c8d4481c9ea, type: 3}
   shootPos: {fileID: 2479080241319192343}
   fireCooldown: 0.5
+  crystal: {fileID: 7662026795068302122}
 --- !u!114 &6969522243567206416
 MonoBehaviour:
   m_ObjectHideFlags: 0
