@@ -23,6 +23,7 @@ public class playerController : MonoBehaviour, IDamage
     [SerializeField] GameObject fireStaff;
     [SerializeField] GameObject Slingshot;
     [SerializeField] GameObject ThunderHammer;
+    [SerializeField] GameObject explosionStaff;
     [SerializeField] int castDamage;
     [SerializeField] float castRate;
     [SerializeField] int castDist;
@@ -82,6 +83,7 @@ public class playerController : MonoBehaviour, IDamage
         weaponSlots.Add("Fire Staff", fireStaff);
         weaponSlots.Add("Slingshot", Slingshot);
         weaponSlots.Add("Thunder Hammer", ThunderHammer);
+        weaponSlots.Add("Explosion_Staff", explosionStaff);
         loadStats();
     }
 
@@ -367,6 +369,18 @@ public class playerController : MonoBehaviour, IDamage
                 }
             }
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            for (int i = 0; i < weapons.Count; i++)
+            {
+                if (weapons[i].name == "Explosion_Staff")
+                {
+                    selectedWeapon = i;
+                    changeWeapon();
+                    return;
+                }
+            }
+        }
     }
 
     void changeWeapon()
@@ -413,6 +427,15 @@ public class playerController : MonoBehaviour, IDamage
                 else
                 {
                     ThunderHammer.GetComponent<thunderHammer>().DisableThunderHammer();
+                }
+
+                if (weaponName == "Explosion_Staff")
+                {
+                    explosionStaff.GetComponent<explosionStaff>().EnableExplosionStaff();
+                }
+                else
+                {
+                    explosionStaff.GetComponent<explosionStaff>().DisableExplosionStaff();
                 }
             }
             else

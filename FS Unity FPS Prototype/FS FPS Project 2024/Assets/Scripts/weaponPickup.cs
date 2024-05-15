@@ -20,7 +20,7 @@ public class weaponPickup : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             gameManager.instance.playerScript.getWeaponStats(weapon);
-            gameManager.instance.ShowWeaponIcon(weaponNumber);
+            //gameManager.instance.ShowWeaponIcon(weaponNumber);
             Destroy(gameObject);
         }
     }
