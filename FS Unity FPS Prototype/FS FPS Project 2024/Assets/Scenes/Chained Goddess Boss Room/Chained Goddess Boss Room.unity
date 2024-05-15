@@ -752,7 +752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.7051675
+      value: 1.5559422
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
       propertyPath: m_LocalScale.z
@@ -764,7 +764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0500001
+      value: -1.03
       objectReference: {fileID: 0}
     - target: {fileID: 3280519133390621042, guid: a71be3e7990efb040a07565c43cbb198, type: 3}
       propertyPath: m_LocalPosition.z
@@ -871,6 +871,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 198858562690846188, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 199218836714256136, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -923,6 +927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 808522048}
+  - component: {fileID: 808522049}
   m_Layer: 0
   m_Name: shootPOS4
   m_TagString: Untagged
@@ -945,6 +950,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 956021184}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &808522049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808522047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffeeffe5dc48c754ca303bcc634e14b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &956021183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,6 +1896,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 8032268299403237424, guid: 28020e8fde3d1fd4a872c1af03fcdaa0, type: 3}
+    - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: aura1
       value: 
       objectReference: {fileID: 1169824556}
@@ -1903,6 +1924,14 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 6091307505351321095, guid: 28020e8fde3d1fd4a872c1af03fcdaa0, type: 3}
+    - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
+      propertyPath: projDmg
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: justiceObj
       value: 
       objectReference: {fileID: 1228092401}
@@ -1913,27 +1942,31 @@ PrefabInstance:
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: magiShootPOS1
       value: 
-      objectReference: {fileID: 1364178740}
+      objectReference: {fileID: 1364178739}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: magiShootPOS2
       value: 
-      objectReference: {fileID: 1107444128}
+      objectReference: {fileID: 1107444127}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: magiShootPOS3
       value: 
-      objectReference: {fileID: 1855359994}
+      objectReference: {fileID: 1855359993}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: magiShootPOS4
       value: 
-      objectReference: {fileID: 808522048}
+      objectReference: {fileID: 808522047}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: magiShootPOS5
       value: 
-      objectReference: {fileID: 1135181171}
+      objectReference: {fileID: 1135181170}
     - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: justiceTrigger
       value: 
       objectReference: {fileID: 1228092405}
+    - target: {fileID: 2667324067429557016, guid: c888a3d681459dd499aec3597027c179, type: 3}
+      propertyPath: magicianProjectile
+      value: 
+      objectReference: {fileID: 6091307505351321095, guid: 28020e8fde3d1fd4a872c1af03fcdaa0, type: 3}
     - target: {fileID: 6164444662030399719, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: m_Name
       value: Melore, The Demon Queen
@@ -1941,6 +1974,10 @@ PrefabInstance:
     - target: {fileID: 6164444662030399719, guid: c888a3d681459dd499aec3597027c179, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676367470036635223, guid: c888a3d681459dd499aec3597027c179, type: 3}
+      propertyPath: m_AgentTypeID
+      value: 1479372276
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

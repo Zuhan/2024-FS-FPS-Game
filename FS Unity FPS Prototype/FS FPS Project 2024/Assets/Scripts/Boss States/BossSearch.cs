@@ -63,21 +63,26 @@ public class BossSearch : MonoBehaviour, IDamage
 
     [SerializeField] public GameObject auraUnderBoss;
 
-    [SerializeField] public Transform magiShootPOS1;
-    [SerializeField] public Transform magiShootPOS2;
-    [SerializeField] public Transform magiShootPOS3;
-    [SerializeField] public Transform magiShootPOS4;
-    [SerializeField] public Transform magiShootPOS5;
+    [SerializeField] public GameObject magiShootPOS1;
+    [SerializeField] public GameObject magiShootPOS2;
+    [SerializeField] public GameObject magiShootPOS3;
+    [SerializeField] public GameObject magiShootPOS4;
+    [SerializeField] public GameObject magiShootPOS5;
 
-    
+    [SerializeField] public GameObject bullet;
+    [SerializeField] public float projDmg;
+
 
     [SerializeField] public Rigidbody rb;
     [SerializeField] public GameObject magicianProjectile;
-    [SerializeField] public Vector3 currShootPOS;
+    
+    [SerializeField] public GameObject shootPos;
+    public Vector3 playerDir;
 
 
     [Header("-----Miscellaneous-----")]
     public List<GameObject> auraList = new List<GameObject>();
+    public List<GameObject> shootPosList = new List<GameObject>();
     public List<GameObject> cardDeck = new List<GameObject>();
 
     public IdleState idleState = new IdleState();
@@ -118,6 +123,11 @@ public class BossSearch : MonoBehaviour, IDamage
             }
             playerTarget = other.gameObject;
         }
+    }
+
+    public void InstantiateBullet(Vector3 pos)
+    {
+        Instantiate(magicianProjectile, pos, transform.rotation);
     }
 
     public void TakeDamage(float damage)

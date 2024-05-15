@@ -71,17 +71,20 @@ public class AttackState : IBossState
     {
         isPullingCard = true;
         Debug.Log("Melore is pulling a card.");
-        
+
         if (!secondPhaseActive)
         {
             boss.cardDeck.Clear();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 12; i++)
             {
                 boss.cardDeck.Add(boss.Card_TheWorld);
-                boss.cardDeck.Add(boss.Card_TheMagician); 
+                boss.cardDeck.Add(boss.Card_TheMagician);
             }
-            boss.cardDeck.Add(boss.Card_Justice);
-            boss.cardDeck.Add(boss.Card_Justice);
+            for (int i = 0; i < 8; i++)
+            {
+                boss.cardDeck.Add(boss.Card_Justice);
+            }
+
 
             int randCard = Random.Range(0, boss.cardDeck.Count);
 
@@ -120,11 +123,16 @@ public class AttackState : IBossState
         else
         {
             boss.cardDeck.Clear();
+            for (int i = 0; i < 20; i++)
+            {
+                boss.cardDeck.Add(boss.Card_TheWorld);
+                boss.cardDeck.Add(boss.Card_TheMagician);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                boss.cardDeck.Add(boss.Card_Justice);
+            }
 
-            boss.cardDeck.Add(boss.Card_TheWorld);
-            boss.cardDeck.Add(boss.Card_TheMagician);
-            boss.cardDeck.Add(boss.Card_Justice);
-            boss.cardDeck.Add(boss.Card_TheTower);
 
             int randCard = Random.Range(0, boss.cardDeck.Count);
 
@@ -136,25 +144,62 @@ public class AttackState : IBossState
                 if (cardSelected == boss.Card_TheWorld)
                 {
                     Debug.Log("Selected The World");
+                    Shuffle(boss);
                     TheWorld(boss);
+
                 }
                 else if (cardSelected == boss.Card_TheMagician)
                 {
                     Debug.Log("Selected The Magician");
-                }
-                else if (cardSelected == boss.Card_Justice)
-                {
-                    Debug.Log("Selected Justice");
+                    TheMagician(boss);
+
                 }
                 else
                 {
-                    Debug.Log("Selected The Tower");
+                    Debug.Log("Selected Justice");
+                    Justice(boss);
                 }
+                //clear deck
+                boss.cardDeck.Clear();
             }
-
-            cardSelected.SetActive(false);
-            boss.cardDeck.Clear();
         }
+        //{
+        //    boss.cardDeck.Clear();
+
+        //    boss.cardDeck.Add(boss.Card_TheWorld);
+        //    boss.cardDeck.Add(boss.Card_TheMagician);
+        //    boss.cardDeck.Add(boss.Card_Justice);
+        //    boss.cardDeck.Add(boss.Card_TheTower);
+
+        //    int randCard = Random.Range(0, boss.cardDeck.Count);
+
+        //    GameObject cardSelected = boss.cardDeck[randCard];
+        //    cardSelected.SetActive(true);
+
+        //    if (cardSelected != null)
+        //    {
+        //        if (cardSelected == boss.Card_TheWorld)
+        //        {
+        //            Debug.Log("Selected The World");
+        //            TheWorld(boss);
+        //        }
+        //        else if (cardSelected == boss.Card_TheMagician)
+        //        {
+        //            Debug.Log("Selected The Magician");
+        //        }
+        //        else if (cardSelected == boss.Card_Justice)
+        //        {
+        //            Debug.Log("Selected Justice");
+        //        }
+        //        else
+        //        {
+        //            Debug.Log("Selected The Tower");
+        //        }
+        //    }
+
+        //    cardSelected.SetActive(false);
+        //    boss.cardDeck.Clear();
+        //}
     }
 
     private void TheWorld(BossSearch boss)
@@ -258,31 +303,68 @@ public class AttackState : IBossState
         Debug.Log("Melore is executing: The Magician");
 
         boss.auraUnderBoss.SetActive(true);
-        
 
+        boss.auraList.Clear();
         boss.auraList.Add(boss.aura1);
         boss.auraList.Add(boss.aura2);
         boss.auraList.Add(boss.aura3);
         boss.auraList.Add(boss.aura4);
         boss.auraList.Add(boss.aura5);
 
+        boss.shootPosList.Clear();
+        boss.shootPosList.Add(boss.magiShootPOS1);
+        boss.shootPosList.Add(boss.magiShootPOS2);
+        boss.shootPosList.Add(boss.magiShootPOS3);
+        boss.shootPosList.Add(boss.magiShootPOS4);
+        boss.shootPosList.Add(boss.magiShootPOS5);
+
         for (int i = 0; i < boss.auraList.Count; i++)
         {
             boss.auraList[i].SetActive(true);
             yield return new WaitForSeconds(1);
         }
+        for (int i = 0; i < boss.auraList.Count; i++)
+        {
+            boss.shootPos = boss.shootPosList[i];
+            FaceTarget(boss, boss.shootPosList[i]);
+            boss.InstantiateBullet(boss.shootPos.transform.position);
+            yield return new WaitForSeconds(1);
+        }
+        for (int i = 0; i < boss.auraList.Count; i++)
+        {
+            boss.auraList[i].SetActive(false);
+            yield return new WaitForSeconds(0.2f);
+        }
 
-        
-
-        yield return new WaitForSeconds(3);
-
-        
+        yield return new WaitForSeconds(2);
 
         boss.auraUnderBoss.SetActive(false);
         isPullingCard = false;
     }
 
-    
+    bool canSeePlayer(BossSearch boss, GameObject shootPos)
+    {
+        boss.playerDir = gameManager.instance.player.transform.position - shootPos.transform.position;
+
+        RaycastHit hit;
+
+        if(Physics.Raycast(shootPos.transform.position, boss.playerDir, out hit))
+        {
+            if(hit.collider.CompareTag("Player"))
+            {
+                FaceTarget(boss, shootPos);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    void FaceTarget(BossSearch boss, GameObject shootPos)
+    {
+        
+        Quaternion rot = Quaternion.LookRotation(new Vector3(boss.playerDir.x, shootPos.transform.position.y, boss.playerDir.x));
+        shootPos.transform.rotation = Quaternion.Lerp(shootPos.transform.rotation, rot, Time.deltaTime);
+    }
 
     IEnumerator ExecuteJustice(BossSearch boss)
     {
@@ -431,5 +513,7 @@ public class AttackState : IBossState
 
         yield return new WaitForSeconds(2);
     }
+
+
 
 }
