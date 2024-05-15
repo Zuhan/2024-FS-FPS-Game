@@ -9,6 +9,7 @@ public class cheatCodeManager : MonoBehaviour
     [SerializeField] private GameObject slingshot;
     [SerializeField] private GameObject fireStaff;
     [SerializeField] private GameObject thunderHammer;
+    [SerializeField] private GameObject explosionStaff;
 
     public static cheatCodeManager instance;
 
@@ -96,6 +97,9 @@ public class cheatCodeManager : MonoBehaviour
                     break;
                 case "thunderhammer":
                     itemPrefab = thunderHammer;
+                    break;
+                case "explosionstaff":
+                    itemPrefab = explosionStaff;
                     break;
                 default:
                     Debug.LogWarning("Item not found!");
