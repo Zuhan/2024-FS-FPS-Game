@@ -161,7 +161,7 @@ public class playerController : MonoBehaviour, IDamage
 
     void Sprint()
     {
-        canSprint = stamina > 0;
+        canSprint = stamina >= 0;
 
         if (canSprint)
         {
@@ -179,6 +179,10 @@ public class playerController : MonoBehaviour, IDamage
             {
                 stamina -= runCost * Time.deltaTime;
                 if (stamina < 0) stamina = 0;
+                if(stamina <= 0)
+                {
+                    isSprinting=false;
+                }
                 updateStaminaUI();
             }
             else
