@@ -37,4 +37,8 @@ public class MainMenu : MonoBehaviour
     {
         mainMixer.SetFloat("SFX Volume", sfxVol.value);
     }
+    public void PlayDemo()
+    {
+        SceneManager.LoadSceneAsync(12);
+    }
 }
