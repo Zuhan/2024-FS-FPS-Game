@@ -85,6 +85,7 @@ public class playerController : MonoBehaviour, IDamage
         weaponSlots.Add("Thunder Hammer", ThunderHammer);
         weaponSlots.Add("Explosion_Staff", explosionStaff);
         loadStats();
+        gameObject.transform.parent = null;
     }
 
     // Update is called once per frame
@@ -304,6 +305,7 @@ public class playerController : MonoBehaviour, IDamage
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
+        gameObject.transform.parent = null;
     }
 
     public void getWeaponStats(weaponStats weapon)
