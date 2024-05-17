@@ -15,6 +15,8 @@ public class spikeTrap : MonoBehaviour
     private Vector3 moveDown;
     bool raised;
     bool inSpikes;
+    bool raiseQueued;
+    bool lowerQueued;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class spikeTrap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(raised && !inSpikes)
+        if(raised && !inSpikes && !lowerQueued)
         {
             raised = false;
             StartCoroutine(lowerSpikes());
@@ -36,7 +38,7 @@ public class spikeTrap : MonoBehaviour
         
         if (other.gameObject.CompareTag("Player"))
         {
-            if (!raised)
+            if (!raised && !raiseQueued && !lowerQueued)
             {
                 StartCoroutine(raiseSpikes());
             }
@@ -55,16 +57,20 @@ public class spikeTrap : MonoBehaviour
     }
     IEnumerator raiseSpikes()
     {
+        raiseQueued = true;
         yield return new WaitForSeconds(delay);
         spikes.transform.Translate(move);
         aud.PlayOneShot(audSpike,audSpikeVol);
         raised = true;
+        raiseQueued = false;
     }
     IEnumerator lowerSpikes()
     {
-        yield return new WaitForSeconds(delay);
+        lowerQueued = true;
+        yield return new WaitForSeconds(2f);
         spikes.transform.Translate(moveDown);
         aud.PlayOneShot(audSpikeDown, audSpikeDownVol);
         raised = false;
+        lowerQueued = false;
     }
 }
