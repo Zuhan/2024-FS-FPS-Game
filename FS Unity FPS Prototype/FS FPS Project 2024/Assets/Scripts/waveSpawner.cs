@@ -10,8 +10,6 @@ public class waveSpawner : MonoBehaviour
     [SerializeField] int numToSpawn;
     [SerializeField] int spawnTimer;
     [SerializeField] Transform[] spawnPos;
-    
-    private int enemyIncrement = 0;
 
     int spawnCount;
     bool isSpawning;
