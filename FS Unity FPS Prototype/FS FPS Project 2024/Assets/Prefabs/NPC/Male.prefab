@@ -2927,10 +2927,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4802702920362097454}
-  - component: {fileID: 4713650938117021813}
   - component: {fileID: 1653134275357681062}
+  - component: {fileID: 4713650938117021813}
   - component: {fileID: 8307715336736152641}
-  - component: {fileID: 4301214512343147402}
+  - component: {fileID: -1295768592476308140}
   - component: {fileID: 5836539228279965757}
   - component: {fileID: 526734161351559470}
   - component: {fileID: -3075253621129139474}
@@ -2960,32 +2960,6 @@ Transform:
   - {fileID: 7703016259868124444}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -178.6, z: 0}
---- !u!114 &4713650938117021813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8070748883795860609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67a98db3fd3b84d46a3d9388c8386817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 8307715336736152641}
-  model: {fileID: 4301214512343147402}
-  anim: {fileID: 1653134275357681062}
-  headPos: {fileID: 5559787303141607188}
-  aud: {fileID: -3075253621129139474}
-  faceTargetSpeed: 6
-  viewCone: 90
-  roamDist: 15
-  roamPauseTimer: 3
-  idleTimer: 2
-  animSpeedTrans: 4
-  voiceOver:
-  - {fileID: 8300000, guid: c7f844afbdc5a26409a2b4cf88e5fc4f, type: 3}
-  audVoiceVol: 0.9
 --- !u!95 &1653134275357681062
 Animator:
   serializedVersion: 5
@@ -2999,7 +2973,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 799ee97766475d44190951c6086ee45e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -3007,6 +2981,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4713650938117021813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8070748883795860609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a98db3fd3b84d46a3d9388c8386817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 8307715336736152641}
+  model: {fileID: -1295768592476308140}
+  anim: {fileID: 1653134275357681062}
+  headPos: {fileID: 5559787303141607188}
+  aud: {fileID: -3075253621129139474}
+  faceTargetSpeed: 6
+  viewCone: 90
+  roamDist: 15
+  roamPauseTimer: 3
+  animSpeedTrans: 4
+  voiceOver:
+  - {fileID: 8300000, guid: c7f844afbdc5a26409a2b4cf88e5fc4f, type: 3}
+  audVoiceVol: 0.9
 --- !u!195 &8307715336736152641
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3018,19 +3017,19 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 32
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 600
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!23 &4301214512343147402
-MeshRenderer:
+--- !u!137 &-1295768592476308140
+SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3044,7 +3043,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
+  m_RayTracingMode: 3
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
@@ -3070,7 +3069,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 0
 --- !u!136 &5836539228279965757
 CapsuleCollider:
   m_ObjectHideFlags: 0
