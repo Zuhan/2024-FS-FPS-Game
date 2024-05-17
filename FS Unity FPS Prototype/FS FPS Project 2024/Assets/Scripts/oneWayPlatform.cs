@@ -8,6 +8,11 @@ public class oneWayPlatform : MonoBehaviour
     [SerializeField] GameObject endPoint;
     [SerializeField] float speed;
     bool isMoving;
+    private Vector3 position;
+    public void Start()
+    {
+        position = transform.position;
+    }
     void FixedUpdate()
     {
         if (isMoving)
@@ -31,5 +36,10 @@ public class oneWayPlatform : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         other.transform.SetParent(null);
+    }
+    public void resetPosition()
+    {
+        transform.position = position;
+        isMoving = false;
     }
 }
