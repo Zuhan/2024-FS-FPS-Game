@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class fire : MonoBehaviour
 {
+    [Header("-----Fire Attributes-----")]
     [SerializeField] int damagePerTick;
     [SerializeField] float tickInterval;
     [SerializeField] float duration;
 
     [SerializeField] Rigidbody rb;
 
-    private float timer = 0f;
     private Transform targetEnemy;
     private Vector3 initialOffset;
 
@@ -31,7 +31,6 @@ public class fire : MonoBehaviour
     public void SetTargetEnemy(Transform enemyTransform)
     {
         targetEnemy = enemyTransform;
-        // Get the closest point on the enemy collider's surface to the fire's current position
         Collider enemyCollider = targetEnemy.GetComponent<Collider>();
         if (enemyCollider != null)
         {
