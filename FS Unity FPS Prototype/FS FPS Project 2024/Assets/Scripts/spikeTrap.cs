@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class spikeTrap : MonoBehaviour
 {
+    [Header("---Audio---")]
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audSpike;
     [Range(0, 1)][SerializeField] float audSpikeVol;
     [SerializeField] AudioClip audSpikeDown;
     [Range(0, 1)][SerializeField] float audSpikeDownVol;
+    [Header("---Necessary Fields---")]
     [SerializeField] float delay;
     [SerializeField] GameObject spikes;
     private Vector3 move;
