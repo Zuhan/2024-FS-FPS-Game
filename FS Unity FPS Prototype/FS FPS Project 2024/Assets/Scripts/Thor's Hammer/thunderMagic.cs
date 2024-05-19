@@ -19,7 +19,6 @@ public class thunderMagic : MonoBehaviour, IDamage
 
     private Quaternion initialRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,7 +52,6 @@ public class thunderMagic : MonoBehaviour, IDamage
             if (dmg != null)
             {
                 dmg.TakeDamage(baseDmg);
-                //Debug.Log("Dealt " + baseDmg + " to " + enemyHit.name);
             }
         }
 

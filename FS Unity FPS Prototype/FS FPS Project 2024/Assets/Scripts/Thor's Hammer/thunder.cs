@@ -53,20 +53,18 @@ public class thunder : MonoBehaviour
     void ChainNearbyEnemy(Vector3 center, float range)
     {
         Collider[] hits = Physics.OverlapSphere(center, range);
-        //Debug.Log("Entered chainEnemy function");
 
         foreach(var hit in hits)
         {
             if (hit.gameObject.CompareTag("Enemy") && currJumps < maxJumps)
             {
-                //Debug.Log("Enemy in range: " + hit.name);
                 if (!hasHit)
                 {
                     IDamage dmg = hit.GetComponent<IDamage>();
                     if (dmg != null)
                     {
                         Instantiate(chainLightningPrefab, hit.bounds.center, Quaternion.identity);
-                        //Debug.Log("Dealt damage to " + hit.gameObject.name);
+
                         hasHit = true;
                         currJumps++;
                         dmg.TakeDamage(baseDmg);

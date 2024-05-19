@@ -96,15 +96,12 @@ public class BossSearch : MonoBehaviour, IDamage
     public float HP;
     public float maxHP;
 
-    public int pointsToGain = 2500;
-
     public bool playerInRange = false;
     public bool castingSpell = false;
 
     public HPValue hpValue = new HPValue();
 
 
-    // Start is called before the first frame update
     void OnEnable()
     {
         HP = maxHP;
@@ -139,8 +136,6 @@ public class BossSearch : MonoBehaviour, IDamage
         {
             Destroy(gameObject);
 
-            //PointsManager.Instance.AddPoints(pointsToGain);
-            //win-condition
             gameManager.instance.win();
         }
 
@@ -159,9 +154,6 @@ public class BossSearch : MonoBehaviour, IDamage
         LArm.material.color = Color.white;
     }
 
-    
-
-    // Update is called once per frame
     void Update()
     {
         currentState = currentState.DoState(this);

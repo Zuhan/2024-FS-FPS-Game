@@ -6,28 +6,13 @@ using UnityEngine.AI;
 
 public class AttackState : IBossState
 {
-    int sayThisOnce = 0;
-    int sayThisOnceAgain = 0;
-
     private bool isPullingCard = false;
     private bool secondPhaseActive = false;
 
     private int worldCastTime = 3;
-    //private int magicianCastTime = 2;
-    private int justiceCastTime;
-    private int towerCastTime;
-
-    
-    private float flightSpeed = 1.5f;
 
     public IBossState DoState(BossSearch boss)
     {
-        //while (sayThisOnce == 0)
-        //{
-        //    Debug.Log("Melore has entered attack state");
-        //    sayThisOnce++;
-        //}
-
         if (boss.agent == null)
         {
             boss.agent = boss.GetComponent<NavMeshAgent>();
@@ -36,12 +21,7 @@ public class AttackState : IBossState
         switch (boss.hpValue)
         {
             case BossSearch.HPValue.highHP:
-                //while (sayThisOnceAgain == 0)
-                //{
-                //    Debug.Log("Melore is above 25% HP");
-                //    sayThisOnceAgain++;
-                //}
-                if(!isPullingCard)
+                if (!isPullingCard)
                     CardPull(boss);
                 break;
             case BossSearch.HPValue.quarterOrBelow:
@@ -61,11 +41,6 @@ public class AttackState : IBossState
             return boss.attackState;
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void CardPull(BossSearch boss)
     {
@@ -84,7 +59,6 @@ public class AttackState : IBossState
             {
                 boss.cardDeck.Add(boss.Card_Justice);
             }
-
 
             int randCard = Random.Range(0, boss.cardDeck.Count);
 
@@ -114,10 +88,6 @@ public class AttackState : IBossState
                 //clear deck
                 boss.cardDeck.Clear();
             }
-            //foreach(var card in boss.cardDeck)
-            //{
-            //    Debug.Log(card.name);
-            //}
             cardSelected.SetActive(false);
         }
         else
@@ -159,59 +129,21 @@ public class AttackState : IBossState
                     Debug.Log("Selected Justice");
                     Justice(boss);
                 }
-                //clear deck
                 boss.cardDeck.Clear();
             }
         }
-        //{
-        //    boss.cardDeck.Clear();
-
-        //    boss.cardDeck.Add(boss.Card_TheWorld);
-        //    boss.cardDeck.Add(boss.Card_TheMagician);
-        //    boss.cardDeck.Add(boss.Card_Justice);
-        //    boss.cardDeck.Add(boss.Card_TheTower);
-
-        //    int randCard = Random.Range(0, boss.cardDeck.Count);
-
-        //    GameObject cardSelected = boss.cardDeck[randCard];
-        //    cardSelected.SetActive(true);
-
-        //    if (cardSelected != null)
-        //    {
-        //        if (cardSelected == boss.Card_TheWorld)
-        //        {
-        //            Debug.Log("Selected The World");
-        //            TheWorld(boss);
-        //        }
-        //        else if (cardSelected == boss.Card_TheMagician)
-        //        {
-        //            Debug.Log("Selected The Magician");
-        //        }
-        //        else if (cardSelected == boss.Card_Justice)
-        //        {
-        //            Debug.Log("Selected Justice");
-        //        }
-        //        else
-        //        {
-        //            Debug.Log("Selected The Tower");
-        //        }
-        //    }
-
-        //    cardSelected.SetActive(false);
-        //    boss.cardDeck.Clear();
-        //}
     }
 
     private void TheWorld(BossSearch boss)
     {
         boss.StartCoroutine(ExecuteTheWorld(boss));
     }
-    
+
     private void TheMagician(BossSearch boss)
     {
         boss.StartCoroutine(ExecuteTheMagician(boss));
     }
-    
+
     private void Justice(BossSearch boss)
     {
         boss.StartCoroutine(ExecuteJustice(boss));
@@ -229,13 +161,6 @@ public class AttackState : IBossState
 
     IEnumerator ExecuteTheWorld(BossSearch boss)
     {
-        Debug.Log("Melore is executing: The World");
-        
-        //boss.ExplosionUIOne.SetActive(true);
-        //boss.ExplosionUITwo.SetActive(true);
-        //boss.ExplosionUIThree.SetActive(true);
-        //boss.ExplosionUIFour.SetActive(true);
-        //boss.ExplosionUIFive.SetActive(true);
 
         boss.BossCenterPOS.SetActive(true);
         boss.BossRightPOS.SetActive(true);
@@ -263,7 +188,7 @@ public class AttackState : IBossState
         boss.ExplosionBossRight.SetActive(true);
         boss.ExplosionBossLeft.SetActive(true);
         boss.ExplosionFarRight.SetActive(true);
-        boss.ExplosionFarLeft.SetActive(true);        
+        boss.ExplosionFarLeft.SetActive(true);
 
         yield return new WaitForSeconds(1);
 
@@ -300,7 +225,6 @@ public class AttackState : IBossState
 
     IEnumerator ExecuteTheMagician(BossSearch boss)
     {
-        Debug.Log("Melore is executing: The Magician");
 
         boss.auraUnderBoss.SetActive(true);
 
@@ -348,9 +272,9 @@ public class AttackState : IBossState
 
         RaycastHit hit;
 
-        if(Physics.Raycast(shootPos.transform.position, boss.playerDir, out hit))
+        if (Physics.Raycast(shootPos.transform.position, boss.playerDir, out hit))
         {
-            if(hit.collider.CompareTag("Player"))
+            if (hit.collider.CompareTag("Player"))
             {
                 FaceTarget(boss, shootPos);
             }
@@ -361,7 +285,7 @@ public class AttackState : IBossState
 
     void FaceTarget(BossSearch boss, GameObject shootPos)
     {
-        
+
         Quaternion rot = Quaternion.LookRotation(new Vector3(boss.playerDir.x, shootPos.transform.position.y, boss.playerDir.x));
         shootPos.transform.rotation = Quaternion.Lerp(shootPos.transform.rotation, rot, Time.deltaTime);
     }
@@ -381,108 +305,29 @@ public class AttackState : IBossState
 
         float HPtoHeal = boss.maxHP * .02f;
 
-        if(boss.HP + HPtoHeal <= boss.maxHP) 
+        if (boss.HP + HPtoHeal <= boss.maxHP)
         {
-            boss.HP += HPtoHeal;
+            for (int i = 0; i < 5; i++)
+            {
+                boss.HP += HPtoHeal;
 
-            boss.body.material.color = Color.green;
-            boss.LArm.material.color = Color.green;
-            boss.RArm.material.color = Color.green;
+                boss.body.material.color = Color.green;
+                boss.LArm.material.color = Color.green;
+                boss.RArm.material.color = Color.green;
 
-            yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.1f);
 
-            boss.body.material.color = Color.white;
-            boss.LArm.material.color = Color.white;
-            boss.RArm.material.color = Color.white;
+                boss.body.material.color = Color.white;
+                boss.LArm.material.color = Color.white;
+                boss.RArm.material.color = Color.white;
 
-            yield return new WaitForSeconds(2.9f);
+                yield return new WaitForSeconds(2.9f); 
+            }
         }
         else
         {
             yield return new WaitForSeconds(2.9f);
         }
-        if(boss.HP + HPtoHeal <= boss.maxHP) 
-        {
-            boss.HP += HPtoHeal;
-
-            boss.body.material.color = Color.green;
-            boss.LArm.material.color = Color.green;
-            boss.RArm.material.color = Color.green;
-
-            yield return new WaitForSeconds(0.1f);
-
-            boss.body.material.color = Color.white;
-            boss.LArm.material.color = Color.white;
-            boss.RArm.material.color = Color.white;
-
-            yield return new WaitForSeconds(2.9f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2.9f);
-        }
-        if (boss.HP + HPtoHeal <= boss.maxHP) 
-        {
-            boss.HP += HPtoHeal;
-
-            boss.body.material.color = Color.green;
-            boss.LArm.material.color = Color.green;
-            boss.RArm.material.color = Color.green;
-
-            yield return new WaitForSeconds(0.1f);
-
-            boss.body.material.color = Color.white;
-            boss.LArm.material.color = Color.white;
-            boss.RArm.material.color = Color.white;
-
-            yield return new WaitForSeconds(2.9f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2.9f);
-        }
-        if (boss.HP + HPtoHeal <= boss.maxHP) 
-        {
-            boss.HP += HPtoHeal;
-
-            boss.body.material.color = Color.green;
-            boss.LArm.material.color = Color.green;
-            boss.RArm.material.color = Color.green;
-
-            yield return new WaitForSeconds(0.1f);
-
-            boss.body.material.color = Color.white;
-            boss.LArm.material.color = Color.white;
-            boss.RArm.material.color = Color.white;
-
-            yield return new WaitForSeconds(2.9f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2.9f);
-        }
-        if (boss.HP + HPtoHeal <= boss.maxHP) 
-        {
-            boss.HP += HPtoHeal;
-
-            boss.body.material.color = Color.green;
-            boss.LArm.material.color = Color.green;
-            boss.RArm.material.color = Color.green;
-
-            yield return new WaitForSeconds(0.1f);
-
-            boss.body.material.color = Color.white;
-            boss.LArm.material.color = Color.white;
-            boss.RArm.material.color = Color.white;
-
-            yield return new WaitForSeconds(2.9f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2.9f);
-        }
-
-        
 
         boss.LArmHitBox.enabled = true;
         boss.RArmHitBox.enabled = true;
@@ -490,8 +335,6 @@ public class AttackState : IBossState
 
         isPullingCard = false;
     }
-
-
 
     IEnumerator CycleCards(BossSearch boss)
     {
@@ -506,14 +349,11 @@ public class AttackState : IBossState
 
             boss.cardDeck[randCard].SetActive(true);
             yield return new WaitForSeconds(.75f);
-            boss.cardDeck[randCard].SetActive(false); 
+            boss.cardDeck[randCard].SetActive(false);
         }
 
         boss.cardDeck.Clear();
 
         yield return new WaitForSeconds(2);
     }
-
-
-
 }
