@@ -42,13 +42,11 @@ public class cheatCodeManager : MonoBehaviour
 
     void DropItemCheat(string itemName)
     {
-        Debug.Log("Item Drop Code Called");
         DropItem(itemName);
     }
 
     void ActivatePointsOPlenty()
     {
-        Debug.Log("CheatsOPlenty Activated");
         if (!cheatActivated)
         {
             gameManager.points += 1000;
@@ -60,7 +58,6 @@ public class cheatCodeManager : MonoBehaviour
 
     void ToggleGodMode()
     {
-        Debug.Log("God Mode Activated");
         if (!cheatActivated)
         {
             playerController playerCtrl = player.GetComponent<playerController>();
@@ -71,7 +68,6 @@ public class cheatCodeManager : MonoBehaviour
 
     void ToggleNoClipMode()
     {
-        Debug.Log("No Clip Activated");
         if (!cheatActivated)
         {
             playerController playerCtrl = player.GetComponent<playerController>();
@@ -83,10 +79,8 @@ public class cheatCodeManager : MonoBehaviour
     void DropItem(string itemName)
     {if (!cheatActivated)
         {
-            Debug.Log("Dropping item: " + itemName);
             Vector3 dropPosition = player.transform.position + player.transform.forward * 4;
             GameObject itemPrefab = null;
-
             switch (itemName.ToLower())
             {
                 case "slingshot":
@@ -137,14 +131,12 @@ public class cheatCodeManager : MonoBehaviour
         currentInput = input.ToLower();
         CheckCheatCode();
         inputField.gameObject.SetActive(false);
-        Debug.Log("Input: " + currentInput);
     }
 
     void CheckCheatCode()
     {
         string[] inputParts = currentInput.Trim().Split(' ');
         string cheatCode = inputParts[0];
-
         foreach (cheatCode cheat in cheatCodes)
         {
             if (cheat != null && cheatCode == cheat.code)
@@ -173,12 +165,10 @@ public class cheatCodeManager : MonoBehaviour
                         Debug.LogWarning("Cheat code does not require an argument!");
                     }
                 }
-
                 inputField.text = "";
                 return;
             }
         }
-
         Debug.LogWarning("Cheat code not found!");
         inputField.text = "";
     }

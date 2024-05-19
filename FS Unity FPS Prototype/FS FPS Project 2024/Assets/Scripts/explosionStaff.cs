@@ -34,15 +34,10 @@ public class explosionStaff : MonoBehaviour
     void CastExplosionMagic()
     {
         Vector3 firingDirection = Camera.main.transform.forward;
-
         GameObject explosionMagic = Instantiate(explosionMagicPrefab, shootPos.position, Quaternion.identity);
-
         Quaternion initialRotation = Quaternion.LookRotation(firingDirection);
-
         explosionMagic.transform.rotation = initialRotation;
-
         explosionMagic.transform.parent = null;
-
         explosionMagic.GetComponent<explosionMagic>().SetInitialRotation(initialRotation);
     }
 
@@ -63,5 +58,4 @@ public class explosionStaff : MonoBehaviour
         enabled = false;
         crystal.SetActive(false );
     }
-    //
 }

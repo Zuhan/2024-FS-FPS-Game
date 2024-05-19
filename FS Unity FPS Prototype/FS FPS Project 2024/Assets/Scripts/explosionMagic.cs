@@ -18,13 +18,10 @@ public class explosionMagic : MonoBehaviour
 
     private Quaternion initialRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();
-
         rb.velocity = transform.forward * projectileSpeed;
-
         StartCoroutine(DestroyAfterTime());
     }
     public void SetInitialRotation(Quaternion rotation)
@@ -37,25 +34,19 @@ public class explosionMagic : MonoBehaviour
     {
         if (hasHit)
             return;
-
         GameObject hitObject = collision.gameObject;
-
         IDamage dmg = hitObject.GetComponent<IDamage>();
         if (dmg != null)
         {
             float distance = Vector3.Distance(transform.position, collision.collider.transform.position);
             float falloff = 1f - Mathf.Clamp01(distance / damageRadius);
             int finalDamage = Mathf.RoundToInt(damage * falloff);
-
             dmg.TakeDamage(damage);
         }
 
         Instantiate(explosion, collision.contacts[0].point, Quaternion.identity);
-
         transform.parent = null;
-
         hasHit = true;
-
         Destroy(gameObject);
     }
     private IEnumerator DestroyAfterTime()
@@ -64,4 +55,3 @@ public class explosionMagic : MonoBehaviour
         Destroy(gameObject);
     }
 }
-//

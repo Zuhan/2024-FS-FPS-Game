@@ -13,4 +13,3 @@ public class weaponStats : ScriptableObject
     public int castDist;
     public int cooldown;
 }
-//

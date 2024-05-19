@@ -31,19 +31,16 @@ public class npcAI : MonoBehaviour
     bool hasPlayedVoiceLine;
     Coroutine roamCoroutine;
 
-    // Start is called before the first frame update
     void Start()
     {
         startingPos = transform.position;
         stoppingDistOr = agent.stoppingDistance;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float animSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
-
         if (playerInRange && !canSeePlayer())
         {
             StartCoroutine(roam());
@@ -61,14 +58,11 @@ public class npcAI : MonoBehaviour
             destinationChosen = true;
             agent.stoppingDistance = 0;
             yield return new WaitForSeconds(roamPauseTimer);
-
             Vector3 randomPos = Random.insideUnitSphere * roamDist;
             randomPos += startingPos;
-
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
             agent.SetDestination(hit.position);
-
             destinationChosen = false;
         }
     }
@@ -78,16 +72,13 @@ public class npcAI : MonoBehaviour
         playerDir = gameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, playerDir.y + 1, playerDir.z), transform.forward);
         Debug.DrawRay(headPos.position, playerDir);
-
         RaycastHit hit;
-
         if (Physics.Raycast(headPos.position, playerDir, out hit))
         {
             if (hit.collider.CompareTag("Player") && angleToPlayer <= viewCone)
             {
                 agent.stoppingDistance = stoppingDistOr;
                 agent.SetDestination(gameManager.instance.player.transform.position);
-
                 if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     faceTarget();
@@ -122,9 +113,7 @@ public class npcAI : MonoBehaviour
         {
             Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
-
             aud.PlayOneShot(voiceOver[Random.Range(0, voiceOver.Length)], audVoiceVol);
-
             hasPlayedVoiceLine = true;
         }
     }

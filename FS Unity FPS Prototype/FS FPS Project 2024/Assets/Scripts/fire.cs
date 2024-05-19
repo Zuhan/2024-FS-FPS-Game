@@ -10,7 +10,6 @@ public class fire : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
 
-    //private float timer = 0f;
     private Transform targetEnemy;
     private Vector3 initialOffset;
 
@@ -45,13 +44,10 @@ public class fire : MonoBehaviour
     private IEnumerator DamageOverTime()
     {
         yield return new WaitForSeconds(0.5f);
-
         float timer = 0f;
-
         while (timer < duration)
         {
             ApplyDamageOverTime();
-
             yield return new WaitForSeconds(tickInterval);
             timer += tickInterval;
         }
