@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class disappearingPlatform : MonoBehaviour
 {
-    [Header("-----Time Settings-----")]
+    [Header("---Audio---")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audClip;
+    [Range(0f, 1f)][SerializeField] float audVol;
+
+    [Header("---Time Settings---")]
     [SerializeField] float timeToDisappear;
     [SerializeField] float timeToReappear;
 
-    [Header("-----Things that need to be disabled and reenabled-----")]
+    [Header("---Things that need to be disabled and reenabled---")]
     [SerializeField] MeshRenderer render;
     [SerializeField] BoxCollider objectCollider;
     [SerializeField] BoxCollider trigger;
@@ -16,6 +22,7 @@ public class disappearingPlatform : MonoBehaviour
     [SerializeField] Material mat;
 
     private Color color;
+    private bool isPlaying;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +57,11 @@ public class disappearingPlatform : MonoBehaviour
             c.a = c.a - 0.001f;
             mat.color = c;
             yield return null;
+            if(!isPlaying && dur - t <= 1)
+            {
+                UnityEngine.Debug.Log("xdd");
+                StartCoroutine(playSound());
+            }
         }
         render.enabled = false;
         objectCollider.enabled = false;
@@ -65,10 +77,21 @@ public class disappearingPlatform : MonoBehaviour
             c.a = c.a + 0.001f;
             mat.color = c;
             yield return null;
+            if (!isPlaying && dur - t <= 1)
+            {
+                UnityEngine.Debug.Log("ddx");
+                StartCoroutine(playSound());
+            }
         }
-        
         objectCollider.enabled = true;
         trigger.enabled = true;
         mat.color = color;
+    }
+    IEnumerator playSound()
+    {
+        isPlaying = true;
+        aud.PlayOneShot(audClip,audVol);
+        yield return new WaitForSeconds(1.2f);
+        isPlaying = false;
     }
 }
