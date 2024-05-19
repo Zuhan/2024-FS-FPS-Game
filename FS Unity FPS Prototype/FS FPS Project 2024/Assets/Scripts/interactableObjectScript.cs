@@ -26,17 +26,9 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     {
         emptyGameObjectCollider = emptyGameObject.GetComponent<Collider>();
     }
-    public void Update()
-    {
-        if (!isInTrigger)
-        {
-            gameManager.instance.hideInteractText();
-            gameManager.instance.hideInteractFail();
-        }
-    }
     public void interact()
     {
-        Debug.Log("Interacting with the door");
+        /*Debug.Log("Interacting with the door");
         if (emptyGameObjectCollider != null)
         {
             emptyGameObjectCollider.enabled = true;
@@ -49,7 +41,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
             {
                 Debug.LogWarning("No scene to load specified.");
             }
-        }
+        }*/
 
         int amount = gameManager.instance.points;
         if (amount < pointCost && !isFailing)
@@ -58,8 +50,27 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         }
         else if(amount >= pointCost && !isInteracting)
         {
-            StartCoroutine(objInteract());
-            gameManager.instance.pointsChange(-pointCost);
+            Debug.Log("Interacting with the door");
+            if (emptyGameObjectCollider != null)
+            {
+                emptyGameObjectCollider.enabled = true;
+                if (!string.IsNullOrEmpty(sceneToLoad))
+                {
+                    Debug.Log("Loading Scene");
+                    gameManager.instance.pointsChange(-pointCost);
+                    StartCoroutine(objInteract());
+                    emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
+                }
+                else
+                {
+                    Debug.LogWarning("No scene to load specified.");
+                }
+            }
+            else
+            {
+                StartCoroutine(objInteract());
+                gameManager.instance.pointsChange(-pointCost);
+            }
         }
     }
     public int getCost()
@@ -86,6 +97,11 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         gameManager.instance.hideInteractFail();
         gameManager.instance.showInteractText(pointCost);
         isFailing = false;
+        if (!isInTrigger)
+        {
+            gameManager.instance.hideInteractText();
+            gameManager.instance.hideInteractFail();
+        }
     }
     public void OnTriggerEnter(Collider other)
     {
