@@ -20,10 +20,19 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     private Collider emptyGameObjectCollider;
     private bool isInteracting;
     private bool isFailing;
+    private bool isInTrigger;
     // Start is called before the first frame update
     void Start()
     {
         emptyGameObjectCollider = emptyGameObject.GetComponent<Collider>();
+    }
+    public void Update()
+    {
+        if (!isInTrigger)
+        {
+            gameManager.instance.hideInteractText();
+            gameManager.instance.hideInteractFail();
+        }
     }
     public void interact()
     {
@@ -82,6 +91,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            isInTrigger=true;
             gameManager.instance.showInteractText(pointCost);
         }
     }
@@ -89,6 +99,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            isInTrigger=false;
             gameManager.instance.hideInteractText();
         }
     }
