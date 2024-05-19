@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class key : MonoBehaviour, IPickup
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("---Audio---")]
+    /*[SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audPickup;
+    [Range(0, 1)][SerializeField] float audPickupVol;*/
+    [Header("---Bool for determining if key is for one scene or multiple scenes---")]
+    [SerializeField] bool isSingleScene;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //pickup inherit from interface
+    //handles single and multiple scene use cases
     public void pickup()
     {
-        playerStats.keys.Add(gameObject);
-
-        //something something display UI menu saying you picked it up
-
-        gameObject.SetActive(false);
+        if (isSingleScene)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            playerStats.keys.Add(gameObject);
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1673,7 +1673,6 @@ MonoBehaviour:
   viewCone: 90
   roamDist: 15
   roamPauseTimer: 3
-  idleTimer: 2
   animSpeedTrans: 4
   voiceOver: []
   audVoiceVol: 0
@@ -1690,7 +1689,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 799ee97766475d44190951c6086ee45e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1709,7 +1708,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 32
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 600
   m_StoppingDistance: 3

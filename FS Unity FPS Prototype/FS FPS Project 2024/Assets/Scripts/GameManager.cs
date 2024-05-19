@@ -87,7 +87,7 @@ public class gameManager : MonoBehaviour
         points = playerStats.money;
         pointsText.text = points.ToString("F0");
         slingUI = playerStats.slingUI;
-        Debug.Log(playerStats.slingUI);
+        //Debug.Log(playerStats.slingUI);
         fireUI = playerStats.fireUI;
         thUI = playerStats.thUI;
         if (slingUI)

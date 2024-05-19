@@ -567,6 +567,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1206950174302657758, guid: 1ae52dc744e137346bf3d363c20272bc, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2049031617417064260, guid: 1ae52dc744e137346bf3d363c20272bc, type: 3}
       propertyPath: destination
       value: 
@@ -681,6 +685,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 515228050224253813, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821890103601762983, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6888008216250841363, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
@@ -1715,6 +1723,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4821890103601762983, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6888008216250841363, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
       propertyPath: switchDoor
       value: 
@@ -1787,6 +1799,10 @@ PrefabInstance:
     - target: {fileID: 3683313696808981178, guid: 8a26464eec1457741950a1709b962625, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4108485448234225800, guid: 8a26464eec1457741950a1709b962625, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5989656569266656096, guid: 8a26464eec1457741950a1709b962625, type: 3}
       propertyPath: m_Name
@@ -1950,6 +1966,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4821890103601762983, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6888008216250841363, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
       propertyPath: switchDoor
       value: 
@@ -1967,6 +1987,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6608281789694512890, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784144563047013923, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
+      propertyPath: delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772474014833556403, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.012582
@@ -2570,6 +2598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6401853467044482538, guid: da3a93794801cbb4caaf7251bf390d70, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1978297228596368001, guid: da3a93794801cbb4caaf7251bf390d70, type: 3}
       propertyPath: switches.Array.size
       value: 4
@@ -2687,6 +2719,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4108485448234225800, guid: 8a26464eec1457741950a1709b962625, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5989656569266656096, guid: 8a26464eec1457741950a1709b962625, type: 3}
       propertyPath: m_Name
       value: geyser
@@ -2761,6 +2797,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1206950174302657758, guid: 1ae52dc744e137346bf3d363c20272bc, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2049031617417064260, guid: 1ae52dc744e137346bf3d363c20272bc, type: 3}
       propertyPath: destination
       value: 
@@ -2923,6 +2963,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4821890103601762983, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6888008216250841363, guid: 0f3693e8c9ec6794abf4d29a37f6f683, type: 3}
       propertyPath: switchDoor
       value: 
@@ -3005,6 +3049,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6608281789694512890, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 784144563047013923, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
+      propertyPath: delay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4772474014833556403, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.662956
@@ -3179,6 +3231,10 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 670eebd4e69b5bd4db5e09d47da35472, type: 3}
+    - target: {fileID: 7947545697797947717, guid: d2cd8645865d3e64c92ec09152c00855, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7947545697797947717, guid: d2cd8645865d3e64c92ec09152c00855, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 

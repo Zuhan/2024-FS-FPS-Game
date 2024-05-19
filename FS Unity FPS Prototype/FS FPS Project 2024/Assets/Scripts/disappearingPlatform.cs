@@ -32,35 +32,17 @@ public class disappearingPlatform : MonoBehaviour
         if (!isActive)
         {
             isActive = true;
-            StartCoroutine(reappear2(timeToReappear));
+            StartCoroutine(reappear(timeToReappear));
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(disappear2(timeToDisappear));
+            StartCoroutine(disappear(timeToDisappear));
         }
     }
-    IEnumerator disappear()
-    {
-        Debug.Log("disappear called");
-        yield return new WaitForSeconds(timeToDisappear);
-        render.enabled = false;
-        objectCollider.enabled = false;
-        trigger.enabled = false;
-        isActive = false;
-    }
-    IEnumerator reappear()
-    {
-        Debug.Log("reappear called");
-        yield return new WaitForSeconds(timeToReappear);
-        render.enabled = true;
-        objectCollider.enabled = true;
-        trigger.enabled = true;
-        mat.color = color;
-    }
-    IEnumerator disappear2(float dur)
+    IEnumerator disappear(float dur)
     {
         for (float t = 0f; t < dur; t += Time.deltaTime)
         {
@@ -74,7 +56,7 @@ public class disappearingPlatform : MonoBehaviour
         trigger.enabled = false;
         isActive = false;
     }
-    IEnumerator reappear2(float dur)
+    IEnumerator reappear(float dur)
     {
         render.enabled = true;
         for (float t = 0f; t < dur; t += Time.deltaTime)
