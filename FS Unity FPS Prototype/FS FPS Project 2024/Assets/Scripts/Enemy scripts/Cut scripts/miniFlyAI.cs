@@ -104,7 +104,7 @@ public class miniflyAI : MonoBehaviour, IDamage
             
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
-            PointsManager.Instance.AddPoints(pointsToGain);
+            
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");

@@ -10,7 +10,7 @@ public class fire : MonoBehaviour
 
     [SerializeField] Rigidbody rb;
 
-    private float timer = 0f;
+    //private float timer = 0f;
     private Transform targetEnemy;
     private Vector3 initialOffset;
 

@@ -120,18 +120,7 @@ public class gameManager : MonoBehaviour
         menuActive.SetActive(isPaused);
         menuActive = null;
     }
-    //method for adding and removing enemy count and determining if you win
-    public void updateGameGoal(int count)
-    {
-        /*enemyCount += count;
-        enemyCountText.text = enemyCount.ToString("F0");
-        if (enemyCount <= 0 && waveManager.instance.waveCurrent >= waveManager.instance.spawners.Length)
-        {
-            statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(isPaused);
-        }*/
-    }
+
 
     public void win()
     {
@@ -175,13 +164,7 @@ public class gameManager : MonoBehaviour
         invOpen = true;
         statePaused();
     }
-    /*public void hideInventory()
-    {
-        inventory.SetActive(false);
-        invOpen = false;
-        menuActive.SetActive(false);
-        menuActive = null;
-    }*/
+
     //method for hiding interact text
     public void hideInteractText()
     {

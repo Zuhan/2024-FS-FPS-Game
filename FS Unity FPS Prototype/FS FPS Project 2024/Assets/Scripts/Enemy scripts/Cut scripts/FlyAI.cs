@@ -42,8 +42,7 @@ public class flyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        //updates enemy count on start instance
-        gameManager.instance.updateGameGoal(1);
+        
         //get starter enemy color
         enemycolor = model.material.color;
         //set spawn flys to false
@@ -110,12 +109,9 @@ public class flyAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
-            //removes a enemy from enemy count
-            gameManager.instance.updateGameGoal(-1);
-            
             Destroy(gameObject);
             //Points manager points add... (works? Sometimes?)
-            PointsManager.Instance.AddPoints(pointsToGain);
+            
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");

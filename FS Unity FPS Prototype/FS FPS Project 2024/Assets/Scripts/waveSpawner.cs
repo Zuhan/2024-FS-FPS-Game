@@ -28,7 +28,6 @@ public class waveSpawner : MonoBehaviour
     {
         startSpawning = setSpawnTrue.isSpawning;
         numToSpawn *= multiplier;
-        gameManager.instance.updateGameGoal(numToSpawn);
         gameManager.instance.updateWave(waveManager.instance.waveCurrent);
     }
     IEnumerator spawn()
