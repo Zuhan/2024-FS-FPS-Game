@@ -119,10 +119,6 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
 
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(HeadPos.position, playerDir);
-
-
         RaycastHit hit;
 
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))

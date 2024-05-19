@@ -11,6 +11,9 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header ("----Main----")]
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource Scythe;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] GameObject Helmet;
@@ -34,7 +37,17 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
     [SerializeField] int viewCone;
     [SerializeField] float Armor;
     [SerializeField] float AttackRange;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audVolWalk;
+    [SerializeField] AudioClip[] audAttack;
+    [Range(0, 1)][SerializeField] float audVolAttack;
+    [SerializeField] float TimeBetweenSteps;
 
+
+    bool playingWalk;
     float MaxHP;
     float angleToPlayer;
     bool playerInRange;
@@ -66,6 +79,12 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
+            {
+                StartCoroutine(WalkSound());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -158,6 +177,7 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
 
 
         HP -= damage;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -192,6 +212,11 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    public void attackSound()
+    {
+        Scythe.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
     }
 
 
@@ -285,6 +310,14 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
         return damage;
     }
 
+
+    IEnumerator WalkSound()
+    {
+        playingWalk = true;
+        Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        playingWalk = false;
+    }
 
     public void WeaponColOn()
     {
