@@ -6,11 +6,11 @@ using UnityEngine;
 public class conditionalDoor : MonoBehaviour, IfInteract
 {
     [Header("---Audio---")]
-    /*[SerializeField] AudioSource aud;
+    [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audOpen;
     [SerializeField] AudioClip audFail;
-    [Range(0,1)][SerializeField] float audOpenVol;
-    [Range(0, 1)][SerializeField] float audFailVol;*/
+    [Range(0, 1)][SerializeField] float audOpenVol;
+    [Range(0, 1)][SerializeField] float audFailVol;
     [Header("---Necessary Fields---")]
     [SerializeField] int objectsRequired;
     [SerializeField] Renderer model;
@@ -19,6 +19,8 @@ public class conditionalDoor : MonoBehaviour, IfInteract
     private bool isSingleScene;
     //int for counting how many keys are picked up for single scene usage
     private int count;
+    private bool isInteracting;
+    private bool isFailing;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,11 +42,11 @@ public class conditionalDoor : MonoBehaviour, IfInteract
                     count++;
                 }
             }
-            if(count < keys.Count)
+            if(count < keys.Count && !isFailing)
             {
                 StartCoroutine(openFail());
             }
-            else
+            else if(count >= keys.Count && !isInteracting)
             {
                 StartCoroutine(openDoor());
             }
@@ -52,11 +54,11 @@ public class conditionalDoor : MonoBehaviour, IfInteract
         }
         else
         {
-            if (playerStats.keys.Count < objectsRequired)
+            if (playerStats.keys.Count < objectsRequired && !isFailing && !isInteracting)
             {
                 StartCoroutine(openFail());
             }
-            else
+            else if(playerStats.keys.Count >= objectsRequired && !isInteracting)
             {
                 StartCoroutine(openDoor());
                 playerStats.keys.Clear();
@@ -66,6 +68,8 @@ public class conditionalDoor : MonoBehaviour, IfInteract
     //enumerator for opening the door
     IEnumerator openDoor()
     {
+        isInteracting = true;
+        aud.PlayOneShot(audOpen,audOpenVol);
         model.material.color = Color.green;
         yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
@@ -73,6 +77,9 @@ public class conditionalDoor : MonoBehaviour, IfInteract
     //enumerator for not meeting conditions to open door
     IEnumerator openFail()
     {
+        isFailing = true;
+        aud.PlayOneShot(audFail, audFailVol);
         yield return new WaitForSeconds (1f);
+        isFailing = false;
     }
 }

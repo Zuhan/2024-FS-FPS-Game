@@ -1244,6 +1244,8 @@ MonoBehaviour:
   switchText: {fileID: 7348512942286219351}
   audDoor: {fileID: 8300000, guid: 4acb2d10085e73442813ef7c7112eed3, type: 3}
   audDoorVol: 0.514
+  audFail: {fileID: 8300000, guid: 8ff3c7b8aeb537847972e95eb9f1d571, type: 3}
+  audFailVol: 0.506
 --- !u!33 &656404183001747202
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1324,9 +1326,9 @@ AudioSource:
   m_GameObject: {fileID: 7496138712559558376}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: 2879096216292800894, guid: 88c43d2cbf7271748a6c699157ee9b0f, type: 2}
+  m_audioClip: {fileID: 8300000, guid: 4acb2d10085e73442813ef7c7112eed3, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

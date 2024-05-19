@@ -5,27 +5,24 @@ using UnityEngine;
 
 public class potionBuy : MonoBehaviour, IfInteract
 {
+    [Header("---Fields for audio---")]
     [SerializeField] AudioSource aud;
-
+    [SerializeField] AudioClip audBuy;
+    [Range(0, 1)][SerializeField] float audBuyVol;
+    [Header("---Fields for passing potion object and cost---")]
     [SerializeField] hpPotion potion;
     [SerializeField] int cost;
+    [Header("---Fields for UI elements---")]
     [SerializeField] GameObject menuText;
     [SerializeField] GameObject menuText2;
     public TMP_Text costText;
     [SerializeField] GameObject failText;
 
-    [SerializeField] AudioClip audBuy;
-    [Range(0, 1)][SerializeField] float audBuyVol;
+    
     // Start is called before the first frame update
     void Start()
     {
         costText.text = cost.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void interact()
     {

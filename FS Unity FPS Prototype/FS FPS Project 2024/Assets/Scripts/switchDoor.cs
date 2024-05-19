@@ -15,6 +15,10 @@ public class switchDoor : MonoBehaviour, IfInteract
     private int numSwitchedOn;
     [SerializeField] AudioClip audDoor;
     [Range(0, 1)][SerializeField] float audDoorVol;
+    [SerializeField] AudioClip audFail;
+    [Range(0, 1)][SerializeField] float audFailVol;
+    private bool isInteracting;
+    private bool isFailing;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,22 +26,16 @@ public class switchDoor : MonoBehaviour, IfInteract
         numSwitched.text = switchCount.ToString();
         switchText.text = switches.Length.ToString();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void interact()
     {
         checkSwitches();
-        if (allSwitched)
+        if (allSwitched && !isInteracting)
         {
             StartCoroutine(openDoor());
         }
-        else
+        else if(!allSwitched && !isFailing)
         {
-
+            StartCoroutine(playFail());
         }
     }
     private void checkSwitches()
@@ -57,6 +55,7 @@ public class switchDoor : MonoBehaviour, IfInteract
     }
     IEnumerator openDoor()
     {
+        isInteracting = true;
         model.material.color = Color.green;
         aud.PlayOneShot(audDoor,audDoorVol);
         yield return new WaitForSeconds(1f);
@@ -66,5 +65,12 @@ public class switchDoor : MonoBehaviour, IfInteract
     {
         numSwitchedOn++;
         numSwitched.text = numSwitchedOn.ToString();
+    }
+    IEnumerator playFail()
+    {
+        isFailing = true;
+        aud.PlayOneShot(audFail,audFailVol);
+        yield return new WaitForSeconds(1f);
+        isFailing = false;
     }
 }
