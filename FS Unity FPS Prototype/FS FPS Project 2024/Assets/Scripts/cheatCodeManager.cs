@@ -21,7 +21,7 @@ public class cheatCodeManager : MonoBehaviour
     public GameObject player;
     public playerController playerScript;
 
-    private bool cheatActivated = false;
+    bool cheatActivated = false;
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class cheatCodeManager : MonoBehaviour
     {
         if (!cheatActivated)
         {
-            gameManager.points += 1000;
+            gameManager.points += 5000;
             gameManager.pointsText.text = gameManager.points.ToString("F0");
             playerStats.money = gameManager.points;
             cheatActivated = true;
@@ -77,7 +77,8 @@ public class cheatCodeManager : MonoBehaviour
     }
 
     void DropItem(string itemName)
-    {if (!cheatActivated)
+    {
+        if (!cheatActivated)
         {
             Vector3 dropPosition = player.transform.position + player.transform.forward * 4;
             GameObject itemPrefab = null;
@@ -109,20 +110,33 @@ public class cheatCodeManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            inputField.gameObject.SetActive(true);
-            inputField.Select();
-            inputField.ActivateInputField();
-            gameManager.instance.menuActive = gameManager.instance.cheatInput;
-            gameManager.instance.statePaused();
+            if (!inputField.gameObject.activeSelf)
+            {
+                Debug.Log("Opening cheat input window");
+                inputField.gameObject.SetActive(true);
+                inputField.Select();
+                inputField.ActivateInputField();
+                gameManager.instance.menuActive = gameManager.instance.cheatInput;
+                gameManager.instance.statePaused();
+            }
+            else
+            {
+                Debug.Log("Closing cheat input window");
+                inputField.DeactivateInputField();
+                inputField.gameObject.SetActive(false);
+                gameManager.instance.stateUnpaused();
+            }
         }
         else if (Input.GetKeyDown(KeyCode.Return))
         {
-            CheckCheatCode();
-            gameManager.instance.stateUnpaused();
-        }
-        else
-        {
-            cheatActivated = false;
+            if (inputField.gameObject.activeSelf)
+            {
+                Debug.Log("Submitting cheat code: " + inputField.text);
+                SubmitInput(inputField.text);
+                inputField.DeactivateInputField();
+                inputField.gameObject.SetActive(false);
+                gameManager.instance.stateUnpaused();
+            }
         }
     }
 
@@ -166,6 +180,9 @@ public class cheatCodeManager : MonoBehaviour
                     }
                 }
                 inputField.text = "";
+                cheatActivated = false;
+                Debug.Log("Cheat code executed: " + cheatCode);
+                gameManager.instance.stateUnpaused();
                 return;
             }
         }
