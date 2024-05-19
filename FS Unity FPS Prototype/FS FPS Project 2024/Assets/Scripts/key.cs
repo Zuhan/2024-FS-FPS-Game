@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class key : MonoBehaviour, IPickup
 {
-    [Header("---Audio---")]
-    /*[SerializeField] AudioSource aud;
     [SerializeField] AudioClip audPickup;
-    [Range(0, 1)][SerializeField] float audPickupVol;*/
+    [Range(0,1)][SerializeField] float audVol;
     [Header("---Bool for determining if key is for one scene or multiple scenes---")]
     [SerializeField] bool isSingleScene;
 
@@ -17,12 +15,19 @@ public class key : MonoBehaviour, IPickup
     {
         if (isSingleScene)
         {
+            StartCoroutine(playSound());
             gameObject.SetActive(false);
         }
         else
         {
             playerStats.keys.Add(gameObject);
+            StartCoroutine(playSound());
             gameObject.SetActive(false);
         }
+    }
+    IEnumerator playSound()
+    {
+        AudioSource.PlayClipAtPoint(audPickup,transform.position,audVol);
+        yield return new WaitForSeconds(0f);
     }
 }

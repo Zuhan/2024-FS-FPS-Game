@@ -34,7 +34,6 @@ public class potionBuy : MonoBehaviour, IfInteract
             playerStats.potions.Add(potion);
             gameManager.instance.pointsChange(-cost);
             playSound();
-            //play audio or something
         }
         else
         {

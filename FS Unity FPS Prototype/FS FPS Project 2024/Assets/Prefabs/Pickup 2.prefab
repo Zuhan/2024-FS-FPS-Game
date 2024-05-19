@@ -610,7 +610,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc00db3be6147574794547bd706b69d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audPoints: {fileID: 8300000, guid: 2a002fd44bb09e04a8a372a9cb94379a, type: 3}
+  audPointsVol: 0.525
+  audHP: {fileID: 8300000, guid: 255adbd64ad09954d82d42d7bada4f9b, type: 3}
+  audHPVol: 0.501
   pointsToGain: 100
+  hpToAdd: 0
 --- !u!1 &5719490118220350685
 GameObject:
   m_ObjectHideFlags: 0

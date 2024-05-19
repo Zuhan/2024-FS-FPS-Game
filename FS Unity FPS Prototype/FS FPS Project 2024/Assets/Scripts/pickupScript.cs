@@ -4,27 +4,34 @@ using UnityEngine;
 
 public class pickupScript : MonoBehaviour, IPickup
 {
+    [Header("---Fields to play audio of pickups---")]
+    [SerializeField] AudioClip audPoints;
+    [Range(0, 1)][SerializeField] float audPointsVol;
+    [SerializeField] AudioClip audHP;
+    [Range(0, 1)][SerializeField] float audHPVol;
+    [Header("---Fields to change values of pickups---")]
     [SerializeField] int pointsToGain;
     [SerializeField] float hpToAdd;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void pickup()
     {
-        gameManager.instance.pointsChange(pointsToGain);
         if (this.GetComponent<BillboardRenderer>())
         {
+            playHP();
             gameManager.instance.playerScript.addHP(hpToAdd);
         }
+        else
+        {
+            playPoint();
+            gameManager.instance.pointsChange(pointsToGain);
+        }
         Destroy(gameObject);
+    }
+    private void playPoint()
+    {
+        AudioSource.PlayClipAtPoint(audPoints,transform.position,audPointsVol);
+    }
+    private void playHP()
+    {
+        AudioSource.PlayClipAtPoint(audHP, transform.position, audHPVol);
     }
 }

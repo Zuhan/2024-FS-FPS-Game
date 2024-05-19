@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class oneWayPlatform : MonoBehaviour
 {
+    [SerializeField] AudioSource aud;
     [SerializeField] GameObject endPoint;
     [SerializeField] float speed;
     bool isMoving;
@@ -22,6 +23,8 @@ public class oneWayPlatform : MonoBehaviour
             if(Vector3.Distance(transform.position, endPoint.transform.position) < 0.001f)
             {
                 isMoving = false;
+                aud.Stop();
+                aud.loop=false;
             }
         }
     }
@@ -30,16 +33,19 @@ public class oneWayPlatform : MonoBehaviour
         other.transform.SetParent(transform);
         if (other.CompareTag("Player"))
         {
+            aud.Play();
             isMoving = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         other.transform.SetParent(null);
+        aud.Stop();
     }
     public void resetPosition()
     {
         transform.position = position;
         isMoving = false;
+        aud.Stop();
     }
 }
