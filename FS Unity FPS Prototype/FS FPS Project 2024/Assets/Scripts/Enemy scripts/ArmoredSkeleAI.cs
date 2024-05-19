@@ -11,7 +11,9 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header ("----Main----")]
-    [SerializeField] AudioSource aud;
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource Sword;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] GameObject Helmet;
@@ -175,7 +177,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
 
 
         HP -= damage;
-        aud.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -215,7 +217,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
 
     public void attackSound()
     {
-        aud.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
+        Sword.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
     }
 
 
@@ -318,7 +320,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     IEnumerator WalkSound()
     {
         playingWalk = true;
-        aud.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
+        Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
         yield return new WaitForSeconds(TimeBetweenSteps);
         playingWalk = false;
     }
