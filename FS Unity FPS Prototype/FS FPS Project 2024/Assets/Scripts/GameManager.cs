@@ -106,7 +106,6 @@ public class gameManager : MonoBehaviour
 
     public void statePaused()
     {
-        Debug.Log("Pausing Game...");
         isPaused = !isPaused;
         Time.timeScale = 0;
         Cursor.visible = true;
@@ -114,7 +113,6 @@ public class gameManager : MonoBehaviour
     }
     public void stateUnpaused()
     {
-        Debug.Log("Unpausing game...");
         isPaused = false;
         Time.timeScale = 1;
         Cursor.visible = false;

@@ -104,6 +104,7 @@ public class npcAI : MonoBehaviour
         {
             playerInRange = false;
             agent.stoppingDistance = 0;
+            hasPlayedVoiceLine = false;
         }
     }
 

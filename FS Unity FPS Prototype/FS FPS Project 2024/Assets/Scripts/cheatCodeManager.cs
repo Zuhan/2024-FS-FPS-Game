@@ -112,7 +112,6 @@ public class cheatCodeManager : MonoBehaviour
         {
             if (!inputField.gameObject.activeSelf)
             {
-                Debug.Log("Opening cheat input window");
                 inputField.gameObject.SetActive(true);
                 inputField.Select();
                 inputField.ActivateInputField();
@@ -121,7 +120,6 @@ public class cheatCodeManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Closing cheat input window");
                 inputField.DeactivateInputField();
                 inputField.gameObject.SetActive(false);
                 gameManager.instance.stateUnpaused();
@@ -131,7 +129,6 @@ public class cheatCodeManager : MonoBehaviour
         {
             if (inputField.gameObject.activeSelf)
             {
-                Debug.Log("Submitting cheat code: " + inputField.text);
                 SubmitInput(inputField.text);
                 inputField.DeactivateInputField();
                 inputField.gameObject.SetActive(false);
@@ -181,7 +178,6 @@ public class cheatCodeManager : MonoBehaviour
                 }
                 inputField.text = "";
                 cheatActivated = false;
-                Debug.Log("Cheat code executed: " + cheatCode);
                 gameManager.instance.stateUnpaused();
                 return;
             }
