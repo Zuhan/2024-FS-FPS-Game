@@ -59,7 +59,6 @@ public class disappearingPlatform : MonoBehaviour
             yield return null;
             if(!isPlaying && dur - t <= 1)
             {
-                UnityEngine.Debug.Log("xdd");
                 StartCoroutine(playSound());
             }
         }
@@ -79,7 +78,6 @@ public class disappearingPlatform : MonoBehaviour
             yield return null;
             if (!isPlaying && dur - t <= 1)
             {
-                UnityEngine.Debug.Log("ddx");
                 StartCoroutine(playSound());
             }
         }

@@ -485,7 +485,14 @@ public class playerController : MonoBehaviour, IDamage
     }
     public void addVelocityY(float amount)
     {
-        playerVelocity.y = amount;
+        if (controller.isGrounded)
+        {
+            playerVelocity.y += amount;
+        }
+        else
+        {
+            playerVelocity.y += amount;
+        }
     }
     public float getMaxHP()
     {
