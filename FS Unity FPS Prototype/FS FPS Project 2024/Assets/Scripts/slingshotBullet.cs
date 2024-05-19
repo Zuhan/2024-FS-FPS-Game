@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class slingshotBullet : MonoBehaviour
 {
-
     [SerializeField] Rigidbody rb;
 
     [SerializeField] int damage;
@@ -18,7 +17,6 @@ public class slingshotBullet : MonoBehaviour
         Destroy(gameObject, destroyTime);
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
 
@@ -26,14 +24,11 @@ public class slingshotBullet : MonoBehaviour
         {
             return;
         }
-
         IDamage dmg = other.GetComponent<IDamage>();
-
         if (dmg != null && !hitHappend)
         {
             dmg.TakeDamage(damage);
             hitHappend = true;
         }
     }
-
 }

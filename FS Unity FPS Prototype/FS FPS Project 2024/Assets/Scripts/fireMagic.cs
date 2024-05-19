@@ -18,13 +18,10 @@ public class fireMagic : MonoBehaviour
 
     private Quaternion initialRotation;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         rb.velocity = transform.forward * fireballSpeed;
-
         StartCoroutine(DestroyAfterTime());
     }
 
@@ -38,9 +35,7 @@ public class fireMagic : MonoBehaviour
     {
         if (hasHit)
             return;
-
         GameObject hitObject = collision.gameObject;
-
         IDamage dmg = hitObject.GetComponent<IDamage>();
         if (dmg != null)
         {
@@ -48,7 +43,6 @@ public class fireMagic : MonoBehaviour
         }
 
         GameObject newFire = Instantiate(fire, collision.contacts[0].point, Quaternion.identity);
-
         if (collision.gameObject.CompareTag("Enemy"))
         {
             fire fireComponent = newFire.GetComponent<fire>();
@@ -58,7 +52,6 @@ public class fireMagic : MonoBehaviour
             }
         }
         hasHit = true;
-
         Destroy(gameObject);
     }
 

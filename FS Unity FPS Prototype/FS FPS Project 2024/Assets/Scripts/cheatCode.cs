@@ -7,17 +7,15 @@ using UnityEngine;
 public class cheatCode
 {
     public string code;
-    public Action action; // Action without arguments
-    public Action<string> actionWithString; // Action with a string argument
+    public Action action;
+    public Action<string> actionWithString;
 
-    // Constructor for methods without arguments
     public cheatCode(string _code, Action _action)
     {
         code = _code;
         action = _action;
     }
 
-    // Constructor for methods with a string argument
     public cheatCode(string _code, Action<string> _actionWithString)
     {
         code = _code;

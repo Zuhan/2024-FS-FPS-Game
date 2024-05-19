@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class fireStaff : MonoBehaviour
 {
-    //MY STAFF OF FIRE. I, DEREK, CALL UPON THEE TO BURN MY ENEMIES TO ASHES
+    //MY STAFF OF FIRE. I, DEREK, CALL UPON THEE TO BURN MY ENEMIES TO ASHE
 
     public GameObject fireMagicPrefab;
     [SerializeField] Transform shootPos;
     [SerializeField] private float fireCooldown = 0.5f;
     private float lastFireTime;
-
 
     void Start()
     {
@@ -34,15 +33,10 @@ public class fireStaff : MonoBehaviour
     void CastFireMagic()
     {
         Vector3 firingDirection = Camera.main.transform.forward;
-
         GameObject fireMagic = Instantiate(fireMagicPrefab, shootPos.position, Quaternion.identity);
-
         Quaternion initialRotation = Quaternion.LookRotation(firingDirection);
-
         fireMagic.transform.rotation = initialRotation;
-
         fireMagic.transform.parent = null;
-
         fireMagic.GetComponent<fireMagic>().SetInitialRotation(initialRotation);
     }
 
@@ -55,12 +49,10 @@ public class fireStaff : MonoBehaviour
 
     public void EnableFireStaff()
     {
-        //Debug.Log("Fire Staff Enabled");
         enabled = true;
     }
     public void DisableFireStaff()
     {
-        //Debug.Log("Fire Staff Disabled");
         enabled = false;
     }
 }
