@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
@@ -11,6 +12,10 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header ("----Main----")]
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource Bow;
+    [SerializeField] AudioSource BowString;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] GameObject Helmet;
@@ -34,7 +39,19 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
     [SerializeField] int viewCone;
     [SerializeField] float Armor;
     [SerializeField] float AttackRange;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audVolWalk;
+    [SerializeField] AudioClip[] audShoot;
+    [Range(0, 1)][SerializeField] float audVolShoot;
+    [SerializeField] AudioClip[] audDraw;
+    [Range(0, 1)][SerializeField] float audVolDraw;
+    [SerializeField] float TimeBetweenSteps;
 
+
+    bool playingWalk;
     float MaxHP;
     float angleToPlayer;
     bool playerInRange;
@@ -66,6 +83,12 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
+            {
+                StartCoroutine(WalkSound());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -158,6 +181,7 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
 
 
         HP -= damage;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -195,6 +219,19 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
     }
 
 
+
+
+    public void attackSound()
+    {
+        Bow.PlayOneShot(audShoot[UnityEngine.Random.Range(0, audShoot.Length)], audVolShoot);
+    }
+
+    public void drawSound()
+    {
+        BowString.PlayOneShot(audDraw[UnityEngine.Random.Range(0, audDraw.Length)], audVolDraw);
+    }
+
+
     private float ArmorReduction(float damage)
     {
 
@@ -223,6 +260,9 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
             //set damage to 0
             damage = 0f;
         }
+
+
+
 
 
         if (armorLReach5 != true)
@@ -285,6 +325,14 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
         return damage;
     }
 
+
+    IEnumerator WalkSound()
+    {
+        playingWalk = true;
+        Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        playingWalk = false;
+    }
 
     public void createBullet()
     {
