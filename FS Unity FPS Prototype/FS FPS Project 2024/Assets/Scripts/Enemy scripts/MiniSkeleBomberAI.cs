@@ -9,6 +9,9 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
 {
     [Header("----Main----")]
     //Serialized fields for enemy ai
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource explosion;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer head;
     [SerializeField] Renderer torso;
@@ -19,7 +22,6 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Collider BombAOE;
     [SerializeField] GameObject VFX;
-    [SerializeField] AudioSource explosion;
     [SerializeField] Image healthbar;
     //[SerializeField] GameObject bullet;
     [Header("----stats----")]
@@ -31,8 +33,15 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     [SerializeField] int animSpeedTrans;
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audVolWalk;
+    [SerializeField] float TimeBetweenSteps;
 
 
+    bool playingWalk;
     float MaxHP;
     bool isDead;
     float angleToPlayer;
@@ -60,6 +69,12 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
         if (playerInRange && isDead != true)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
+            {
+                StartCoroutine(WalkSound());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -99,9 +114,11 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
 
             if ( hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange && angleToPlayer <= viewCone)
             {
-           
+
                 if (!isShooting)
+                {
                     StartCoroutine(Shoot());
+                }
 
             } 
 
@@ -136,6 +153,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         UpdateEnemyUI();
         StartCoroutine(FlashRed());
         //set destination when damaged
@@ -150,6 +168,14 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
             gameManager.instance.pointsChange(pointsToGain);
             //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
         }
+    }
+
+    IEnumerator WalkSound()
+    {
+        playingWalk = true;
+        Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        playingWalk = false;
     }
 
 
