@@ -128,7 +128,8 @@ public class playerController : MonoBehaviour, IDamage
             if (controller.isGrounded)
             {
                 jumpedTimes = 0;
-                playerVelocity = Vector3.zero;
+                playerVelocity.y -= playerVelocity.y;
+                //playerVelocity = Vector3.zero;
             }
 
             moveDirection = (Input.GetAxis("Horizontal") * transform.right)
@@ -487,11 +488,11 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (controller.isGrounded)
         {
-            playerVelocity.y += amount;
+            playerVelocity.y = amount;
         }
         else
         {
-            playerVelocity.y += amount;
+            playerVelocity.y = amount;
         }
     }
     public float getMaxHP()
