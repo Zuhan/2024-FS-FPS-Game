@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class conditionalDoor : MonoBehaviour, IfInteract
 {
@@ -21,6 +22,7 @@ public class conditionalDoor : MonoBehaviour, IfInteract
     private int count;
     private bool isInteracting;
     private bool isFailing;
+    bool rotating;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,9 @@ public class conditionalDoor : MonoBehaviour, IfInteract
             }
             else if(count >= keys.Count && !isInteracting)
             {
-                StartCoroutine(openDoor());
+                aud.PlayOneShot(audOpen, audOpenVol);
+                StartCoroutine(rotate(new Vector3(0,90,0),1));
+                //StartCoroutine(openDoor());
             }
             count = 0;
         }
@@ -60,7 +64,9 @@ public class conditionalDoor : MonoBehaviour, IfInteract
             }
             else if(playerStats.keys.Count >= objectsRequired && !isInteracting)
             {
-                StartCoroutine(openDoor());
+                aud.PlayOneShot(audOpen, audOpenVol);
+                StartCoroutine(rotate(new Vector3(0, 90, 0), 1));
+                //StartCoroutine(openDoor());
                 playerStats.keys.Clear();
             }
         }
@@ -81,5 +87,24 @@ public class conditionalDoor : MonoBehaviour, IfInteract
         aud.PlayOneShot(audFail, audFailVol);
         yield return new WaitForSeconds (1f);
         isFailing = false;
+    }
+    IEnumerator rotate(Vector3 rot, float dur)
+    {
+        if (rotating)
+        {
+            yield break;
+        }
+        isInteracting = true;
+        rotating = true;
+        Vector3 newRot = transform.eulerAngles + rot;
+        Vector3 curRot = transform.eulerAngles;
+        float count = 0;
+        while (count < dur)
+        {
+            count += Time.deltaTime;
+            transform.eulerAngles = Vector3.Lerp(curRot, newRot, count);
+            yield return null;
+        }
+        rotating = false;
     }
 }
