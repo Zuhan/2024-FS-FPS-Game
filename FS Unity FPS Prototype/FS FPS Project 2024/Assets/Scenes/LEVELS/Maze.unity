@@ -3883,6 +3883,94 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f1c6ad87bbfe464db4a4f588e771a55, type: 3}
+--- !u!1001 &1360362107
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.8574
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.8574
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.8574
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.020536
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.4850352
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96162075
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.27438226
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 31.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3861547304858508440, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084660061820924347, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630588110848197161, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_Name
+      value: ArmoredMeleeSkele (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7943172194690802943, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 1982755577330056146, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    - {fileID: 1376621408126555701, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    - {fileID: 4037513614929376808, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    - {fileID: 1163195317931325770, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    - {fileID: 8401643761218941611, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    - {fileID: 4193609006081978337, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    - {fileID: 3393053233087189732, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
 --- !u!1001 &1380712804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7599,3 +7687,4 @@ SceneRoots:
   - {fileID: 1475323886}
   - {fileID: 314383298}
   - {fileID: 1105784106}
+  - {fileID: 1360362107}
