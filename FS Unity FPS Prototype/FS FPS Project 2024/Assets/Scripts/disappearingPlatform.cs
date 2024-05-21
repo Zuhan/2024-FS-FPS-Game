@@ -54,7 +54,7 @@ public class disappearingPlatform : MonoBehaviour
         for (float t = 0f; t < dur; t += Time.deltaTime)
         {
             Color c = mat.color;
-            c.a = c.a - 0.001f;
+            c.a = c.a - 0.002f;
             mat.color = c;
             yield return null;
             if(!isPlaying && dur - t <= 1)
@@ -73,7 +73,7 @@ public class disappearingPlatform : MonoBehaviour
         for (float t = 0f; t < dur; t += Time.deltaTime)
         {
             Color c = mat.color;
-            c.a = c.a + 0.001f;
+            c.a = c.a + 0.002f;
             mat.color = c;
             yield return null;
             if (!isPlaying && dur - t <= 1)

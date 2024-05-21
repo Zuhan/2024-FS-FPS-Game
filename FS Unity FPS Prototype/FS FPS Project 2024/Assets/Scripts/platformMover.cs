@@ -8,11 +8,13 @@ public class platformMover : MonoBehaviour
 {
     [SerializeField] pathScript path;
     [SerializeField] float speed;
+    [SerializeField] float stopTime;
     private int targetIndex;
     private Transform prev;
     private Transform target;
     private float timeToPoint;
     private float elapsed;
+    private bool isStopped;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +27,10 @@ public class platformMover : MonoBehaviour
         completed = Mathf.SmoothStep(0,1,completed);
         transform.position = Vector3.Lerp(prev.position, target.position, completed);
         transform.rotation = Quaternion.Lerp(prev.rotation, target.rotation, completed);
-        if (completed >= 1)
+        if (completed >= 1 && !isStopped)
         {
-            targetNext();
+            StartCoroutine(stopAtNextPoint());
+            //targetNext();
         }
     }
     private void targetNext()
@@ -46,5 +49,12 @@ public class platformMover : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         other.transform.SetParent(null);
+    }
+    IEnumerator stopAtNextPoint()
+    {
+        isStopped = true;
+        yield return new WaitForSeconds(stopTime);
+        targetNext();
+        isStopped = false;
     }
 }
