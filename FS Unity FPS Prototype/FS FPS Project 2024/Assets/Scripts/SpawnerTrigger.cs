@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class SpawnerTrigger : MonoBehaviour
 {
+    [Header("---Array of enemies---")]
     [SerializeField] GameObject[] enemiesToSpawn;
+    [Header("---Amount of enemies to spawn and delay between each spawn---")]
     [SerializeField] int numToSpawn;
     [SerializeField] int spawnDelay;
-    [Header("--- Weighting modifiers ---(Adds to 100, 1 value is missing for the mimic, its just the remainder of the 100 -  the 5 numbers)")]
+    [Header("---Weighting modifiers---(Adds to 100, 1 value is missing for the last array element, its just the remainder of the 100 minus the 5 numbers)")]
     [SerializeField] int Element0Weight;
     [SerializeField] int Element1Weight;
     [SerializeField] int Element2Weight;
     [SerializeField] int Element3Weight;
     [SerializeField] int Element4Weight;
     [Header("You can remove elements from the list, just make sure the weight on their corresponding element gets decreased, this gives you the ability to make the spawner spawn less than 6 enemies with the customizable weighting")]
-    int spawnCount;
-    bool isSpawning;
-    bool startSpawning;
-    void Start()
-    {
-        
-    }
-
+    private int spawnCount;
+    private bool isSpawning;
+    private bool startSpawning;
     // Update is called once per frame
     void Update()
     {
@@ -56,13 +53,13 @@ public class SpawnerTrigger : MonoBehaviour
         int enemy = Random.Range(0, 100);
         //Debug.Log(enemy);
         int num = 0;
-        //spawn case 1: mini skele
+        //spawn case 1
         if(enemy <= Element0Weight-1)
         {
             num = 0;
             return num;
         }
-        //spawn case 2: skele red mage
+        //spawn case 2
         else if(enemy <= Element0Weight-1+Element1Weight)
         {
             num = 1;
@@ -72,7 +69,7 @@ public class SpawnerTrigger : MonoBehaviour
             }
             return num;
         }
-        //spawn case 3: skele yellow bomber
+        //spawn case 3
         else if (enemy <= Element0Weight+Element1Weight+Element2Weight-1)
         {
             num = 2;
@@ -82,7 +79,7 @@ public class SpawnerTrigger : MonoBehaviour
             }
             return num;
         }
-        //spawn case 4: beholder
+        //spawn case 4
         else if (enemy <= Element0Weight+Element1Weight+Element2Weight+Element3Weight-1)
         {
             num = 3;
@@ -92,7 +89,7 @@ public class SpawnerTrigger : MonoBehaviour
             }
             return num;
         }
-        //spawn case 5: armored melee skele
+        //spawn case 5
         else if (enemy <= Element0Weight + Element1Weight + Element2Weight + Element3Weight + Element4Weight -1)
         {
             num = 4;
@@ -102,7 +99,7 @@ public class SpawnerTrigger : MonoBehaviour
             }
             return num;
         }
-        //spawn case 6: mimic
+        //spawn case 6
         else
         {
             num = 5;

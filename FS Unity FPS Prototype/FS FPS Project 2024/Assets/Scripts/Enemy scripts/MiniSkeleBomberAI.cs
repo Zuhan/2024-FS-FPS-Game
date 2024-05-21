@@ -52,7 +52,6 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     Color enemycolor2;
     Color enemycolor3;
     Color enemycolor4;
-    public waveSpawnerTwo spawnLocation;
 
     // Start is called before the first frame update
     void Start()

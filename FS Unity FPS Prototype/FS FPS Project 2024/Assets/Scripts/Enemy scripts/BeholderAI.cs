@@ -44,7 +44,6 @@ public class BeholderAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
-    public waveSpawnerTwo spawnLocation;
     List<Transform> BeamList;
 
     // Start is called before the first frame update

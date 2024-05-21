@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class spikeTrap : MonoBehaviour
 {
-    [Header("---Audio---")]
+    [Header("---Audio Fields---")]
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audSpike;
     [Range(0, 1)][SerializeField] float audSpikeVol;
     [SerializeField] AudioClip audSpikeDown;
     [Range(0, 1)][SerializeField] float audSpikeDownVol;
-    [Header("---Necessary Fields---")]
+    [Header("---Fields for delay before spikes trigger and the spikes object---")]
     [SerializeField] float delay;
     [SerializeField] GameObject spikes;
     private Vector3 move;
     private Vector3 moveDown;
-    bool raised;
-    bool inSpikes;
-    bool raiseQueued;
-    bool lowerQueued;
+    private bool raised;
+    private bool inSpikes;
+    private bool raiseQueued;
+    private bool lowerQueued;
     // Start is called before the first frame update
     void Start()
     {

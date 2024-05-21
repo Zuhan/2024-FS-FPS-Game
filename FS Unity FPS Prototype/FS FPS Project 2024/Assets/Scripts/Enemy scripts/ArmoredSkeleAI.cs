@@ -54,7 +54,6 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     bool isShooting;
     float TotalArmor;
     Color enemycolor1;
-    public waveSpawnerTwo spawnLocation;
     List<GameObject> armorList;
     bool armorLReach1;
     bool armorLReach2;

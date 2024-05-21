@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class resetBarrier : MonoBehaviour
 {
+    [Header("---Array of all one way platforms in the scene---")]
     [SerializeField] oneWayPlatform[] platforms;
     private void OnTriggerEnter(Collider other)
     {

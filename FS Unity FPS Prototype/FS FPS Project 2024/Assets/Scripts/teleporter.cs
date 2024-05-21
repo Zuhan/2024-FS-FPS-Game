@@ -4,21 +4,12 @@ using UnityEngine;
 
 public class teleporter : MonoBehaviour
 {
+    [Header("---Audio Fields---")]
     [SerializeField] AudioSource aud;
-    public GameObject destination;
     [SerializeField] AudioClip audTp;
     [Range(0, 1)][SerializeField] float audTpVol;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("---Destination Field---")]
+    public GameObject destination;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

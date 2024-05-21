@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class switchDoor : MonoBehaviour, IfInteract
 {
+    [Header("---Audio Fields---")]
     [SerializeField] AudioSource aud;
-    [SerializeField] switches[] switches;
-    [SerializeField] Renderer model;
-    private bool allSwitched;
-    private int switchCount;
-    public TMP_Text numSwitched;
-    public TMP_Text switchText;
-    private int numSwitchedOn;
     [SerializeField] AudioClip audDoor;
     [Range(0, 1)][SerializeField] float audDoorVol;
     [SerializeField] AudioClip audFail;
     [Range(0, 1)][SerializeField] float audFailVol;
+    [Header("---Fields for objects---")]
+    [SerializeField] switches[] switches;
+    [SerializeField] Renderer model;
+    public TMP_Text numSwitched;
+    public TMP_Text switchText;
+    //private fields
+    private bool allSwitched;
+    private int switchCount;
+    private int numSwitchedOn;
     private bool isInteracting;
     private bool isFailing;
     private bool rotating;
@@ -32,7 +35,6 @@ public class switchDoor : MonoBehaviour, IfInteract
         checkSwitches();
         if (allSwitched && !isInteracting)
         {
-            //StartCoroutine(openDoor());
             aud.PlayOneShot(audDoor, audDoorVol);
             for (int i = 0; i < transform.childCount; i++)
             {
@@ -59,17 +61,6 @@ public class switchDoor : MonoBehaviour, IfInteract
             allSwitched = true;
         }
         switchCount = 0;
-    }
-    IEnumerator openDoor()
-    {
-        isInteracting = true;
-        model.material.color = Color.green;
-        aud.PlayOneShot(audDoor,audDoorVol);
-        yield return new WaitForSeconds(1f);
-        for(int i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
     }
     public void UpdateSwitch()
     {

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class spikeDmg : MonoBehaviour
 {
+    [Header("---Fields for damage and damage frequency---")]
     [SerializeField] float damage;
     [SerializeField] float dmgDelay;
 
+    //private fields for the damage to happen on intervals
     private float time;
     private float diff;
     private float start;
@@ -14,12 +16,6 @@ public class spikeDmg : MonoBehaviour
     void Start()
     {
         time = 0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     private void OnTriggerEnter(Collider other)
     {

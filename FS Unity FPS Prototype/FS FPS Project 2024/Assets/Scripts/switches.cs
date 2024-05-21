@@ -5,24 +5,19 @@ using UnityEngine;
 
 public class switches : MonoBehaviour, IfInteract
 {
+    [Header("---Audio Fields---")]
     [SerializeField] AudioSource aud;
-
-    [SerializeField] GameObject menu;
-    [SerializeField] switchDoor switchDoor;
-    private bool switchedOn;
     [SerializeField] AudioClip audSwitch;
     [Range(0, 1)][SerializeField] float audSwitchVol;
-    bool rotating;
-    // Start is called before the first frame update
+    [Header("---Game Objects---")]
+    [SerializeField] GameObject menu;
+    [SerializeField] switchDoor switchDoor;
+    //private fields
+    private bool switchedOn;
+    private bool rotating;
     void Start()
     {
         switchedOn = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void interact()
     {
@@ -32,14 +27,6 @@ public class switches : MonoBehaviour, IfInteract
             StartCoroutine(rotate(new Vector3(-90,0,0),1));
             switchedOn = true;
         }
-    }
-    public void OnTriggerEnter(Collider other)
-    {
-        
-    }
-    public void OnTriggerExit(Collider other)
-    {
-        
     }
     public bool isSwitchedOn()
     {

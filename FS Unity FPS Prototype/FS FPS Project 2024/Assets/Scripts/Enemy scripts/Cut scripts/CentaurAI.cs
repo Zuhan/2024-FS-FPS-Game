@@ -26,7 +26,6 @@ public class CentaurAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
-    public waveSpawner spawnLocation;
 
     // Start is called before the first frame update
     void Start()
@@ -95,10 +94,6 @@ public class CentaurAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
-            if (spawnLocation)
-            {
-                spawnLocation.updateEnemyNumber();
-            }
             Destroy(gameObject);
 
             gameManager.instance.pointsChange(pointsToGain);

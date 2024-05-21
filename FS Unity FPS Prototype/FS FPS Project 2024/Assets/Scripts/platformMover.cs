@@ -6,16 +6,18 @@ public class platformMover : MonoBehaviour
 
     //read pathScript.cs please
 {
+    [Header("---Path Field(Needs a pathScript object)---")]
     [SerializeField] pathScript path;
+    [Header("---Fields for speed and stop duration---")]
     [SerializeField] float speed;
     [SerializeField] float stopTime;
+    //Private fields for determining the target point
     private int targetIndex;
     private Transform prev;
     private Transform target;
     private float timeToPoint;
     private float elapsed;
     private bool isStopped;
-    // Start is called before the first frame update
     void Start()
     {
         targetNext();
@@ -30,7 +32,6 @@ public class platformMover : MonoBehaviour
         if (completed >= 1 && !isStopped)
         {
             StartCoroutine(stopAtNextPoint());
-            //targetNext();
         }
     }
     private void targetNext()
