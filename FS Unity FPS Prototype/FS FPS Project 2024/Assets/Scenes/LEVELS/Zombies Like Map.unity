@@ -25895,6 +25895,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1009450858347230391, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: m_Radius
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009450858347230391, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: m_Center.x
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009450858347230391, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: m_Center.z
+      value: 7.53
+      objectReference: {fileID: 0}
     - target: {fileID: 1472149322916554416, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: m_Name
       value: SpawnerTrigger (1)
@@ -30729,6 +30741,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1009450858347230391, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: m_Center.x
+      value: 5.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1472149322916554416, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: m_Name
       value: SpawnerTrigger (4)
