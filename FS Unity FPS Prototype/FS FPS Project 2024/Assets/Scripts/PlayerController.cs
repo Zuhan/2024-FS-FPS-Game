@@ -186,6 +186,7 @@ public class playerController : MonoBehaviour, IDamage
                 if(stamina <= 0)
                 {
                     isSprinting=false;
+                    speed /= sprintMultiplier;
                 }
                 updateStaminaUI();
             }
