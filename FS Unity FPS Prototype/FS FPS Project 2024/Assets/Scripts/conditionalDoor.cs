@@ -23,9 +23,12 @@ public class conditionalDoor : MonoBehaviour, IfInteract
     private bool isSingleScene;
     //int for counting how many keys are picked up for single scene usage
     private int count;
+    //bools for preventing interactions from happening multiple times in quick succession
     private bool isInteracting;
     private bool isFailing;
+    //int for how many keys the player currently has
     private int curKeys = 0;
+    //bool for if the door is currently opening
     bool rotating;
     // Start is called before the first frame update
     void Start()
@@ -74,7 +77,6 @@ public class conditionalDoor : MonoBehaviour, IfInteract
                 {
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
-                //StartCoroutine(openDoor());
             }
             count = 0;
         }
@@ -92,19 +94,9 @@ public class conditionalDoor : MonoBehaviour, IfInteract
                 {
                     transform.GetChild(i).gameObject.SetActive(false);
                 }
-                //StartCoroutine(openDoor());
                 playerStats.keys.Clear();
             }
         }
-    }
-    //enumerator for opening the door
-    IEnumerator openDoor()
-    {
-        isInteracting = true;
-        aud.PlayOneShot(audOpen,audOpenVol);
-        model.material.color = Color.green;
-        yield return new WaitForSeconds(1f);
-        gameObject.SetActive(false);
     }
     //enumerator for not meeting conditions to open door
     IEnumerator openFail()
