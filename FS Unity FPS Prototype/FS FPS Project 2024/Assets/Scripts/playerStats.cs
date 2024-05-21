@@ -12,5 +12,6 @@ public static class playerStats
     public static List<hpPotion> potions = new List<hpPotion>();
     public static bool slingUI = false;
     public static bool fireUI = false;
-    public static bool thUI = false; 
+    public static bool thUI = false;
+    public static int currentWeapon = 0;
 }

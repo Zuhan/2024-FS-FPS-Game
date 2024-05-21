@@ -85,6 +85,11 @@ public class playerController : MonoBehaviour, IDamage
         weaponSlots.Add("Thunder Hammer", ThunderHammer);
         weaponSlots.Add("Explosion_Staff", explosionStaff);
         loadStats();
+        selectedWeapon = playerStats.currentWeapon;
+        if (weapons.Count > 0)
+        {
+            changeWeapon();
+        }
         gameObject.transform.parent = null;
     }
 
@@ -308,7 +313,8 @@ public class playerController : MonoBehaviour, IDamage
         playerStats.hp = HP;
         stamina = maxStamina;
         updatePlayerUI();
-
+        selectedWeapon = playerStats.currentWeapon;
+        changeWeapon();
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
@@ -333,6 +339,7 @@ public class playerController : MonoBehaviour, IDamage
         castDamage = weapon.castDamage;
         castDist = weapon.castDist;
         castRate = weapon.castRate;
+        playerStats.currentWeapon = selectedWeapon;
         saveStats();
     }
 
@@ -350,6 +357,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (weapons[i].name == "Slingshot")
                 {
                     selectedWeapon = i;
+                    playerStats.currentWeapon = i;
                     changeWeapon();
                     return;
                 }
@@ -362,6 +370,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (weapons[i].name == "Fire Staff")
                 {
                     selectedWeapon = i;
+                    playerStats.currentWeapon = i;
                     changeWeapon();
                     return;
                 }
@@ -374,6 +383,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (weapons[i].name == "Thunder Hammer")
                 {
                     selectedWeapon = i;
+                    playerStats.currentWeapon = i;
                     changeWeapon();
                     return;
                 }
@@ -386,6 +396,7 @@ public class playerController : MonoBehaviour, IDamage
                 if (weapons[i].name == "Explosion_Staff")
                 {
                     selectedWeapon = i;
+                    playerStats.currentWeapon = i;
                     changeWeapon();
                     return;
                 }
