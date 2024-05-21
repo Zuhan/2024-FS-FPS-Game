@@ -15,6 +15,11 @@ public class SpawnerTrigger : MonoBehaviour
     [SerializeField] int Element2Weight;
     [SerializeField] int Element3Weight;
     [SerializeField] int Element4Weight;
+    [SerializeField] int Element5Weight;
+    [SerializeField] int Element6Weight;
+    [SerializeField] int Element7Weight;
+    [SerializeField] int Element8Weight;
+    [SerializeField] int Element9Weight;
     [Header("You can remove elements from the list, just make sure the weight on their corresponding element gets decreased, this gives you the ability to make the spawner spawn less than 6 enemies with the customizable weighting")]
     private int spawnCount;
     private bool isSpawning;
@@ -100,9 +105,39 @@ public class SpawnerTrigger : MonoBehaviour
             return num;
         }
         //spawn case 6
-        else
+        else if (enemy <= Element0Weight + Element1Weight + Element2Weight + Element3Weight + Element4Weight + Element5Weight - 1)
         {
             num = 5;
+            if (num >= enemiesToSpawn.Length)
+            {
+                num = 0;
+            }
+            return num;
+        }
+        //spawn case 7
+        else if (enemy <= Element0Weight + Element1Weight + Element2Weight + Element3Weight + Element4Weight + Element5Weight + Element6Weight - 1)
+        {
+            num = 6;
+            if (num >= enemiesToSpawn.Length)
+            {
+                num = 0;
+            }
+            return num;
+        }
+        //spawn case 8
+        else if (enemy <= Element0Weight + Element1Weight + Element2Weight + Element3Weight + Element4Weight + Element5Weight + Element6Weight + Element7Weight - 1)
+        {
+            num = 7;
+            if (num >= enemiesToSpawn.Length)
+            {
+                num = 0;
+            }
+            return num;
+        }
+        //spawn case 9
+        else
+        {
+            num = 8;
             if (num >= enemiesToSpawn.Length)
             {
                 num = 0;
