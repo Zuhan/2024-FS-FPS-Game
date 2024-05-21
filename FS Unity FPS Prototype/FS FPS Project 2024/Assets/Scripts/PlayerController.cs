@@ -314,7 +314,10 @@ public class playerController : MonoBehaviour, IDamage
         stamina = maxStamina;
         updatePlayerUI();
         selectedWeapon = playerStats.currentWeapon;
-        changeWeapon();
+        if(weapons.Count > 0)
+        {
+            changeWeapon();
+        }
         controller.enabled = false;
         transform.position = gameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
