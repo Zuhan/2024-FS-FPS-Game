@@ -19,7 +19,6 @@ public class SpawnerTrigger : MonoBehaviour
     [SerializeField] int Element6Weight;
     [SerializeField] int Element7Weight;
     [SerializeField] int Element8Weight;
-    [SerializeField] int Element9Weight;
     [Header("You can remove elements from the list, just make sure the weight on their corresponding element gets decreased, this gives you the ability to make the spawner spawn less than 6 enemies with the customizable weighting")]
     private int spawnCount;
     private bool isSpawning;
