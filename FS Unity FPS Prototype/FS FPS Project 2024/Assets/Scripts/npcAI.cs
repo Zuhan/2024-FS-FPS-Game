@@ -104,7 +104,6 @@ public class npcAI : MonoBehaviour
         {
             playerInRange = false;
             agent.stoppingDistance = 0;
-            hasPlayedVoiceLine = false;
         }
     }
 
@@ -116,6 +115,13 @@ public class npcAI : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
             aud.PlayOneShot(voiceOver[Random.Range(0, voiceOver.Length)], audVoiceVol);
             hasPlayedVoiceLine = true;
+            StartCoroutine(voiceLineReset());
         }
+    }
+
+    IEnumerator voiceLineReset()
+    {
+        yield return new WaitForSeconds(5);
+        hasPlayedVoiceLine = false;
     }
 }

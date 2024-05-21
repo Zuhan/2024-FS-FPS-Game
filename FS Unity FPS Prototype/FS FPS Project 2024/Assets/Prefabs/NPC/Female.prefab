@@ -3194,7 +3194,6 @@ GameObject:
   - component: {fileID: 8615774242310654953}
   - component: {fileID: 3783199126356692509}
   - component: {fileID: 6154964297885099628}
-  - component: {fileID: 1471473732563579622}
   - component: {fileID: 5059583892701223506}
   - component: {fileID: 3873088246209339258}
   - component: {fileID: 9048064712455996997}
@@ -3216,7 +3215,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.9999254, z: 0, w: 0.012216958}
   m_LocalPosition: {x: 5.1664543, y: 0, z: -1.2267181}
-  m_LocalScale: {x: 1.1656982, y: 1.1656982, z: 1.1656982}
+  m_LocalScale: {x: 1.165698, y: 1.1656982, z: 1.165698}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 153352055034197757}
@@ -3240,7 +3239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5059583892701223506}
-  model: {fileID: 1471473732563579622}
+  model: {fileID: 0}
   anim: {fileID: 6154964297885099628}
   headPos: {fileID: 153352055034197757}
   aud: {fileID: -5032812753268340175}
@@ -3253,7 +3252,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b39508342c8588a4096af6a8959434e8, type: 3}
   - {fileID: 8300000, guid: cf0ab8112d7776a4a9e1373f2077acf9, type: 3}
   - {fileID: 8300000, guid: 8bb2a3a613ceee84cb13732162b15c77, type: 3}
-  audVoiceVol: 0.5
+  audVoiceVol: 0.7
 --- !u!95 &6154964297885099628
 Animator:
   serializedVersion: 5
@@ -3275,48 +3274,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!23 &1471473732563579622
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8342302023923445015}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!195 &5059583892701223506
 NavMeshAgent:
   m_ObjectHideFlags: 0
