@@ -20,6 +20,7 @@ public class SpawnerTrigger : MonoBehaviour
     [SerializeField] int Element7Weight;
     [SerializeField] int Element8Weight;
     [Header("You can remove elements from the list, just make sure the weight on their corresponding element gets decreased, this gives you the ability to make the spawner spawn less than 6 enemies with the customizable weighting")]
+    //private fields
     private int spawnCount;
     private bool isSpawning;
     private bool startSpawning;
@@ -42,7 +43,6 @@ public class SpawnerTrigger : MonoBehaviour
     {
         isSpawning = true;
         int spawnPos = Random.Range(0, transform.childCount);
-        //int enemy = Random.Range(0,enemiesToSpawn.Length);
         int enemy = enemyAlgorithim();
         Instantiate(enemiesToSpawn[enemy], transform.GetChild(spawnPos).position, transform.GetChild(spawnPos).rotation);
         spawnCount++;
