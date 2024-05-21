@@ -285,7 +285,12 @@ public class playerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.1f);
         gameManager.instance.playerDamageScreen.SetActive(false);
     }
-
+    IEnumerator flashHeal()
+    {
+        gameManager.instance.playerHealScreen.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gameManager.instance.playerHealScreen.SetActive(false);
+    }
     //updating ui
     void updatePlayerUI()
     {
@@ -483,6 +488,7 @@ public class playerController : MonoBehaviour, IDamage
             HP+= amount;
             playerStats.hp = HP;
         }
+        StartCoroutine(flashHeal());
         updatePlayerUI();
     }
     public void addVelocityY(float amount)

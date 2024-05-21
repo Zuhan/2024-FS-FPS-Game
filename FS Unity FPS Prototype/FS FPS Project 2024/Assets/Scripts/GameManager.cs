@@ -29,6 +29,7 @@ public class gameManager : MonoBehaviour
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
+    public GameObject playerHealScreen;
     public TMP_Text collectibleText;
     public TMP_Text potionCount;
     public GameObject inventory;
