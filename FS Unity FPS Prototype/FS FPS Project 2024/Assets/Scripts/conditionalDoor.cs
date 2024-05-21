@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class conditionalDoor : MonoBehaviour, IfInteract
 {
@@ -16,12 +17,15 @@ public class conditionalDoor : MonoBehaviour, IfInteract
     [SerializeField] int objectsRequired;
     [SerializeField] Renderer model;
     [SerializeField] List<key> keys = new List<key>();
+    public TMP_Text numKeys;
+    public TMP_Text keyText;
     //bool for determining what the door is for
     private bool isSingleScene;
     //int for counting how many keys are picked up for single scene usage
     private int count;
     private bool isInteracting;
     private bool isFailing;
+    private int curKeys = 0;
     bool rotating;
     // Start is called before the first frame update
     void Start()
@@ -29,6 +33,20 @@ public class conditionalDoor : MonoBehaviour, IfInteract
         if (keys.Count != 0)
         {
             isSingleScene = true;
+            keyText.text = keys.Count.ToString();
+            numKeys.text = curKeys.ToString();
+        }
+        else
+        {
+            keyText.text = objectsRequired.ToString();
+            numKeys.text = playerStats.keys.Count.ToString();
+        }
+    }
+    public void Update()
+    {
+        if(keys.Count == 0)
+        {
+            numKeys.text = playerStats.keys.Count.ToString();
         }
     }
     //interact inherit from interface
@@ -52,6 +70,10 @@ public class conditionalDoor : MonoBehaviour, IfInteract
             {
                 aud.PlayOneShot(audOpen, audOpenVol);
                 StartCoroutine(rotate(new Vector3(0,90,0),1));
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
                 //StartCoroutine(openDoor());
             }
             count = 0;
@@ -66,6 +88,10 @@ public class conditionalDoor : MonoBehaviour, IfInteract
             {
                 aud.PlayOneShot(audOpen, audOpenVol);
                 StartCoroutine(rotate(new Vector3(0, 90, 0), 1));
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
                 //StartCoroutine(openDoor());
                 playerStats.keys.Clear();
             }
@@ -106,5 +132,10 @@ public class conditionalDoor : MonoBehaviour, IfInteract
             yield return null;
         }
         rotating = false;
+    }
+    public void updateKey()
+    {
+        curKeys++;
+        numKeys.text = curKeys.ToString();
     }
 }
