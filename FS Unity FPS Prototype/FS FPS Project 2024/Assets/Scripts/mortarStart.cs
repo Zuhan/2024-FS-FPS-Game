@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class mortarStart : MonoBehaviour
 {
+    [Header("---Audio Fields---")]
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audFire;
     [Range(0, 1)][SerializeField] float audFireVol;
     [SerializeField] AudioClip audLand;
     [Range(0, 1)][SerializeField] float audLandVol;
+    [Header("---Fields for objects and damage---")]
     [SerializeField] mortarShell mortar;
     [SerializeField] float damage;
     [SerializeField] ParticleSystem particles;
@@ -63,11 +65,6 @@ public class mortarStart : MonoBehaviour
                 Debug.Log("xdd");
                 StartCoroutine(dealDamage(other));
                 damageTaken = true;
-                //aud.PlayOneShot(audLand, audLandVol);
-                /*transform.GetChild(0).gameObject.SetActive(false);
-                transform.GetChild(1).gameObject.SetActive(false);
-                col.gameObject.SetActive(false);*/
-                //transform.gameObject.SetActive(false);
             }
         }
     }
@@ -85,6 +82,5 @@ public class mortarStart : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(false);
         col.enabled = false;
         hasPlayed = true;
-        //transform.gameObject.SetActive(false);
     }
 }

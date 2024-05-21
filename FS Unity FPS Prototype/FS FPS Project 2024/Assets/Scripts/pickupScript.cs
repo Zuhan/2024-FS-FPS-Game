@@ -14,15 +14,15 @@ public class pickupScript : MonoBehaviour, IPickup
     [SerializeField] float hpToAdd;
     public void pickup()
     {
-        if (this.GetComponent<BillboardRenderer>())
-        {
-            playHP();
-            gameManager.instance.playerScript.addHP(hpToAdd);
-        }
-        else
+        if (pointsToGain > 0)
         {
             playPoint();
             gameManager.instance.pointsChange(pointsToGain);
+        }
+        if (hpToAdd > 0)
+        {
+            playHP();
+            gameManager.instance.playerScript.addHP(hpToAdd);
         }
         Destroy(gameObject);
     }

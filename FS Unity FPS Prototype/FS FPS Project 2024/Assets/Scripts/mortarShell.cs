@@ -11,7 +11,6 @@ public class mortarShell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //isMoving = false;
         hasLanded = false;
     }
 

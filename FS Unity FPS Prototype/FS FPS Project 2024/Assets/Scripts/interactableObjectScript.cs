@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class interactableObjectScript : MonoBehaviour, IfInteract
 {
-    [Header("---Audio---")]
+    [Header("---Audio Fields---")]
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audOpen;
     [SerializeField] AudioClip audFail;
@@ -17,6 +17,7 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     [Header("---Fields for scene change---")]
     [SerializeField] GameObject emptyGameObject;
     [SerializeField] string sceneToLoad;
+    //private bools for preventing multiple interactions
     private Collider emptyGameObjectCollider;
     private bool isInteracting;
     private bool isFailing;
@@ -28,21 +29,6 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
     }
     public void interact()
     {
-        /*Debug.Log("Interacting with the door");
-        if (emptyGameObjectCollider != null)
-        {
-            emptyGameObjectCollider.enabled = true;
-            if (!string.IsNullOrEmpty(sceneToLoad))
-            {
-                Debug.Log("Loading Scene");
-                emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
-            }
-            else
-            {
-                Debug.LogWarning("No scene to load specified.");
-            }
-        }*/
-
         int amount = gameManager.instance.points;
         if (amount < pointCost && !isFailing)
         {

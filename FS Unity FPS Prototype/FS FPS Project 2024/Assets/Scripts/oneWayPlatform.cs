@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class oneWayPlatform : MonoBehaviour
 {
+    [Header("---Audio Field---")]
     [SerializeField] AudioSource aud;
+    [Header("---Destination and Speed Fields---")]
     [SerializeField] GameObject endPoint;
     [SerializeField] float speed;
     bool isMoving;

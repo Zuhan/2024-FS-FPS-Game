@@ -5,29 +5,14 @@ using UnityEngine;
 public class lavaScript : MonoBehaviour
 {
     public float damage;
-    /*public int dotDamage;
-    public int dotTicks;
-    public bool fireDot;
-    public int dotDelay;*/
     private float time;
     private float diff;
     private float start;
-    /*private float dotTime;
-    private float dotDiff;
-    private float dotStart;
-    private int currentTicks;*/
     public float dmgDelay;
     // Start is called before the first frame update
     void Start()
     {
         time = 0f;
-        //currentTicks = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -73,19 +58,6 @@ public class lavaScript : MonoBehaviour
             time = 0;
             diff = 0;
             start = 0;
-            /*if (fireDot)
-            {
-                if (currentTicks > 0)
-                {
-                    currentTicks += dotTicks;
-                }
-                else
-                {
-                    currentTicks += dotTicks;
-                    dotStart = Time.time;
-                    StartCoroutine(lightOnFire(other));
-                }
-            }*/
         }
     }
     //dealing damage to player
@@ -97,33 +69,5 @@ public class lavaScript : MonoBehaviour
             dmg.TakeDamage(damage);
         }
         yield return new WaitForSeconds(1f);
-        
     }
-    /*IEnumerator lightOnFire(Collider other)
-    {
-        IDamage dmg = other.GetComponent<IDamage>();
-        if (dmg != null)
-        {
-            dmg.TakeDamage(dotDamage);
-        }
-        currentTicks--;
-        int i = 0;
-        dotDiff = 0;
-        while (i < currentTicks)
-        {
-            dotTime = Time.time;
-            if (dotDiff >= dotDelay)
-            {
-                if (dmg != null)
-                {
-                    dmg.TakeDamage(dotDamage);
-                }
-                i++;
-                dotTime = Time.time;
-                dotStart = Time.time;
-            }
-            dotDiff = dotTime - dotStart;
-        }
-        yield return new WaitForSeconds(1f);
-    }*/
 }
