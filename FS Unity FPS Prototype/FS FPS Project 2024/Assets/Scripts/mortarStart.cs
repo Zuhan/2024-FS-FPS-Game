@@ -11,6 +11,7 @@ public class mortarStart : MonoBehaviour
     [Range(0, 1)][SerializeField] float audLandVol;
     [SerializeField] mortarShell mortar;
     [SerializeField] float damage;
+    [SerializeField] ParticleSystem particles;
     Collider col;
     private bool damageTaken;
     private bool fired;
@@ -78,6 +79,7 @@ public class mortarStart : MonoBehaviour
         if (!hasPlayed)
         {
             aud.PlayOneShot(audLand, audLandVol);
+            particles.Play();
         }
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(false);
