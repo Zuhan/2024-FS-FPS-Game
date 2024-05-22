@@ -90,6 +90,8 @@ public class gameManager : MonoBehaviour
         slingUI = playerStats.slingUI;
         fireUI = playerStats.fireUI;
         thUI = playerStats.thUI;
+        exploUI = playerStats.expStaffUI;
+        potionUI = playerStats.potionUI;
         if (slingUI)
         {
             ShowWeaponIcon(0);
