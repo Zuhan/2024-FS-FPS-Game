@@ -3,7 +3,62 @@ guid: d931f54957403954697fa96481c11e68
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Metal
+    second: {fileID: 2100000, guid: 0b82b411029eb594c93b49e854cc81d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StainedGlass
+    second: {fileID: 2100000, guid: 7e5edf0698594a94d9822f80e1549c5a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StoneBricks
+    second: {fileID: 2100000, guid: 2637fab0cd0ea2949a0a6aee013a043c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Large_Brick_basecolor
+    second: {fileID: 2800000, guid: 51a4b3efc840f104d859eab135e322df, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Large_Brick_roughness
+    second: {fileID: 2800000, guid: aa0ff9dbb1009f7448f0ad3c91506444, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Metal_BaseColor
+    second: {fileID: 2800000, guid: 3232e519ab1445048a71b6335676cb0c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Metal_Metallic
+    second: {fileID: 2800000, guid: 9c845b7f1125b494eb14e21f323bda1f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Metal_Roughness
+    second: {fileID: 2800000, guid: a91c375dd41a92a478105dabcfd76427, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_StainedGlass_basecolor
+    second: {fileID: 2800000, guid: 4b8f3456de7b5de4c97a0bef64aeeb53, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_StainedGlass_metallic
+    second: {fileID: 2800000, guid: a20d0df614646d4439603d4fc3e9dc28, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_StainedGlass_roughness
+    second: {fileID: 2800000, guid: e22d1ae33c849684a8c074849f32ff92, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

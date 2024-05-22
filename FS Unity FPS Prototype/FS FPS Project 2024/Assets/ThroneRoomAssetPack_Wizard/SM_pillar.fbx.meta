@@ -3,7 +3,22 @@ guid: 80cbac1b7434d1f45938f7c6db51cda6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_StoneBricks
+    second: {fileID: 2100000, guid: 0c7f7edc11bdee64bb59e9e446831e5a, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Large_Brick_basecolor
+    second: {fileID: 2800000, guid: 1faf91adad7a12142ba87d537cf89863, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Large_Brick_roughness
+    second: {fileID: 2800000, guid: 35aa3891d44693d4e8dbf11237517b06, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

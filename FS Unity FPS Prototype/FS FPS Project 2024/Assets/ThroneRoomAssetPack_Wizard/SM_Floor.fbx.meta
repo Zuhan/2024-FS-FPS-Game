@@ -3,7 +3,22 @@ guid: 9e8ddf08e20a64a43b4c89050749fd9a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Marble
+    second: {fileID: 2100000, guid: 78d50ba1cb42c6f4184eee390618451c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Marble_BaseColor
+    second: {fileID: 2800000, guid: 640a044d47023cd41886e8ec44eb1c09, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Marble_Roughness
+    second: {fileID: 2800000, guid: 6a194eda7070c8949b9277895a1a6117, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

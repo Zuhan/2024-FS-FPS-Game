@@ -3,7 +3,27 @@ guid: de415bae9babee442b3a69041b805fa3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Metal
+    second: {fileID: 2100000, guid: e097788a547877c41a684d1a14d4d02f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_Wood
+    second: {fileID: 2100000, guid: 724b69007c9b0e44a9b1a1fc1d471a36, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Wood_BaseColor
+    second: {fileID: 2800000, guid: 9c6117645e5ee444da079434d5f1139b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: T_Wood_Roughness
+    second: {fileID: 2800000, guid: 3a1ac638bb4815643a4cab0bf8695843, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
