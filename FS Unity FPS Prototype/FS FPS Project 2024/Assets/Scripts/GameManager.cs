@@ -155,14 +155,6 @@ public class gameManager : MonoBehaviour
         pointsCostText.text = cost.ToString("F0");
         interactText.SetActive(true);
     }
-    public void showInventory()
-    {
-        menuActive = inventory;
-        menuActive.SetActive(true);
-        potionCount.text = playerStats.potions.Count.ToString();
-        invOpen = true;
-        statePaused();
-    }
     //method for hiding interact text
     public void hideInteractText()
     {

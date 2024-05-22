@@ -102,13 +102,6 @@ public class playerController : MonoBehaviour, IDamage
             {
                 usePotion();
             }
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (!gameManager.instance.invOpen)
-                {
-                    gameManager.instance.showInventory();
-                }
-            }
             selectWeapon();
             movement();
         }
