@@ -26,8 +26,6 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     [SerializeField] Transform HeadPos;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Image healthbar;
-    //[SerializeField] GameObject bullet;
-    //[SerializeField] Transform shootPos;
     [Header("----Stats----")]
     [SerializeField] float shootRate;
     [SerializeField] int faceTargetSpeed;

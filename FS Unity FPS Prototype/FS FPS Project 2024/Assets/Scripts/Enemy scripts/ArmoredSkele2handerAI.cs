@@ -26,8 +26,6 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
     [SerializeField] Transform HeadPos;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Image healthbar;
-    //[SerializeField] GameObject bullet;
-    //[SerializeField] Transform shootPos;
     [Header("----Stats----")]
     [SerializeField] float shootRate;
     [SerializeField] int faceTargetSpeed;
@@ -117,10 +115,6 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
-
-
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;
 

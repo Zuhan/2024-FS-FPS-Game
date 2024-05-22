@@ -87,9 +87,6 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(HeadPos.position, playerDir);
-
         RaycastHit hit;
 
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))
@@ -206,16 +203,5 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
         bullet.GetComponent<Bullet>().RemoveDamage(DamageAbsorb);
         DamageAbsorb = 0;
     }
-
-
-    // public void WeaponColOn()
-    //{
-    //    weaponCol.enabled = true;
-    //}
-
-    // public void WeaponColOff()
-    //{
-    //    weaponCol.enabled = false;
-    //}
 
 }

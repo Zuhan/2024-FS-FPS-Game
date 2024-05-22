@@ -24,7 +24,6 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
     [SerializeField] GameObject BracerLegL;
     [SerializeField] GameObject BracerLegR;
     [SerializeField] Animator anim;
-    //[SerializeField] Collider weaponCol;
     [SerializeField] Transform HeadPos;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Image healthbar;
@@ -121,10 +120,6 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
-
-
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;
 
@@ -337,16 +332,5 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
     }
-
-
-    // public void WeaponColOn()
-    //{
-    //weaponCol.enabled = true;
-    //}
-
-    //public void WeaponColOff()
-    //{
-    // weaponCol.enabled = false;
-    //}
 
 }

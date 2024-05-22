@@ -16,8 +16,6 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     [SerializeField] Renderer legs;
     [SerializeField] Animator anim;
     [SerializeField] Collider weaponCol;
-    //[SerializeField] GameObject bullet;
-    //[SerializeField] Transform shootPos;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Transform HeadPos;
     [SerializeField] Image healthbar;
@@ -83,9 +81,6 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
-
-        //Debug.Log(angleToPlayer);
-        //Debug.DrawRay(HeadPos.position, playerDir);
 
         RaycastHit hit;
 
