@@ -392,7 +392,7 @@ public class playerController : MonoBehaviour, IDamage
                 }
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha0))
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             for (int i = 0; i < weapons.Count; i++)
             {
