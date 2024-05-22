@@ -20,6 +20,7 @@ public class hpPotion : MonoBehaviour, IPickup
         {
             playerStats.potions.Add(this);
             AudioSource.PlayClipAtPoint(audClip,transform.position,audVol);
+            gameManager.instance.ShowWeaponIcon(4);
             gameObject.SetActive(false);
         }
     }

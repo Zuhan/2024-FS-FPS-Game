@@ -30,6 +30,7 @@ public class potionBuy : MonoBehaviour, IfInteract
         {
             playerStats.potions.Add(potion);
             gameManager.instance.pointsChange(-cost);
+            gameManager.instance.ShowWeaponIcon(4);
             playSound();
         }
         else
