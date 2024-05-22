@@ -16,4 +16,5 @@ public static class playerStats
     public static bool expStaffUI = false;
     public static bool potionUI = false;
     public static int currentWeapon = 0;
+    public static float sens = 300;
 }
