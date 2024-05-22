@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BenCamera : MonoBehaviour
 {
-    [SerializeField] int sensitivity;
+    [Range(2,600)][SerializeField] float sensitivity;
     [SerializeField] int lockVertMin, lockVertMax;
     [SerializeField] bool invertY;
     float rotX;
@@ -36,5 +36,13 @@ public class BenCamera : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotX, 0, 0);
         //rotate player on y-axis
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
+    public float GetSensitivity()
+    {
+        return sensitivity;
+    }
+    public void SetSensitivity(float Sensitivity)
+    {
+        sensitivity = Sensitivity;
     }
 }
