@@ -18,6 +18,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] public GameObject cheatInput;
     [SerializeField] List<Image> weaponIcons;
+    [SerializeField] TMP_Text potionAmount;
 
     [Header("----- UI Stuff -----")]
     public Image playerHPBar;
@@ -33,8 +34,6 @@ public class gameManager : MonoBehaviour
     public TMP_Text collectibleText;
     public TMP_Text potionCount;
     public GameObject inventory;
-    //public List<GameObject> enemies;
-    //public GameObject spawner;
 
     //game manager instance
     public static gameManager instance;
@@ -75,6 +74,7 @@ public class gameManager : MonoBehaviour
     public bool fireUI;
     public bool thUI;
     public bool exploUI;
+    public bool potionUI;
     //void awake so its called first 
     void Awake()
     {
@@ -88,7 +88,6 @@ public class gameManager : MonoBehaviour
         points = playerStats.money;
         pointsText.text = points.ToString("F0");
         slingUI = playerStats.slingUI;
-        //Debug.Log(playerStats.slingUI);
         fireUI = playerStats.fireUI;
         thUI = playerStats.thUI;
         if (slingUI)
@@ -102,6 +101,17 @@ public class gameManager : MonoBehaviour
         if (thUI)
         {
             ShowWeaponIcon(2);
+        }
+        if (exploUI)
+        {
+            ShowWeaponIcon(3);
+        }
+        if (potionUI)
+        {
+            ShowWeaponIcon(4);
+            potionAmount.text = playerStats.potions.Count.ToString();
+            potionAmount.gameObject.SetActive(true);
+            potionAmount.enabled = true;
         }
     }
 
@@ -124,24 +134,12 @@ public class gameManager : MonoBehaviour
         }
         menuActive = null;
     }
-
-
     public void win()
     {
         statePaused();
         menuActive = menuWin;
         menuActive.SetActive(isPaused);
     }
-    public void winByPoints()
-    {
-        winPoints++;
-        collectibleText.text = winPoints.ToString("F0");
-        if (winPoints >= 5)
-        {
-            win();
-        }
-    }
-
     //method for losing
     public void lose()
     {
@@ -155,11 +153,6 @@ public class gameManager : MonoBehaviour
         pointsCostText.text = cost.ToString("F0");
         interactText.SetActive(true);
     }
-    public void showBarricadeText(int cost)
-    {
-        pointsCostText.text = cost.ToString("F0");
-        barricadeText.SetActive(true);
-    }
     public void showInventory()
     {
         menuActive = inventory;
@@ -168,15 +161,10 @@ public class gameManager : MonoBehaviour
         invOpen = true;
         statePaused();
     }
-
     //method for hiding interact text
     public void hideInteractText()
     {
         interactText?.SetActive(false);
-    }
-    public void hideBarricadeText()
-    {    
-        barricadeText?.SetActive(false);
     }
     //method for showing when you dont have enough points
     public void showInteractFail()
@@ -194,15 +182,9 @@ public class gameManager : MonoBehaviour
         pointsText.text = points.ToString("F0");
         playerStats.money = points;
     }
-    public void updateWave(int wave)
-    {
-        waveText.text = wave.ToString("F0");
-    }
-
     [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData", order = 1)]
     public class PlayerData : ScriptableObject
     {
-        //public int points;
         public List<weaponStats> weapons = new List<weaponStats>();
         // Add other player data here
     }
@@ -226,23 +208,39 @@ public class gameManager : MonoBehaviour
             }
         }      
     }
-
     public void ShowWeaponIcon(int weaponIndex)
     {
+        if(weaponIndex >= weaponIcons.Count)
+        {
+            weaponIndex = 0;
+        }
         weaponIcons[weaponIndex].enabled = true;
         if(weaponIndex == 0)
         {
-            
             playerStats.slingUI = true;
-            Debug.Log(playerStats.slingUI);
         }
         else if (weaponIndex == 1)
         {
             playerStats.fireUI = true;
         }
-        else
+        else if(weaponIndex == 2)
         {
             playerStats.thUI = true;
+        }
+        else if (weaponIndex == 3)
+        {
+            playerStats.expStaffUI = true;
+        }
+        else if(weaponIndex == 4)
+        {
+            playerStats.potionUI = true;
+            potionAmount.text = playerStats.potions.Count.ToString();
+            potionAmount.gameObject.SetActive(true);
+            potionAmount.enabled = true;
+        }
+        else
+        {
+            //last weapon slot
         }
     }
 }
