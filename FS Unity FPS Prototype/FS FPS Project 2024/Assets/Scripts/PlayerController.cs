@@ -521,6 +521,7 @@ public class playerController : MonoBehaviour, IDamage
             playerStats.potions[0].pickup();
             aud.PlayOneShot(audDrink[Random.Range(0, audDrink.Length)],audDrinkVol);
             playerStats.potions.RemoveAt(0);
+            gameManager.instance.updatePotionUi();
             updatePlayerUI();
             Debug.Log(playerStats.potions);
         }

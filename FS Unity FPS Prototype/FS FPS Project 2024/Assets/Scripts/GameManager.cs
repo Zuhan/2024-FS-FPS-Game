@@ -224,4 +224,8 @@ public class gameManager : MonoBehaviour
             //last weapon slot
         }
     }
+    public void updatePotionUi()
+    {
+        potionAmount.text = playerStats.potions.Count.ToString();
+    }
 }
