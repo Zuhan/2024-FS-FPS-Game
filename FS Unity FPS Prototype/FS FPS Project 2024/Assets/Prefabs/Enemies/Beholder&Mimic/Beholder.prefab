@@ -274,7 +274,6 @@ MonoBehaviour:
   audBeam:
   - {fileID: 8300000, guid: 074e9680613ea474785f31c8d3c0e315, type: 3}
   audBeamVol: 0.2
-  spawnLocation: {fileID: 0}
 --- !u!195 &6262648383871211015
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -329,7 +328,7 @@ AudioSource:
   m_GameObject: {fileID: 908410883882053373}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2879096216292800894, guid: 88c43d2cbf7271748a6c699157ee9b0f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -37,7 +37,6 @@ public class nukeExplosion : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collider Stayed: " + other.name);
         IDamage dmg = other.GetComponent<IDamage>();
 
         if (dmg != null)

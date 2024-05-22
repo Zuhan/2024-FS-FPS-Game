@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 170332678657945647}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.033, y: 1.495, z: 0.276}
+  m_LocalPosition: {x: -0.325, y: 1.59, z: 0.436}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionMagicPrefab: {fileID: 7958346828356480755, guid: 058ad907804d6624fb7c2c8d4481c9ea, type: 3}
   shootPos: {fileID: 945540012679350163}
-  fireCooldown: 0.5
+  fireCooldown: 6.5
   crystal: {fileID: 2662910849215522402}
 --- !u!33 &9076379246228295452
 MeshFilter:
@@ -465,7 +465,7 @@ AudioSource:
   m_GameObject: {fileID: 1498508535447480768}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2879096216292800894, guid: 88c43d2cbf7271748a6c699157ee9b0f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
