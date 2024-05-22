@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Audio;
-using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     public TMP_Dropdown graphicsDropdown;
     public Slider masterVol, musicVol, sfxVol, lookSensitivity;
     public AudioMixer mainMixer;
-    public GameObject camera;
+    public GameObject cameraA;
     public BenCamera cameraController;
 
     float sensitivity;
@@ -20,9 +18,15 @@ public class MainMenu : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        camera = GameObject.FindWithTag("MainCamera");
-        cameraController = camera.GetComponent<BenCamera>();
-        sensitivity = cameraController.GetSensitivity();
+        
+        sensitivity = playerStats.sens;
+
+        masterVol.value = playerStats.masterVol;
+        musicVol.value = playerStats.musicVol;
+        sfxVol.value = playerStats.sfxVol;
+        cameraA = GameObject.FindWithTag("MainCamera");
+        cameraController = cameraA.GetComponent<BenCamera>();
+
     }
     public void PlayGame()
     {
@@ -39,15 +43,19 @@ public class MainMenu : MonoBehaviour
     }
     public void ChangeMasterVolume()
     {
+
         mainMixer.SetFloat("Master Volume", masterVol.value);
+        playerStats.masterVol = masterVol.value;
     }
     public void ChangeMusicVolume()
     {
         mainMixer.SetFloat("Music Volume", musicVol.value);
+        playerStats.musicVol = musicVol.value;
     }
     public void ChangeSFXVolume()
     {
         mainMixer.SetFloat("SFX Volume", sfxVol.value);
+        playerStats.sfxVol = sfxVol.value;
     }
     public void PlayDemo()
     {
@@ -58,6 +66,8 @@ public class MainMenu : MonoBehaviour
         //float sensitivity = cameraController.GetSensitivity();
         sensitivity = lookSensitivity.value;
         cameraController.SetSensitivity(sensitivity);
+        playerStats.sens = sensitivity;
+
         
     }
 }

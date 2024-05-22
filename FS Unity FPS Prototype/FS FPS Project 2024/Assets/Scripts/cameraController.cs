@@ -13,6 +13,7 @@ public class BenCamera : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        sensitivity = playerStats.sens;
     }
 
     // Update is called once per frame
