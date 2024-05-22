@@ -11,7 +11,6 @@ public class gameManager : MonoBehaviour
     [Header("----- Menu Stuff -----")]
     [SerializeField] GameObject interactText;
     [SerializeField] GameObject interactFailText;
-    [SerializeField] GameObject barricadeText;
     [SerializeField] public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -26,14 +25,10 @@ public class gameManager : MonoBehaviour
     public Image slingShot;
     public Image fireStaff;
     public Image thunderHammer;
-    public TMP_Text enemyCountText;
     public TMP_Text pointsText;
     public TMP_Text pointsCostText;
     public GameObject playerDamageScreen;
     public GameObject playerHealScreen;
-    public TMP_Text collectibleText;
-    public TMP_Text potionCount;
-    public GameObject inventory;
 
     //game manager instance
     public static gameManager instance;
@@ -55,20 +50,14 @@ public class gameManager : MonoBehaviour
     public GameObject cooldownRing;
 
 
-    //enemy count field 
-    public int enemyCount;
-
-    int winPoints = 0;
 
     //point count
     public int points;
 
     public bool isPaused;
 
-    public TMP_Text waveText;
 
     public GameObject playerSpawnPos;
-    public bool invOpen;
 
     public bool slingUI;
     public bool fireUI;
@@ -193,12 +182,10 @@ public class gameManager : MonoBehaviour
                 statePaused();
                 menuActive = menuPause;
                 menuActive.SetActive(isPaused);
-                invOpen = false;
             }
-            else if (menuActive == menuPause || menuActive == inventory)
+            else if (menuActive == menuPause)
             {
                 stateUnpaused();
-                invOpen = false;
             }
         }      
     }
