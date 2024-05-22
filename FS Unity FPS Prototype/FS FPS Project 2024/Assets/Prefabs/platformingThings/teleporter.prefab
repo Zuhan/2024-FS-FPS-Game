@@ -262,9 +262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aud: {fileID: 1206950174302657758}
-  destination: {fileID: 0}
   audTp: {fileID: 8300000, guid: 1aa7e26dd37296d46ab758b27804c1aa, type: 3}
   audTpVol: 0.339
+  destination: {fileID: 0}
 --- !u!65 &1891294025105955277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ AudioSource:
   m_GameObject: {fileID: 5758539915182086534}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2879096216292800894, guid: 88c43d2cbf7271748a6c699157ee9b0f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
