@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b1522de0f5934d5a8f7086ec995cab43
+guid: a5aa3ce397c24155845dba13bc634b36
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable:
@@ -299,7 +299,7 @@ ModelImporter:
     second: BeholderMesh
   - first:
       74: 7400000
-    second: Attack02RPT
+    second: Attack01
   - first:
       95: 9500000
     second: //RootNode
@@ -336,11 +336,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Attack02RPT
+      name: Attack01
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 20
+      lastFrame: 22
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -360,29 +360,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.046385515
-        functionName: ShootBeam
+      - time: 0.6380208
+        functionName: createBullet
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.34745
-        functionName: ShootBeam
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.621057
-        functionName: ShootBeam
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.8862279
-        functionName: ShootBeam
+      - time: 0.62868184
+        functionName: AttackSound
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

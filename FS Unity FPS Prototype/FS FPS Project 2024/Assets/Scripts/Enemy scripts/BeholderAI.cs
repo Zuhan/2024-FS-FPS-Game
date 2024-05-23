@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class BeholderAI : MonoBehaviour, IDamage
@@ -9,6 +10,9 @@ public class BeholderAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header("----Main----")]
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource attack;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
@@ -35,8 +39,17 @@ public class BeholderAI : MonoBehaviour, IDamage
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audBeam;
     [Range(0, 1)][SerializeField] float audBeamVol;
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audVolWalk;
+    [SerializeField] AudioClip[] audAttack;
+    [Range(0, 1)][SerializeField] float audVolAttack;
+    [SerializeField] float TimeBetweenSteps;
 
 
+
+    bool playingWalk;
     float MaxHP;
     bool LowHpReached = false;
     float angleToPlayer;
@@ -78,6 +91,12 @@ public class BeholderAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
+            {
+                StartCoroutine(WalkSound());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -146,6 +165,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -197,10 +217,24 @@ public class BeholderAI : MonoBehaviour, IDamage
     }
 
 
+    public void AttackSound()
+    {
+        attack.PlayOneShot(audAttack[Random.Range(0, audAttack.Length)], audVolAttack);
+    }
+
+
+    IEnumerator WalkSound()
+    {
+        playingWalk = true;
+        Foot.PlayOneShot(audWalk[Random.Range(0, audWalk.Length)], audVolWalk);
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        playingWalk = false;
+    }
+
     //shoot beam func for low hp attack in anim
     public void ShootBeam()
     {
-       int random = UnityEngine.Random.Range(0, 4);
+       int random = Random.Range(0, 4);
        Instantiate(Beam, BeamList[random].position, transform.rotation);
     }
 
