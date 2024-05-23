@@ -67,7 +67,5 @@ public class MainMenu : MonoBehaviour
         sensitivity = lookSensitivity.value;
         cameraController.SetSensitivity(sensitivity);
         playerStats.sens = sensitivity;
-
-        
     }
 }
