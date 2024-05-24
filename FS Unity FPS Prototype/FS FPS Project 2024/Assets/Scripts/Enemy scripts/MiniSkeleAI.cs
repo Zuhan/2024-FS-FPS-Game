@@ -9,6 +9,9 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header("----Main----")]
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource Sword;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer head;
     [SerializeField] Renderer torso;
@@ -27,7 +30,17 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     [SerializeField] int pointsToGain;
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audVolWalk;
+    [SerializeField] AudioClip[] audAttack;
+    [Range(0, 1)][SerializeField] float audVolAttack;
+    [SerializeField] float TimeBetweenSteps;
 
+
+    bool playingWalk;
     float MaxHP;
     float angleToPlayer;
     bool playerInRange;
@@ -53,6 +66,12 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
+            {
+                StartCoroutine(WalkSound());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -126,6 +145,7 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -165,6 +185,22 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+
+    public void attackSound()
+    {
+        Sword.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
+    }
+
+
+
+    IEnumerator WalkSound()
+    {
+        playingWalk = true;
+        Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        playingWalk = false;
     }
 
     public void WeaponColOn()
