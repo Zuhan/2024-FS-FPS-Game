@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
@@ -9,6 +10,10 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header("----Main----")]
+    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource HurtBody;
+    [SerializeField] AudioSource attack;
+    [SerializeField] AudioSource specialAbility;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer head;
     [SerializeField] Renderer torso;
@@ -30,7 +35,19 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
     [SerializeField] float ShieldCooldown;
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
+    [SerializeField] AudioClip[] audWalk;
+    [Range(0, 1)][SerializeField] float audVolWalk;
+    [SerializeField] AudioClip[] audAttack;
+    [Range(0, 1)][SerializeField] float audVolAttack;
+    [SerializeField] AudioClip[] audSpecialAbility;
+    [Range(0, 1)][SerializeField] float audVolSpecialAbility;
+    [SerializeField] float TimeBetweenSteps;
 
+
+    bool playingWalk;
     float MaxHP;
     bool ShieldOn;
     bool ShieldOnCoolDown;
@@ -60,6 +77,13 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
         if (playerInRange)
         {
             agent.SetDestination(gameManager.instance.player.transform.position);
+
+
+
+            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
+            {
+                StartCoroutine(WalkSound());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -92,6 +116,7 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))
         {
 
+
             if (hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange && angleToPlayer <= viewCone)
             {
                 if (!isShooting)
@@ -103,6 +128,12 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
                 }
             }
         }
+    }
+
+
+    public void attackSound()
+    {
+        attack.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
     }
 
 
@@ -142,7 +173,7 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
 
 
         HP -= damage;
-
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         UpdateEnemyUI();
 
         StartCoroutine(FlashRed());
@@ -191,8 +222,17 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
         ShieldOnCoolDown = true;
         Shield.SetActive(true);
         ShieldOn = true;
+        specialAbility.PlayOneShot(audSpecialAbility[UnityEngine.Random.Range(0, audSpecialAbility.Length)], audVolSpecialAbility);
         yield return new WaitForSeconds(ShieldCooldown);
         ShieldOnCoolDown = false;
+    }
+
+    IEnumerator WalkSound()
+    {
+        playingWalk = true;
+        Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
+        yield return new WaitForSeconds(TimeBetweenSteps);
+        playingWalk = false;
     }
 
 
