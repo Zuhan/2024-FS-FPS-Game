@@ -8,9 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: cfxr cloud blur add
-  m_Shader: {fileID: -6465566751694194690, guid: 1a29b4d27eb8b04479ef89c00dea533d,
-    type: 3}
-  m_ValidKeywords:
+  m_Shader: {fileID: 47, guid: 0000000000000000f000000000000000, type: 0}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _
   - _CFXR_ADDITIVE
   - _CFXR_DISSOLVE
   - _CFXR_DITHERED_SHADOWS_ON
@@ -18,8 +21,6 @@ Material:
   - _CFXR_OVERLAYTEX_1X
   - _CFXR_SINGLE_CHANNEL
   - _FADING_ON
-  m_InvalidKeywords:
-  - _
   - _OVERLAYTEX_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -27,6 +28,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -90,6 +92,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SpecGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _BacklightTransmittance: 1
@@ -106,7 +112,7 @@ Material:
     - _DissolveSmooth: 0.35
     - _Distort: 0.1
     - _DoubleDissolve: 0
-    - _DstBlend: 1
+    - _DstBlend: 0
     - _EdgeFadeMax: 2
     - _EdgeFadeMin: 3
     - _EdgeFadePow: 2
@@ -132,7 +138,7 @@ Material:
     - _SoftParticlesFadeDistanceFar: 1
     - _SoftParticlesFadeDistanceNear: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 5
+    - _SrcBlend: 1
     - _UVDistortionAdd: 0
     - _UVSec: 0
     - _UseAlphaClip: 0
@@ -151,7 +157,7 @@ Material:
     - _UseSecondColor: 0
     - _UseUV2Distortion: 0
     - _UseUVDistortion: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveScroll: {r: 0, g: 0, b: 0, a: 0}
