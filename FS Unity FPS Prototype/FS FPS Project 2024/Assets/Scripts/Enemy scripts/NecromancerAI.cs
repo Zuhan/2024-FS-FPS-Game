@@ -63,6 +63,9 @@ public class NecromancerAI : MonoBehaviour, IDamage
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
 
+    bool teleported1;
+    bool teleported2;
+    bool teleported3;
     float damageDealt;
     int SkeletonsAlive;
     bool SummonOnCooldown;
@@ -109,10 +112,6 @@ public class NecromancerAI : MonoBehaviour, IDamage
             ShadowBolt, ShadowBolt1, ShadowBolt2, ShadowBolt3, ShadowBolt4, ShadowBolt5, ShadowBolt6
         };
 
-        TeleportList = new List<Transform>(3)
-        {
-            TeleportLocation, TeleportLocation1, TeleportLocation2
-        };
 
     }
 
@@ -236,7 +235,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
         if(npcmode == NPCmode.AttackShadowBolts)
         {
             damageDealt += damage;
-            if(damageDealt >= 25)
+            if(damageDealt >= 33)
             {
                 npcmode = NPCmode.Teleport;
             }
@@ -334,9 +333,24 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     private void Teleport()
     {
-        int randomTeleport = Random.Range(0, 2);
-        transform.position= TeleportList[randomTeleport].position;
+        SummonsAmountLeft = SummonsTotal;
         npcmode = NPCmode.Idle;
+        
+
+        if (teleported1 == false) {
+            transform.position = TeleportLocation.position;
+            transform.Rotate(0, -90, 0);
+        }
+        else if(teleported2 == false)
+        {
+            transform.position = TeleportLocation1.position;
+            transform.Rotate(0, 90, 0);
+        }
+        else if (teleported3 == false)
+        {
+            transform.position = TeleportLocation2.position;
+            transform.Rotate(0, 180, 0);
+        }
     }
 
     private void PassiveAttack()
