@@ -674,7 +674,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 8
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -887,11 +887,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1563624733371418225}
   - component: {fileID: 1232000304218705515}
+  - component: {fileID: 4900000319920961970}
   - component: {fileID: 128738958486734978}
   - component: {fileID: 6824096250023532483}
   - component: {fileID: 964562928823103430}
   - component: {fileID: 7249161479246070895}
-  - component: {fileID: 4900000319920961970}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Enemy
@@ -944,6 +944,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &4900000319920961970
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476663220124368191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.35
+  m_Height: 5.72
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.19, z: 0}
 --- !u!114 &128738958486734978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -956,15 +979,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa137104cde6120448df1e9c7432cd62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Foot: {fileID: 964562928823103430}
+  Summon: {fileID: 964562928823103430}
   HurtBody: {fileID: 9159975854919849267}
   attack: {fileID: 4348468641602435490}
+  ShieldAudioSource: {fileID: 3916718459471775812}
   agent: {fileID: 6824096250023532483}
   model: {fileID: 7178609881887975355}
   anim: {fileID: 1232000304218705515}
   bullet: {fileID: 4928952699966851807, guid: 4c142af8a477dc646b915a18b47dbe7f, type: 3}
   HeadPos: {fileID: 6127138125974556422}
-  shootPos: {fileID: 6287840575845365907}
+  shootPos: {fileID: 3609786289236806780}
   playerDetectiomRad: {fileID: 7249161479246070895}
   healthbar: {fileID: 469875130265222647}
   Spawn1: {fileID: 6052621544731377204}
@@ -976,19 +1000,25 @@ MonoBehaviour:
   SpawnType2: {fileID: 930708274263820222, guid: ef7100edc54524e49a01681472d84a18, type: 3}
   SpawnType3: {fileID: 684946142704275704, guid: 2cd4b2418812e7d4b893e9dfdaa29abd, type: 3}
   Shield: {fileID: 2162061572587172318}
-  PassPart: {fileID: 8074418808953674973}
   faceTargetSpeed: 6
   animSpeedTrans: 4
-  HP: 6
+  HP: 100
   passiveshootRate: 3
-  pointsToGain: 0
-  SkeletonSummonDelay: 3
-  SummonsTotal: 5
-  DurOfPassive: 30
-  audHurt: []
-  audVolHurt: 0
-  audAttack: []
-  audVolAttack: 0
+  pointsToGain: 10
+  SkeletonSummonDelay: 4
+  SummonsTotal: 6
+  audHurt:
+  - {fileID: 8300000, guid: 9c344680984815b45ac078084eef40a8, type: 3}
+  audVolHurt: 1
+  audAttack:
+  - {fileID: 8300000, guid: f7cb50eed012f0c46a71af6bf3ebfd76, type: 3}
+  audVolAttack: 1
+  audSummon:
+  - {fileID: 8300000, guid: 6541dde4173559c448cbbe61addb05a0, type: 3}
+  audVolSummon: 1
+  audShield:
+  - {fileID: 8300000, guid: 64320a6d3b76368478903731c2be58d4, type: 3}
+  audVolShield: 1
 --- !u!195 &6824096250023532483
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -999,12 +1029,12 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 3.86
-  m_Speed: 4
+  m_Speed: 0
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 8
-  m_AutoTraverseOffMeshLink: 1
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 5.49
@@ -1128,29 +1158,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 100, y: 30, z: 114.7}
   m_Center: {x: 0, y: 15.44, z: 48.7}
---- !u!136 &4900000319920961970
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3476663220124368191}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.77
-  m_Height: 7.12
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.19, z: 0}
 --- !u!1 &3553719500923461218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,7 +1207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6287840575845365907
 Transform:
   m_ObjectHideFlags: 0
@@ -1233,7 +1240,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -7384,6 +7391,18 @@ PrefabInstance:
     - target: {fileID: 5094161840831728290, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281797609512144973, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
+      propertyPath: m_Color.b
+      value: 0.006289184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281797609512144973, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
+      propertyPath: m_Color.g
+      value: 0.006289184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281797609512144973, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
+      propertyPath: m_Color.r
+      value: 0.006289184
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
