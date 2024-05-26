@@ -9,7 +9,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     //Serialized fields for enemy ai
     [Header("----Main----")]
-    [SerializeField] AudioSource Foot;
+    [SerializeField] AudioSource Summon;
     [SerializeField] AudioSource HurtBody;
     [SerializeField] AudioSource attack;
     [SerializeField] NavMeshAgent agent;
@@ -44,6 +44,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audVolHurt;
     [SerializeField] AudioClip[] audAttack;
     [Range(0, 1)][SerializeField] float audVolAttack;
+    [SerializeField] AudioClip[] audSummon;
+    [Range(0, 1)][SerializeField] float audVolSummon;
 
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
@@ -124,7 +126,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
                 //summon skeletons
                 case NPCmode.SummonSkeletons:
 
-                if (SummonsAmountLeft >= 0)
+                if (SummonsAmountLeft > 0)
                 {
                     if (SummonOnCooldown == false)
                     {
@@ -134,13 +136,10 @@ public class NecromancerAI : MonoBehaviour, IDamage
                 }
                 else
                 {
-                    //set shield to inactive
-                    Shield.SetActive(false);
-                    ShieldIsActive = false;
                     //set to passive mode
-                    npcmode = NPCmode.PassiveAttack;
                     //call cooldown on passive
                     WaitTimePassive();
+                    npcmode = NPCmode.PassiveAttack;
                 }
                 break;
                 //passive attack
@@ -148,11 +147,14 @@ public class NecromancerAI : MonoBehaviour, IDamage
                    
                   if (OnPassiveCooldown == true)
                   {
-                    PassPart.Play();
+                    PassPart.Play(true);
                     PassiveAttack();
                   }
                   else
                   {
+                    //set shield to inactive
+                    Shield.SetActive(false);
+                    ShieldIsActive = false;
                     PassPart.Stop();
                     npcmode = NPCmode.AttackShadowBolts;
                   }
@@ -196,7 +198,6 @@ public class NecromancerAI : MonoBehaviour, IDamage
         }
     }
 
-    // Take Damage AI added by Matt
     public void TakeDamage(float damage)
     {
         if(ShieldIsActive == true) 
@@ -235,8 +236,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     IEnumerator PassiveShoot()
     {
-        isShooting = true;
         anim.SetTrigger("PassiveShoot");
+        isShooting = true;
         yield return new WaitForSeconds(passiveshootRate);
         isShooting = false;
     }
@@ -306,6 +307,11 @@ public class NecromancerAI : MonoBehaviour, IDamage
         //spawn random enemy at random location
         yield return new WaitForSeconds(SkeletonSummonDelay);
         SummonOnCooldown = false;
+    }
+
+    public void playSummonSound()
+    {
+        Summon.PlayOneShot(audSummon[Random.Range(0, audSummon.Length)], audVolSummon);
     }
 
 
