@@ -684,15 +684,15 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.4966526
-        functionName: PassiveAttack
+      - time: 0.49103293
+        functionName: AttackSound
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.49549222
-        functionName: AttackSound
+      - time: 0.52563816
+        functionName: createBullet
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

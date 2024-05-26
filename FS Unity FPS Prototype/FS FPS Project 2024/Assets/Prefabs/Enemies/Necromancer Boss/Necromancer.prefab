@@ -674,7 +674,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 8
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -982,12 +982,13 @@ MonoBehaviour:
   Summon: {fileID: 964562928823103430}
   HurtBody: {fileID: 9159975854919849267}
   attack: {fileID: 4348468641602435490}
+  ShieldAudioSource: {fileID: 3916718459471775812}
   agent: {fileID: 6824096250023532483}
   model: {fileID: 7178609881887975355}
   anim: {fileID: 1232000304218705515}
   bullet: {fileID: 4928952699966851807, guid: 4c142af8a477dc646b915a18b47dbe7f, type: 3}
   HeadPos: {fileID: 6127138125974556422}
-  shootPos: {fileID: 6287840575845365907}
+  shootPos: {fileID: 3609786289236806780}
   playerDetectiomRad: {fileID: 7249161479246070895}
   healthbar: {fileID: 469875130265222647}
   Spawn1: {fileID: 6052621544731377204}
@@ -999,15 +1000,13 @@ MonoBehaviour:
   SpawnType2: {fileID: 930708274263820222, guid: ef7100edc54524e49a01681472d84a18, type: 3}
   SpawnType3: {fileID: 684946142704275704, guid: 2cd4b2418812e7d4b893e9dfdaa29abd, type: 3}
   Shield: {fileID: 2162061572587172318}
-  PassPart: {fileID: 8074418808953674973}
   faceTargetSpeed: 6
   animSpeedTrans: 4
   HP: 100
   passiveshootRate: 3
   pointsToGain: 10
-  SkeletonSummonDelay: 3
-  SummonsTotal: 5
-  DurOfPassive: 30
+  SkeletonSummonDelay: 4
+  SummonsTotal: 6
   audHurt:
   - {fileID: 8300000, guid: 9c344680984815b45ac078084eef40a8, type: 3}
   audVolHurt: 1
@@ -1017,6 +1016,9 @@ MonoBehaviour:
   audSummon:
   - {fileID: 8300000, guid: 6541dde4173559c448cbbe61addb05a0, type: 3}
   audVolSummon: 1
+  audShield:
+  - {fileID: 8300000, guid: 64320a6d3b76368478903731c2be58d4, type: 3}
+  audVolShield: 1
 --- !u!195 &6824096250023532483
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1205,7 +1207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6287840575845365907
 Transform:
   m_ObjectHideFlags: 0
@@ -1238,7 +1240,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -7389,6 +7391,18 @@ PrefabInstance:
     - target: {fileID: 5094161840831728290, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281797609512144973, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
+      propertyPath: m_Color.b
+      value: 0.006289184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281797609512144973, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
+      propertyPath: m_Color.g
+      value: 0.006289184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281797609512144973, guid: 41a6a44e88bcfb1479a596e5ce560316, type: 3}
+      propertyPath: m_Color.r
+      value: 0.006289184
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
