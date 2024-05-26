@@ -50,11 +50,11 @@ public class AttackState : IBossState
         if (!secondPhaseActive)
         {
             boss.cardDeck.Clear();
-            //for (int i = 0; i < 12; i++)
-            //{
-            //    boss.cardDeck.Add(boss.Card_TheWorld);
-            //    boss.cardDeck.Add(boss.Card_TheMagician);
-            //}
+            for (int i = 0; i < 12; i++)
+            {
+                boss.cardDeck.Add(boss.Card_TheWorld);
+                boss.cardDeck.Add(boss.Card_TheMagician);
+            }
             for (int i = 0; i < 8; i++)
             {
                 boss.cardDeck.Add(boss.Card_Justice);

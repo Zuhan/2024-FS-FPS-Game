@@ -42,7 +42,6 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] public GameObject Card_TheTower;
 
     [Header("-----Justice-----")]
-    [Header("-----Body-----")]
 
     [SerializeField] public GameObject healAura;
 
