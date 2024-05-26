@@ -1019,6 +1019,7 @@ MonoBehaviour:
   audShield:
   - {fileID: 8300000, guid: 64320a6d3b76368478903731c2be58d4, type: 3}
   audVolShield: 1
+  ShieldIsActive: 0
 --- !u!195 &6824096250023532483
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1026,7 +1027,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3476663220124368191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 3.86
   m_Speed: 0
@@ -6864,7 +6865,7 @@ Transform:
   m_GameObject: {fileID: 7078396303211164130}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.2, y: 2, z: 19.26}
+  m_LocalPosition: {x: -25.2, y: 1, z: 19.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

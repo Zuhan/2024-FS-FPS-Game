@@ -51,10 +51,11 @@ public class NecromancerAI : MonoBehaviour, IDamage
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
 
+
     int SkeletonsAlive;
     bool SummonOnCooldown;
     int SummonsAmountLeft;
-    bool ShieldIsActive;
+    public bool ShieldIsActive;
     float MaxHP;
     bool playerInRange;
     bool isShooting;
@@ -116,6 +117,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
                 {
                     //call shield func
                     Barrier();
+                    AddSkeleton(SummonsTotal);
                 }
                 else
                 {
@@ -128,7 +130,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
                 if (SummonsAmountLeft > 0)
                 {
-                    if (SummonOnCooldown == false)
+                    if (SummonOnCooldown == false && SummonsAmountLeft > 0)
                     {
                         SummonSkeletons();
                     }
@@ -145,18 +147,18 @@ public class NecromancerAI : MonoBehaviour, IDamage
                 //passive attack
                 case NPCmode.PassiveAttack:
 
-
+                if (SkeletonsAlive > 0)
+                {
                     PassiveAttack();
-
-
-                //shootPos.SetActive(false);
-                ////set shield to inactive
-                //Shield.SetActive(false);
-                //ShieldIsActive = false;
-                //PassPart.Stop();
-                //npcmode = NPCmode.AttackShadowBolts;
-
-
+                }
+                else
+                {
+                    shootPos.SetActive(false);
+                    //set shield to inactive
+                    Shield.SetActive(false);
+                    ShieldIsActive = false;
+                    npcmode = NPCmode.AttackShadowBolts;
+                }
 
                 break;
                 case NPCmode.AttackShadowBolts:
@@ -270,7 +272,12 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     private void SummonSkeletons()
     {
-        StartCoroutine(Summons());
+        
+        if (SummonOnCooldown == false)
+        {
+            SummonOnCooldown = true;
+            StartCoroutine(Summons());
+        }
     }
 
     private void AttackShadowBolts()
@@ -295,10 +302,9 @@ public class NecromancerAI : MonoBehaviour, IDamage
     IEnumerator Summons()
     {
         anim.SetTrigger("Summon");
-        SummonOnCooldown = true;
-        SummonsAmountLeft -= 1;
         //spawn random enemy at random location
         yield return new WaitForSeconds(SkeletonSummonDelay);
+        SummonsAmountLeft -= 1;
         SummonOnCooldown = false;
     }
 
@@ -311,9 +317,9 @@ public class NecromancerAI : MonoBehaviour, IDamage
     public void skeletonSum()
     {
         //spawn location
-        int randomSpawn = Random.Range(0, 4);
+        int randomSpawn = Random.Range(0, 5);
         //type of enemy
-        int randomType = Random.Range(0, 2);
+        int randomType = Random.Range(0, 3);
         Instantiate(SpawnListType[randomType], SpawnList[randomSpawn].position, transform.rotation);
     }
 
