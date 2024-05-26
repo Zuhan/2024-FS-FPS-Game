@@ -17,6 +17,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] Animator anim;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject ShadowBoltBullet;
     [SerializeField] Transform HeadPos;
     [SerializeField] GameObject shootPos;
     [SerializeField] Component playerDetectiomRad;
@@ -30,6 +31,13 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] GameObject SpawnType2;
     [SerializeField] GameObject SpawnType3;
     [SerializeField] GameObject Shield;
+    [SerializeField] Transform ShadowBolt;
+    [SerializeField] Transform ShadowBolt1;
+    [SerializeField] Transform ShadowBolt2;
+    [SerializeField] Transform ShadowBolt3;
+    [SerializeField] Transform ShadowBolt4;
+    [SerializeField] Transform ShadowBolt5;
+    [SerializeField] Transform ShadowBolt6;
     [Header("----Stats----")]  
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
@@ -38,6 +46,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] int pointsToGain;
     [SerializeField] float SkeletonSummonDelay;
     [SerializeField] int SummonsTotal;
+    [SerializeField] float ShadowBoltFireRate;
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audHurt;
     [Range(0, 1)][SerializeField] float audVolHurt;
@@ -62,6 +71,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     Color enemycolor;
     List<Transform> SpawnList;
     List<GameObject> SpawnListType;
+    List<Transform> ShadowBoltList;
 
     // Start is called before the first frame update
     void Start()
@@ -88,6 +98,13 @@ public class NecromancerAI : MonoBehaviour, IDamage
         {
             SpawnType1, SpawnType2, SpawnType3
         };
+
+
+        ShadowBoltList = new List<Transform>(7)
+        {
+            ShadowBolt, ShadowBolt1, ShadowBolt2, ShadowBolt3, ShadowBolt4, ShadowBolt5, ShadowBolt6
+        };
+
     }
 
 
@@ -162,7 +179,9 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
                 break;
                 case NPCmode.AttackShadowBolts:
+
                    AttackShadowBolts();
+
                 break;
 
                 case NPCmode.Teleport:
@@ -244,6 +263,14 @@ public class NecromancerAI : MonoBehaviour, IDamage
     }
 
 
+    IEnumerator ShadowBoltFire()
+    {
+        anim.SetTrigger("ShadowBolt");
+        isShooting = true;
+        yield return new WaitForSeconds(ShadowBoltFireRate);
+        isShooting = false;
+    }
+
     public void AttackSound()
     {
         attack.PlayOneShot(audAttack[Random.Range(0, audAttack.Length)], audVolAttack);
@@ -282,7 +309,10 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     private void AttackShadowBolts()
     {
-
+        if (isShooting == false)
+        {
+            StartCoroutine(ShadowBoltFire());
+        }
     }
 
     private void Teleport()
@@ -312,6 +342,14 @@ public class NecromancerAI : MonoBehaviour, IDamage
     {
         Summon.PlayOneShot(audSummon[Random.Range(0, audSummon.Length)], audVolSummon);
     }
+
+    public void createShadowBullet()
+    {
+        int randomBullet = Random.Range(0, 6);
+        playSummonSound();
+        Instantiate(ShadowBoltBullet, ShadowBoltList[randomBullet].position, transform.rotation);
+    }
+
 
 
     public void skeletonSum()
