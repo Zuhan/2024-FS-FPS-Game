@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -50,12 +51,12 @@ public class AttackState : IBossState
         if (!secondPhaseActive)
         {
             boss.cardDeck.Clear();
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 14; i++)
             {
                 boss.cardDeck.Add(boss.Card_TheWorld);
                 boss.cardDeck.Add(boss.Card_TheMagician);
             }
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 6; i++)
             {
                 boss.cardDeck.Add(boss.Card_Justice);
             }
@@ -71,13 +72,11 @@ public class AttackState : IBossState
                 {
                     Debug.Log("Selected The World");
                     TheWorld(boss);
-
                 }
                 else if (cardSelected == boss.Card_TheMagician)
                 {
                     Debug.Log("Selected The Magician");
                     TheMagician(boss);
-
                 }
                 else
                 {
@@ -137,6 +136,8 @@ public class AttackState : IBossState
         boss.StartCoroutine(ExecuteTheWorld(boss));
     }
 
+    
+
     private void TheMagician(BossSearch boss)
     {
         boss.StartCoroutine(ExecuteTheMagician(boss));
@@ -154,6 +155,7 @@ public class AttackState : IBossState
 
     IEnumerator ExecuteTheWorld(BossSearch boss)
     {
+        boss.anim.SetTrigger("TheWorld");
 
         boss.BossCenterPOS.SetActive(true);
         boss.BossRightPOS.SetActive(true);
@@ -218,6 +220,7 @@ public class AttackState : IBossState
 
     IEnumerator ExecuteTheMagician(BossSearch boss)
     {
+        boss.anim.SetTrigger("TheMagician");
 
         boss.auraUnderBoss.SetActive(true);
 
@@ -285,7 +288,7 @@ public class AttackState : IBossState
 
     IEnumerator ExecuteJustice(BossSearch boss)
     {
-        yield return new WaitForSeconds(2);
+        boss.anim.SetTrigger("Justice");
 
         boss.justiceObj.SetActive(true);
         boss.justiceTrigger.resetSpawner();
@@ -301,15 +304,19 @@ public class AttackState : IBossState
                 boss.HP += HPtoHeal;
 
                 boss.healAura.SetActive(true);
-                yield return new WaitForSeconds(0.5f);
-                boss.healAura.SetActive(true);
+                boss.hitbox.enabled = false;
+                
+                yield return new WaitForSeconds(1f);
 
-                yield return new WaitForSeconds(2.5f);
+                boss.healAura.SetActive(false);
+                boss.hitbox.enabled = true;
+
+                yield return new WaitForSeconds(2f);
             }
         }
         else
         {
-            yield return new WaitForSeconds(2.9f);
+            yield return new WaitForSeconds(3f);
         }
 
         isPullingCard = false;

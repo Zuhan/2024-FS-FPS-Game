@@ -9,6 +9,7 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] private string stateName;
     [SerializeField] private IBossState currentState;
     [SerializeField] public SphereCollider trigger;
+    [SerializeField] public Animator anim;
 
     [Header("-----The World-----")]
     [SerializeField] public GameObject BossCenterPOS;
@@ -44,6 +45,7 @@ public class BossSearch : MonoBehaviour, IDamage
     [Header("-----Justice-----")]
 
     [SerializeField] public GameObject healAura;
+    [SerializeField] public CapsuleCollider hitbox;
 
     [SerializeField] public GameObject justiceObj;
     [SerializeField] public SpawnerTrigger justiceTrigger;
