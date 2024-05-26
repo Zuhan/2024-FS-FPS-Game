@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class NecromancerAI : MonoBehaviour, IDamage
@@ -31,6 +29,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] GameObject SpawnType2;
     [SerializeField] GameObject SpawnType3;
     [SerializeField] GameObject Shield;
+    [SerializeField] ParticleSystem PassPart;
     [Header("----Stats----")]  
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
@@ -39,6 +38,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] int pointsToGain;
     [SerializeField] float SkeletonSummonDelay;
     [SerializeField] int SummonsTotal;
+    [SerializeField] int DurOfPassive;
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audHurt;
     [Range(0, 1)][SerializeField] float audVolHurt;
@@ -48,13 +48,13 @@ public class NecromancerAI : MonoBehaviour, IDamage
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
 
+  
+    bool OnPassiveCooldown;
     bool SummonOnCooldown;
     int SummonsAmountLeft;
-    bool SkeletonsAreAlive;
     bool ShieldIsActive;
     float MaxHP;
     bool playerInRange;
-    Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
     List<Transform> SpawnList;
@@ -139,17 +139,21 @@ public class NecromancerAI : MonoBehaviour, IDamage
                     ShieldIsActive = false;
                     //set to passive mode
                     npcmode = NPCmode.PassiveAttack;
+                    //call cooldown on passive
+                    WaitTimePassive();
                 }
                 break;
                 //passive attack
                 case NPCmode.PassiveAttack:
-
-                  if (SkeletonsAreAlive == false)
+                   
+                  if (OnPassiveCooldown == true)
                   {
+                    PassPart.Play();
                     PassiveAttack();
                   }
                   else
                   {
+                    PassPart.Stop();
                     npcmode = NPCmode.AttackShadowBolts;
                   }
 
@@ -191,30 +195,23 @@ public class NecromancerAI : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
-    void faceTarget()
-    {
-        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, transform.position.y, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
-    }
 
     // Take Damage AI added by Matt
     public void TakeDamage(float damage)
     {
-
-        //if shield is active damage is set to 0
-        if (ShieldIsActive)
+        if(ShieldIsActive == true) 
         {
             damage = 0;
         }
 
+
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
         //set destination when damaged
 
         UpdateEnemyUI();
 
-        agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {            
             Destroy(gameObject);
@@ -244,6 +241,13 @@ public class NecromancerAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+
+    IEnumerator WaitTimePassive()
+    {
+        OnPassiveCooldown = true;
+        yield return new WaitForSeconds(DurOfPassive);
+        OnPassiveCooldown = false;
+    }
 
 
     public void AttackSound()
@@ -299,16 +303,20 @@ public class NecromancerAI : MonoBehaviour, IDamage
         anim.SetTrigger("Summon");
         SummonOnCooldown = true;
         SummonsAmountLeft -= 1;
-        //spawn location
-        int randomSpawn = Random.Range(0, 4);
-        //type of enemy
-        int randomType = Random.Range(0, 2);
         //spawn random enemy at random location
-        Instantiate(SpawnListType[randomType], SpawnList[randomSpawn].position, transform.rotation);
         yield return new WaitForSeconds(SkeletonSummonDelay);
         SummonOnCooldown = false;
     }
 
+
+    public void skeletonSum()
+    {
+        //spawn location
+        int randomSpawn = Random.Range(0, 4);
+        //type of enemy
+        int randomType = Random.Range(0, 2);
+        Instantiate(SpawnListType[randomType], SpawnList[randomSpawn].position, transform.rotation);
+    }
 
 
     //NPC enum boss states
