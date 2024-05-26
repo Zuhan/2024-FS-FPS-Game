@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SocialPlatforms.Impl;
@@ -27,22 +28,19 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] float HP;  
     [SerializeField] float shootRate;
     [SerializeField] int pointsToGain;
-    [SerializeField] int viewCone;
     [SerializeField] float AttackRange;
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audHurt;
     [Range(0, 1)][SerializeField] float audVolHurt;
-    [SerializeField] AudioClip[] audWalk;
-    [Range(0, 1)][SerializeField] float audVolWalk;
     [SerializeField] AudioClip[] audAttack;
     [Range(0, 1)][SerializeField] float audVolAttack;
-    [SerializeField] float TimeBetweenSteps;
 
+    //boss npc mode set to idle
+    private NPCmode npcmode = NPCmode.Idle;
 
-
-    bool playingWalk;
+    bool SkeletonsAreAlive;
+    bool ShieldIsActive;
     float MaxHP;
-    float angleToPlayer;
     bool playerInRange;
     Vector3 playerDir;
     bool isShooting;
@@ -69,34 +67,83 @@ public class NecromancerAI : MonoBehaviour, IDamage
     {
         float animSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
-    
 
-        if (playerInRange)
+
+        switch (npcmode)
         {
-            agent.SetDestination(gameManager.instance.player.transform.position);
+
+            case NPCmode.Idle:
+                Idle();
+                //if player in range from idle 
+                if (playerInRange == true)
+                {
+                    //set mode to shield
+                    npcmode = NPCmode.Shield;
+                }
+                //break from case
+                break;
+
+            case NPCmode.Shield:
+                //if shield is not active
+                if (ShieldIsActive == false)
+                {
+                    //call shield func
+                    Shield();
+                }
+                else
+                {
+                    //else set mode to summonskeletons
+                    npcmode = NPCmode.SummonSkeletons;
+                }
+                break;
+                //summon skeletons
+                case NPCmode.SummonSkeletons:
+
+                if (SkeletonsAreAlive == false)
+                {
+                    SummonSkeletons();
+                }
+                else
+                {
+                  npcmode = NPCmode.PassiveAttack;
+                }
+                break;
+                //passive attack
+                case NPCmode.PassiveAttack:
+
+                  if (SkeletonsAreAlive == false)
+                  {
+                    PassiveAttack();
+                  }
+                  else
+                  {
+                    npcmode = NPCmode.AttackShadowBolts;
+                  }
 
 
-            if (playingWalk == false && GetComponent<NavMeshAgent>().velocity.normalized.magnitude > 0.25f)
-            {
-                StartCoroutine(WalkSound());
-            }
+                break;
+                case NPCmode.AttackShadowBolts:
+                   AttackShadowBolts();
+                break;
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                faceTarget();
-
-                canSeePlayer();
+                case NPCmode.Teleport:
+                   Teleport();
+                break;
 
 
-            }
-           
+
+            default:
+
+            break;
+
         }
+           
+        
     }
 
     void canSeePlayer()
     {
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
-        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
 
         RaycastHit hit;
@@ -104,7 +151,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
         if (Physics.Raycast(HeadPos.position, playerDir, out hit))
         {
 
-            if (hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange && angleToPlayer <= viewCone)
+            if (hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange)
             {
 
 
@@ -147,6 +194,13 @@ public class NecromancerAI : MonoBehaviour, IDamage
     // Take Damage AI added by Matt
     public void TakeDamage(float damage)
     {
+
+        //if shield is active damage is set to 0
+        if (ShieldIsActive)
+        {
+            damage = 0;
+        }
+
         HP -= damage;
         HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         StartCoroutine(FlashRed());
@@ -192,19 +246,56 @@ public class NecromancerAI : MonoBehaviour, IDamage
     }
 
 
-    IEnumerator WalkSound()
-    {
-        playingWalk = true;
-        Foot.PlayOneShot(audWalk[Random.Range(0, audWalk.Length)], audVolWalk);
-        yield return new WaitForSeconds(TimeBetweenSteps);
-        playingWalk = false;
-    }
-
-
-
     public void createBullet()
     {
         Instantiate(bullet, shootPos.position, transform.rotation);
+    }
+     
+
+    //boss states start
+    private void Idle()
+    {
+
+    }
+
+    private void Shield()
+    {
+        ShieldIsActive = true;
+    }
+
+    private void SummonSkeletons()
+    {
+
+    }
+
+    private void AttackShadowBolts()
+    {
+
+    }
+
+    private void Teleport()
+    {
+
+    }
+
+    private void PassiveAttack()
+    {
+
+    }
+    //end of boss state functions
+
+
+
+
+    //NPC enum boss states
+    public enum NPCmode
+    {
+        Idle,
+        SummonSkeletons,
+        AttackShadowBolts,
+        Shield,
+        Teleport,
+        PassiveAttack,
     }
 
 }
