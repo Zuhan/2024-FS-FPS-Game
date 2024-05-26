@@ -292,11 +292,39 @@ public class AttackState : IBossState
 
     IEnumerator ExecuteJustice(BossSearch boss)
     {
+        Color buttonColor = boss.button.material.color;
+        Color cheekColor = boss.cheek.material.color;
+        Color hair_accColor = boss.hair_acc.material.color;
+        Color hair_frontColor = boss.hair_front.material.color;
+        Color hair_sideColor = boss.hair_side.material.color;
+        Color hairbandColor = boss.hairband.material.color;
+        Color legColor = boss.leg.material.color;
+        Color shirtsColor = boss.shirts.material.color;
+        Color shirts_sColor = boss.shirts_s.material.color;
+        Color shirts_bkColor = boss.shirts_bk.material.color;
+        Color skinColor = boss.skin.material.color;
+        Color tailColor = boss.tail.material.color;
+        Color tail_bottomColor = boss.tail_bottom.material.color;
+        Color uwagiColor = boss.uwagi.material.color;
+        Color uwagi_bkColor = boss.uwagi_bk.material.color;
+
         yield return new WaitForSeconds(2);
 
-        boss.LArmHitBox.enabled = false;
-        boss.RArmHitBox.enabled = false;
-        boss.bodyHitBox.enabled = false;
+        boss.buttonHB.enabled =  false;
+        boss.cheekHB.enabled = false;
+        boss.hair_accHB.enabled = false ;
+        boss.hair_frontHB.enabled = false;
+        boss.hair_sideHB.enabled = false;
+        boss.hairbandHB.enabled = false;
+        boss.legHB.enabled = false;
+        boss.shirtsHB.enabled = false;
+        boss.shirts_sHB.enabled = false;
+        boss.shirts_bkHB.enabled = false;
+        boss.skinHB.enabled = false;
+        boss.tailHB.enabled = false;
+        boss.tail_bottomHB.enabled = false;
+        boss.uwagiHB.enabled = false;
+        boss.uwagi_bkHB.enabled = false;
 
         boss.justiceObj.SetActive(true);
         boss.justiceTrigger.resetSpawner();
@@ -311,15 +339,39 @@ public class AttackState : IBossState
             {
                 boss.HP += HPtoHeal;
 
-                boss.body.material.color = Color.green;
-                boss.LArm.material.color = Color.green;
-                boss.RArm.material.color = Color.green;
+                boss.button.material.color = Color.green;
+                boss.cheek.material.color = Color.green;
+                boss.hair_acc.material.color = Color.green;
+                boss.hair_front.material.color = Color.green;
+                boss.hair_side.material.color = Color.green;
+                boss.hairband.material.color = Color.green;
+                boss.leg.material.color = Color.green;
+                boss.shirts.material.color = Color.green;
+                boss.shirts_s.material.color = Color.green;
+                boss.shirts_bk.material.color = Color.green;
+                boss.skin.material.color = Color.green;
+                boss.tail.material.color = Color.green;
+                boss.tail_bottom.material.color = Color.green;
+                boss.uwagi.material.color = Color.green;
+                boss.uwagi_bk.material.color = Color.green;
 
                 yield return new WaitForSeconds(0.1f);
 
-                boss.body.material.color = Color.white;
-                boss.LArm.material.color = Color.white;
-                boss.RArm.material.color = Color.white;
+                boss.button.material.color = buttonColor;
+                boss.cheek.material.color = cheekColor;
+                boss.hair_acc.material.color = hair_accColor;
+                boss.hair_front.material.color = hair_frontColor;
+                boss.hair_side.material.color = hair_sideColor;
+                boss.hairband.material.color = hairbandColor;
+                boss.leg.material.color = legColor;
+                boss.shirts.material.color = shirtsColor;
+                boss.shirts_s.material.color = shirts_sColor;
+                boss.shirts_bk.material.color = shirts_bkColor;
+                boss.skin.material.color = skinColor;
+                boss.tail.material.color = tailColor;
+                boss.tail_bottom.material.color = tail_bottomColor;
+                boss.uwagi.material.color = uwagiColor;
+                boss.uwagi_bk.material.color = uwagi_bkColor;
 
                 yield return new WaitForSeconds(2.9f); 
             }
@@ -329,9 +381,21 @@ public class AttackState : IBossState
             yield return new WaitForSeconds(2.9f);
         }
 
-        boss.LArmHitBox.enabled = true;
-        boss.RArmHitBox.enabled = true;
-        boss.bodyHitBox.enabled = true;
+        boss.buttonHB.enabled = true;
+        boss.cheekHB.enabled = true;
+        boss.hair_accHB.enabled = true;
+        boss.hair_frontHB.enabled = true;
+        boss.hair_sideHB.enabled = true;
+        boss.hairbandHB.enabled = true;
+        boss.legHB.enabled = true;
+        boss.shirtsHB.enabled = true;
+        boss.shirts_sHB.enabled = true;
+        boss.shirts_bkHB.enabled = true;
+        boss.skinHB.enabled = true;
+        boss.tailHB.enabled = true;
+        boss.tail_bottomHB.enabled = true;
+        boss.uwagiHB.enabled = true;
+        boss.uwagi_bkHB.enabled = true;
 
         isPullingCard = false;
     }
@@ -346,10 +410,16 @@ public class AttackState : IBossState
         for (int i = 0; i < 5; i++)
         {
             int randCard = Random.Range(0, boss.cardDeck.Count);
+            int currCard = randCard;
 
-            boss.cardDeck[randCard].SetActive(true);
-            yield return new WaitForSeconds(.75f);
-            boss.cardDeck[randCard].SetActive(false);
+            if (randCard < boss.cardDeck.Count)
+            {
+                boss.cardDeck[currCard].SetActive(true);
+                yield return new WaitForSeconds(.75f);
+                boss.cardDeck[currCard].SetActive(false); 
+            }
+
+            currCard = 0;
         }
 
         boss.cardDeck.Clear();

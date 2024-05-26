@@ -43,13 +43,39 @@ public class BossSearch : MonoBehaviour, IDamage
 
     [Header("-----Justice-----")]
     [Header("-----Body-----")]
-    [SerializeField] public Renderer body;
-    [SerializeField] public Renderer RArm;
-    [SerializeField] public Renderer LArm;
 
-    [SerializeField] public CapsuleCollider bodyHitBox;
-    [SerializeField] public CapsuleCollider LArmHitBox;
-    [SerializeField] public CapsuleCollider RArmHitBox;
+    [SerializeField] public Renderer button;
+    [SerializeField] public Renderer cheek;
+    [SerializeField] public Renderer hair_acc;
+    [SerializeField] public Renderer hair_front;
+    [SerializeField] public Renderer hair_side;
+    [SerializeField] public Renderer hairband;
+    [SerializeField] public Renderer leg;
+    [SerializeField] public Renderer shirts;
+    [SerializeField] public Renderer shirts_s;
+    [SerializeField] public Renderer shirts_bk;
+    [SerializeField] public Renderer skin;
+    [SerializeField] public Renderer tail;
+    [SerializeField] public Renderer tail_bottom;
+    [SerializeField] public Renderer uwagi;
+    [SerializeField] public Renderer uwagi_bk;
+
+    [SerializeField] public Renderer buttonHB;
+    [SerializeField] public Renderer cheekHB;
+    [SerializeField] public Renderer hair_accHB;
+    [SerializeField] public Renderer hair_frontHB;
+    [SerializeField] public Renderer hair_sideHB;
+    [SerializeField] public Renderer hairbandHB;
+    [SerializeField] public Renderer legHB;
+    [SerializeField] public Renderer shirtsHB;
+    [SerializeField] public Renderer shirts_sHB;
+    [SerializeField] public Renderer shirts_bkHB;
+    [SerializeField] public Renderer skinHB;
+    [SerializeField] public Renderer tailHB;
+    [SerializeField] public Renderer tail_bottomHB;
+    [SerializeField] public Renderer uwagiHB;
+    [SerializeField] public Renderer uwagi_bkHB;
+
 
     [SerializeField] public GameObject justiceObj;
     [SerializeField] public SpawnerTrigger justiceTrigger;
@@ -143,15 +169,55 @@ public class BossSearch : MonoBehaviour, IDamage
 
     IEnumerator FlashRed()
     {
-        body.material.color = Color.red;
-        RArm.material.color = Color.red;
-        LArm.material.color = Color.red;
+        Color buttonColor = button.material.color;
+        Color cheekColor = cheek.material.color;
+        Color hair_accColor = hair_acc.material.color;
+        Color hair_frontColor = hair_front.material.color;
+        Color hair_sideColor = hair_side.material.color;
+        Color hairbandColor = hairband.material.color;
+        Color legColor = leg.material.color;
+        Color shirtsColor = shirts.material.color;
+        Color shirts_sColor = shirts_s.material.color;
+        Color shirts_bkColor = shirts_bk.material.color;
+        Color skinColor = skin.material.color;
+        Color tailColor = tail.material.color;
+        Color tail_bottomColor = tail_bottom.material.color;
+        Color uwagiColor = uwagi.material.color;
+        Color uwagi_bkColor = uwagi_bk.material.color;
+
+        button.material.color = Color.green;
+        cheek.material.color = Color.green;
+        hair_acc.material.color = Color.green;
+        hair_front.material.color = Color.green;
+        hair_side.material.color = Color.green;
+        hairband.material.color = Color.green;
+        leg.material.color = Color.green;
+        shirts.material.color = Color.green;
+        shirts_s.material.color = Color.green;
+        shirts_bk.material.color = Color.green;
+        skin.material.color = Color.green;
+        tail.material.color = Color.green;
+        tail_bottom.material.color = Color.green;
+        uwagi.material.color = Color.green;
+        uwagi_bk.material.color = Color.green;
 
         yield return new WaitForSeconds(0.1f);
 
-        body.material.color = Color.white;
-        RArm.material.color = Color.white;
-        LArm.material.color = Color.white;
+        button.material.color = buttonColor;
+        cheek.material.color = cheekColor;
+        hair_acc.material.color = hair_accColor;
+        hair_front.material.color = hair_frontColor;
+        hair_side.material.color = hair_sideColor;
+        hairband.material.color = hairbandColor;
+        leg.material.color = legColor;
+        shirts.material.color = shirtsColor;
+        shirts_s.material.color = shirts_sColor;
+        shirts_bk.material.color = shirts_bkColor;
+        skin.material.color = skinColor;
+        tail.material.color = tailColor;
+        tail_bottom.material.color = tail_bottomColor;
+        uwagi.material.color = uwagiColor;
+        uwagi_bk.material.color = uwagi_bkColor;
     }
 
     void Update()
