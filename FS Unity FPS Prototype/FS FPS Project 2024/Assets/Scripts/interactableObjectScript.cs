@@ -42,14 +42,13 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
                 emptyGameObjectCollider.enabled = true;
                 if (!string.IsNullOrEmpty(sceneToLoad))
                 {
-                    Debug.Log("Loading Scene");
                     gameManager.instance.pointsChange(-pointCost);
                     StartCoroutine(objInteract());
                     emptyGameObject.GetComponent<sceneLoader>().LoadScene(sceneToLoad);
                 }
                 else
                 {
-                    Debug.LogWarning("No scene to load specified.");
+
                 }
             }
             else

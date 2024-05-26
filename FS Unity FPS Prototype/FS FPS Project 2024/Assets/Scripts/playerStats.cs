@@ -17,7 +17,7 @@ public static class playerStats
     public static bool potionUI = false;
     public static int currentWeapon = 0;
     public static float sens = 300;
-    public static float masterVol = -10;
-    public static float musicVol = -10;
-    public static float sfxVol = -10;
+    public static float masterVol = 0;
+    public static float musicVol = 0;
+    public static float sfxVol = 0;
 }

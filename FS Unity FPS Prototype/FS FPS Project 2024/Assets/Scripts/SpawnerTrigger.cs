@@ -55,7 +55,6 @@ public class SpawnerTrigger : MonoBehaviour
     private int enemyAlgorithim()
     {
         int enemy = Random.Range(0, 100);
-        //Debug.Log(enemy);
         int num = 0;
         //spawn case 1
         if(enemy <= Element0Weight-1)
