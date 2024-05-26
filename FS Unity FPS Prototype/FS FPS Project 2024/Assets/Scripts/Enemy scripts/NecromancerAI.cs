@@ -38,6 +38,9 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] Transform ShadowBolt4;
     [SerializeField] Transform ShadowBolt5;
     [SerializeField] Transform ShadowBolt6;
+    [SerializeField] Transform TeleportLocation;
+    [SerializeField] Transform TeleportLocation1;
+    [SerializeField] Transform TeleportLocation2;
     [Header("----Stats----")]  
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
@@ -60,7 +63,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
 
-
+    float damageDealt;
     int SkeletonsAlive;
     bool SummonOnCooldown;
     int SummonsAmountLeft;
@@ -72,6 +75,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     List<Transform> SpawnList;
     List<GameObject> SpawnListType;
     List<Transform> ShadowBoltList;
+    List<Transform> TeleportList;
 
     // Start is called before the first frame update
     void Start()
@@ -103,6 +107,11 @@ public class NecromancerAI : MonoBehaviour, IDamage
         ShadowBoltList = new List<Transform>(7)
         {
             ShadowBolt, ShadowBolt1, ShadowBolt2, ShadowBolt3, ShadowBolt4, ShadowBolt5, ShadowBolt6
+        };
+
+        TeleportList = new List<Transform>(3)
+        {
+            TeleportLocation, TeleportLocation1, TeleportLocation2
         };
 
     }
@@ -224,6 +233,14 @@ public class NecromancerAI : MonoBehaviour, IDamage
             damage = 0;
         }
 
+        if(npcmode == NPCmode.AttackShadowBolts)
+        {
+            damageDealt += damage;
+            if(damageDealt >= 25)
+            {
+                npcmode = NPCmode.Teleport;
+            }
+        }
 
         HP -= damage;
         HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
@@ -317,7 +334,9 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     private void Teleport()
     {
-
+        int randomTeleport = Random.Range(0, 2);
+        transform.position= TeleportList[randomTeleport].position;
+        npcmode = NPCmode.Idle;
     }
 
     private void PassiveAttack()
@@ -346,7 +365,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     public void createShadowBullet()
     {
         int randomBullet = Random.Range(0, 6);
-        playSummonSound();
+      
         Instantiate(ShadowBoltBullet, ShadowBoltList[randomBullet].position, transform.rotation);
     }
 
@@ -377,5 +396,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
         Teleport,
         PassiveAttack,
     }
+
+
+
 
 }
