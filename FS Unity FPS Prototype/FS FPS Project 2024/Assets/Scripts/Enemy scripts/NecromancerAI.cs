@@ -240,6 +240,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
             if(damageDealt >= 33)
             {
                 npcmode = NPCmode.Teleport;
+                damageDealt = 0;
             }
         }
 
