@@ -254,6 +254,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
         if (HP <= 0)
         {            
             Destroy(gameObject);
+            //win
+            gameManager.instance.win();
             //Game manager points add... (Works, but not connected to player script)
             gameManager.instance.pointsChange(pointsToGain);
             //Debug.Log("Enemy died. Player gained " + pointsToGain + " points.");
