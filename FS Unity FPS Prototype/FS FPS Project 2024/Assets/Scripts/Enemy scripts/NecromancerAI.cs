@@ -130,7 +130,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
                 if (SummonsAmountLeft > 0)
                 {
-                    if (SummonOnCooldown == false && SummonsAmountLeft > 0)
+                    if (SummonOnCooldown == false)
                     {
                         SummonSkeletons();
                     }
