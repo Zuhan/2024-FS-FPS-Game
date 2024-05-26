@@ -70,7 +70,6 @@ public class AttackState : IBossState
                 if (cardSelected == boss.Card_TheWorld)
                 {
                     Debug.Log("Selected The World");
-                    Shuffle(boss);
                     TheWorld(boss);
 
                 }
@@ -114,7 +113,6 @@ public class AttackState : IBossState
                 if (cardSelected == boss.Card_TheWorld)
                 {
                     Debug.Log("Selected The World");
-                    Shuffle(boss);
                     TheWorld(boss);
 
                 }
@@ -152,11 +150,6 @@ public class AttackState : IBossState
     private void AttackPatternTwo()
     {
         Debug.Log("Boss is below half HP");
-    }
-
-    private void Shuffle(BossSearch boss)
-    {
-        boss.StartCoroutine(CycleCards(boss));
     }
 
     IEnumerator ExecuteTheWorld(BossSearch boss)
@@ -400,30 +393,30 @@ public class AttackState : IBossState
         isPullingCard = false;
     }
 
-    IEnumerator CycleCards(BossSearch boss)
-    {
-        boss.cardDeck.Add(boss.Card_TheWorld);
-        boss.cardDeck.Add(boss.Card_TheMagician);
-        boss.cardDeck.Add(boss.Card_Justice);
-        boss.cardDeck.Add(boss.Card_TheTower);
+    //IEnumerator CycleCards(BossSearch boss)
+    //{
+    //    boss.cardDeck.Add(boss.Card_TheWorld);
+    //    boss.cardDeck.Add(boss.Card_TheMagician);
+    //    boss.cardDeck.Add(boss.Card_Justice);
+    //    boss.cardDeck.Add(boss.Card_TheTower);
 
-        for (int i = 0; i < 5; i++)
-        {
-            int randCard = Random.Range(0, boss.cardDeck.Count);
-            int currCard = randCard;
+    //    for (int i = 0; i < 5; i++)
+    //    {
+    //        int randCard = Random.Range(0, boss.cardDeck.Count);
+    //        int currCard = randCard;
 
-            if (randCard < boss.cardDeck.Count)
-            {
-                boss.cardDeck[currCard].SetActive(true);
-                yield return new WaitForSeconds(.75f);
-                boss.cardDeck[currCard].SetActive(false); 
-            }
+    //        if (randCard < boss.cardDeck.Count)
+    //        {
+    //            boss.cardDeck[currCard].SetActive(true);
+    //            yield return new WaitForSeconds(.75f);
+    //            boss.cardDeck[currCard].SetActive(false); 
+    //        }
 
-            currCard = 0;
-        }
+    //        currCard = 0;
+    //    }
 
-        boss.cardDeck.Clear();
+    //    boss.cardDeck.Clear();
 
-        yield return new WaitForSeconds(2);
-    }
+    //    yield return new WaitForSeconds(2);
+    //}
 }
