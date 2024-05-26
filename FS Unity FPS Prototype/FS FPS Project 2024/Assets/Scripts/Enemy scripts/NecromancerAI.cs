@@ -22,13 +22,23 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Component playerDetectiomRad;
     [SerializeField] Image healthbar;
+    [SerializeField] Transform Spawn1;
+    [SerializeField] Transform Spawn2;
+    [SerializeField] Transform Spawn3;
+    [SerializeField] Transform Spawn4;
+    [SerializeField] Transform Spawn5;
+    [SerializeField] GameObject SpawnType1;
+    [SerializeField] GameObject SpawnType2;
+    [SerializeField] GameObject SpawnType3;
+    [SerializeField] GameObject Shield;
     [Header("----Stats----")]  
     [SerializeField] int faceTargetSpeed;
     [SerializeField] int animSpeedTrans;
     [SerializeField] float HP;  
-    [SerializeField] float shootRate;
+    [SerializeField] float passiveshootRate;
     [SerializeField] int pointsToGain;
-    [SerializeField] float AttackRange;
+    [SerializeField] float SkeletonSummonDelay;
+    [SerializeField] int SummonsTotal;
     [Header("----- Audio -----")]
     [SerializeField] AudioClip[] audHurt;
     [Range(0, 1)][SerializeField] float audVolHurt;
@@ -38,6 +48,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
 
+    bool SummonOnCooldown;
+    int SummonsAmountLeft;
     bool SkeletonsAreAlive;
     bool ShieldIsActive;
     float MaxHP;
@@ -45,6 +57,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
+    List<Transform> SpawnList;
+    List<GameObject> SpawnListType;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +74,17 @@ public class NecromancerAI : MonoBehaviour, IDamage
         MaxHP = HP;
         UpdateEnemyUI();
         enemycolor = model.material.color;
+        SummonsAmountLeft = SummonsTotal;
+
+        SpawnList = new List<Transform>(5)
+        {
+            Spawn1, Spawn2, Spawn3, Spawn4, Spawn5
+        };
+
+          SpawnListType = new List<GameObject>(3)
+        {
+            SpawnType1, SpawnType2, SpawnType3
+        };
     }
 
 
@@ -72,7 +97,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
         switch (npcmode)
         {
 
-            case NPCmode.Idle:
+                case NPCmode.Idle:
                 Idle();
                 //if player in range from idle 
                 if (playerInRange == true)
@@ -83,12 +108,12 @@ public class NecromancerAI : MonoBehaviour, IDamage
                 //break from case
                 break;
 
-            case NPCmode.Shield:
+                case NPCmode.Shield:
                 //if shield is not active
                 if (ShieldIsActive == false)
                 {
                     //call shield func
-                    Shield();
+                    Barrier();
                 }
                 else
                 {
@@ -99,13 +124,21 @@ public class NecromancerAI : MonoBehaviour, IDamage
                 //summon skeletons
                 case NPCmode.SummonSkeletons:
 
-                if (SkeletonsAreAlive == false)
+                if (SummonsAmountLeft >= 0)
                 {
-                    SummonSkeletons();
+                    if (SummonOnCooldown == false)
+                    {
+                        SummonSkeletons();
+                    }
+                       
                 }
                 else
                 {
-                  npcmode = NPCmode.PassiveAttack;
+                    //set shield to inactive
+                    Shield.SetActive(false);
+                    ShieldIsActive = false;
+                    //set to passive mode
+                    npcmode = NPCmode.PassiveAttack;
                 }
                 break;
                 //passive attack
@@ -139,33 +172,6 @@ public class NecromancerAI : MonoBehaviour, IDamage
         }
            
         
-    }
-
-    void canSeePlayer()
-    {
-        playerDir = gameManager.instance.player.transform.position - HeadPos.position;
-        float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(HeadPos.position, playerDir, out hit))
-        {
-
-            if (hit.collider.CompareTag("Player") && distanceToPlayer <= AttackRange)
-            {
-
-
-                if (isShooting == false)
-                {
-                    StartCoroutine(Shoot());
-                }
-
-
-
-            }
-
-        }
-       
     }
 
 
@@ -230,11 +236,11 @@ public class NecromancerAI : MonoBehaviour, IDamage
         model.material.color = enemycolor;
     }
 
-    IEnumerator Shoot()
+    IEnumerator PassiveShoot()
     {
         isShooting = true;
-        anim.SetTrigger("Shoot");
-        yield return new WaitForSeconds(shootRate);
+        anim.SetTrigger("PassiveShoot");
+        yield return new WaitForSeconds(passiveshootRate);
         isShooting = false;
     }
 
@@ -258,14 +264,15 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     }
 
-    private void Shield()
+    private void Barrier()
     {
+        Shield.SetActive(true);
         ShieldIsActive = true;
     }
 
     private void SummonSkeletons()
     {
-
+        StartCoroutine(Summons());
     }
 
     private void AttackShadowBolts()
@@ -280,10 +287,27 @@ public class NecromancerAI : MonoBehaviour, IDamage
 
     private void PassiveAttack()
     {
-
+        if (isShooting == false)
+        {
+            StartCoroutine(PassiveShoot());
+        }
     }
     //end of boss state functions
 
+    IEnumerator Summons()
+    {
+        anim.SetTrigger("Summon");
+        SummonOnCooldown = true;
+        SummonsAmountLeft -= 1;
+        //spawn location
+        int randomSpawn = Random.Range(0, 4);
+        //type of enemy
+        int randomType = Random.Range(0, 2);
+        //spawn random enemy at random location
+        Instantiate(SpawnListType[randomType], SpawnList[randomSpawn].position, transform.rotation);
+        yield return new WaitForSeconds(SkeletonSummonDelay);
+        SummonOnCooldown = false;
+    }
 
 
 
