@@ -889,9 +889,9 @@ GameObject:
   - component: {fileID: 1232000304218705515}
   - component: {fileID: 128738958486734978}
   - component: {fileID: 6824096250023532483}
-  - component: {fileID: 2400057210619040011}
   - component: {fileID: 964562928823103430}
   - component: {fileID: 7249161479246070895}
+  - component: {fileID: 4900000319920961970}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Enemy
@@ -962,7 +962,7 @@ MonoBehaviour:
   agent: {fileID: 6824096250023532483}
   model: {fileID: 7178609881887975355}
   anim: {fileID: 1232000304218705515}
-  bullet: {fileID: 1154981450380241885, guid: 038a0cf5bd62c8e418ff904ad81b49d1, type: 3}
+  bullet: {fileID: 4928952699966851807, guid: 4c142af8a477dc646b915a18b47dbe7f, type: 3}
   HeadPos: {fileID: 6127138125974556422}
   shootPos: {fileID: 6287840575845365907}
   playerDetectiomRad: {fileID: 7249161479246070895}
@@ -976,13 +976,15 @@ MonoBehaviour:
   SpawnType2: {fileID: 930708274263820222, guid: ef7100edc54524e49a01681472d84a18, type: 3}
   SpawnType3: {fileID: 684946142704275704, guid: 2cd4b2418812e7d4b893e9dfdaa29abd, type: 3}
   Shield: {fileID: 2162061572587172318}
+  PassPart: {fileID: 8074418808953674973}
   faceTargetSpeed: 6
   animSpeedTrans: 4
-  HP: 300
-  passiveshootRate: 0
+  HP: 6
+  passiveshootRate: 3
   pointsToGain: 0
-  SkeletonSummonDelay: 6
+  SkeletonSummonDelay: 3
   SummonsTotal: 5
+  DurOfPassive: 30
   audHurt: []
   audVolHurt: 0
   audAttack: []
@@ -996,7 +998,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3476663220124368191}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 3.86
   m_Speed: 4
   m_Acceleration: 32
   avoidancePriority: 50
@@ -1005,33 +1007,10 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 5.49
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!136 &2400057210619040011
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3476663220124368191}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.5
-  m_Height: 6.25
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.4, z: 0}
 --- !u!82 &964562928823103430
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1149,6 +1128,29 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 100, y: 30, z: 114.7}
   m_Center: {x: 0, y: 15.44, z: 48.7}
+--- !u!136 &4900000319920961970
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3476663220124368191}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.77
+  m_Height: 7.12
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.19, z: 0}
 --- !u!1 &3553719500923461218
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1233,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
