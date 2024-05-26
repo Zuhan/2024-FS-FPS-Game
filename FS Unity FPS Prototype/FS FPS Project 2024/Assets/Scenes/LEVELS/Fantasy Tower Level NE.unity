@@ -9570,11 +9570,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: Element4Weight
-      value: 20
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: Element5Weight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: enemiesToSpawn.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: enemiesToSpawn.Array.data[0]
@@ -9583,7 +9587,7 @@ PrefabInstance:
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: enemiesToSpawn.Array.data[1]
       value: 
-      objectReference: {fileID: 8342302023923445015, guid: 741493360cb43cb4d8c4739f7e481b2e, type: 3}
+      objectReference: {fileID: 8342302023923445015, guid: a105fb7226233114a87a7c1f8603a82e, type: 3}
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: enemiesToSpawn.Array.data[2]
       value: 
@@ -9591,11 +9595,19 @@ PrefabInstance:
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: enemiesToSpawn.Array.data[3]
       value: 
-      objectReference: {fileID: 8070748883795860609, guid: 03f9ffca3e3f35545a3e0ce484411592, type: 3}
+      objectReference: {fileID: 8070748883795860609, guid: b34f5593a560ee24da0ffdb8becc85c0, type: 3}
     - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: enemiesToSpawn.Array.data[4]
       value: 
       objectReference: {fileID: 8070748883795860609, guid: 03f9ffca3e3f35545a3e0ce484411592, type: 3}
+    - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[5]
+      value: 
+      objectReference: {fileID: 7535529932955132692, guid: 0f377ab178fdad44691e710ab1166fcc, type: 3}
+    - target: {fileID: 2907375677935091995, guid: f803f2040bd0a6641812d62c94249530, type: 3}
+      propertyPath: enemiesToSpawn.Array.data[6]
+      value: 
+      objectReference: {fileID: 7535529932955132692, guid: 0f377ab178fdad44691e710ab1166fcc, type: 3}
     - target: {fileID: 3406271615417571749, guid: f803f2040bd0a6641812d62c94249530, type: 3}
       propertyPath: m_Enabled
       value: 0
