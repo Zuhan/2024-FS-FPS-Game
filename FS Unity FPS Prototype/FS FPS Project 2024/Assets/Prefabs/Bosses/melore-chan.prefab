@@ -1278,7 +1278,7 @@ GameObject:
   - component: {fileID: 2088543430693176683}
   m_Layer: 0
   m_Name: melore-chan
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1291,7 +1291,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298775983315068023}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.99879193, z: -0, w: -0.049140364}
+  m_LocalRotation: {x: -0, y: -0.99879205, z: 0, w: -0.04913725}
   m_LocalPosition: {x: -16.05, y: 1.74, z: 96.10805}
   m_LocalScale: {x: 7.5938, y: 7.5938, z: 7.5938}
   m_ConstrainProportionsScale: 0
@@ -1348,7 +1348,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1298775983315068023}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.15
+  m_Radius: 0.41
   m_Speed: 3.5
   m_Acceleration: 35
   avoidancePriority: 50
@@ -1357,7 +1357,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 0.75
+  m_Height: 0.93
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   Card_TheMagician: {fileID: 5613358508254436870}
   Card_Justice: {fileID: 9154830663434780886}
   Card_TheTower: {fileID: 7779776389794055077}
-  healAura: {fileID: 5611198338670779075}
+  healAura: {fileID: 0}
   justiceObj: {fileID: 7680099838570991729}
   justiceTrigger: {fileID: 6242552964333205466}
   aura1: {fileID: 4293601150189633647}
@@ -10258,11 +10258,6 @@ PrefabInstance:
 --- !u!4 &5609005360015295907 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4299952606933750, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
-  m_PrefabInstance: {fileID: 5609363492748834645}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5611198338670779075 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1844191813266838, guid: 968c924d2be019d4b9e67647551eec3e, type: 3}
   m_PrefabInstance: {fileID: 5609363492748834645}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9149926991570073281
