@@ -179,10 +179,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
-            if (FindObjectOfType<NecromancerAI>().ShieldIsActive == true)
-            {
-                FindObjectOfType<NecromancerAI>().AddSkeleton(-1);
-            }
+       
 
             Destroy(gameObject);
             //Game manager points add... (Works, but not connected to player script)

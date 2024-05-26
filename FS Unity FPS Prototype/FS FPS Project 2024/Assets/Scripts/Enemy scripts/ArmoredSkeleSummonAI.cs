@@ -6,14 +6,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
+public class ArmoredSkeleSummonAI : MonoBehaviour, IDamage
 {
 
     //Serialized fields for enemy ai
     [Header ("----Main----")]
     [SerializeField] AudioSource Foot;
     [SerializeField] AudioSource HurtBody;
-    [SerializeField] AudioSource Scythe;
+    [SerializeField] AudioSource Sword;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer model;
     [SerializeField] GameObject Helmet;
@@ -43,7 +43,6 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
     [SerializeField] AudioClip[] audAttack;
     [Range(0, 1)][SerializeField] float audVolAttack;
     [SerializeField] float TimeBetweenSteps;
-
 
     bool playingWalk;
     float MaxHP;
@@ -108,9 +107,6 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
             BracerLegR
         };
         UpdateEnemyUI();
-
-
-       
     }
 
     void canSeePlayer()
@@ -118,6 +114,7 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
         playerDir = gameManager.instance.player.transform.position - HeadPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, HeadPos.position.y + 1, playerDir.z), transform.forward);
         float distanceToPlayer = Vector3.Distance(transform.position, gameManager.instance.player.transform.position);
+
 
         RaycastHit hit;
 
@@ -182,7 +179,10 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
         agent.SetDestination(gameManager.instance.player.transform.position);
         if (HP <= 0)
         {
-         
+            if (FindObjectOfType<NecromancerAI>().ShieldIsActive == true)
+            {
+                FindObjectOfType<NecromancerAI>().AddSkeleton(-1);
+            }
 
             Destroy(gameObject);
             //Game manager points add... (Works, but not connected to player script)
@@ -212,9 +212,10 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
+
     public void attackSound()
     {
-        Scythe.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
+        Sword.PlayOneShot(audAttack[UnityEngine.Random.Range(0, audAttack.Length)], audVolAttack);
     }
 
 
@@ -257,7 +258,8 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
                 armorList.RemoveAt(ARindex);
                 armorLReach1 = true;
                 gameObject.GetComponent<NavMeshAgent>().speed += .30f;
-                shootRate -= .25f;
+                shootRate -= .15f;
+                TimeBetweenSteps -= .05f;
             }
             else
             if (armorLReach2 != true && Armor <= TotalArmor * .60f)
@@ -267,7 +269,8 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
                 armorList.RemoveAt(ARindex);
                 armorLReach2 = true;
                 gameObject.GetComponent<NavMeshAgent>().speed += .30f;
-                shootRate -= .25f;
+                shootRate -= .15f;
+                TimeBetweenSteps -= .05f;
             }
             else
             if (armorLReach3 != true && Armor <= TotalArmor * .40f)
@@ -277,7 +280,8 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
                 armorList.RemoveAt(ARindex);
                 armorLReach3 = true;
                 gameObject.GetComponent<NavMeshAgent>().speed += .30f;
-                shootRate -= .25f;
+                shootRate -= .15f;
+                TimeBetweenSteps -= .05f;
             }
             else
             if (armorLReach4 != true && Armor <= TotalArmor * .20f)
@@ -287,7 +291,8 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
                 armorList.RemoveAt(ARindex);
                 armorLReach4 = true;
                 gameObject.GetComponent<NavMeshAgent>().speed += .30f;
-                shootRate -= .25f;
+                shootRate -= .15f;
+                TimeBetweenSteps -= .05f;
             }
             else
             if (armorLReach5 != true && Armor <= TotalArmor * .0f)
@@ -297,7 +302,8 @@ public class ArmoredSkele2HanderAI : MonoBehaviour, IDamage
                 armorList.RemoveAt(ARindex);
                 armorLReach5 = true;
                 gameObject.GetComponent<NavMeshAgent>().speed += .30f;
-                shootRate -= .25f;
+                shootRate -= .15f;
+                TimeBetweenSteps -= .05f;
             }
         }
 
