@@ -59,6 +59,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
     [Range(0, 1)][SerializeField] float audVolSummon;
     [SerializeField] AudioClip[] audShield;
     [Range(0, 1)][SerializeField] float audVolShield;
+    [SerializeField] AudioClip[] audTeleport;
+    [Range(0, 1)][SerializeField] float audVolTeleport;
 
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
@@ -78,7 +80,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
     List<Transform> SpawnList;
     List<GameObject> SpawnListType;
     List<Transform> ShadowBoltList;
-    List<Transform> TeleportList;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -335,7 +337,8 @@ public class NecromancerAI : MonoBehaviour, IDamage
     {
         SummonsAmountLeft = SummonsTotal;
         npcmode = NPCmode.Idle;
-        
+
+        HurtBody.PlayOneShot(audTeleport[Random.Range(0, audTeleport.Length)], audVolTeleport);
 
         if (teleported1 == false) {
             transform.position = TeleportLocation.position;
