@@ -45,7 +45,6 @@ public class mortarStart : MonoBehaviour
     }
     IEnumerator dealDamage(Collider other)
     {
-        Debug.Log("xdd");
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null)
         {
