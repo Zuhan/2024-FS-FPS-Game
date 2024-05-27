@@ -44,14 +44,15 @@ public class thunderMagic : MonoBehaviour, IDamage
 
             GameObject enemyHit = collision.gameObject;
             GameObject thunderBall = Instantiate(thunder, collision.contacts[0].point, Quaternion.identity);
-            thunderBall.transform.SetParent(collision.gameObject.transform);
+            //thunderBall.transform.SetParent(collision.gameObject.transform);
 
             hitEnemy = true;
             IDamage dmg = enemyHit.GetComponent<IDamage>();
             //Debug.Log(dmg);
             if (dmg != null)
             {
-                dmg.TakeDamage(baseDmg);
+                Debug.Log("Bullshit");
+                //dmg.TakeDamage(baseDmg);
             }
         }
 

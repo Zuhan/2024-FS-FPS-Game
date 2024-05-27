@@ -10,9 +10,9 @@ public class thunder : MonoBehaviour
 
     public int currJumps;
     [SerializeField] int maxJumps;
-    [SerializeField] float chainJumpDelay;
+    [SerializeField] float chainJumpDelay = 0.5f;
 
-    [SerializeField] float delay;
+    [SerializeField] float delay = 1f;
 
     [SerializeField] Rigidbody rb;
     [SerializeField] bool hasHit;
@@ -43,7 +43,7 @@ public class thunder : MonoBehaviour
 
             initialOffset = transform.position - objectHit.transform.position;
 
-            StartCoroutine(WaitForChain(chainJumpDelay));
+            StartCoroutine(WaitForChain());
 
             Destroy(gameObject);
         }
@@ -60,11 +60,10 @@ public class thunder : MonoBehaviour
             {
                 if (!hasHit)
                 {
+                    Instantiate(chainLightningPrefab, hit.bounds.center, Quaternion.identity);
                     IDamage dmg = hit.GetComponent<IDamage>();
                     if (dmg != null)
                     {
-                        Instantiate(chainLightningPrefab, hit.bounds.center, Quaternion.identity);
-
                         hasHit = true;
                         currJumps++;
                         dmg.TakeDamage(baseDmg);
@@ -75,9 +74,9 @@ public class thunder : MonoBehaviour
         }
     }
 
-    IEnumerator WaitForChain(float delay)
+    IEnumerator WaitForChain()
     {
         ChainNearbyEnemy(objectHit.transform.position, chainRange);
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(chainJumpDelay);
     }
 }
