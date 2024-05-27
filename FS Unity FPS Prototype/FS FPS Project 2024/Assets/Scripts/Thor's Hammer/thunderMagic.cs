@@ -47,13 +47,6 @@ public class thunderMagic : MonoBehaviour, IDamage
             //thunderBall.transform.SetParent(collision.gameObject.transform);
 
             hitEnemy = true;
-            IDamage dmg = enemyHit.GetComponent<IDamage>();
-            //Debug.Log(dmg);
-            if (dmg != null)
-            {
-                Debug.Log("Bullshit");
-                //dmg.TakeDamage(baseDmg);
-            }
         }
 
         Destroy(gameObject);
