@@ -49,7 +49,6 @@ public class mortarStart : MonoBehaviour
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null)
         {
-            Debug.Log("xdd");
             dmg.TakeDamage(damage);
             gameManager.instance.playerScript.addVelocityY(10);
         }
@@ -62,7 +61,6 @@ public class mortarStart : MonoBehaviour
         {
             if (mortar.hasLandedFunc() && !damageTaken)
             {
-                Debug.Log("xdd");
                 StartCoroutine(dealDamage(other));
                 damageTaken = true;
             }
