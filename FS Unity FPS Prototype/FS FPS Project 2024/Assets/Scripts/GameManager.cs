@@ -15,6 +15,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuOptions;
     [SerializeField] public GameObject cheatInput;
     [SerializeField] List<Image> weaponIcons;
     [SerializeField] TMP_Text potionAmount;
@@ -185,6 +186,10 @@ public class gameManager : MonoBehaviour
             }
             else if (menuActive == menuPause)
             {
+                if (menuOptions.activeInHierarchy)
+                {
+                    menuOptions.SetActive(false);
+                }
                 stateUnpaused();
             }
         }      
