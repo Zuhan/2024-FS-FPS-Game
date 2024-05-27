@@ -46,7 +46,6 @@ public class AttackState : IBossState
     private void CardPull(BossSearch boss)
     {
         isPullingCard = true;
-        Debug.Log("Melore is pulling a card.");
 
         if (!secondPhaseActive)
         {
@@ -70,17 +69,14 @@ public class AttackState : IBossState
             {
                 if (cardSelected == boss.Card_TheWorld)
                 {
-                    Debug.Log("Selected The World");
                     TheWorld(boss);
                 }
                 else if (cardSelected == boss.Card_TheMagician)
                 {
-                    Debug.Log("Selected The Magician");
                     TheMagician(boss);
                 }
                 else
                 {
-                    Debug.Log("Selected Justice");
                     Justice(boss);
                 }
                 //clear deck
@@ -111,19 +107,16 @@ public class AttackState : IBossState
             {
                 if (cardSelected == boss.Card_TheWorld)
                 {
-                    Debug.Log("Selected The World");
                     TheWorld(boss);
 
                 }
                 else if (cardSelected == boss.Card_TheMagician)
                 {
-                    Debug.Log("Selected The Magician");
                     TheMagician(boss);
 
                 }
                 else
                 {
-                    Debug.Log("Selected Justice");
                     Justice(boss);
                 }
                 boss.cardDeck.Clear();
@@ -150,7 +143,7 @@ public class AttackState : IBossState
 
     private void AttackPatternTwo()
     {
-        Debug.Log("Boss is below half HP");
+        
     }
 
     IEnumerator ExecuteTheWorld(BossSearch boss)
