@@ -16,13 +16,11 @@ public class npcShopAI : MonoBehaviour
     [SerializeField] AudioClip[] voiceOver;
     [Range(0, 1)][SerializeField] float audVoiceVol;
 
-    bool playerInRange;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            playerInRange = true;
             aud.PlayOneShot(voiceOver[Random.Range(0, voiceOver.Length)], audVoiceVol);
         }
     }
