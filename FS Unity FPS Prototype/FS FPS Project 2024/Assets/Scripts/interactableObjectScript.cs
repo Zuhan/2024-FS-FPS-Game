@@ -36,7 +36,6 @@ public class interactableObjectScript : MonoBehaviour, IfInteract
         }
         else if(amount >= pointCost && !isInteracting)
         {
-            Debug.Log("Interacting with the door");
             if (emptyGameObjectCollider != null)
             {
                 emptyGameObjectCollider.enabled = true;
