@@ -471,7 +471,6 @@ public class playerController : MonoBehaviour, IDamage
         }
         else
         {
-            Debug.LogError("Unknown weapon: " + weaponName);
             return null;
         }
     }
@@ -517,13 +516,11 @@ public class playerController : MonoBehaviour, IDamage
     {
         if (playerStats.potions.Count > 0 && HP < getMaxHP())
         {
-            Debug.Log("potion used");
             playerStats.potions[0].pickup();
             aud.PlayOneShot(audDrink[Random.Range(0, audDrink.Length)],audDrinkVol);
             playerStats.potions.RemoveAt(0);
             gameManager.instance.updatePotionUi();
             updatePlayerUI();
-            Debug.Log(playerStats.potions);
         }
     }
 }
