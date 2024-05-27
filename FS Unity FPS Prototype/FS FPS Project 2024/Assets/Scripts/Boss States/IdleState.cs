@@ -11,7 +11,6 @@ public class IdleState : IBossState
     {
         while(sayThiOnce == 0)
         {
-            Debug.Log("Melore is in Idle State");
             sayThiOnce++;
         }
 
