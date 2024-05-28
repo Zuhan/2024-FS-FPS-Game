@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         
-        sensitivity = playerStats.sens;
+        lookSensitivity.value = playerStats.sens;
 
         masterVol.value = playerStats.masterVol;
         musicVol.value = playerStats.musicVol;
@@ -65,7 +65,10 @@ public class MainMenu : MonoBehaviour
     {
         //float sensitivity = cameraController.GetSensitivity();
         sensitivity = lookSensitivity.value;
-        cameraController.SetSensitivity(sensitivity);
         playerStats.sens = sensitivity;
+        if (cameraController != null)
+        {
+            cameraController.SetSensitivity(sensitivity);
+        }
     }
 }

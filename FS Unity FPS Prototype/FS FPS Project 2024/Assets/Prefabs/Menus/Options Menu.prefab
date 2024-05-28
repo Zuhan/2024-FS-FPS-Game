@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 1733530134080394496}
   - component: {fileID: 6636644614198064295}
   m_Layer: 5
-  m_Name: SFX Volume Slider
+  m_Name: Sensitivity Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,16 +577,16 @@ MonoBehaviour:
   m_FillRect: {fileID: 319084615684950392}
   m_HandleRect: {fileID: 1395822347216312610}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 2
+  m_MaxValue: 600
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 225
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1342901082051905195}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: ChangeSFXVolume
+        m_MethodName: ChangeLookSensitivity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2627,7 +2627,7 @@ MonoBehaviour:
   masterVol: {fileID: 6185462460921276790}
   musicVol: {fileID: 8762792939440927416}
   sfxVol: {fileID: 3119723999281172230}
-  lookSensitivity: {fileID: 0}
+  lookSensitivity: {fileID: 6636644614198064295}
   mainMixer: {fileID: 24100000, guid: 88c43d2cbf7271748a6c699157ee9b0f, type: 2}
   cameraA: {fileID: 0}
   cameraController: {fileID: 0}
