@@ -104,8 +104,8 @@ public class playerController : MonoBehaviour, IDamage
             }
             selectWeapon();
             movement();
-        }
-        Sprint();     
+            Sprint();
+        }   
     }
 
     void movement()
@@ -506,6 +506,10 @@ public class playerController : MonoBehaviour, IDamage
         else
         {
             playerVelocity.y = amount;
+        }
+        if(playerVelocity.y > 0)
+        {
+            jumpedTimes=1;
         }
     }
     public float getMaxHP()
