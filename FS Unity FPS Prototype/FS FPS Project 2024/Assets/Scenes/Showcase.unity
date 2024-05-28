@@ -8272,6 +8272,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton2Hander
       objectReference: {fileID: 0}
+    - target: {fileID: 1228420015697597161, guid: ef7100edc54524e49a01681472d84a18, type: 3}
+      propertyPath: m_Height
+      value: 0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228420015697597161, guid: ef7100edc54524e49a01681472d84a18, type: 3}
+      propertyPath: m_Radius
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228420015697597161, guid: ef7100edc54524e49a01681472d84a18, type: 3}
+      propertyPath: m_Center.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228420015697597161, guid: ef7100edc54524e49a01681472d84a18, type: 3}
+      propertyPath: m_Center.y
+      value: 0.24
+      objectReference: {fileID: 0}
     - target: {fileID: 2054398043680093562, guid: ef7100edc54524e49a01681472d84a18, type: 3}
       propertyPath: AttackRange
       value: 8
@@ -8328,8 +8344,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1228420015697597161, guid: ef7100edc54524e49a01681472d84a18, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -10661,6 +10676,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArmoredMeleeSkele
       objectReference: {fileID: 0}
+    - target: {fileID: 6712154050929521917, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_Height
+      value: 0.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712154050929521917, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: m_Center.y
+      value: -0.03
+      objectReference: {fileID: 0}
     - target: {fileID: 7943172194690802943, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
       propertyPath: m_Speed
       value: 0
@@ -10673,8 +10696,7 @@ PrefabInstance:
       propertyPath: AttackRange
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6712154050929521917, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -12588,7 +12610,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
