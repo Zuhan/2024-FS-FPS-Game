@@ -11,6 +11,7 @@ public class oneWayPlatform : MonoBehaviour
     [SerializeField] GameObject endPoint;
     [SerializeField] float speed;
     bool isMoving;
+    bool hasStopped;
     private Vector3 position;
     public void Start()
     {
@@ -27,6 +28,7 @@ public class oneWayPlatform : MonoBehaviour
                 isMoving = false;
                 aud.Stop();
                 aud.loop=false;
+                hasStopped = true;
             }
         }
     }
@@ -44,10 +46,18 @@ public class oneWayPlatform : MonoBehaviour
         other.transform.SetParent(null);
         aud.Stop();
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if (hasStopped)
+        {
+            other.transform.SetParent(null);
+        }
+    }
     public void resetPosition()
     {
         transform.position = position;
         isMoving = false;
         aud.Stop();
+        hasStopped = false;
     }
 }

@@ -58,4 +58,8 @@ public class platformMover : MonoBehaviour
         targetNext();
         isStopped = false;
     }
+    private void OnTriggerStay(Collider other)
+    {
+        other.transform.SetParent(transform);
+    }
 }
