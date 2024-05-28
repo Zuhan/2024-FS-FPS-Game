@@ -31,7 +31,9 @@ public class nukeExplosion : MonoBehaviour
         {
             currentRadius += expandSpeed * Time.deltaTime;
             explosionCollider.radius = currentRadius;
-            yield return null;
+
+            // Add a slight delay to reduce the frequency of updates, if appropriate
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
