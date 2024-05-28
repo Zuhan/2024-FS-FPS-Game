@@ -6367,6 +6367,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2129075098929108339, guid: d23a2072d241dfb4ea9801154134be9a, type: 3}
   m_PrefabInstance: {fileID: 7538794437699135966}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1345726044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345726042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d080e57d880ebd4c854e4e953ebbe33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1370515880
 GameObject:
   m_ObjectHideFlags: 0
@@ -13865,7 +13877,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1284331496729602420, guid: d23a2072d241dfb4ea9801154134be9a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1345726044}
   m_SourcePrefab: {fileID: 100100000, guid: d23a2072d241dfb4ea9801154134be9a, type: 3}
 --- !u!222 &7628084436351529908
 CanvasRenderer:
