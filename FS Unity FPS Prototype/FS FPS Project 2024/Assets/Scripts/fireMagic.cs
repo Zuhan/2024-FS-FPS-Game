@@ -35,6 +35,10 @@ public class fireMagic : MonoBehaviour
     {
         if (hasHit)
             return;
+
+        if(collision.gameObject.CompareTag("Player"))
+            return;
+
         GameObject hitObject = collision.gameObject;
         IDamage dmg = hitObject.GetComponent<IDamage>();
         if (dmg != null)

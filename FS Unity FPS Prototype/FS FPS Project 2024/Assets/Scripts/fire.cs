@@ -30,7 +30,6 @@ public class fire : MonoBehaviour
     public void SetTargetEnemy(Transform enemyTransform)
     {
         targetEnemy = enemyTransform;
-        // Get the closest point on the enemy collider's surface to the fire's current position
         Collider enemyCollider = targetEnemy.GetComponent<Collider>();
         if (enemyCollider != null)
         {
@@ -60,6 +59,9 @@ public class fire : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, transform.localScale.x / 2f);
         foreach (Collider collider in colliders)
         {
+            if(collider.CompareTag("Player"))
+                continue;            
+
             IDamage dmg = collider.GetComponent<IDamage>();
             if (dmg != null)
             {

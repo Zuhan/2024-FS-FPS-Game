@@ -19,11 +19,16 @@ public class slingshotBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.isTrigger)
         {
             return;
         }
+
+        if (other.CompareTag("Player"))
+        {
+            return;
+        }
+
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null && !hitHappend)
         {

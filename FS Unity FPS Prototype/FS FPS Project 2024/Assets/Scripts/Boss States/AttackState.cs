@@ -26,7 +26,6 @@ public class AttackState : IBossState
                     CardPull(boss);
                 break;
             case BossSearch.HPValue.quarterOrBelow:
-                //secondPhaseActive = true;
                 Debug.Log("Melore is below 25% HP");
                 if (!isPullingCard)
                     AttackPatternTwo();
@@ -79,7 +78,6 @@ public class AttackState : IBossState
                 {
                     Justice(boss);
                 }
-                //clear deck
                 boss.cardDeck.Clear();
             }
             cardSelected.SetActive(false);
@@ -248,7 +246,6 @@ public class AttackState : IBossState
             boss.auraList[i].SetActive(false);
             yield return new WaitForSeconds(0.2f);
         }
-
         yield return new WaitForSeconds(2);
 
         boss.auraUnderBoss.SetActive(false);
@@ -274,7 +271,6 @@ public class AttackState : IBossState
 
     void FaceTarget(BossSearch boss, GameObject shootPos)
     {
-
         Quaternion rot = Quaternion.LookRotation(new Vector3(boss.playerDir.x, shootPos.transform.position.y, boss.playerDir.x));
         shootPos.transform.rotation = Quaternion.Lerp(shootPos.transform.rotation, rot, Time.deltaTime);
     }
@@ -311,34 +307,6 @@ public class AttackState : IBossState
         {
             yield return new WaitForSeconds(3f);
         }
-
         isPullingCard = false;
     }
-
-    //IEnumerator CycleCards(BossSearch boss)
-    //{
-    //    boss.cardDeck.Add(boss.Card_TheWorld);
-    //    boss.cardDeck.Add(boss.Card_TheMagician);
-    //    boss.cardDeck.Add(boss.Card_Justice);
-    //    boss.cardDeck.Add(boss.Card_TheTower);
-
-    //    for (int i = 0; i < 5; i++)
-    //    {
-    //        int randCard = Random.Range(0, boss.cardDeck.Count);
-    //        int currCard = randCard;
-
-    //        if (randCard < boss.cardDeck.Count)
-    //        {
-    //            boss.cardDeck[currCard].SetActive(true);
-    //            yield return new WaitForSeconds(.75f);
-    //            boss.cardDeck[currCard].SetActive(false); 
-    //        }
-
-    //        currCard = 0;
-    //    }
-
-    //    boss.cardDeck.Clear();
-
-    //    yield return new WaitForSeconds(2);
-    //}
 }
