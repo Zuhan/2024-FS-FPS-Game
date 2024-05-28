@@ -2388,6 +2388,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4458dbda01e628438e402be5d6434aa, type: 3}
+--- !u!1001 &792496898
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.8734455
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.1978326
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.96162075
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.27438226
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 31.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5958358056071864428, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174862934610060641, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
+      propertyPath: m_Name
+      value: Statue
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8011425905568ce458df1ada8a807dc2, type: 3}
 --- !u!1001 &813512800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6900,7 +6957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2053201027}
   m_Layer: 0
-  m_Name: Skele
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7618,3 +7675,4 @@ SceneRoots:
   - {fileID: 1203529037}
   - {fileID: 2053201027}
   - {fileID: 1838251839}
+  - {fileID: 792496898}
