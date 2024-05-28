@@ -118,14 +118,26 @@ public class gameManager : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1;
+        CloseAllMenus();
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void CloseAllMenus()
+    {
         if (menuActive != null)
         {
             menuActive.SetActive(false);
+            menuActive = null;
         }
-        menuActive = null;
+
+        menuPause.SetActive(false);
+        menuWin.SetActive(false);
+        menuLose.SetActive(false);
+        menuOptions.SetActive(false);
+        cheatInput.SetActive(false);
     }
+
     public void win()
     {
         statePaused();
@@ -190,6 +202,7 @@ public class gameManager : MonoBehaviour
                 {
                     menuOptions.SetActive(false);
                 }
+                CloseAllMenus();
                 stateUnpaused();
             }
         }      

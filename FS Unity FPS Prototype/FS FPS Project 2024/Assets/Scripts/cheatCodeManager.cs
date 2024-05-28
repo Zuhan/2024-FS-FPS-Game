@@ -120,8 +120,7 @@ public class cheatCodeManager : MonoBehaviour
             }
             else
             {
-                inputField.DeactivateInputField();
-                inputField.gameObject.SetActive(false);
+                CloseAllMenus();
                 gameManager.instance.stateUnpaused();
             }
         }
@@ -135,6 +134,12 @@ public class cheatCodeManager : MonoBehaviour
                 gameManager.instance.stateUnpaused();
             }
         }
+    }
+
+    void CloseAllMenus()
+    {
+        gameManager.instance.CloseAllMenus();
+        gameManager.instance.stateUnpaused();
     }
 
     void SubmitInput(string input)
