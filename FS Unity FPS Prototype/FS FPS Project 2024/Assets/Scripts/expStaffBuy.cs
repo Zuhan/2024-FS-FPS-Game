@@ -24,6 +24,11 @@ public class expStaffBuy : MonoBehaviour, IfInteract
     void Start()
     {
         costText.text = cost.ToString();
+        if (playerStats.hasPurchasedExpStaff)
+        {
+            soldOut = true;
+            displaySoldOut();
+        }
     }
     public void interact()
     {
@@ -32,6 +37,7 @@ public class expStaffBuy : MonoBehaviour, IfInteract
             Instantiate(weapon,gameManager.instance.playerScript.transform.position, new Quaternion());
             gameManager.instance.pointsChange(-cost);
             playSound();
+            playerStats.hasPurchasedExpStaff = true;
             soldOut = true;
             displaySoldOut();
         }
