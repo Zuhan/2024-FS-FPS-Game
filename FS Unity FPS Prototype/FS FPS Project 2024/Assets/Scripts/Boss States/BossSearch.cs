@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class BossSearch : MonoBehaviour, IDamage
@@ -10,6 +11,10 @@ public class BossSearch : MonoBehaviour, IDamage
     [SerializeField] private IBossState currentState;
     [SerializeField] public SphereCollider trigger;
     [SerializeField] public Animator anim;
+    //added by bug healthbar
+    [SerializeField] Image healthbar;
+    //added by bug hurt audio source
+    [SerializeField] AudioSource HurtAudioSource;
 
     [Header("-----The World-----")]
     [SerializeField] public GameObject BossCenterPOS;
@@ -78,6 +83,10 @@ public class BossSearch : MonoBehaviour, IDamage
     public List<GameObject> auraList = new List<GameObject>();
     public List<GameObject> shootPosList = new List<GameObject>();
     public List<GameObject> cardDeck = new List<GameObject>();
+    //audio for hurt noise added by bug
+    [Header("----- Audio -----")]
+    [SerializeField] AudioClip[] audHurt;
+    [Range(0, 1)][SerializeField] float audVolHurt;
 
     public IdleState idleState = new IdleState();
     public AttackState attackState = new AttackState();
@@ -96,9 +105,13 @@ public class BossSearch : MonoBehaviour, IDamage
     public HPValue hpValue = new HPValue();
 
 
+
+
+
     void OnEnable()
     {
         HP = maxHP;
+        UpdateEnemyUI();
         currentState = idleState;
         trigger.enabled = true;
     }
@@ -120,8 +133,13 @@ public class BossSearch : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
+        //added by bug call udpate enemy UI
+        UpdateEnemyUI();
+        //audio source added by bug
+        HurtAudioSource.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
 
-        if(HP <= 0)
+
+        if (HP <= 0)
         {
             Destroy(gameObject);
 
@@ -148,4 +166,12 @@ public class BossSearch : MonoBehaviour, IDamage
         highHP,
         quarterOrBelow
     }
+
+    //added by bug update enemy UI
+    void UpdateEnemyUI()
+    {
+        healthbar.fillAmount = HP / maxHP;
+    }
+
+
 }
