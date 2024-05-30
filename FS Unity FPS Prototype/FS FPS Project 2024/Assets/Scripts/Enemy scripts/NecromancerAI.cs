@@ -65,17 +65,19 @@ public class NecromancerAI : MonoBehaviour, IDamage
     //boss npc mode set to idle
     private NPCmode npcmode = NPCmode.Idle;
 
-    bool teleported1;
-    bool teleported2;
-    bool teleported3;
-    float damageDealt;
-    int SkeletonsAlive;
-    bool SummonOnCooldown;
-    int SummonsAmountLeft;
+
+    private bool HurtOnCooldown;
+    private bool teleported1;
+    private bool teleported2;
+    private bool teleported3;
+    private float damageDealt;
+    private int SkeletonsAlive;
+    private bool SummonOnCooldown;
+    private int SummonsAmountLeft;
     public bool ShieldIsActive;
-    float MaxHP;
-    bool playerInRange;
-    bool isShooting;
+    private float MaxHP;
+    private bool playerInRange;
+    private bool isShooting;
     Color enemycolor;
     List<Transform> SpawnList;
     List<GameObject> SpawnListType;
@@ -233,6 +235,15 @@ public class NecromancerAI : MonoBehaviour, IDamage
         {
             damage = 0;
         }
+        else 
+        {
+            HP -= damage;
+            if (HurtOnCooldown == false)
+            {
+                StartCoroutine(PlayHurtAudio());
+            }
+            StartCoroutine(FlashRed());
+        }
 
         if(npcmode == NPCmode.AttackShadowBolts)
         {
@@ -244,9 +255,7 @@ public class NecromancerAI : MonoBehaviour, IDamage
             }
         }
 
-        HP -= damage;
-        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
-        StartCoroutine(FlashRed());
+    
         //set destination when damaged
 
         UpdateEnemyUI();
@@ -291,6 +300,15 @@ public class NecromancerAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(ShadowBoltFireRate);
         isShooting = false;
     }
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
+    }
+
 
     public void AttackSound()
     {

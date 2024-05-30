@@ -60,6 +60,7 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
     Color enemycolor2;
     Color enemycolor3;
     Color enemycolor4;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -170,10 +171,15 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
             damage = 0;
             ShieldOn = false;
         }
+        else
+        {
+            HP -= damage;
+            if (HurtOnCooldown == false)
+            {
+                StartCoroutine(PlayHurtAudio());
+            }
+        }
 
-
-        HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
         UpdateEnemyUI();
 
         StartCoroutine(FlashRed());
@@ -235,6 +241,14 @@ public class MiniSkeleRedMageAI : MonoBehaviour, IDamage
         playingWalk = false;
     }
 
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
+    }
 
     public void createBullet()
     {
