@@ -45,6 +45,7 @@ public class MimicAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool isShooting;
     Color enemycolor;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -140,7 +141,10 @@ public class MimicAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        if (HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
         StartCoroutine(FlashRed());
         //set destination when damaged
         UpdateEnemyUI();
@@ -188,6 +192,14 @@ public class MimicAI : MonoBehaviour, IDamage
        
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
     }
 
     public void WeaponColOn()

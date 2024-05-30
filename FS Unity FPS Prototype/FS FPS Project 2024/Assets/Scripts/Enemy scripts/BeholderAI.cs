@@ -58,6 +58,7 @@ public class BeholderAI : MonoBehaviour, IDamage
     bool isShooting;
     Color enemycolor;
     List<Transform> BeamList;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -165,7 +166,10 @@ public class BeholderAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        if (HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -204,6 +208,14 @@ public class BeholderAI : MonoBehaviour, IDamage
         anim.SetTrigger("Shoot");
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
     }
 
     //low hp attack func

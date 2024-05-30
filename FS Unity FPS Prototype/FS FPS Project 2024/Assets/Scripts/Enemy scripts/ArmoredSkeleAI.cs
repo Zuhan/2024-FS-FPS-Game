@@ -58,6 +58,7 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
     bool armorLReach3;
     bool armorLReach4;
     bool armorLReach5;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -170,7 +171,10 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
 
 
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        if(HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -318,6 +322,14 @@ public class ArmoredSkeleAI : MonoBehaviour, IDamage
         Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
         yield return new WaitForSeconds(TimeBetweenSteps);
         playingWalk = false;
+    }
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
     }
 
     public void WeaponColOn()

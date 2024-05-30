@@ -49,6 +49,7 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     Color enemycolor2;
     Color enemycolor3;
     Color enemycolor4;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -144,7 +145,10 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        if (HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -200,6 +204,14 @@ public class MiniSkeleAI : MonoBehaviour, IDamage
         Foot.PlayOneShot(audWalk[UnityEngine.Random.Range(0, audWalk.Length)], audVolWalk);
         yield return new WaitForSeconds(TimeBetweenSteps);
         playingWalk = false;
+    }
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
     }
 
     public void WeaponColOn()

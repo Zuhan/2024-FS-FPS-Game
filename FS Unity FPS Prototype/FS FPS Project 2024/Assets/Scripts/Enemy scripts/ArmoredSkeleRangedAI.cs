@@ -64,6 +64,7 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
     bool armorLReach3;
     bool armorLReach4;
     bool armorLReach5;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -175,7 +176,10 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
 
 
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        if(HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
         StartCoroutine(FlashRed());
         //set destination when damaged
 
@@ -214,7 +218,13 @@ public class ArmoredSkeleRangedAI : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
+    }
 
 
     public void attackSound()

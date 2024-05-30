@@ -103,10 +103,7 @@ public class BossSearch : MonoBehaviour, IDamage
     public bool castingSpell = false;
 
     public HPValue hpValue = new HPValue();
-
-
-
-
+    private bool HurtOnCooldown;
 
     void OnEnable()
     {
@@ -136,7 +133,10 @@ public class BossSearch : MonoBehaviour, IDamage
         //added by bug call udpate enemy UI
         UpdateEnemyUI();
         //audio source added by bug
-        HurtAudioSource.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        if(HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
 
 
         if (HP <= 0)
@@ -165,6 +165,15 @@ public class BossSearch : MonoBehaviour, IDamage
     {
         highHP,
         quarterOrBelow
+    }
+
+    //Play hurt audio added by bug
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtAudioSource.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
     }
 
     //added by bug update enemy UI

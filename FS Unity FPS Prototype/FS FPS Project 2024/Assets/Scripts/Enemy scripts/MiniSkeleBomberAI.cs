@@ -50,6 +50,7 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     Color enemycolor2;
     Color enemycolor3;
     Color enemycolor4;
+    private bool HurtOnCooldown;
 
     // Start is called before the first frame update
     void Start()
@@ -147,7 +148,10 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
     public void TakeDamage(float damage)
     {
         HP -= damage;
-        HurtBody.PlayOneShot(audHurt[UnityEngine.Random.Range(0, audHurt.Length)], audVolHurt);
+        if (HurtOnCooldown == false)
+        {
+            StartCoroutine(PlayHurtAudio());
+        }
         UpdateEnemyUI();
         StartCoroutine(FlashRed());
         //set destination when damaged
@@ -198,6 +202,14 @@ public class MiniSkeleBomberAI : MonoBehaviour, IDamage
         anim.SetTrigger("Shoot");
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator PlayHurtAudio()
+    {
+        HurtOnCooldown = true;
+        HurtBody.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
+        yield return new WaitForSeconds(audHurt.Length);
+        HurtOnCooldown = false;
     }
 
     IEnumerator BlowUp()
