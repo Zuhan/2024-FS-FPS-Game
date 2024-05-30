@@ -172,7 +172,7 @@ public class BossSearch : MonoBehaviour, IDamage
     {
         HurtOnCooldown = true;
         HurtAudioSource.PlayOneShot(audHurt[Random.Range(0, audHurt.Length)], audVolHurt);
-        yield return new WaitForSeconds(audHurt.Length);
+        yield return new WaitForSeconds(audHurt.Length / 3);
         HurtOnCooldown = false;
     }
 
