@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class disableEnemies : MonoBehaviour
+public class enableThings : MonoBehaviour
 {
-    [SerializeField] GameObject enemies;
+    [SerializeField] GameObject thing;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            enemies.SetActive(false);
+            thing.SetActive(true);
         }
     }
 }
