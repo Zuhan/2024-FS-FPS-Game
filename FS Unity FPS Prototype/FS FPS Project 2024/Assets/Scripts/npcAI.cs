@@ -121,7 +121,7 @@ public class npcAI : MonoBehaviour
 
     IEnumerator voiceLineReset()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         hasPlayedVoiceLine = false;
     }
 }

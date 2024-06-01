@@ -16,12 +16,21 @@ public class npcShopAI : MonoBehaviour
     [SerializeField] AudioClip[] voiceOver;
     [Range(0, 1)][SerializeField] float audVoiceVol;
 
+    bool hasPlayedVoiceLine;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasPlayedVoiceLine)
         {
             aud.PlayOneShot(voiceOver[Random.Range(0, voiceOver.Length)], audVoiceVol);
+            hasPlayedVoiceLine = true;
+            StartCoroutine(voiceLineReset());
         }
+    }
+
+    IEnumerator voiceLineReset()
+    {
+        yield return new WaitForSeconds(10);
+        hasPlayedVoiceLine = false;
     }
 }
