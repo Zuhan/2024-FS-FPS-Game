@@ -68,6 +68,7 @@ public class playerController : MonoBehaviour, IDamage
     int selectedWeapon;
     float setSpeed;
     public Coroutine recharge;
+    Vector3 previouspos;
 
     // Start is called before the first frame update
     void Start()
@@ -110,6 +111,8 @@ public class playerController : MonoBehaviour, IDamage
 
     void movement()
     {
+        previouspos = transform.position;
+
         //Movement
         if (noClipModeActive)
         {
@@ -167,12 +170,12 @@ public class playerController : MonoBehaviour, IDamage
 
         if (canSprint)
         {
-            if (Input.GetButtonDown("Sprint"))
+            if (Input.GetButtonDown("Sprint") && transform.position != previouspos)
             {
                 isSprinting = true;
                 speed *= sprintMultiplier;
             }
-            else if (Input.GetButtonUp("Sprint"))
+            else if (Input.GetButtonUp("Sprint") || transform.position == previouspos)
             {
                 isSprinting = false;
                 speed = setSpeed;
