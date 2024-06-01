@@ -3041,7 +3041,7 @@ PrefabInstance:
       objectReference: {fileID: 1170364249}
     - target: {fileID: 6577935227841137679, guid: 90dadd67cfe878942b8a38edb8fc8ba5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.93
+      value: -32.46
       objectReference: {fileID: 0}
     - target: {fileID: 6577935227841137679, guid: 90dadd67cfe878942b8a38edb8fc8ba5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3621,7 +3621,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 37893384332934249ada63e1a8ebcca5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 3
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -6071,16 +6071,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArmoredMeleeSkele (6)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9115284843587726839, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      propertyPath: playerDetectiomRad
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6084660061820924347, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6630588110848197161, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1906165137}
   m_SourcePrefab: {fileID: 100100000, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
 --- !u!4 &1906165135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 924041525926218226, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
   m_PrefabInstance: {fileID: 1906165134}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1906165136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6630588110848197161, guid: 824725aa66ad30f4bb22c95422ffedcb, type: 3}
+  m_PrefabInstance: {fileID: 1906165134}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1906165137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906165136}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.01, y: 6.86, z: 34.6}
+  m_Center: {x: 0, y: 1.34, z: 0}
 --- !u!1001 &1950838501
 PrefabInstance:
   m_ObjectHideFlags: 0
