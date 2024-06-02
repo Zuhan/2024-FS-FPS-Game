@@ -167,7 +167,10 @@ public class playerController : MonoBehaviour, IDamage
 
     void Sprint()
     {
-        canSprint = stamina >= 0;
+        if (amountOfCooldowns == 0)
+        {
+            canSprint = stamina >= 0;
+        }
 
         if (canSprint)
         {
