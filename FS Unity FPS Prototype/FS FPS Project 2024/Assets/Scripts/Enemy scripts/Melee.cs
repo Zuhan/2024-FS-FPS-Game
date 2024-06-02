@@ -37,12 +37,19 @@ public class Melee : MonoBehaviour
     IEnumerator slowDown()
     {
         slowDownApplied = true;
+        gameManager.instance.player.GetComponent<playerController>().CooldownIncrement(1);
         gameManager.instance.player.GetComponent<playerController>().SprintingHit(false);
         gameManager.instance.player.GetComponent<playerController>().AddedSpeed(-slowDownSpeed);
         yield return new WaitForSeconds(slowCoolDown);
+        gameManager.instance.player.GetComponent<playerController>().CooldownIncrement(-1); 
         gameManager.instance.player.GetComponent<playerController>().AddedSpeed(slowDownSpeed);
-        gameManager.instance.player.GetComponent<playerController>().SprintingHit(true);
+       
+        if (gameManager.instance.player.GetComponent<playerController>().CooldownReturn() == 0)
+        {
+            gameManager.instance.player.GetComponent<playerController>().SprintingHit(true);
+        }
         slowDownApplied = false;
+
     }
 
 }

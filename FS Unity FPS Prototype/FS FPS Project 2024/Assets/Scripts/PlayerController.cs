@@ -68,6 +68,7 @@ public class playerController : MonoBehaviour, IDamage
     int selectedWeapon;
     float setSpeed;
     public Coroutine recharge;
+    int amountOfCooldowns;
     Vector3 previouspos;
 
     // Start is called before the first frame update
@@ -538,5 +539,13 @@ public class playerController : MonoBehaviour, IDamage
     public float CurrentSpeed()
     {
         return speed;
+    }
+    public int CooldownReturn()
+    {
+        return amountOfCooldowns;
+    }
+    public void CooldownIncrement(int amount)
+    {
+        amountOfCooldowns += amount;
     }
 }
