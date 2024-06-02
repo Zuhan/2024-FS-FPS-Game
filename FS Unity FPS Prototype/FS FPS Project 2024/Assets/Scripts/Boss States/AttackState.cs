@@ -247,6 +247,8 @@ public class AttackState : IBossState
             
                 boss.HP += HPtoHeal;
 
+                boss.UpdateEnemyUI();
+
                 boss.healAura.SetActive(true);
                 boss.hitbox.enabled = false;
                 

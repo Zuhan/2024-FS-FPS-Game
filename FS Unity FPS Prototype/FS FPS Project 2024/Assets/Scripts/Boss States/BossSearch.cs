@@ -177,7 +177,7 @@ public class BossSearch : MonoBehaviour, IDamage
     }
 
     //added by bug update enemy UI
-    void UpdateEnemyUI()
+    public void UpdateEnemyUI()
     {
         healthbar.fillAmount = HP / maxHP;
     }
