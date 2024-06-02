@@ -28,7 +28,7 @@ public class AttackState : IBossState
             case BossSearch.HPValue.quarterOrBelow:
                 Debug.Log("Melore is below 25% HP");
                 if (!isPullingCard)
-                    AttackPatternTwo();
+                    CardPull(boss);
                 break;
         }
 
@@ -46,80 +46,39 @@ public class AttackState : IBossState
     {
         isPullingCard = true;
 
-        if (!secondPhaseActive)
+        boss.cardDeck.Clear();
+        for (int i = 0; i < 14; i++)
         {
-            boss.cardDeck.Clear();
-            for (int i = 0; i < 14; i++)
-            {
-                boss.cardDeck.Add(boss.Card_TheWorld);
-                boss.cardDeck.Add(boss.Card_TheMagician);
-            }
-            for (int i = 0; i < 6; i++)
-            {
-                boss.cardDeck.Add(boss.Card_Justice);
-            }
-
-            int randCard = Random.Range(0, boss.cardDeck.Count);
-
-            GameObject cardSelected = boss.cardDeck[randCard];
-            cardSelected.SetActive(true);
-
-            if (cardSelected != null)
-            {
-                if (cardSelected == boss.Card_TheWorld)
-                {
-                    TheWorld(boss);
-                }
-                else if (cardSelected == boss.Card_TheMagician)
-                {
-                    TheMagician(boss);
-                }
-                else
-                {
-                    Justice(boss);
-                }
-                boss.cardDeck.Clear();
-            }
-            cardSelected.SetActive(false);
+            boss.cardDeck.Add(boss.Card_TheWorld);
+            boss.cardDeck.Add(boss.Card_TheMagician);
         }
-        else
+        for (int i = 0; i < 6; i++)
         {
-            boss.cardDeck.Clear();
-            for (int i = 0; i < 20; i++)
-            {
-                boss.cardDeck.Add(boss.Card_TheWorld);
-                boss.cardDeck.Add(boss.Card_TheMagician);
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                boss.cardDeck.Add(boss.Card_Justice);
-            }
-
-
-            int randCard = Random.Range(0, boss.cardDeck.Count);
-
-            GameObject cardSelected = boss.cardDeck[randCard];
-            cardSelected.SetActive(true);
-
-            if (cardSelected != null)
-            {
-                if (cardSelected == boss.Card_TheWorld)
-                {
-                    TheWorld(boss);
-
-                }
-                else if (cardSelected == boss.Card_TheMagician)
-                {
-                    TheMagician(boss);
-
-                }
-                else
-                {
-                    Justice(boss);
-                }
-                boss.cardDeck.Clear();
-            }
+            boss.cardDeck.Add(boss.Card_Justice);
         }
+
+        int randCard = Random.Range(0, boss.cardDeck.Count);
+
+        GameObject cardSelected = boss.cardDeck[randCard];
+        cardSelected.SetActive(true);
+
+        if (cardSelected != null)
+        {
+            if (cardSelected == boss.Card_TheWorld)
+            {
+                TheWorld(boss);
+            }
+            else if (cardSelected == boss.Card_TheMagician)
+            {
+                TheMagician(boss);
+            }
+            else
+            {
+                Justice(boss);
+            }
+            boss.cardDeck.Clear();
+        }
+        cardSelected.SetActive(false);
     }
 
     private void TheWorld(BossSearch boss)
@@ -137,11 +96,6 @@ public class AttackState : IBossState
     private void Justice(BossSearch boss)
     {
         boss.StartCoroutine(ExecuteJustice(boss));
-    }
-
-    private void AttackPatternTwo()
-    {
-        
     }
 
     IEnumerator ExecuteTheWorld(BossSearch boss)
@@ -279,17 +233,18 @@ public class AttackState : IBossState
     {
         boss.anim.SetTrigger("Justice");
 
+        //boss.healAura.SetActive(true);
         boss.justiceObj.SetActive(true);
         boss.justiceTrigger.resetSpawner();
         yield return new WaitForSeconds(1f);
         boss.justiceObj.SetActive(false);
 
         float HPtoHeal = boss.maxHP * .02f;
-
-        if (boss.HP + HPtoHeal <= boss.maxHP)
+        for (int i = 0; i < 5; i++)
         {
-            for (int i = 0; i < 5; i++)
+            if (boss.HP + HPtoHeal <= boss.maxHP)
             {
+            
                 boss.HP += HPtoHeal;
 
                 boss.healAura.SetActive(true);
@@ -302,11 +257,13 @@ public class AttackState : IBossState
 
                 yield return new WaitForSeconds(2f);
             }
+            else
+            {
+                yield return new WaitForSeconds(3f);
+            }
         }
-        else
-        {
-            yield return new WaitForSeconds(3f);
-        }
+        
+        //boss.healAura.SetActive(false);
         isPullingCard = false;
     }
 }
