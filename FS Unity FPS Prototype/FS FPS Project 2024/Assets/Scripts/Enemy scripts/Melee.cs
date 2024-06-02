@@ -25,7 +25,7 @@ public class Melee : MonoBehaviour
         {
             dmg.TakeDamage(damage);
             hitHappend = true;
-            if (slowDownApplied == false)
+            if (slowDownApplied == false && slowDownSpeed <= gameManager.instance.player.GetComponent<playerController>().CurrentSpeed())
             {
                 StartCoroutine(slowDown());
             }
@@ -37,9 +37,11 @@ public class Melee : MonoBehaviour
     IEnumerator slowDown()
     {
         slowDownApplied = true;
+        gameManager.instance.player.GetComponent<playerController>().SprintingHit(false);
         gameManager.instance.player.GetComponent<playerController>().AddedSpeed(-slowDownSpeed);
         yield return new WaitForSeconds(slowCoolDown);
         gameManager.instance.player.GetComponent<playerController>().AddedSpeed(slowDownSpeed);
+        gameManager.instance.player.GetComponent<playerController>().SprintingHit(true);
         slowDownApplied = false;
     }
 

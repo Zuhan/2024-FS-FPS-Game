@@ -530,4 +530,13 @@ public class playerController : MonoBehaviour, IDamage
             updatePlayerUI();
         }
     }
+    public void SprintingHit(bool rUSprinting)
+    {
+        isSprinting = false;
+        canSprint = rUSprinting;
+    }
+    public float CurrentSpeed()
+    {
+        return speed;
+    }
 }
